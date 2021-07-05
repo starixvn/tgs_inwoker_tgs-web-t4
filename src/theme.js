@@ -36,7 +36,7 @@ export const themeBlack = {
   primaryHightlight: "#fde73f",
   secondary: "#363A45",
   secondaryText: "#fff",
-  tertiary: "#FF9900",
+  tertiary: "#950400",
   tertiaryText: "#fff",
 };
 

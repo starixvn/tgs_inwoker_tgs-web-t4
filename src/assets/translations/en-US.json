@@ -1,4 +1,7 @@
 {
+  "lang": {
+    "language": "Language"
+  },
   "error": {
     "ERR101": "Invalid credential.",
     "ERR201": "Player not found.",
@@ -6,7 +9,7 @@
     "ERR401": "Please check your input."
   },
   "common": {
-    "title":"{brand} | The Biggest & Most Trusted Online Casino",
+    "title": "{brand} | The Biggest & Most Trusted Online Casino",
     "register": "Register",
     "login": "Login",
     "submit": "Submit",
@@ -104,15 +107,15 @@
     "cs": "CHAT",
     "msgSuccessUpdateProfile": "Profile Update successful",
     "joinGame": "Enter",
-    "withdrawalBankType":"Type",
-    "withdrawalChannel":"Channel",
-    "withdrawalNumber":"Bank card number/Crypto currency address",
-    "msgEnterWithdrawalNumber":"Please enter bank card number/crypto currency address",
-    "msgEmailExist":"Email address already exists",
-    "msgRequiredTurnover":"Withdrawal unavailable. Please make sure you meet the wagering requirements, or contact Customer Service for further information.",
-    "msgInvalidUsername":"Invalid username/ password.",
-    "msgInvalidWithdrawalPassword":"Invalid withdrawal password",
-    "msgRequestFailed" : "Request failed, please contact Customer Service for further information."
+    "withdrawalBankType": "Type",
+    "withdrawalChannel": "Channel",
+    "withdrawalNumber": "Bank card number/Crypto currency address",
+    "msgEnterWithdrawalNumber": "Please enter bank card number/crypto currency address",
+    "msgEmailExist": "Email address already exists",
+    "msgRequiredTurnover": "Withdrawal unavailable. Please make sure you meet the wagering requirements, or contact Customer Service for further information.",
+    "msgInvalidUsername": "Invalid username/ password.",
+    "msgInvalidWithdrawalPassword": "Invalid withdrawal password",
+    "msgRequestFailed": "Request failed, please contact Customer Service for further information."
   },
   "affiliate": {
     "title": "Promote",
@@ -205,13 +208,13 @@
     "msgPlsSelectPayment": "Please select the payment type",
     "msgPlsSelectMethod": "Please select the payment channel",
     "msgPlsEnterAccount": "Please enter the bank account name",
-    "msgInvalidFileSize":"File too Big, please select a file less than 2mb",
-    "msgInvalidFileType":"Please upload image file only. (.jpg/.jpeg/.png/.tiff)",
+    "msgInvalidFileSize": "File too Big, please select a file less than 2mb",
+    "msgInvalidFileType": "Please upload image file only. (.jpg/.jpeg/.png/.tiff)",
     "msgFailedJoinPromotion": "You can not register this promition. Please contact Customer Service if you need further information.",
-    "exchangeRate":"Exchange Rate",
-    "buyPrice":"Buy",
-    "sellPrice":"Sell",
-    "expectedPayment":"Expected Amount",
+    "exchangeRate": "Exchange Rate",
+    "buyPrice": "Buy",
+    "sellPrice": "Sell",
+    "expectedPayment": "Expected Amount",
     "details": {
       "bank": "Bank",
       "account": "Account",
@@ -330,7 +333,7 @@
     "details": "Details",
     "phoneVerification": "Phone Verification",
     "emailVerification": "Email Verification",
-    "msgPlsBindEmailAddress":"Please bind email address",
+    "msgPlsBindEmailAddress": "Please bind email address",
     "changePassword": {
       "msgConfirmPassFail": "Confirm Password Wrong",
       "editPassword": "Edit Password",
@@ -373,24 +376,24 @@
       "phoneDesc": "Please be assured that we will not disclose any user information"
     },
     "email": {
-      "editEmail":"Modify email",
-      "verifyEmail":"Verify email",
-      "addEmail":"Setup email",
-      "plsEnterEmail":"Please enter email address",
+      "editEmail": "Modify email",
+      "verifyEmail": "Verify email",
+      "addEmail": "Setup email",
+      "plsEnterEmail": "Please enter email address",
 
       "bindEmail": "Bind Email Address",
       "toEdit": "If Required To Edit Email, Please Click ",
       "here": "Here"
     },
-    "qq":{
-      "msgInvalidQQ" :"Invalid QQ account",
-      "plsEnterQQ" :"Please enter QQ account",
-      "qqAccount":"QQ Account"
+    "qq": {
+      "msgInvalidQQ": "Invalid QQ account",
+      "plsEnterQQ": "Please enter QQ account",
+      "qqAccount": "QQ Account"
     },
-    "wechat":{
-      "msgInvalidWeChat" :"Invalid WeChat account",
-      "plsEnterWechat" :"Please enter WeChat account",
-      "weChatAccount":"WeChat"
+    "wechat": {
+      "msgInvalidWeChat": "Invalid WeChat account",
+      "plsEnterWechat": "Please enter WeChat account",
+      "weChatAccount": "WeChat"
     },
     "resetResetWithdrawalPassword": {
       "title": "Reset Withdrawal Password",
@@ -520,7 +523,7 @@
     "maxAmount": "Max Amt",
     "transfer": "Transfer",
     "noticeTitle": "Tips",
-    "msgFailedTransfer":"Transfer failed"
+    "msgFailedTransfer": "Transfer failed"
   },
 
   "withdrawal": {
@@ -546,8 +549,8 @@
     "receiverAmount": "Amount"
   },
   "promotion": {
-    "emptyLine1":"MORE PROMOTIONS AND ACTIVITIES ARE",
-    "emptyLine2":"COMING SOON!",
+    "emptyLine1": "MORE PROMOTIONS AND ACTIVITIES ARE",
+    "emptyLine2": "COMING SOON!",
     "moreInfo": "More Info",
     "startDate": "Start Date: ",
     "endDate": "End Date: ",
@@ -559,7 +562,7 @@
     "joinPromo": "JOIN",
     "joinSuccess": "Successful participation in promotion activities",
     "promoJoint": "Promotion activities has participated!",
-    "details":"Details"
+    "details": "Details"
   },
   "web": {
     "home": {
@@ -720,77 +723,77 @@
       "btn": "Contact Us"
     }
   },
-  "PrimePay":"PrimePay",
-  "LeePay":"LeePay",
-  "ApplePay":"ApplePay",
-  "Manual":"Manual",
-  "Crypto":"Crypto",
-  "BankTransfer":"Bank Transfer",
-  "CustomBank":"Custom Bank",
-  "VR":{
-    "lottery":"VR",
-    "desc":"VR Lottery has always been in the leading position in the industry with \"fairness, safety, fast and accuracy\", and has an all-round system of artificial intelligence. We have all kinds of mainstream lottery here, mainly divided into \"VR Live streaming lottery\" and \"VR lottery\". We are also developing the \"VR Electronic\" series of games, determined to give customers more diversified choices.    VR will continue to create and progress, in order to introduce more new kind lottery for the public, and create an all-round entertainment environment."
+  "PrimePay": "PrimePay",
+  "LeePay": "LeePay",
+  "ApplePay": "ApplePay",
+  "Manual": "Manual",
+  "Crypto": "Crypto",
+  "BankTransfer": "Bank Transfer",
+  "CustomBank": "Custom Bank",
+  "VR": {
+    "lottery": "VR",
+    "desc": "VR Lottery has always been in the leading position in the industry with \"fairness, safety, fast and accuracy\", and has an all-round system of artificial intelligence. We have all kinds of mainstream lottery here, mainly divided into \"VR Live streaming lottery\" and \"VR lottery\". We are also developing the \"VR Electronic\" series of games, determined to give customers more diversified choices.    VR will continue to create and progress, in order to introduce more new kind lottery for the public, and create an all-round entertainment environment."
   },
-  "KY":{
-    "chess":"KaiYuan",
-    "desc":"No 1 card game. Bull bull,blackjack,poker,dragon tiger and other real playercard game",
-    "BankerNiuNiu":"Niu-Niu",
-    "GoldenFlower":"Gloden Flower",
-    "The21Point":"The 21 Point",
-    "SanGong":"San-Gong"
+  "KY": {
+    "chess": "KaiYuan",
+    "desc": "No 1 card game. Bull bull,blackjack,poker,dragon tiger and other real playercard game",
+    "BankerNiuNiu": "Niu-Niu",
+    "GoldenFlower": "Gloden Flower",
+    "The21Point": "The 21 Point",
+    "SanGong": "San-Gong"
   },
-  "sports":{
-    "desc":"Pega Gaming provide innovative, variety of bet type and competitive odds for live matches.  Easy betting with quick, and secure way through any kind of devices anywhere, anytime!  In addition, we support all kinds of sport events, including soccer, basketball, baseball, tennis, football, and E-sports to fulfill your needs!"
+  "sports": {
+    "desc": "Pega Gaming provide innovative, variety of bet type and competitive odds for live matches.  Easy betting with quick, and secure way through any kind of devices anywhere, anytime!  In addition, we support all kinds of sport events, including soccer, basketball, baseball, tennis, football, and E-sports to fulfill your needs!"
   },
-  "esports":{
-    "desc":"IM E-Sports is an industry-leading betting platform designed by gamers for gamers. Ready to be stunned by the aesthetically pleasing visual interface, endless betting options, and the ultimate betting experience.Visit 【PG】 Gaming, a proud partner of IM E-Sports, and stay up to date on your favorite games and teams!"
+  "esports": {
+    "desc": "IM E-Sports is an industry-leading betting platform designed by gamers for gamers. Ready to be stunned by the aesthetically pleasing visual interface, endless betting options, and the ultimate betting experience.Visit 【PG】 Gaming, a proud partner of IM E-Sports, and stay up to date on your favorite games and teams!"
   },
-  "services":{
-    "depositTitle":"Easy, Rapid Payouts",
-    "deposit":"We strive to have the fastest, easiest and most secure payouts in the industry, all of them are 100% secure and reliable. Through various deposit and withdrawal options, we  promise to make your playing experience enjoyable and easy.",
-    "securityTitle":"Safety & Security",
-    "security":"As the most trusted online betting platform in Asia, we are committed to providing the best gaming experience in every aspect. We use an 128-bit SSL to encrypt every private information you share with us.",
-    "oddsTitle":"500+ Top games",
-    "odds":"From exciting sports, to massive progressive jackpots, classic table games, live casino, lottery, and specialty games – we have it all! With 500+ games, our online casino offers hours of entertainment and exclusive rewards, prizes and bonuses just for you!",
-    "platformTitle":"Anywhere, any devices",
-    "platform":"No matter where you are, you can win your fortune and have fun at anytime, with any devices! We are available on apps for both Android and iOS devices, and also as a web-based platform. Take advantage of chances to win BIG with us today!"
+  "services": {
+    "depositTitle": "Easy, Rapid Payouts",
+    "deposit": "We strive to have the fastest, easiest and most secure payouts in the industry, all of them are 100% secure and reliable. Through various deposit and withdrawal options, we  promise to make your playing experience enjoyable and easy.",
+    "securityTitle": "Safety & Security",
+    "security": "As the most trusted online betting platform in Asia, we are committed to providing the best gaming experience in every aspect. We use an 128-bit SSL to encrypt every private information you share with us.",
+    "oddsTitle": "500+ Top games",
+    "odds": "From exciting sports, to massive progressive jackpots, classic table games, live casino, lottery, and specialty games – we have it all! With 500+ games, our online casino offers hours of entertainment and exclusive rewards, prizes and bonuses just for you!",
+    "platformTitle": "Anywhere, any devices",
+    "platform": "No matter where you are, you can win your fortune and have fun at anytime, with any devices! We are available on apps for both Android and iOS devices, and also as a web-based platform. Take advantage of chances to win BIG with us today!"
   },
-  "AG":{
-    "name":"Asia Gaming",
-    "live":"Asia Gaming"
+  "AG": {
+    "name": "Asia Gaming",
+    "live": "Asia Gaming"
   },
-  "BG":{
-    "name":"Big Gaming",
-    "live":"Big Gaming"
+  "BG": {
+    "name": "Big Gaming",
+    "live": "Big Gaming"
   },
-  "SG":{
-    "name":"Sexy Gaming",
-    "live":"Sexy Gaming"
+  "SG": {
+    "name": "Sexy Gaming",
+    "live": "Sexy Gaming"
   },
-  "SW":{
-    "live":"Skywind",
-    "slots":"Skywind",
-    "electron":"Skywind"
+  "SW": {
+    "live": "Skywind",
+    "slots": "Skywind",
+    "electron": "Skywind"
   },
-  "SBO":{
-    "sports":"SBO"
+  "SBO": {
+    "sports": "SBO"
   },
-  "IMES":{
-    "sports":"IM"
+  "IMES": {
+    "sports": "IM"
   },
-  "SABA":{
-    "sports":"SABA"
+  "SABA": {
+    "sports": "SABA"
   },
-  "HABA":{
-    "slots":"Habanero",
-    "electron":"Habanero"
+  "HABA": {
+    "slots": "Habanero",
+    "electron": "Habanero"
   },
-  "JDB":{
-    "slots":"JDB",
-    "fish":"JDB"
+  "JDB": {
+    "slots": "JDB",
+    "fish": "JDB"
   },
-  "PP":{
-    "slots":"Pragmatic Play",
-    "electron":"Pragmatic Play"
+  "PP": {
+    "slots": "Pragmatic Play",
+    "electron": "Pragmatic Play"
   }
 }

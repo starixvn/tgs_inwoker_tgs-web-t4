@@ -26,6 +26,7 @@ import { withSnackbar } from "notistack";
 import Common from "../../utils/Common";
 import Config from "../../config/config";
 import i18n from "../../utils/i18n";
+import LanguangeChanger from "./LanguagePicker";
 
 const moment = require("moment");
 
@@ -99,6 +100,30 @@ const LinkList = styled.ul`
 `;
 const LinkListItem = styled.li`
   display: inline;
+`;
+
+const LanguageContent = styled.div`
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  padding: 12px 16px;
+  z-index: 1;
+`;
+
+const LanguageContainer = styled.div`
+  float: left;
+  padding-top: 7.5px;
+  padding-right: 5px;
+  position: relative;
+  display: inline-block;
+
+  :hover {
+    ${LanguageContent} {
+      display: block;
+    }
+  }
 `;
 
 const RightContainer = styled.div`
@@ -610,32 +635,37 @@ class Header extends Component {
       <StyledAppBar>
         <InnerWrap>
           <TopContainer>
-            <TimerContainer>
-              <TimerLogo></TimerLogo>
-              <TimerSpan>GMT+8 {this.state.systemDateTime}</TimerSpan>
-            </TimerContainer>
-            <LinkContainer>
-              <LinkList>
-                <LinkListItem>
-                  {config.languages.map((lang, index) => {
-                    return (
-                      <>
-                        <CustomExternalLink
-                          selected={i18n.language === lang.name}
-                          onClick={() => {
-                            window.location.href = `/${lang.name}`;
-                          }}
-                        >
-                          {lang.label}
-                        </CustomExternalLink>
-                        {index < config.languages.length - 1 ? " | " : ""}
-                      </>
-                    );
-                  })}
-                </LinkListItem>
-              </LinkList>
-            </LinkContainer>
+            {
+              //     <TimerContainer>
+              //     <TimerLogo></TimerLogo>
+              //     <TimerSpan>GMT+8 {this.state.systemDateTime}</TimerSpan>
+              //   </TimerContainer>
+              //   <LinkContainer>
+              //     <LinkList>
+              //       <LinkListItem>
+              //         {config.languages.map((lang, index) => {
+              //           return (
+              //             <>
+              //               <CustomExternalLink
+              //                 selected={i18n.language === lang.name}
+              //                 onClick={() => {
+              //                   window.location.href = `/${lang.name}`;
+              //                 }}
+              //               >
+              //                 {lang.label}
+              //               </CustomExternalLink>
+              //               {index < config.languages.length - 1 ? " | " : ""}
+              //             </>
+              //           );
+              //         })}
+              //       </LinkListItem>
+              //     </LinkList>
+              //   </LinkContainer>
+            }
             <RightContainer>
+              <LanguageContainer language={config.languages}>
+                <LanguangeChanger />
+              </LanguageContainer>
               {(() => {
                 if (
                   this.props.account.token !== this.props.account.info.token

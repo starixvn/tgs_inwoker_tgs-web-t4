@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { withRouter } from "react-router-dom";
-import Slick from "react-slick";
+import Slider from "react-slick";
 import Provider1PNG from "../../assets/images/provider1.png";
 import Provider2PNG from "../../assets/images/provider2.png";
 import Provider3PNG from "../../assets/images/provider3.png";
@@ -49,7 +49,7 @@ const AffCSRightContentLine2 = styled.span`
 `;
 
 const MiddleContainer = styled.div`
-  height: 68px;
+  height: 100px;
   width: 100%;
   margin-top: 30px;
   border-bottom: solid 1px ${(props) => props.theme.primaryGradient};
@@ -82,6 +82,7 @@ const BottomContainer = styled.div`
   padding-top: 16px;
   margin: 0 auto;
   color: #f6f6f6;
+  text-transform: uppercase;
 `;
 const CopyRightLine1 = styled.span`
   font-size: 12px;
@@ -182,17 +183,32 @@ const Img = styled.div`
   width: 120px;
   border: none;
 `;
+
+const BrandsImage = styled.div`
+  opacity: 1;
+  height: 95px;
+  width: 175px;
+  background: url(${(props) => props.img}) no-repeat center;
+  background-size: 65%;
+`;
+
+const ThirdPartyLogoHolder = styled.div`
+  display: flex !important;
+  justify-content: center;
+  width: 175px;
+`;
 const settings = {
+  className: "footer",
   dots: false,
-  adaptiveHeight: true,
-  className: "center",
-  centerMode: false,
-  infinite: true,
-  centerPadding: "0px",
-  slidesToShow: 11,
-  speed: 500,
-  arrows: true,
+  arrows: false,
+  slidesToShow: 5,
+  slidesToScroll: 1,
   autoplay: true,
+  speed: 2000,
+  autoplaySpeed: 6000,
+  cssEase: "linear",
+  variableWidth: true,
+  infinite: true,
 };
 function Footer(props) {
   console.log(props.game.providerList);
@@ -200,21 +216,22 @@ function Footer(props) {
     <Container>
       <MiddleContainer>
         <MiddleInnerWrap>
-          <Slick {...settings}>
+          <Slider {...settings}>
             {(() => {
               return props.game.providerList.map((item, index) => {
                 return (
-                  <Img
-                    key={index}
-                    img={
-                      process.env.PUBLIC_URL +
-                      `/assets/images/provider/${item.abbreviation.toLowerCase()}.png`
-                    }
-                  ></Img>
+                  <ThirdPartyLogoHolder style={{ width: 215 }}>
+                    <BrandsImage
+                      img={
+                        process.env.PUBLIC_URL +
+                        `/assets/images/provider/${item.abbreviation.toLowerCase()}.png`
+                      }
+                    />
+                  </ThirdPartyLogoHolder>
                 );
               });
             })()}
-          </Slick>
+          </Slider>
           {/* <ProductUL>
             <ProductLI>
               <ProductImg src={Provider1PNG}></ProductImg>

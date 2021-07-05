@@ -1,4 +1,7 @@
 {
+  "lang": {
+    "language": "语言"
+  },
   "error": {
     "ERR101": "无效的凭证。",
     "ERR201": "找不到玩家。",
@@ -6,7 +9,7 @@
     "ERR401": "请检查您的输入。"
   },
   "common": {
-    "title":"{brand} - 专业娱乐平台",
+    "title": "{brand} - 专业娱乐平台",
     "register": "注册",
     "login": "登录",
     "submit": "提交",
@@ -104,15 +107,15 @@
     "cs": "客服",
     "msgSuccessUpdateProfile": "修改成功。",
     "joinGame": "立刻体验",
-    "withdrawalBankType":"类别",
-    "withdrawalChannel":"渠道",
-    "withdrawalNumber":"银行卡号码/加密货币地址",
-    "msgEnterWithdrawalNumber":"请输入银行卡号码/加密货币地址",
-    "msgEmailExist":"电子邮件地址已存在",
-    "msgRequiredTurnover":"您的投注流水不足，无法提款。 如有问题，请联系客服。",
-    "msgInvalidUsername":"帐号或密码错误",
-    "msgInvalidWithdrawalPassword":"提款密码不正确",
-    "msgRequestFailed" : "请求失败，请联系客服"
+    "withdrawalBankType": "类别",
+    "withdrawalChannel": "渠道",
+    "withdrawalNumber": "银行卡号码/加密货币地址",
+    "msgEnterWithdrawalNumber": "请输入银行卡号码/加密货币地址",
+    "msgEmailExist": "电子邮件地址已存在",
+    "msgRequiredTurnover": "您的投注流水不足，无法提款。 如有问题，请联系客服。",
+    "msgInvalidUsername": "帐号或密码错误",
+    "msgInvalidWithdrawalPassword": "提款密码不正确",
+    "msgRequestFailed": "请求失败，请联系客服"
   },
   "affiliate": {
     "title": "推广赚钱",
@@ -205,13 +208,13 @@
     "msgPlsSelectPayment": "请选择支付方式",
     "msgPlsSelectMethod": "请选择支付渠道",
     "msgPlsEnterAccount": "请输入银行账号名称",
-    "msgInvalidFileSize":"文件太大，请选择小于2mb的文件",
-    "msgInvalidFileType":"请仅上传图像文件。(.jpg/.jpeg/.png/.tiff)",
+    "msgInvalidFileSize": "文件太大，请选择小于2mb的文件",
+    "msgInvalidFileType": "请仅上传图像文件。(.jpg/.jpeg/.png/.tiff)",
     "msgFailedJoinPromotion": "您无法参加此活动。如有问题，请联系客服。",
-    "exchangeRate":"汇率",
-    "buyPrice":"买",
-    "sellPrice":"卖",
-    "expectedPayment":"预计支付",
+    "exchangeRate": "汇率",
+    "buyPrice": "买",
+    "sellPrice": "卖",
+    "expectedPayment": "预计支付",
     "details": {
       "bank": "银行",
       "account": "账户",
@@ -330,7 +333,7 @@
     "details": "查看",
     "phoneVerification": "手机验证",
     "emailVerification": "邮箱验证",
-    "msgPlsBindEmailAddress":"请绑定邮箱地址",
+    "msgPlsBindEmailAddress": "请绑定邮箱地址",
     "changePassword": {
       "msgConfirmPassFail": "确认密码错误",
       "editPassword": "修改密码",
@@ -373,24 +376,24 @@
       "phoneDesc": "请放心，我们不会泄露任何用户信息，以及发送骚扰信息。"
     },
     "email": {
-      "editEmail":"修改邮箱",
-      "verifyEmail":"验证原邮箱",
-      "addEmail":"设定新邮箱",
-      "plsEnterEmail":"请输入邮箱地址",
-      
+      "editEmail": "修改邮箱",
+      "verifyEmail": "验证原邮箱",
+      "addEmail": "设定新邮箱",
+      "plsEnterEmail": "请输入邮箱地址",
+
       "bindEmail": "綁定郵箱地址",
       "toEdit": "要修改邮箱地址，请点击",
       "here": "这里"
     },
-    "qq":{
-      "msgInvalidQQ" :"QQ账号格式不正确",
-      "plsEnterQQ" :"请输入QQ账号",
-      "qqAccount":"QQ账号"
+    "qq": {
+      "msgInvalidQQ": "QQ账号格式不正确",
+      "plsEnterQQ": "请输入QQ账号",
+      "qqAccount": "QQ账号"
     },
-    "wechat":{
-      "msgInvalidWeChat" :"微信账号格式不正确",
-      "plsEnterWechat" :"请输入微信账号",
-      "weChatAccount":"微信账号"
+    "wechat": {
+      "msgInvalidWeChat": "微信账号格式不正确",
+      "plsEnterWechat": "请输入微信账号",
+      "weChatAccount": "微信账号"
     },
     "resetResetWithdrawalPassword": {
       "title": "修改提款密码",
@@ -521,7 +524,7 @@
     "maxAmount": "最大金额",
     "transfer": "转账",
     "noticeTitle": "温馨提示",
-    "msgFailedTransfer":"转账失败"
+    "msgFailedTransfer": "转账失败"
   },
 
   "withdrawal": {
@@ -547,8 +550,8 @@
     "receiverAmount": "到账金额"
   },
   "promotion": {
-    "emptyLine1":"目前尚未有活动",
-    "emptyLine2":"请敬请期待",
+    "emptyLine1": "目前尚未有活动",
+    "emptyLine2": "请敬请期待",
     "moreInfo": "更多资讯",
     "startDate": "开始时间：",
     "endDate": "结束时间：",
@@ -560,7 +563,7 @@
     "joinPromo": "参加优惠",
     "joinSuccess": "参加优惠活动成功",
     "promoJoint": "参加优惠已参加！",
-    "details":"详情"
+    "details": "详情"
   },
   "web": {
     "home": {
@@ -721,77 +724,77 @@
       "btn": "联系我们"
     }
   },
-  "PrimePay":"一等付",
-  "LeePay":"利付钱包",
-  "ApplePay":"苹果支付",
-  "Manual":"手动存款",
-  "Crypto":"虚拟币",
-  "BankTransfer":"银行转账",
-  "CustomBank":"自定银行",
-  "VR":{
-    "lottery":"VR彩票",
-    "desc":"VR奖源一直以“公正、安全、快速、精准”处于行业领先地位，拥有人工智能的全方位系统主流彩种应有尽有，主要分为「VR视讯彩」、「VR品牌彩票」等。亦在积极开发「VR电子」系列游戏，立志给予客户更多样化的选择。VR将持续创造进步，为大众推出更多的新彩种，创造一个全方位的娱乐环境。"
+  "PrimePay": "一等付",
+  "LeePay": "利付钱包",
+  "ApplePay": "苹果支付",
+  "Manual": "手动存款",
+  "Crypto": "虚拟币",
+  "BankTransfer": "银行转账",
+  "CustomBank": "自定银行",
+  "VR": {
+    "lottery": "VR彩票",
+    "desc": "VR奖源一直以“公正、安全、快速、精准”处于行业领先地位，拥有人工智能的全方位系统主流彩种应有尽有，主要分为「VR视讯彩」、「VR品牌彩票」等。亦在积极开发「VR电子」系列游戏，立志给予客户更多样化的选择。VR将持续创造进步，为大众推出更多的新彩种，创造一个全方位的娱乐环境。"
   },
-  "KY":{
-    "chess":"开元棋牌",
-    "desc":"抢庄牛牛龙虎斗，多款棋牌任君选！棋牌彰显胸怀，竞技娱乐烧脑，好友相约竞技，游戏改变生活",
-    "BankerNiuNiu":"抢庄牛牛",
-    "GoldenFlower":"炸金花",
-    "The21Point":"21点",
-    "SanGong":"三公"
+  "KY": {
+    "chess": "开元棋牌",
+    "desc": "抢庄牛牛龙虎斗，多款棋牌任君选！棋牌彰显胸怀，竞技娱乐烧脑，好友相约竞技，游戏改变生活",
+    "BankerNiuNiu": "抢庄牛牛",
+    "GoldenFlower": "炸金花",
+    "The21Point": "21点",
+    "SanGong": "三公"
   },
-  "sports":{
-    "desc":"PG 包网提供您创新且多样化的玩法和高赔率的赛事转播，与随时随地使用各式设备，让您能轻松、快速、且安全下注，再加上丰富的体育赛事投注包括足球、篮球、棒球、网球、美式足球、电竞等，以满足各项的体育竞技热爱者的需求！"
+  "sports": {
+    "desc": "PG 包网提供您创新且多样化的玩法和高赔率的赛事转播，与随时随地使用各式设备，让您能轻松、快速、且安全下注，再加上丰富的体育赛事投注包括足球、篮球、棒球、网球、美式足球、电竞等，以满足各项的体育竞技热爱者的需求！"
   },
-  "esports":{
-    "desc":"IM电子竞技有顶尖的技术支持，还拥有令人惊叹的视觉界面及高效的用户体验。即刻透过【PG】包网平台，体验轻松投注电子竞技的乐趣吧!"
+  "esports": {
+    "desc": "IM电子竞技有顶尖的技术支持，还拥有令人惊叹的视觉界面及高效的用户体验。即刻透过【PG】包网平台，体验轻松投注电子竞技的乐趣吧!"
   },
-  "services":{
-    "depositTitle":"极速存取转款",
-    "deposit":"最新技术自主研发的财务处理系统真正做到极速存、取、转独家网络优化技术，为您提供一流的游戏体验，最大优化网络延迟。",
-    "securityTitle":"加密安全管理",
-    "security":"独家开发，采用128位加密技术和严格的安全管理体系，客户资金得到最完善的保障，让您全情尽享娱乐、赛事投注、无后顾之忧！",
-    "oddsTitle":"海量赛事种类",
-    "odds":"每天为您提供近千场精彩体育赛事，更有真人、彩票、电子游戏等多种娱乐方式选择，让您拥有完美游戏体验。",
-    "platformTitle":"三端任您选择",
-    "platform":"引领市场的卓越技术，自主研发了全套终端应用，让您畅享Web、H5，更有iOS、Android原生APP，让您随时随地，娱乐投注! 7x24小时在线客服提供最贴心，最优质的服务"
+  "services": {
+    "depositTitle": "极速存取转款",
+    "deposit": "最新技术自主研发的财务处理系统真正做到极速存、取、转独家网络优化技术，为您提供一流的游戏体验，最大优化网络延迟。",
+    "securityTitle": "加密安全管理",
+    "security": "独家开发，采用128位加密技术和严格的安全管理体系，客户资金得到最完善的保障，让您全情尽享娱乐、赛事投注、无后顾之忧！",
+    "oddsTitle": "海量赛事种类",
+    "odds": "每天为您提供近千场精彩体育赛事，更有真人、彩票、电子游戏等多种娱乐方式选择，让您拥有完美游戏体验。",
+    "platformTitle": "三端任您选择",
+    "platform": "引领市场的卓越技术，自主研发了全套终端应用，让您畅享Web、H5，更有iOS、Android原生APP，让您随时随地，娱乐投注! 7x24小时在线客服提供最贴心，最优质的服务"
   },
-  "AG":{
-    "name":"AG真人",
-    "live":"AG真人"
+  "AG": {
+    "name": "AG真人",
+    "live": "AG真人"
   },
-  "BG":{
-    "name":"BG真人",
-    "live":"BG真人"
+  "BG": {
+    "name": "BG真人",
+    "live": "BG真人"
   },
-  "SG":{
-    "name":"Sexy真人",
-    "live":"Sexy真人"
+  "SG": {
+    "name": "Sexy真人",
+    "live": "Sexy真人"
   },
-  "SW":{
-    "live":"SW真人",
-    "slots":"SW老虎机",
-    "electron":"SW电子"
+  "SW": {
+    "live": "SW真人",
+    "slots": "SW老虎机",
+    "electron": "SW电子"
   },
-  "SBO":{
-    "sports":"SBO体育"
+  "SBO": {
+    "sports": "SBO体育"
   },
-  "IMES":{
-    "sports":"IM电竞"
+  "IMES": {
+    "sports": "IM电竞"
   },
-  "SABA":{
-    "sports":"沙巴体育"
+  "SABA": {
+    "sports": "沙巴体育"
   },
-  "HABA":{
-    "slots":"HABANERO",
-    "electron":"HABANERO"
+  "HABA": {
+    "slots": "HABANERO",
+    "electron": "HABANERO"
   },
-  "JDB":{
-    "slots":"JDB",
-    "fish":"JDB捕鱼"
+  "JDB": {
+    "slots": "JDB",
+    "fish": "JDB捕鱼"
   },
-  "PP":{
-    "slots":"PP老虎机",
-    "electron":"PP电子"
+  "PP": {
+    "slots": "PP老虎机",
+    "electron": "PP电子"
   }
 }
