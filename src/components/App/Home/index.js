@@ -61,7 +61,7 @@ const SectionContainer = styled.div`
 const Section1 = styled.div`
   background: url(${Section1BG}) center no-repeat;
   height: 900px;
-
+  position: relative;
   background-size: 100%;
 `;
 
@@ -69,14 +69,14 @@ const Section2 = styled.div`
   background: url(${Section2BG}) center no-repeat;
   height: 780px;
 
-  background-size: 100%;
+  background-size: content;
 `;
 
 const Section3 = styled.div`
   background: url(${Section3BG}) center no-repeat;
   height: 580px;
 
-  background-size: 100%;
+  background-size: content;
 `;
 
 const FourButtonImageContainer = styled(Grid)`
@@ -91,8 +91,9 @@ const FourButtonImage = styled.div`
   animation: 3s linear 0s infinite normal none running ${breatheAnimation};
 `;
 
-const FourButtonWrapper = styled(Grid)`
+const FourButtonWrapper = styled.div`
   padding: 10px 37.5px;
+  display: table-cell;
 `;
 
 const TheActualButton = styled(Grid)`
@@ -135,9 +136,7 @@ const TheButtonSubtitle = styled.div`
 `;
 
 const StashOfCoins = styled.div`
-  background: url(${CoinPNG}) left no-repeat;
   height: 500px;
-  background-position-y: 50px;
 `;
 
 const IconsMenu = styled.img`
@@ -152,8 +151,24 @@ const GradientText = styled.div`
   font-weight: bold;
 `;
 
+const TheCoinStash = styled.div`
+  position: absolute;
+  left: 0%;
+  bottom: -100px;
+`;
+
+const EightButton = styled.div`
+  width: 700px;
+  position: absolute;
+  left: 45%;
+  bottom: 125px;
+`;
+
 const TheIconMenuButton = styled(Grid)`
   cursor: pointer;
+  width: 175px;
+  height: 175px;
+  display: inline-flex;
 
   :hover {
     ${GradientText} {
@@ -355,10 +370,10 @@ class Home extends Component {
           <Slider list={this.props.ui.board_list}></Slider>
         </SliderContainer>
         <Section1>
-          <Grid container justify="center">
+          <div style={{ textAlign: "-webkit-center" }}>
             {this.theButton.map((data, index) => {
               return (
-                <FourButtonWrapper item>
+                <FourButtonWrapper>
                   <TheFourButton
                     container
                     direction="column"
@@ -381,81 +396,69 @@ class Home extends Component {
                 </FourButtonWrapper>
               );
             })}
-          </Grid>
+          </div>
 
-          <Grid style={{ height: 550 }}>
-            <StashOfCoins>
-              <Container>
-                <Grid container alignItems="center" style={{ height: 500 }}>
-                  <Grid item xl={6} style={{ position: "relative" }}></Grid>
-                  <Grid item xl={6}>
-                    <Grid container>
-                      {this.theSubmenu.map((data, index) => {
-                        return (
-                          <Grid item xl={3}>
-                            <TheIconMenuButton
-                              container
-                              direction="column"
-                              alignItems="center"
-                            >
-                              <IconsMenu src={data.icon} />
-                              <GradientText>{data.name}</GradientText>
-                            </TheIconMenuButton>
-                          </Grid>
-                        );
-                      })}
-                    </Grid>
-                  </Grid>
-                </Grid>
-              </Container>
-            </StashOfCoins>
-          </Grid>
+          <StashOfCoins>
+            <Container>
+              <TheCoinStash>
+                <img src={CoinPNG} />
+              </TheCoinStash>
+              <EightButton>
+                {this.theSubmenu.map((data, index) => {
+                  return (
+                    <TheIconMenuButton
+                      container
+                      direction="column"
+                      alignItems="center"
+                    >
+                      <IconsMenu src={data.icon} />
+                      <GradientText>{data.name}</GradientText>
+                    </TheIconMenuButton>
+                  );
+                })}
+              </EightButton>
+            </Container>
+          </StashOfCoins>
         </Section1>
-        <Section2 container>
+        <Section2>
           <Container>
-            <Grid container>
-              <Grid item xl={3} style={{ color: "#fff" }}>
-                <Grid container direction="column">
-                  <img src={Section2T} style={{ width: 300, marginTop: 100 }} />
-                  <div style={{ opacity: 0.6, lineHeight: 1.5 }}>
-                    还在为开版等待一个星期、半个月、一个月甚至更漫长的时间吗？时间就是金钱，我的朋友！NEW
-                    BET 5分钟急速开站，让您抢占市场快人一步！
-                  </div>
-                </Grid>
-              </Grid>
-              <Grid item xl={7}></Grid>
-            </Grid>
+            <div style={{ width: 300, color: "#fff" }}>
+              <img src={Section2T} style={{ width: 300, marginTop: 100 }} />
+              <div style={{ opacity: 0.6, lineHeight: 1.5 }}>
+                还在为开版等待一个星期、半个月、一个月甚至更漫长的时间吗？时间就是金钱，我的朋友！NEW
+                BET 5分钟急速开站，让您抢占市场快人一步！
+              </div>
+            </div>
           </Container>
         </Section2>
         <Section3>
           <Container>
-            <Grid container>
-              <Grid item xl={6}></Grid>
-              <Grid item xl={6} style={{ color: "#fff" }}>
-                <Grid container direction="column">
-                  <img
-                    src={Section3T}
-                    style={{ height: 165, marginTop: 100 }}
-                  />
-                  <div
-                    style={{ opacity: 0.6, lineHeight: 2.25, marginLeft: 50 }}
-                  >
-                    1.帮好友注册或发注册链接给好友 <br />
-                    2.好友存款下注 <br />
-                    3.合伙人佣金=好友投注额*0.4%
-                  </div>
-                </Grid>
+            <div style={{ color: "#fff", position: "absolute", left: "50%" }}>
+              <Grid container direction="column">
+                <img src={Section3T} style={{ height: 165, marginTop: 100 }} />
+                <div
+                  style={{
+                    opacity: 0.6,
+                    lineHeight: 2.25,
+                    marginLeft: 50,
+                  }}
+                >
+                  1.帮好友注册或发注册链接给好友 <br />
+                  2.好友存款下注 <br />
+                  3.合伙人佣金=好友投注额*0.4%
+                </div>
               </Grid>
-            </Grid>
+            </div>
           </Container>
         </Section3>
 
         {
-          //   <SectionContainer>
+          //    <SectionContainer>
           //    <SecondSection />
-          //   </SectionContainer>
-          //    <ThirdSection handleJoinGameClick={this.handleJoinGameClick} />
+          //  </SectionContainer>
+          //  <ThirdSection handleJoinGameClick={this.handleJoinGameClick} />
         }
+
         <FloatPanel
           onhandleDepositClick={this.props.onhandleDepositClick}
           onhandleShowCSClick={this.props.onhandleShowCSClick}

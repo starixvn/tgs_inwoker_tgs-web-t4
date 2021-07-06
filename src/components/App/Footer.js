@@ -189,7 +189,7 @@ const BrandsImage = styled.div`
   height: 95px;
   width: 175px;
   background: url(${(props) => props.img}) no-repeat center;
-  background-size: 65%;
+  background-size: contain;
 `;
 
 const ThirdPartyLogoHolder = styled.div`
