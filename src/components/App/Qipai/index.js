@@ -16,7 +16,7 @@ const Container = styled.div`
 
   width: 100%;
   height: auto;
-  min-height: 824px;
+  min-height: 770px;
   padding: 70px 0px;
   position: relative;
   background: url(${(props) =>
