@@ -5,7 +5,7 @@ pipeline {
 	    ENV = "dev"
 	    TAG = sh(script: "echo dev-`date +%Y%m%d%H%M`", returnStdout: true).trim()
 		Registry = "registry.gitlab.com/rayprosoft/turnkey-gaming-system/"
-		Component = "lobby-temp3"
+		Component = "lobby-temp4"
 		BuildEnv="staging"
 		gitlab_user_pwd = credentials('gitlab-user-pwd')
 	}
@@ -19,7 +19,7 @@ pipeline {
 				sh "sudo docker push ${Registry}${Component}:${TAG}"
 				sh "sudo docker push ${Registry}${Component}:${ENV}"
 							
-				withKubeConfig([credentialsId: 'k8s-kube-config', serverUrl: 'https://192.168.50.105:6443']) {
+				withKubeConfig([credentialsId: 'k8s-kube-config']) {
 					sh "kubectl set image deployment/${Component} ${Component}=${Registry}${Component}:${TAG} --record -n ${ENV}"
 				}
 			}
