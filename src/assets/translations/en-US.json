@@ -795,5 +795,12 @@
   "PP": {
     "slots": "Pragmatic Play",
     "electron": "Pragmatic Play"
+  },
+  "EVO":{
+    "live":"Evolution",
+    "slots":"Evolution"
+  },
+  "AB":{
+    "live":"Allbet"
   }
 }

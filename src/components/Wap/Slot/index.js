@@ -271,7 +271,10 @@ class Slot extends Component {
       this.setState({ ...this.state, loading: false });
       if (response.IsSuccess) {
         var data = response.data.map((game) => {
-          game.name = this.language[game.code] || game.name;
+          if (game.gpcode !== "PP" && game.gpcode !== "SW") {
+            game.name = this.language[game.code] || game.name;
+          }
+
           return game;
         });
         if (page === 1) {
@@ -493,9 +496,7 @@ class Slot extends Component {
                       src={`${config.sourceUrl}${row.gpcode.toUpperCase()}${
                         this.state.type === GameTypeEnum.FISH
                           ? `/${i18n.language}`
-                          : row.gpcode === "JDB" || row.gpcode === "SW"
-                          ? `/${Common.getCDNLanguagePrefix()}`
-                          : ``
+                          : `/${Common.getCDNLanguagePrefix()}`
                       }/${row.code.replace(/_/g, "")}.jpg`}
                       style={{ borderRadius: "20px 20px 0 0" }}
                       onClick={() => this.handleGameClick(row.gpcode, row.id)}
