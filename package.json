@@ -72,6 +72,7 @@
     "start:wlg": "env-cmd -f .env.wlg react-scripts start",
     "start:prod_wlg": "env-cmd -f .env.prod_wlg react-scripts start",
     "start:prod_gpi": "env-cmd -f .env.prod_gpi react-scripts start",
+	"start:stag_gpi": "env-cmd -f .env.stag_gpi react-scripts start",
     "build:development": "env-cmd -f .env.development react-scripts build",
     "build:staging": "env-cmd -f .env.staging react-scripts build",
     "build:production": "env-cmd -f .env.production react-scripts build",
@@ -82,6 +83,7 @@
     "build:wlg": "env-cmd -f .env.wlg react-scripts build",
     "build:prod_wlg": "env-cmd -f .env.prod_wlg react-scripts build",
     "build:prod_gpi": "env-cmd -f .env.prod_gpi react-scripts build",
+	"build:stag_gpi": "env-cmd -f .env.stag_gpi react-scripts build",
     "build": "env-cmd -f .env react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
