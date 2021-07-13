@@ -74,7 +74,7 @@ const GameTab = styled.div`
       `.png`})
     no-repeat;
   background-position: center;
-  background-size: contain;
+  background-size: 100%;
   height: 60px;
   width: 100px;
   margin: 0;
@@ -98,12 +98,15 @@ const GameTabButton = styled.div`
   }
   &:hover ${GameTab} {
     background: url(${(props) =>
-      process.env.PUBLIC_URL +
-      `/assets/images/pcGamePage/slots/` +
-      props.img +
-      `-white.png`});
+        process.env.PUBLIC_URL +
+        `/assets/images/pcGamePage/slots/` +
+        props.img +
+        `-white.png`})
+      no-repeat;
     background-position: center;
-    background-size: contain;
+    background-size: 100%;
+    height: 60px;
+    width: 100px;
   }
   ${(props) =>
     props.active
