@@ -186,7 +186,7 @@ const Img = styled.div`
 
 const BrandsImage = styled.div`
   opacity: 1;
-  height: 95px;
+  height: 80px;
   width: 175px;
   background: url(${(props) => props.img}) no-repeat center;
   background-size: contain;

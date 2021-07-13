@@ -43,7 +43,10 @@ const Container = styled.div`
   padding: 70px 0px;
   position: relative;
   background: url(${(props) =>
-      process.env.PUBLIC_URL}/assets/images/pcGamePage/slots/background.jpg)
+      process.env.PUBLIC_URL +
+      `/assets/images/pcGamePage/slots/background-` +
+      Common.getCDNLanguagePrefix() +
+      `.jpg`})
     no-repeat center top;
   background-color: #171b36;
 `;
@@ -55,12 +58,31 @@ const InnerWrap = styled.div`
 
   background: rgba(255, 255, 255, 0.8);
 
-  margin: 130px auto 50px auto;
+  margin: 410px auto 50px auto;
   padding: 16px 46px;
   box-sizing: border-box;
   overflow-y: auto;
 `;
 const GameTabContainer = styled.div``;
+
+const GameTab = styled.div`
+  background: url(${(props) =>
+      process.env.PUBLIC_URL +
+      `/assets/images/pcGamePage/slots/` +
+      props.img +
+      (props.active === true ? `-white` : `-black`) +
+      `.png`})
+    no-repeat;
+  background-position: center;
+  background-size: contain;
+  height: 60px;
+  width: 100px;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+`;
 const GameTabButton = styled.div`
   width: 141px;
   height: 76px;
@@ -72,11 +94,16 @@ const GameTabButton = styled.div`
 
   &:hover {
     cursor: pointer;
-    background-image: linear-gradient(
-      to top,
-      ${({ theme }) => theme.primaryGradient},
-      ${({ theme }) => theme.primary}
-    );
+    background-color: #1a1a1a;
+  }
+  &:hover ${GameTab} {
+    background: url(${(props) =>
+      process.env.PUBLIC_URL +
+      `/assets/images/pcGamePage/slots/` +
+      props.img +
+      `-white.png`});
+    background-position: center;
+    background-size: contain;
   }
   ${(props) =>
     props.active
@@ -87,35 +114,18 @@ const GameTabButton = styled.div`
         `);`
       : `  background-color: #EEEEEE;`};
 `;
-const GameTab = styled.img`
-  max-height: 60px;
-  max-width: 100px;
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translateY(-50%) translateX(-50%);
-`;
+
 const GameTabAll = styled(GameTabButton)`
   ${(props) =>
     props.active
-      ? `  background: url(${SlotAllPNG}) , linear-gradient(to top, ` +
-        props.theme.primaryGradient +
-        `, ` +
-        props.theme.primary +
-        `);`
+      ? `  background: url(${SlotAllPNG}) , #1A1A1A;`
       : `  background: url(${SlotAllInactivePNG}) , rgb(238, 238, 238);`};
   background-repeat: no-repeat;
   background-size: 120ox auto;
   background-position: center;
   &:hover {
     cursor: pointer;
-    background-image: url(${SlotAllPNG}),
-      linear-gradient(
-        to top,
-        ${({ theme }) => theme.primaryGradient},
-        ${({ theme }) => theme.primary}
-      );
+    background-color: url(${SlotAllPNG}), #1a1a1a;
   }
 `;
 
@@ -441,7 +451,10 @@ class Slots extends Component {
     result.then((response) => {
       if (response.IsSuccess) {
         var data = response.data.map((game) => {
-          game.name = this.language[game.code] || game.name;
+          if (game.gpcode !== "PP" && game.gpcode !== "SW") {
+            game.name = this.language[game.code] || game.name;
+          }
+
           return game;
         });
 
@@ -641,9 +654,7 @@ class Slots extends Component {
             img={`${config.sourceUrl}${el.gpcode.toUpperCase()}${
               this.state.type === GameTypeEnum.FISH
                 ? `/${i18n.language}`
-                : el.gpcode === "JDB" || el.gpcode === "SW"
-                ? `/${Common.getCDNLanguagePrefix()}`
-                : ``
+                : `/${Common.getCDNLanguagePrefix()}`
             }/${el.code.replace(/_/g, "")}.jpg`}
           >
             <GameDesc>
@@ -683,13 +694,13 @@ class Slots extends Component {
                 return (
                   <GameTabButton
                     key={index}
+                    img={row.abbreviation.toLowerCase()}
                     active={this.state.platform == row.abbreviation}
                     onClick={() => this.handleParentClick(row.abbreviation)}
                   >
                     <GameTab
-                      src={`${
-                        process.env.PUBLIC_URL
-                      }/assets/images/pcGamePage/slots/${row.abbreviation.toLowerCase()}-white.png`}
+                      img={row.abbreviation.toLowerCase()}
+                      active={this.state.platform == row.abbreviation}
                     ></GameTab>
                   </GameTabButton>
                 );

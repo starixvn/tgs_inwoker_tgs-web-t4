@@ -23,7 +23,7 @@ import Section1BG from "../../../assets/images/home/section/section1.jpg";
 import Section2BG from "../../../assets/images/home/section/section2.jpg";
 import Section3BG from "../../../assets/images/home/section/section3.jpg";
 
-import CoinPNG from "../../../assets/images/home/section/coins.png";
+import CoinPNG from "../../../assets/images/home/section/coins.jpg";
 
 import S1M11 from "../../../assets/images/home/section/section1menu/1-1-new.png";
 import S1M12 from "../../../assets/images/home/section/section1menu/1-2-new.png";
@@ -137,6 +137,8 @@ const TheButtonSubtitle = styled.div`
 
 const StashOfCoins = styled.div`
   height: 500px;
+  background: url(${CoinPNG}) no-repeat;
+  background-position: center;
 `;
 
 const IconsMenu = styled.img`
@@ -158,6 +160,7 @@ const GradientText = styled.div`
 `;
 
 const TheCoinStash = styled.div`
+  background: url(props => props.img) no-repeat;
   position: absolute;
   left: 0%;
   bottom: -100px;
@@ -406,9 +409,6 @@ class Home extends Component {
 
           <StashOfCoins>
             <Container>
-              <TheCoinStash>
-                <img src={CoinPNG} />
-              </TheCoinStash>
               <EightButton>
                 {this.theSubmenu.map((data, index) => {
                   return (
