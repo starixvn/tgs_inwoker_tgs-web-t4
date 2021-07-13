@@ -23,7 +23,7 @@ import Section1BG from "../../../assets/images/home/section/section1.jpg";
 import Section2BG from "../../../assets/images/home/section/section2.jpg";
 import Section3BG from "../../../assets/images/home/section/section3.jpg";
 
-import CoinPNG from "../../../assets/images/home/section/coins.jpg";
+import CoinPNG from "../../../assets/images/home/section/coins.png";
 
 import S1M11 from "../../../assets/images/home/section/section1menu/1-1-new.png";
 import S1M12 from "../../../assets/images/home/section/section1menu/1-2-new.png";
@@ -181,7 +181,7 @@ const TheIconMenuButton = styled(Grid)`
 
   :hover {
     ${GradientText} {
-      font-weight: bold;
+      text-shadow: 0px 0px 1px rgba(254, 221, 109, 1);
     }
   }
 `;
