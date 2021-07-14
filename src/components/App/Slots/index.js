@@ -453,13 +453,7 @@ class Slots extends Component {
     var result = GameService.GetGameList(platform, type);
     result.then((response) => {
       if (response.IsSuccess) {
-        var data = response.data.map((game) => {
-          if (game.gpcode !== "PP" && game.gpcode !== "SW") {
-            game.name = this.language[game.code] || game.name;
-          }
-
-          return game;
-        });
+        var data = response.data;
 
         if (page === 1) {
           this.setState({
@@ -658,7 +652,13 @@ class Slots extends Component {
               this.state.type === GameTypeEnum.FISH
                 ? `/${i18n.language}`
                 : `/${Common.getCDNLanguagePrefix()}`
-            }/${el.code.replace(/_/g, "")}.jpg`}
+            }/${
+              (Common.getCDNLanguagePrefix() === "zh-CN" &&
+                (el.gpcode === "HABA" || el.gpcode === "PP")) ||
+              el.gpcode === "SW"
+                ? el.code
+                : el.code.replace(/_/g, "")
+            }.jpg`}
           >
             <GameDesc>
               <GameProvider>{el.gpcode}</GameProvider>
