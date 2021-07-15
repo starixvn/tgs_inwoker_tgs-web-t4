@@ -184,7 +184,7 @@ class Email extends BaseProfile {
                 label={i18n.t("common.token")}
                 onClick={this.handleGetCodeClick}
                 maxLength={6}
-                type={"number"}
+                type={"text"}
               ></TextboxWithButton>
             );
           }

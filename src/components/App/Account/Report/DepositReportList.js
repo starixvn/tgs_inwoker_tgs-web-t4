@@ -8,6 +8,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import TablePagination from "@material-ui/core/TablePagination";
 import i18n from "../../../../utils/i18n";
+const moment = require("moment");
 const StyledTableCell = withStyles((theme) => ({
   head: {
     backgroundColor: "#f7f7f7",
@@ -61,7 +62,7 @@ const StyledTableRow = withStyles((theme) => ({
 // }
 
 const InnerWrap = styled.div`
-width: 100%;
+  width: 100%;
   float: left;
   margin-top: 8px;
   box-sizing: border-box;
@@ -79,23 +80,26 @@ function DepositReportList(props) {
           <TableRow>
             <StyledTableCell>{i18n.t("report.submitDate")}</StyledTableCell>
             <StyledTableCell>{i18n.t("report.OrderNumber")}</StyledTableCell>
-            <StyledTableCell>{i18n.t("report.depositChannel")}</StyledTableCell>
 
             <StyledTableCell>{i18n.t("report.status")}</StyledTableCell>
-            <StyledTableCell align="right">{i18n.t("common.amount")}</StyledTableCell>
+            <StyledTableCell align="right">
+              {i18n.t("common.amount")}
+            </StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {props.rows.map((row, index) => {
             return (
               <StyledTableRow hover role="checkbox" tabIndex={-1} key={index}>
-                <StyledTableCell>{row.create_time_text}</StyledTableCell>
-                <StyledTableCell>{row.sn}</StyledTableCell>
-                <StyledTableCell>{row.platform_name}</StyledTableCell>
-                <StyledTableCell>{row.status_text}</StyledTableCell>
-                <StyledTableCell align="right">
-                  {row.amount_text}
+                <StyledTableCell>
+                  {moment(row.createdOn).format("YYYY-MM-DD hh:mm a")}
                 </StyledTableCell>
+                <StyledTableCell>{row.id}</StyledTableCell>
+
+                <StyledTableCell>
+                  {i18n.t(`report.deposit.status${row.status}`)}
+                </StyledTableCell>
+                <StyledTableCell align="right">{row.amount}</StyledTableCell>
               </StyledTableRow>
             );
           })}

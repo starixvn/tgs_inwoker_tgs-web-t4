@@ -448,18 +448,16 @@
     "depositChannel": "Channel",
     "withdrawal": {
       "bankCard": "Bank Card",
-      "withdrawalStatus0": "Submitting",
-      "withdrawalStatus1": "Submitted",
-      "withdrawalStatus2": "Approving",
-      "withdrawalStatus3": "Approved",
-      "withdrawalStatus4": "Reject",
-      "withdrawalStatus5": "Cancelled"
+      "status1": "Waiting Payment",
+      "status2": "Review",
+      "status3": "Approved",
+      "status4": "Rejected"
     },
     "deposit": {
-      "status1": "Pending",
-      "status2": "Approved",
-      "status3": "Reject",
-      "status4": "Cancelled"
+      "status1": "Waiting Payment",
+      "status2": "Review",
+      "status3": "Approved",
+      "status4": "Rejected"
     },
     "rebate": {
       "sn": "SN",

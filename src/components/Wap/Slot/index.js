@@ -24,9 +24,7 @@ import "react-lazy-load-image-component/src/effects/blur.css";
 import BottomScrollListener from "react-bottom-scroll-listener";
 import i18n from "../../../utils/i18n";
 import Common from "../../../utils/Common";
-import jsonUS from "../../../assets/translations/slot_en-US.json";
-import jsonCN from "../../../assets/translations/slot_zh-CN.json";
-import jsonTW from "../../../assets/translations/slot_zh-TW.json";
+
 import config from "../../../config/config";
 const Container = styled.div`
   width: 100%;
@@ -47,7 +45,7 @@ const ListItem = styled.div`
   margin: 10px 0 10px 20px;
 
   width: 345px;
-  height: 273px;
+  height: 330px;
   border-radius: 10px;
   background-color: ${({ theme }) => theme.secondary};
 `;
@@ -65,7 +63,7 @@ const ListitemLabelBackground = styled.div`
 `;
 const LeftContainer = styled.div`
   position: absolute;
-  top: 170px;
+  top: 225px;
   left: 20px;
 `;
 const GameProvider = styled.div`
@@ -235,17 +233,6 @@ class Slot extends Component {
   }
   language = null;
   componentDidMount() {
-    switch (i18n.language) {
-      case "zh-CN":
-        this.language = jsonCN;
-        break;
-      case "zh-TW":
-        this.language = jsonTW;
-        break;
-      default:
-        this.language = jsonUS;
-        break;
-    }
     this.getGameList();
   }
 
@@ -481,9 +468,11 @@ class Slot extends Component {
               })
               .map((row) => {
                 return (
-                  <ListItem key={row.id}>
+                  <ListItem
+                    key={row.id}
+                    onClick={() => this.handleGameClick(row.gpcode, row.id)}
+                  >
                     <LazyLoadImage
-                      height={194}
                       width={344}
                       alt={""}
                       effect="blur"
@@ -498,8 +487,10 @@ class Slot extends Component {
                           ? row.code
                           : row.code.replace(/_/g, "")
                       }.jpg`}
-                      style={{ borderRadius: "20px 20px 0 0" }}
-                      onClick={() => this.handleGameClick(row.gpcode, row.id)}
+                      style={{
+                        borderRadius: "20px 20px 0 0",
+                        marginTop: "-50px",
+                      }}
                     />
                     <ListitemLabelBackground></ListitemLabelBackground>
                     <LeftContainer>

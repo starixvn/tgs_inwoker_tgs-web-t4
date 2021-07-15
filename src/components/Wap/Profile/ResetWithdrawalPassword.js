@@ -191,7 +191,7 @@ class ResetResetWithdrawalPassword extends Component {
               label={i18n.t("common.token")}
               onClick={this.handleGetCodeClick}
               maxLength={6}
-              type={"number"}
+              type={"text"}
             ></TextboxWithButton>
             <Button
               style={{ margin: "40px auto 0 auto" }}

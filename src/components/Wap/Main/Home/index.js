@@ -185,6 +185,12 @@ const GameSelectionUL = styled.div`
 
   padding: 0 0px;
   width: 176px;
+  overflow-y: auto;
+  height: calc(100vh - 640px);
+`;
+const GameSelectionEmpty = styled.div`
+  height: 90px;
+  width: 130px;
 `;
 const GameSelectionLI = styled.div`
   width: 130px;
@@ -294,6 +300,7 @@ class Home extends Component {
     var currentType = -1;
     var gameTypeListSorting = [];
     var displayGameType = Common.GetDisplayGameType();
+
     this.props.game.homePageGameList
       .filter((a) => displayGameType.indexOf(a.type) >= 0)
       .sort((a, b) => {

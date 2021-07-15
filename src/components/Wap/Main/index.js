@@ -255,7 +255,7 @@ class Main extends Component {
                 <MenuImage img={IconMenuReport2PNG}></MenuImage>
                 <MenuLabel>{i18n.t("wap.main.menuDrawer.betReport")}</MenuLabel>
               </Menuitem>
-
+            */}
               <Menuitem onClick={() => this.handleChangeSelection("/report/3")}>
                 <MenuImage img={IconMenuReport3PNG}></MenuImage>
                 <MenuLabel>
@@ -267,7 +267,7 @@ class Main extends Component {
                 <MenuLabel>
                   {i18n.t("wap.main.menuDrawer.depositReport")}
                 </MenuLabel>
-              </Menuitem> */}
+              </Menuitem>
               <Menuitem onClick={() => this.handleChangeSelection("/card")}>
                 <MenuImage img={IconMenuCardPNG}></MenuImage>
                 <MenuLabel>{i18n.t("wap.main.menuDrawer.bankCard")}</MenuLabel>

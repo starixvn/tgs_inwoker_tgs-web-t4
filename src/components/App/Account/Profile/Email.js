@@ -77,8 +77,7 @@ const StyleButton = styled.div`
         box-shadow: inset 1px 1px 9px 0  rgba(255, 255, 255, 0.75);
         }
   `}
-
-
+  }
 `;
 const ButtonLabel = styled.span`
   text-align: center;
@@ -232,18 +231,13 @@ class Address extends Component {
           adornment={IconInputVerifyCodePNG}
           onChange={this.onhandleCodeChange}
           value={this.state.code}
-          onInput={(e) => {
-            e.target.value = Math.max(0, parseInt(e.target.value))
-              .toString()
-              .slice(0, 6);
-          }}
           style={{
             width: "200px",
             height: "46px",
           }}
           variant="outlined"
           autoComplete="off"
-          type={"number"}
+          type={"text"}
         ></CustomText>
         <StyleButton
           onClick={this.onhandleGetCodeClick}

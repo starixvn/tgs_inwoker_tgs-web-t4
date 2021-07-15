@@ -105,7 +105,7 @@ class WithdrawalReport extends Component {
       this.state.dateRange.dateFrom,
       this.state.dateRange.dateTo,
       1,
-      parseInt(e.target.value)
+      e.target.value
     );
   };
 
@@ -160,12 +160,13 @@ class WithdrawalReport extends Component {
               variant="outlined"
             >
               <option value={""}>{i18n.t("report.all")}</option>
-              <option value={-2}>{i18n.t("report.withdrawal.withdrawalStatus0")}</option>
-              <option value={-1}>{i18n.t("report.withdrawal.withdrawalStatus1")}</option>
-              <option value={1}>{i18n.t("report.withdrawal.withdrawalStatus2")}</option>
-              <option value={2}>{i18n.t("report.withdrawal.withdrawalStatus3")}</option>
-              <option value={3}>{i18n.t("report.withdrawal.withdrawalStatus4")}</option>
-              <option value={4}>{i18n.t("report.withdrawal.withdrawalStatus5")}</option>
+              {Object.keys(this.props.withdrawalStatusList).map((key) => {
+                return (
+                  <option value={key}>
+                    {i18n.t(`report.withdrawal.status${key}`)}
+                  </option>
+                );
+              })}
             </Select>
           </CustomFormControl>
         </FilterContainer>
@@ -175,6 +176,7 @@ class WithdrawalReport extends Component {
             rows={this.props.withdrawalList.list}
             total={this.props.withdrawalList.count}
             onhandleChangePage={this.handleChangePage}
+            withdrawalStatusList={this.props.withdrawalStatusList}
           ></WithdrawalReportList>
         </InnerWrap>
       </Container>
