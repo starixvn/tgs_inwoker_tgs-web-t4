@@ -270,10 +270,7 @@ class Slot extends Component {
     result.then((response) => {
       this.setState({ ...this.state, loading: false });
       if (response.IsSuccess) {
-        var data = response.data.map((game) => {
-          game.name = this.language[game.code] || game.name;
-          return game;
-        });
+        var data = response.data;
         if (page === 1) {
           this.setState({
             ...this.state,
@@ -493,10 +490,14 @@ class Slot extends Component {
                       src={`${config.sourceUrl}${row.gpcode.toUpperCase()}${
                         this.state.type === GameTypeEnum.FISH
                           ? `/${i18n.language}`
-                          : row.gpcode === "JDB" || row.gpcode === "SW"
-                          ? `/${Common.getCDNLanguagePrefix()}`
-                          : ``
-                      }/${row.code.replace(/_/g, "")}.jpg`}
+                          : `/${Common.getCDNLanguagePrefix()}`
+                      }/${
+                        (Common.getCDNLanguagePrefix() === "zh-CN" &&
+                          (row.gpcode === "HABA" || row.gpcode === "PP")) ||
+                        row.gpcode === "SW"
+                          ? row.code
+                          : row.code.replace(/_/g, "")
+                      }.jpg`}
                       style={{ borderRadius: "20px 20px 0 0" }}
                       onClick={() => this.handleGameClick(row.gpcode, row.id)}
                     />

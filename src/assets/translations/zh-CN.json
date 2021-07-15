@@ -796,5 +796,12 @@
   "PP": {
     "slots": "PP老虎机",
     "electron": "PP电子"
+  },
+  "EVO":{
+    "live":"EVO真人",
+    "slots":"EVO电子"
+  },
+  "AB":{
+    "live":"Allbet真人"
   }
 }

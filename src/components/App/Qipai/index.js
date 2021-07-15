@@ -95,10 +95,10 @@ const JoinGameButton = styled.div`
       .PUBLIC_URL}/assets/images/pcGamePage/qipai/button.png)
     no-repeat;
   color: #fff;
-  font-size: 32px;
+  font-size: 25px;
   font-weight: bold;
   text-align: center;
-  padding-top: 20px;
+  padding-top: 25px;
 
   &:hover {
     cursor: pointer;
@@ -188,7 +188,9 @@ class Qipai extends Component {
               style={{ height: "100%" }}
             >
               <LogoHolder
-                src={`${process.env.PUBLIC_URL}/assets/images/pcGamePage/qipai/ky.png`}
+                src={`${
+                  process.env.PUBLIC_URL
+                }/assets/images/pcGamePage/qipai/ky-${Common.getCDNLanguagePrefix()}.png`}
               />
               <CenterText>{i18n.t("KY.desc")}</CenterText>
               <JoinGameButton

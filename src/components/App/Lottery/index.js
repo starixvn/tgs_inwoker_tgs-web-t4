@@ -63,10 +63,10 @@ const JoinGameButton = styled.div`
       .PUBLIC_URL}/assets/images/pcGamePage/lottery/button.png)
     no-repeat;
   color: #fff;
-  font-size: 32px;
+  font-size: 25px;
   font-weight: bold;
   text-align: center;
-  padding-top: 20px;
+  padding-top: 25px;
 
   &:hover {
     cursor: pointer;

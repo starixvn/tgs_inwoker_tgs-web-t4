@@ -25,14 +25,14 @@ import Section3BG from "../../../assets/images/home/section/section3.jpg";
 
 import CoinPNG from "../../../assets/images/home/section/coins.png";
 
-import S1M11 from "../../../assets/images/home/section/section1menu/1-1.png";
-import S1M12 from "../../../assets/images/home/section/section1menu/1-2.png";
-import S1M13 from "../../../assets/images/home/section/section1menu/1-3.png";
-import S1M14 from "../../../assets/images/home/section/section1menu/1-4.png";
-import S1M21 from "../../../assets/images/home/section/section1menu/2-1.png";
-import S1M22 from "../../../assets/images/home/section/section1menu/2-2.png";
-import S1M23 from "../../../assets/images/home/section/section1menu/2-3.png";
-import S1M24 from "../../../assets/images/home/section/section1menu/2-4.png";
+import S1M11 from "../../../assets/images/home/section/section1menu/1-1-new.png";
+import S1M12 from "../../../assets/images/home/section/section1menu/1-2-new.png";
+import S1M13 from "../../../assets/images/home/section/section1menu/1-3-new.png";
+import S1M14 from "../../../assets/images/home/section/section1menu/1-4-new.png";
+import S1M21 from "../../../assets/images/home/section/section1menu/2-1-new.png";
+import S1M22 from "../../../assets/images/home/section/section1menu/2-2-new.png";
+import S1M23 from "../../../assets/images/home/section/section1menu/2-3-new.png";
+import S1M24 from "../../../assets/images/home/section/section1menu/2-4-new.png";
 
 import Section2T from "../../../assets/images/home/section/section2title.png";
 import Section3T from "../../../assets/images/home/section/section3title.png";
@@ -41,7 +41,7 @@ import ScrollAnimation from "react-animate-on-scroll";
 import { Grid, Container } from "@material-ui/core";
 const breatheAnimation = keyframes`
  0% { transform:translateY(0); }
- 50% { transform:translateY(-20px); }
+ 50% { transform:translateY(-10px); }
  100% { transform:translateY(0px); }
 `;
 const HomeContainer = styled.div`
@@ -86,7 +86,7 @@ const FourButtonImageContainer = styled(Grid)`
 const FourButtonImage = styled.div`
   background: url(${({ src }) => src}) center no-repeat;
   height: auto;
-  width: 200px;
+  width: 170px;
   background-size: 100%;
   animation: 3s linear 0s infinite normal none running ${breatheAnimation};
 `;
@@ -137,6 +137,8 @@ const TheButtonSubtitle = styled.div`
 
 const StashOfCoins = styled.div`
   height: 500px;
+  background: url(${CoinPNG}) no-repeat;
+  background-position: center;
 `;
 
 const IconsMenu = styled.img`
@@ -145,13 +147,20 @@ const IconsMenu = styled.img`
 `;
 
 const GradientText = styled.div`
-  background: -webkit-linear-gradient(#b2802b, #f1cf64, #b2802b);
+  background: -webkit-linear-gradient(
+    90deg,
+    rgba(254, 221, 109, 1) 0%,
+    rgba(190, 136, 44, 1) 7%,
+    rgba(254, 221, 109, 1) 78%,
+    rgba(190, 136, 44, 1) 100%
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-weight: bold;
 `;
 
 const TheCoinStash = styled.div`
+  background: url(props => props.img) no-repeat;
   position: absolute;
   left: 0%;
   bottom: -100px;
@@ -172,7 +181,7 @@ const TheIconMenuButton = styled(Grid)`
 
   :hover {
     ${GradientText} {
-      text-shadow: 1px 1px 2px #f1cf64;
+      text-shadow: 0px 0px 1px rgba(254, 221, 109, 1);
     }
   }
 `;
@@ -400,9 +409,6 @@ class Home extends Component {
 
           <StashOfCoins>
             <Container>
-              <TheCoinStash>
-                <img src={CoinPNG} />
-              </TheCoinStash>
               <EightButton>
                 {this.theSubmenu.map((data, index) => {
                   return (

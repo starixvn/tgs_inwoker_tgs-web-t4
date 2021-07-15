@@ -151,7 +151,7 @@ const LogoContainer = styled.div`
   background-image: url(${process.env
     .PUBLIC_URL}/assets/images/logo/${Config.brand}.png);
   background-repeat: no-repeat;
-  background-size: auto 80px;
+  background-size: auto 60px;
   background-position: left center;
   width: 270px;
 
