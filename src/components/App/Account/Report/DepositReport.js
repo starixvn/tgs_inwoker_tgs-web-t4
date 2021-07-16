@@ -24,7 +24,7 @@ const FilterContainer = styled.div`
   padding: 10px;
 `;
 const InnerWrap = styled.div`
-width: 888px;
+  width: 888px;
   float: left;
   margin-top: 8px;
   box-sizing: border-box;
@@ -105,7 +105,7 @@ class DepositReport extends Component {
       this.state.dateRange.dateFrom,
       this.state.dateRange.dateTo,
       1,
-      parseInt(e.target.value)
+      e.target.value
     );
   };
 
@@ -160,11 +160,13 @@ class DepositReport extends Component {
               variant="outlined"
             >
               <option value={""}>{i18n.t("report.all")}</option>
-              <option value={1}>{i18n.t("report.deposit.status1")}</option>
-              <option value={2}>{i18n.t("report.deposit.status2")}</option>
-
-              <option value={3}>{i18n.t("report.deposit.status3")}</option>
-              <option value={4}>{i18n.t("report.deposit.status4")}</option>
+              {Object.keys(this.props.depositStatusList).map((key) => {
+                return (
+                  <option value={key}>
+                    {i18n.t(`report.deposit.status${key}`)}
+                  </option>
+                );
+              })}
             </Select>
           </CustomFormControl>
         </FilterContainer>
@@ -174,6 +176,7 @@ class DepositReport extends Component {
             rows={this.props.depositList.list}
             total={this.props.depositList.count}
             onhandleChangePage={this.handleChangePage}
+            depositStatusList={this.props.depositStatusList}
           ></DepositReportList>
         </InnerWrap>
       </Container>

@@ -183,7 +183,7 @@ class ChangeEmail extends BaseProfile {
                 this.state.countdownToken +
                 "s)"
           }
-          type={"number"}
+          type={"text"}
           style={{ margin: "20px auto 20px auto" }}
           value={this.state.code}
           onChange={this.handleChangeCode}

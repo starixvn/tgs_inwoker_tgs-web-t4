@@ -33,9 +33,6 @@ import i18n from "../../../utils/i18n";
 import config from "../../../config/config";
 import Common from "../../../utils/Common";
 
-import jsonUS from "../../../assets/translations/slot_en-US.json";
-import jsonCN from "../../../assets/translations/slot_zh-CN.json";
-import jsonTW from "../../../assets/translations/slot_zh-TW.json";
 const Container = styled.div`
   width: 100%;
   height: auto;
@@ -74,7 +71,7 @@ const GameTab = styled.div`
       `.png`})
     no-repeat;
   background-position: center;
-  background-size: 100%;
+  background-size: contain;
   height: 60px;
   width: 100px;
   margin: 0;
@@ -269,19 +266,18 @@ const ButtonMore = styled.div`
 `;
 
 const GameHoverSelection = styled.div`
-width:165px
-height:148px
-position:absolute;
-left:0;
-top:0;
-display:none;
-background-color:rgba(0,0,0,0.7);
-z-index: 2;
-color: #fff;
-font-size: 65px;
-text-align: center;
-padding-top: 32px;
-
+  width: 165px;
+  height: 205px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: none;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 2;
+  color: #fff;
+  font-size: 65px;
+  text-align: center;
+  padding-top: 55px;
 `;
 const ItemContainer = styled.div`
   width: 165px;
@@ -300,8 +296,9 @@ const ItemContainer = styled.div`
   background-image:url(` +
     props.img +
     `)`};
-  background-size: cover;
+  background-size: 165px 165px;
   background-repeat: no-repeat;
+  background-position: center top;
 `;
 const GameDesc = styled.div`
   padding-left: 10px;
@@ -329,7 +326,7 @@ const Namecontainer = styled.div`
   font-size: 14px;
   padding: 10px 10px 0 10px;
   box-sizing: border-box;
-  margin-top: 107px;
+  margin-top: 165px;
   float: left;
   white-space: nowrap;
   overflow: hidden;
@@ -388,17 +385,6 @@ class Slots extends Component {
   }
   language = null;
   componentDidMount() {
-    switch (i18n.language) {
-      case "zh-CN":
-        this.language = jsonCN;
-        break;
-      case "zh-TW":
-        this.language = jsonTW;
-        break;
-      default:
-        this.language = jsonUS;
-        break;
-    }
     this.getGameList();
   }
   componentDidUpdate(prevProps, prevState) {

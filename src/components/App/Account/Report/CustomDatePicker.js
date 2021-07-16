@@ -46,7 +46,7 @@ function CustomDatePicker(props) {
         disableToolbar
         InputAdornmentProps={{ position: "end" }}
         variant="inline"
-        maxDate={new Date()}
+        maxDate={props.maxDate ? props.maxDate : new Date()}
         inputVariant="outlined"
         format="yyyy/MM/dd"
         id="date-picker-inline"

@@ -240,7 +240,7 @@ class ForgotPasswordPhone extends Component {
             variant="outlined"
             onChange={this.handleCodeChange}
             value={this.state.code}
-            type={"number"}
+            type={"text"}
             autoComplete="off"
             style={{
               width: "208px",

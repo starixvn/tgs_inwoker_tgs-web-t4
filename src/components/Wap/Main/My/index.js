@@ -333,6 +333,18 @@ class My extends Component {
             {i18n.t("wap.main.account.betReport")}
           </ListItem>
           <ListItem
+            icon={IconProfileCashflowPNG}
+            onClick={() => this.props.navigate("/report/3")}
+          >
+            {i18n.t("report.withdrawalDetails")}
+          </ListItem>
+          <ListItem
+            icon={IconProfileCashflowPNG}
+            onClick={() => this.props.navigate("/report/4")}
+          >
+            {i18n.t("report.depositDetails")}
+          </ListItem>
+          <ListItem
             icon={IconProfileCardPNG}
             onClick={() => this.props.navigate("/card")}
           >

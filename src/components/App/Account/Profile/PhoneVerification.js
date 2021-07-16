@@ -324,15 +324,10 @@ class PhoneVerification extends Component {
           placeholder={i18n.t("common.msgEnterCode")}
           adornment={IconInputVerifyCodePNG}
           onChange={this.onhandleCodeChange}
-          onInput={(e) => {
-            e.target.value = Math.max(0, parseInt(e.target.value))
-              .toString()
-              .slice(0, 6);
-          }}
           variant="outlined"
           autoComplete="off"
           value={this.state.code}
-          type={"number"}
+          type={"text"}
           style={{
             width: "208px",
             height: "46px",

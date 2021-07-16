@@ -130,7 +130,7 @@ const DataHeader = styled.div`
 const DataRowId = styled.div`
   width: 100%;
   min-height: 40px;
-  padding: 14px 0px 0px 18px;
+  padding: 14px 0px 0px 0px;
   font-weight: 600;
   font-size: 26px;
 `;
@@ -147,15 +147,25 @@ const DataRow = styled.div`
 const DataHeaderRow = styled(DataRow)`
   border-bottom: none;
 `;
+const DataDateCell3 = styled.div`
+  float: left;
+  width: calc(630px / 3 * 1);
+  text-align: left;
+`;
+const DataDateCellAmount = styled.div`
+  float: left;
+  width: calc(630px / 3 * 1);
+  text-align: right;
+`;
 const DataDateCell = styled.div`
   float: left;
   width: calc(630px / 4 * 1);
-  text-align: center;
+  text-align: left;
 `;
 const DataWinlossCell = styled.div`
   float: left;
   width: calc(630px / 4 * 1);
-  text-align: center;
+  text-align: right;
 `;
 const NoRecordContainer = styled.div`
   background: url(${NoRecordPNG}) no-repeat;
@@ -289,11 +299,13 @@ class Report extends Component {
       dataList: [],
       gameList: [],
       isMaxPage: false,
+      depositStatusList: {},
+      withdrawalStatusList: {},
     };
   }
 
   componentDidMount() {
-    //this.GetGameList();
+    this.GetDepositWithdrawalStatus();
     // this.handleAccountGetReportTrigger(
     //   this.state.page,
     //   this.state.pageSize,
@@ -368,6 +380,18 @@ class Report extends Component {
     GameService.GetGameList(this.props.token).then((response) => {
       if (response.IsSuccess) {
         this.setState({ ...this.state, gameList: response.data });
+      }
+    });
+  };
+  GetDepositWithdrawalStatus = () => {
+    ReportService.GetDepositStatus().then((response) => {
+      if (response.IsSuccess) {
+        this.setState({ ...this.state, depositStatusList: response.data });
+      }
+    });
+    ReportService.GetWithdrawalStatus().then((response) => {
+      if (response.IsSuccess) {
+        this.setState({ ...this.state, withdrawalStatusList: response.data });
       }
     });
   };
@@ -539,8 +563,8 @@ class Report extends Component {
   handleTransactionGetReportTrigger = (page, game_platform_id) => {
     this.setState({ ...this.state, loading: true });
     ReportService.GetTransactionDetails(
-      moment(this.state.dateFrom).format("YYYY-MM-DD"),
-      moment(this.state.dateTo).format("YYYY-MM-DD 23:59:59"),
+      moment(this.state.dateFrom).format("YYYY-MM-DDT00:00:00.000") + "Z",
+      moment(this.state.dateTo).format("YYYY-MM-DDT23:59:59.999") + "Z",
       page,
       this.state.pageSize,
       true,
@@ -572,22 +596,26 @@ class Report extends Component {
   handleWithdrawalGetReportTrigger = (page, status) => {
     this.setState({ ...this.state, loading: true });
     ReportService.GetWithdrawalDetails(
-      moment(this.state.dateFrom).format("YYYY-MM-DD"),
-      moment(this.state.dateTo).format("YYYY-MM-DD"),
+      status,
+      moment(this.state.dateFrom).format("YYYY-MM-DDT00:00:00.000") + "Z",
+      moment(this.state.dateTo).format("YYYY-MM-DDT23:59:59.999") + "Z",
       page,
-      status
+      this.state.pageSize,
+      true,
+      "",
+      false
     ).then((response) => {
       if (response.IsSuccess) {
         const dataList =
           page > 1
-            ? this.state.dataList.concat(response.data.list)
-            : response.data.list;
+            ? this.state.dataList.concat(response.data.items)
+            : response.data.items;
         this.setState({
           ...this.state,
           dataList: dataList,
           loading: false,
 
-          isMaxPage: response.data.count == dataList.length,
+          isMaxPage: response.data.totalCount == dataList.length,
         });
       } else {
         this.props.alert("", response.info);
@@ -602,22 +630,26 @@ class Report extends Component {
   handleDepositGetReportTrigger = (page, status) => {
     this.setState({ ...this.state, loading: true });
     ReportService.GetDepositDetails(
-      moment(this.state.dateFrom).format("YYYY-MM-DD"),
-      moment(this.state.dateTo).format("YYYY-MM-DD"),
+      status,
+      moment(this.state.dateFrom).format("YYYY-MM-DDT00:00:00.000") + "Z",
+      moment(this.state.dateTo).format("YYYY-MM-DDT23:59:59.999") + "Z",
       page,
-      status
+      this.state.pageSize,
+      true,
+      "",
+      false
     ).then((response) => {
       if (response.IsSuccess) {
         const dataList =
           page > 1
-            ? this.state.dataList.concat(response.data.list)
-            : response.data.list;
+            ? this.state.dataList.concat(response.data.items)
+            : response.data.items;
         this.setState({
           ...this.state,
           dataList: dataList,
           loading: false,
 
-          isMaxPage: response.data.count == dataList.length,
+          isMaxPage: response.data.totalCount == dataList.length,
         });
       } else {
         this.props.alert("", response.info);
@@ -632,8 +664,8 @@ class Report extends Component {
   handleRebateGetReportTrigger = (page) => {
     this.setState({ ...this.state, loading: true });
     ReportService.GetRebateDetails(
-      moment(this.state.dateFrom).format("YYYY-MM-DD"),
-      moment(this.state.dateTo).format("YYYY-MM-DD"),
+      moment(this.state.dateFrom).format("YYYY-MM-DDT00:00:00.000") + "Z",
+      moment(this.state.dateTo).format("YYYY-MM-DDT23:59:59.999") + "Z",
       page
     ).then((response) => {
       if (response.IsSuccess) {
@@ -713,24 +745,24 @@ class Report extends Component {
             />
           */}
             <Tab
-              style={{ width: "calc(750px/5)" }}
+              style={{ width: "calc(750px/3)" }}
               index={2}
               label={i18n.t("report.bettingDetails")}
               value={2}
             />
-            {/*  <Tab
-              style={{ width: "calc(750px/5)" }}
+            <Tab
+              style={{ width: "calc(750px/3)" }}
               index={3}
               label={i18n.t("report.withdrawalDetails")}
               value={3}
             />
             <Tab
-              style={{ width: "calc(750px/5)" }}
+              style={{ width: "calc(750px/3)" }}
               index={4}
               label={i18n.t("report.depositDetails")}
               value={4}
             />
-            <Tab
+            {/*<Tab
               style={{ width: "calc(750px/5)" }}
               index={5}
               label={i18n.t("report.rebateDetails")}
@@ -804,8 +836,7 @@ class Report extends Component {
           </DateRangContainer>
         </DateContainer>
         {(() => {
-          return <></>;
-          if (this.state.selectedType === 1 || this.state.selectedType === 2) {
+          if (this.state.selectedType === 1) {
             return (
               <SelectContainer>
                 <SelectLabel>{i18n.t("report.platform")}</SelectLabel>
@@ -855,24 +886,14 @@ class Report extends Component {
                     value={this.state.status}
                   >
                     <option value={""}>{i18n.t("report.all")}</option>
-                    <option value={-2}>
-                      {i18n.t("report.withdrawal.withdrawalStatus0")}
-                    </option>
-                    <option value={-1}>
-                      {i18n.t("report.withdrawal.withdrawalStatus1")}
-                    </option>
-                    <option value={1}>
-                      {i18n.t("report.withdrawal.withdrawalStatus2")}
-                    </option>
-                    <option value={2}>
-                      {i18n.t("report.withdrawal.withdrawalStatus3")}
-                    </option>
-                    <option value={3}>
-                      {i18n.t("report.withdrawal.withdrawalStatus4")}
-                    </option>
-                    <option value={4}>
-                      {i18n.t("report.withdrawal.withdrawalStatus5")}
-                    </option>
+
+                    {Object.keys(this.state.withdrawalStatusList).map((key) => {
+                      return (
+                        <option value={key}>
+                          {i18n.t(`report.withdrawal.status${key}`)}
+                        </option>
+                      );
+                    })}
                   </CustomSelect>
                 </CustomFormControl>
               </SelectContainer>
@@ -893,19 +914,13 @@ class Report extends Component {
                     value={this.state.status}
                   >
                     <option value={""}>{i18n.t("report.all")}</option>
-                    <option value={1}>
-                      {i18n.t("report.deposit.status1")}
-                    </option>
-                    <option value={2}>
-                      {i18n.t("report.deposit.status2")}
-                    </option>
-
-                    <option value={3}>
-                      {i18n.t("report.deposit.status3")}
-                    </option>
-                    <option value={4}>
-                      {i18n.t("report.deposit.status4")}
-                    </option>
+                    {Object.keys(this.state.depositStatusList).map((key) => {
+                      return (
+                        <option value={key}>
+                          {i18n.t(`report.deposit.status${key}`)}
+                        </option>
+                      );
+                    })}
                   </CustomSelect>
                 </CustomFormControl>
               </SelectContainer>
@@ -966,8 +981,12 @@ class Report extends Component {
                   <DataHeaderRow>
                     <DataDateCell>{i18n.t("report.betDateTime")}</DataDateCell>
                     <DataDateCell>{i18n.t("report.platform")}</DataDateCell>
-                    <DataDateCell>{i18n.t("report.betAmount")}</DataDateCell>
-                    <DataDateCell>{i18n.t("report.winloss")}</DataDateCell>
+                    <DataWinlossCell>
+                      {i18n.t("report.betAmount")}
+                    </DataWinlossCell>
+                    <DataWinlossCell>
+                      {i18n.t("report.winloss")}
+                    </DataWinlossCell>
                   </DataHeaderRow>
                 </DataHeader>
                 {(() => {
@@ -991,8 +1010,10 @@ class Report extends Component {
                                 <DataDateCell>
                                   {row.gameProviderName}
                                 </DataDateCell>
-                                <DataDateCell>{row.betAmount}</DataDateCell>
-                                <DataDateCell> {row.winLoss}</DataDateCell>
+                                <DataWinlossCell>
+                                  {row.betAmount}
+                                </DataWinlossCell>
+                                <DataWinlossCell>{row.winLoss}</DataWinlossCell>
                               </DataRow>
                             </React.Fragment>
                           );
@@ -1008,10 +1029,12 @@ class Report extends Component {
               <>
                 <DataHeader>
                   <DataHeaderRow>
-                    <DataDateCell>{i18n.t("report.dateTime")}</DataDateCell>
-                    <DataDateCell>{i18n.t("report.OrderNumber")}</DataDateCell>
-                    <DataDateCell>{i18n.t("report.status")}</DataDateCell>
-                    <DataDateCell>{i18n.t("common.amount")}</DataDateCell>
+                    <DataDateCell3>{i18n.t("report.dateTime")}</DataDateCell3>
+
+                    <DataDateCell3>{i18n.t("report.status")}</DataDateCell3>
+                    <DataDateCellAmount>
+                      {i18n.t("common.amount")}
+                    </DataDateCellAmount>
                   </DataHeaderRow>
                 </DataHeader>
                 {(() => {
@@ -1021,15 +1044,27 @@ class Report extends Component {
                     return (
                       <DataContent>
                         {this.state.dataList.map((row, index) => {
+                          const date = moment(row.createdOn).format(
+                            "YYYY-MM-DD hh:mm a"
+                          );
                           return (
-                            <DataRow key={index}>
-                              <DataDateCell>
-                                {row.create_time_text}
-                              </DataDateCell>
-                              <DataDateCell>{row.number}</DataDateCell>
-                              <DataDateCell>{row.status_text}</DataDateCell>
-                              <DataDateCell>{row.amount_text}</DataDateCell>
-                            </DataRow>
+                            <React.Fragment key={index}>
+                              <DataRowId>
+                                {i18n.t("report.OrderNumber")} :{" "}
+                                <IDCell>{row.id}</IDCell>
+                              </DataRowId>
+                              <DataRow>
+                                <DataDateCell3>{date}</DataDateCell3>
+                                <DataDateCell3>
+                                  {i18n.t(
+                                    `report.withdrawal.status${row.status}`
+                                  )}
+                                </DataDateCell3>
+                                <DataDateCellAmount>
+                                  {row.amount}
+                                </DataDateCellAmount>
+                              </DataRow>
+                            </React.Fragment>
                           );
                         })}
                       </DataContent>
@@ -1043,10 +1078,12 @@ class Report extends Component {
               <>
                 <DataHeader>
                   <DataHeaderRow>
-                    <DataDateCell>{i18n.t("report.dateTime")}</DataDateCell>
-                    <DataDateCell>{i18n.t("report.OrderNumber")}</DataDateCell>
-                    <DataDateCell>{i18n.t("report.status")}</DataDateCell>
-                    <DataDateCell>{i18n.t("common.amount")}</DataDateCell>
+                    <DataDateCell3>{i18n.t("report.dateTime")}</DataDateCell3>
+
+                    <DataDateCell3>{i18n.t("report.status")}</DataDateCell3>
+                    <DataDateCellAmount>
+                      {i18n.t("common.amount")}
+                    </DataDateCellAmount>
                   </DataHeaderRow>
                 </DataHeader>
                 {(() => {
@@ -1056,15 +1093,25 @@ class Report extends Component {
                     return (
                       <DataContent>
                         {this.state.dataList.map((row, index) => {
+                          const date = moment(row.createdOn).format(
+                            "YYYY-MM-DD hh:mm a"
+                          );
                           return (
-                            <DataRow key={index}>
-                              <DataDateCell>
-                                {row.create_time_text}
-                              </DataDateCell>
-                              <DataDateCell>{row.sn}</DataDateCell>
-                              <DataDateCell>{row.status_text}</DataDateCell>
-                              <DataDateCell>{row.amount_text}</DataDateCell>
-                            </DataRow>
+                            <React.Fragment key={index}>
+                              <DataRowId>
+                                {i18n.t("report.OrderNumber")} :{" "}
+                                <IDCell>{row.id}</IDCell>
+                              </DataRowId>
+                              <DataRow>
+                                <DataDateCell3>{date}</DataDateCell3>
+                                <DataDateCell3>
+                                  {i18n.t(`report.deposit.status${row.status}`)}
+                                </DataDateCell3>
+                                <DataDateCellAmount>
+                                  {row.amount}
+                                </DataDateCellAmount>
+                              </DataRow>
+                            </React.Fragment>
                           );
                         })}
                       </DataContent>
