@@ -50,7 +50,7 @@ function Marquee(props) {
       <AnnounceText>{i18n.t("web.marquee.latestNews")}</AnnounceText>
       <MarqueeContainer>
         <marquee style={{ marginTop: "10px" }}>
-          {announcement
+          {announcement.length
             ? announcement.map((row, index) => {
                 return (
                   <div

@@ -186,6 +186,10 @@ const TheIconMenuButton = styled(Grid)`
   }
 `;
 
+const MarqueeContainer = styled.div`
+  background-color: transparent;
+`;
+
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -378,6 +382,9 @@ class Home extends Component {
         <SliderContainer>
           <Slider list={this.props.ui.board_list}></Slider>
         </SliderContainer>
+        <MarqueeContainer>
+          <Marquee text={this.props.ui.marqueeText}></Marquee>
+        </MarqueeContainer>
         <Section1>
           <div style={{ textAlign: "-webkit-center" }}>
             {this.theButton.map((data, index) => {
