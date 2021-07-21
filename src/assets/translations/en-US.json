@@ -8,6 +8,14 @@
     "ERR202": "Player is disabled.",
     "ERR401": "Please check your input."
   },
+
+  "panel": {
+    "im": "IM",
+    "cs": "Live Chat",
+    "liveChatWelcome": "[Live Chat] Welcome You!",
+    "liveChatDescription": "Please select your question type to speed up the service!"
+  },
+
   "common": {
     "title": "{brand} | The Biggest & Most Trusted Online Casino",
     "register": "Register",
@@ -794,11 +802,11 @@
     "slots": "Pragmatic Play",
     "electron": "Pragmatic Play"
   },
-  "EVO":{
-    "live":"Evolution",
-    "slots":"Evolution"
+  "EVO": {
+    "live": "Evolution",
+    "slots": "Evolution"
   },
-  "AB":{
-    "live":"Allbet"
+  "AB": {
+    "live": "Allbet"
   }
 }
