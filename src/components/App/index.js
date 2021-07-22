@@ -129,7 +129,7 @@ class App extends Component {
             // this.props.checkGame();
             // this.props.getBankList();
             this.props.getBalanceList();
-            this.props.getMessageList(0, 99);
+            this.props.getMessageList(i18n.language, 0, 99);
             this.props.getBankCardList();
 
             // if (inbox.IsSuccess) {
@@ -140,7 +140,7 @@ class App extends Component {
             // this.props.getDepositChannel();
           }
         }
-        this.props.getMarquee();
+        //this.props.getMarquee();
         this.props.getHomePageGameList();
       }
     }
@@ -351,8 +351,8 @@ const mapDispatchToProps = (dispatch) => {
 
     getSiteToken: () => dispatch(generalAction.getSiteToken()),
 
-    getMessageList: (pages, limit) =>
-      dispatch(inboxAction.getMessages(pages, limit, true, true)),
+    getMessageList: (language, pages, limit) =>
+      dispatch(inboxAction.getMessages(language, pages, limit, true, true)),
   };
 };
 

@@ -374,7 +374,7 @@ class GuestContainer extends Component {
       // this.props.checkGame();
 
       this.props.getAccountInfo();
-      this.props.getMessageList(0, 99);
+      this.props.getMessageList(i18n.language, 0, 99);
       this.props.getBankCardList();
       this.props.getBalanceList();
 
@@ -501,8 +501,8 @@ const mapDispatchToProps = (dispatch) => {
 
     getIDCardNo: () => dispatch(accountAction.getIDCardNo()),
     getInviteLink: () => dispatch(accountAction.getInviteLink()),
-    getMessageList: (pages, limit) =>
-      dispatch(inboxAction.getMessages(pages, limit, true, true)),
+    getMessageList: (language, pages, limit) =>
+      dispatch(inboxAction.getMessages(language, pages, limit, true, true)),
 
     getPlayerPromotionList: () =>
       dispatch(generalAction.getPlayerPromotionList(1, 99, true, "", true)),
