@@ -18,7 +18,7 @@ import {
 import debounce from "lodash.debounce";
 
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
-import { Wapp, setConfigApi } from "@Inwoker/tgs-wap-t1";
+import { Wapp, setConfigApi, seti18n } from "@Inwoker/tgs-wap-t1";
 
 import Loading from "./Share/Loading";
 
@@ -428,6 +428,7 @@ class Wap extends Component {
     this.props.updateScreenSize(w, h, scale);
   };
   async componentDidMount() {
+    seti18n(i18n);
     setConfigApi(config);
     Common.loadScript("/js/config.js", () => {
       Common.loadScript("/js/iovation.js", () => {});
