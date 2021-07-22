@@ -18,11 +18,13 @@ import {
 import debounce from "lodash.debounce";
 
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import { Wapp, setConfigApi } from "@Inwoker/tgs-wap-t1";
 
 import Loading from "./Share/Loading";
 
 import Main from "./Main/index";
-// import {Wapp, setConfigApi} from "@Inwoker/tgs-wap-t1";
+
+import config from "../../config/config";
 import Login from "./Login/index";
 import Slot from "./Slot/index";
 import Profile from "./Profile/index";
@@ -140,181 +142,181 @@ const ButtonCancel = styled(ButtonConfirm)``;
 const RouteMapping = [
   {
     path: "/",
-    component: Login,
+    component: Wapp.Login,
     alert: true,
   },
   {
     path: "/a/:promotionid",
-    component: Login,
+    component: Wapp.Login,
     alert: true,
   },
   {
     path: "/t/:promotionid",
-    component: Login,
+    component: Wapp.Login,
     alert: true,
   },
   {
     path: "/f/:promotionid",
-    component: Login,
+    component: Wapp.Login,
     alert: true,
   },
   {
     path: "/main/:page",
-    component: Main,
+    component: Wapp.Main,
     alert: true,
     popup: true,
     navigate: true,
   },
   {
     path: "/profile",
-    component: Profile,
+    component: Wapp.Profile,
     alert: true,
   },
   {
     path: "/profile/name",
-    component: NameVefiry,
+    component: Wapp.NameVefiry,
     alert: true,
   },
   {
     path: "/profile/wechat",
-    component: WeChat,
+    component: Wapp.WeChat,
     alert: true,
   },
   {
     path: "/profile/qq",
-    component: QQ,
+    component: Wapp.QQ,
     alert: true,
   },
   {
     path: "/profile/email",
-    component: Email,
+    component: Wapp.Email,
     alert: true,
   },
   {
     path: "/profile/changeemail",
-    component: ChangeEmail,
+    component: Wapp.ChangeEmail,
     alert: true,
   },
   {
     path: "/profile/changephone",
-    component: ChangePhone,
+    component: Wapp.ChangePhone,
     alert: true,
   },
   {
     path: "/profile/phone",
-    component: Phone,
+    component: Wapp.Phone,
     alert: true,
   },
   {
     path: "/profile/changepassword",
-    component: ChangePassword,
+    component: Wapp.ChangePassword,
     alert: true,
   },
   {
     path: "/profile/withdrawalpassword",
-    component: WithdrawalPassword,
+    component: Wapp.WithdrawalPassword,
     alert: true,
   },
   {
     path: "/profile/resetwithdrawalpassword",
-    component: ResetWithdrawalPassword,
+    component: Wapp.ResetWithdrawalPassword,
     alert: true,
   },
   {
     path: "/profile/changewithdrawalpassword",
-    component: ChangeWithdrawalPassword,
+    component: Wapp.ChangeWithdrawalPassword,
     alert: true,
   },
 
   {
     path: "/slots/:platform?/:type?",
-    component: Slot,
+    component: Wapp.Slot,
     alert: true,
     navigate: true,
   },
   {
     path: "/promotion-list",
-    component: Promotion,
+    component: Wapp.Promotion,
     alert: true,
     navigate: true,
   },
   {
     path: "/promotion/:id?",
-    component: PromotionDetails,
+    component: Wapp.PromotionDetails,
     alert: true,
     navigate: true,
     promoProps: true,
   },
   {
     path: "/aboutus",
-    component: Aboutus,
+    component: Wapp.Aboutus,
     alert: true,
     navigate: true,
   },
 
   {
     path: "/inbox",
-    component: Inbox,
+    component: Wapp.Inbox,
     alert: true,
     navigate: true,
   },
   {
     path: "/inbox/details/:id",
-    component: InboxDetails,
+    component: Wapp.InboxDetails,
     alert: true,
     navigate: true,
     screenHeight: true,
   },
   {
     path: "/transfer",
-    component: Transfer,
+    component: Wapp.Transfer,
     alert: true,
     navigate: true,
   },
   {
     path: "/withdrawal",
-    component: Withdrawal,
+    component: Wapp.Withdrawal,
     alert: true,
     navigate: true,
   },
   {
     path: "/withdrawal/details",
-    component: WithdrawalDetails,
+    component: Wapp.WithdrawalDetails,
     alert: true,
     navigate: true,
   },
 
   {
     path: "/deposit/:promotionid?",
-    component: Deposit,
+    component: Wapp.Deposit,
     alert: true,
     navigate: true,
   },
   {
     path: "/deposit/payment/:id/:bank/:amount/:bonus?",
-    component: DepositPayment,
+    component: Wapp.DepositPayment,
     alert: true,
     navigate: true,
   },
   {
     path: "/deposit/details",
-    component: DepositDetails,
+    component: Wapp.DepositDetails,
     alert: true,
   },
   {
     path: "/deposit/manual",
-    component: DepositManual,
+    component: Wapp.DepositManual,
     alert: true,
   },
   {
     path: "/card",
-    component: Card,
+    component: Wapp.Card,
     alert: true,
     navigate: true,
   },
   {
     path: "/card/add",
-    component: AddCard,
+    component: Wapp.AddCard,
     alert: true,
     navigate: true,
   },
@@ -333,7 +335,7 @@ const RouteMapping = [
 
   {
     path: "/report/:tab?",
-    component: Report,
+    component: Wapp.Report,
     alert: true,
     navigate: true,
   },
@@ -346,11 +348,11 @@ const RouteMapping = [
   // },
   {
     path: "/chat/:userid?/:name?/:question?",
-    component: CustomerServiceChat,
+    component: Wapp.CustomerServiceChat,
   },
   {
     path: "/forgot-password",
-    component: ForgotPassword,
+    component: Wapp.ForgotPassword,
     alert: true,
   },
   // {
@@ -386,7 +388,7 @@ const RouteMapping = [
   //},
   {
     path: "/setting/language",
-    component: SettingLanguage,
+    component: Wapp.SettingLanguage,
     screenHeight: true,
   },
 ];
@@ -426,7 +428,7 @@ class Wap extends Component {
     this.props.updateScreenSize(w, h, scale);
   };
   async componentDidMount() {
-    // setConfigApi();
+    setConfigApi(config);
     Common.loadScript("/js/config.js", () => {
       Common.loadScript("/js/iovation.js", () => {});
     });
@@ -518,7 +520,7 @@ class Wap extends Component {
         //   responseToken.data.token
         // );
         this.props.getBalanceList();
-        this.props.getMessageList(1, 99);
+        this.props.getMessageList(i18n.language, 1, 99);
         this.props.getBankCardList();
 
         // this.props.getIDCardNo();
@@ -562,7 +564,7 @@ class Wap extends Component {
         this.props.getSiteToken();
       } else {
         localStorage.setItem("client-token", this.props.general.token);
-        this.props.getMarquee();
+        //this.props.getMarquee(i18n.language);
         this.props.getHomePageGameList();
       }
     }
@@ -796,7 +798,7 @@ const mapDispatchToProps = (dispatch) => {
     // checkGame: () => dispatch(accountAction.checkGame()),
     getMobilePrefix: () => dispatch(generalAction.getMobilePrefix()),
     checkTokenIsValid: () => dispatch(accountAction.checkTokenIsValid()),
-    getMarquee: () => dispatch(uiAction.getMarquee()),
+    getMarquee: (language) => dispatch(uiAction.getMarquee(language)),
     getBankCardList: () => dispatch(walletAction.getBankCardList()),
 
     // getBanner: () => dispatch(uiAction.getBanner()),
@@ -806,8 +808,8 @@ const mapDispatchToProps = (dispatch) => {
     // getIDCardNo: () => dispatch(accountAction.getIDCardNo()),
     getHomePageGameList: () => dispatch(gameAction.getHomePageGameList()),
     getSiteToken: () => dispatch(generalAction.getSiteToken()),
-    getMessageList: (pages, limit) =>
-      dispatch(inboxAction.getMessages(pages, limit, true, true)),
+    getMessageList: (language, pages, limit) =>
+      dispatch(inboxAction.getMessages(language, pages, limit, true, true)),
   };
 };
 

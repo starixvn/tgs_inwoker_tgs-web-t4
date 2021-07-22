@@ -21,7 +21,11 @@ function Details(props) {
   return (
     <Container>
       <CustomTextField
-        value={props.inbox.subject}
+        value={
+          props.inbox.localization !== null && props.inbox.localization.subject
+            ? props.inbox.localization.subject
+            : props.inbox.subject
+        }
         maxLength={30}
         readOnly={true}
         bold={true}
@@ -32,7 +36,11 @@ function Details(props) {
       ></CustomTextField>
       <Content
         dangerouslySetInnerHTML={{
-          __html: props.inbox.content,
+          __html:
+            props.inbox.localization !== null &&
+            props.inbox.localization.content
+              ? props.inbox.localization.content
+              : props.inbox.content,
         }}
       ></Content>
 
