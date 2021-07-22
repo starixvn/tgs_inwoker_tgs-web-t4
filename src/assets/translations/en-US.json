@@ -13,7 +13,13 @@
     "im": "IM",
     "cs": "Live Chat",
     "liveChatWelcome": "[Live Chat] Welcome You!",
-    "liveChatDescription": "Please select your question type to speed up the service!"
+    "liveChatDescription": "Please select your question type to speed up the service!",
+    "liveChatOptionFund": "Fund",
+    "liveChatOptionBall": "Sports ",
+    "liveChatOptionLive": "Live",
+    "liveChatOptionLottery": "Lottery",
+    "liveChatOptionRegister": "Register",
+    "liveChatOptionSlot": "Slot"
   },
 
   "common": {

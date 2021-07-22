@@ -13,7 +13,13 @@
     "im": "即使通訊",
     "cs": "客服",
     "liveChatWelcome": "【客服中心】歡迎你！",
-    "liveChatDescription": "請選擇你的問題類型以重大服務速度！"
+    "liveChatDescription": "請選擇你的問題類型以重大服務速度！",
+    "liveChatOptionFund": "點數問題",
+    "liveChatOptionBall": "球賽問題",
+    "liveChatOptionLive": "真人游戏",
+    "liveChatOptionLottery": "彩球游戏",
+    "liveChatOptionRegister": "注册问题",
+    "liveChatOptionSlot": "电子游戏"
   },
   "common": {
     "title": "{brand} - 專業娛樂平台",
