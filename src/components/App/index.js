@@ -45,6 +45,7 @@ import { SupportService } from "@Inwoker/tgs-api";
 
 import i18n from "../../utils/i18n";
 import Fishing from "./Fishing";
+import Maintenance from "../Share/Maintenance";
 const baseRouteUrl = Common.baseRouteUrl;
 const Main = styled.div`
   min-height: 600px;
@@ -298,6 +299,11 @@ class App extends Component {
                       path={baseRouteUrl + "/registersuccess/:username"}
                       component={RegisterSuccess}
                     />*/}
+                    <Route
+                      exact
+                      path={baseRouteUrl + "/maintenance"}
+                      render={(props) => <Maintenance />}
+                    />
                     <Route
                       exact
                       path={baseRouteUrl + "/account/:tab/:popup?"}

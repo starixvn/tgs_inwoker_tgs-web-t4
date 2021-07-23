@@ -4,9 +4,11 @@ import styled from "styled-components";
 import config from "../../config/config";
 import UnderconstructionPNG from "../../assets/images/underconstruction.png";
 import { isMobileOnly } from "react-device-detect";
+import MaintenancePNG from "../../assets/images/maintenance.png";
 const Container = styled.div`
   width: 100%;
-  background-color: #fff;
+  background: url(${MaintenancePNG}) no-repeat center;
+  background-size: cover;
 `;
 const MaintenanceImage = styled.img`
   margin: 150px auto 30px auto;
@@ -27,15 +29,7 @@ class Maintenance extends Component {
   }
   render() {
     return (
-      <Container style={isMobileOnly ? {} : { minHeight: "800px" }}>
-        <MaintenanceImage
-          src={UnderconstructionPNG}
-          style={isMobileOnly ? { width: "750px" } : {}}
-        ></MaintenanceImage>
-        <MaintenanceText style={isMobileOnly ? { fontSize: "40px" } : {}}>
-          系统维护中...
-        </MaintenanceText>
-      </Container>
+      <Container style={isMobileOnly ? {} : { minHeight: "800px" }}></Container>
     );
   }
 }
