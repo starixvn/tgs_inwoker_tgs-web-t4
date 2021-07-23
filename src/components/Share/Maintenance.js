@@ -1,37 +1,368 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import { Router, Route, Switch, Redirect } from "react-router";
+import { AppHistory } from "../../history/History";
+import { withSnackbar } from "notistack";
 
-import config from "../../config/config";
-import UnderconstructionPNG from "../../assets/images/underconstruction.png";
-import { isMobileOnly } from "react-device-detect";
-import MaintenancePNG from "../../assets/images/maintenance.png";
-const Container = styled.div`
-  width: 100%;
-  background: url(${MaintenancePNG}) no-repeat center;
-  background-size: cover;
+import {
+  gameAction,
+  walletAction,
+  uiAction,
+  generalAction,
+  accountAction,
+  inboxAction,
+  SHOW_LOGIN,
+} from "@Inwoker/tgs-api";
+
+import BlowFishEncryption from "../../utils/BlowFishEncryption";
+import LiveGame from "./LiveGame/index";
+import Slots from "./Slots/index";
+import SlotPlay from "./Slots/Play";
+import Qipai from "./Qipai/index";
+import Sports from "./Sports/index";
+import SportsPlay from "./Sports/Play";
+import Lottery from "./Lottery/index";
+import LotteryPlay from "./Lottery/Play";
+import Promotion from "./Promotion/index";
+import PromotionDetails from "./Promotion/Details";
+import Home from "./Home/index";
+
+// import Maintenance from "./Maintenance";
+import Account from "./Account/index";
+
+import Header from "./Header";
+import Common from "../../utils/Common";
+import Footer from "./Footer";
+import Loading from "./Loading";
+// import RegisterSuccess from "./RegisterSuccess";
+import Download from "./Download/index";
+
+// import VIP from "./VIP/index";
+
+import { SupportService } from "@Inwoker/tgs-api";
+
+import i18n from "../../utils/i18n";
+import Fishing from "./Fishing";
+import Maintenance from "../Share/Maintenance";
+const baseRouteUrl = Common.baseRouteUrl;
+const Main = styled.div`
+  min-height: 600px;
 `;
-const MaintenanceImage = styled.img`
-  margin: 150px auto 30px auto;
-  display: block;
+const EmptyHeader = styled.div`
+  height: 45px;
+  background-color: ${(props) => props.theme.primary};
 `;
-const MaintenanceText = styled.div`
-  text-align: center;
-  font-weight: bold;
-  font-size: 26px;
-`;
-class Maintenance extends Component {
-  componentDidMount() {
-    if (isMobileOnly) {
-      document
-        .getElementById("viewport")
-        .setAttribute("content", "width=750, user-scalable=no");
+let csWindowTab = null;
+class App extends Component {
+  state = {
+    showCS: false,
+    isIpRestrict: false,
+    inbox: "",
+  };
+  async componentDidMount() {
+    if (this.props.general.token == "") {
+      this.props.getSiteToken();
+    }
+    // if (response.IsSuccess) {
+    //   localStorage.setItem("client-token", response.data.token);
+    // }
+    // this.props.getMobilePrefix();
+    //this.props.getMarquee();
+    // this.props.getBanner();
+    // this.props.getGamePlatformList();
+    //this.props.getHomePageGameList();
+
+    let urlParams = new URLSearchParams(this.props.location.search);
+    if (urlParams.has("goto")) {
+      const gotoValue = urlParams.get("goto");
+      if (gotoValue) {
+        window.location.href = gotoValue;
+      }
+    }
+    if (urlParams.has("open")) {
+      const openValue = urlParams.get("open");
+      if (openValue) {
+        AppHistory.replace("/" + i18n.language + "/" + openValue);
+      }
+    }
+    if (urlParams.has("do")) {
+      const doValue = urlParams.get("do");
+
+      switch (doValue) {
+        case "login":
+        case "logout":
+        case "register":
+        case "login_auth":
+        case "register_auth":
+          localStorage.removeItem("token0");
+          break;
+        case "login_token":
+          const decryptedToken = BlowFishEncryption.Decrypt(
+            urlParams.get("token")
+          );
+
+          localStorage.setItem("token0", decryptedToken);
+          AppHistory.replace("/");
+          break;
+      }
+    } else {
+      //  this.props.getWalletBalance();
     }
   }
+  async componentDidUpdate(preProps) {
+    if (preProps.general.token !== this.props.general.token) {
+      if (this.props.general.token == null || this.props.general.token == "") {
+        this.props.getSiteToken();
+      } else {
+        localStorage.setItem("client-token", this.props.general.token);
+
+        const localStorageToken = localStorage.getItem("token0");
+        if (
+          localStorageToken != null &&
+          this.props.account.token == null &&
+          this.props.account.info.token === ""
+        ) {
+          const responseToken = await this.props.checkTokenIsValid();
+          if (responseToken.IsSuccess) {
+            this.props.getAccountInfo();
+            // this.props.checkGame();
+            // this.props.getBankList();
+            this.props.getBalanceList();
+            this.props.getMessageList(i18n.language, 0, 99);
+            this.props.getBankCardList();
+
+            // if (inbox.IsSuccess) {
+            //   this.setState({ inbox: inbox.data });
+            // }
+            // this.props.getIDCardNo();
+            // this.props.getInviteLink();
+            // this.props.getDepositChannel();
+          }
+        }
+        //this.props.getMarquee();
+        this.props.getHomePageGameList();
+      }
+    }
+  }
+  GetSupportUrl = (userid, name, question) => {
+    var result = SupportService.GetLiveSupport(
+      userid,
+      name,
+      question,
+      document.URL,
+      document.referrer
+    );
+    if (result.IsSuccess) {
+      if (!csWindowTab || csWindowTab.closed) {
+        csWindowTab = Common.PopupCenter(result.data.online, "", 785, 750);
+      } else {
+        csWindowTab.focus();
+      }
+    } else {
+      this.props.enqueueSnackbar(result.info, {
+        variant: "error",
+      });
+    }
+  };
+
+  handleShowCSClick = () => {
+    this.GetSupportUrl(
+      this.props.account.info.member_id,
+      this.props.account.info.member_username,
+      ""
+    );
+  };
+
+  handleDepositClick = () => {
+    if (this.props.account.token == null) {
+      this.props.showLogin(true);
+    } else {
+      this.props.history.push("/" + i18n.language + "/account/deposit");
+    }
+  };
+
   render() {
     return (
-      <Container style={isMobileOnly ? {} : { minHeight: "800px" }}></Container>
+      <Router history={AppHistory}>
+        {(() => {
+          if (
+            this.state.isIpRestrict ||
+            this.props.general.token == "" ||
+            this.props.general.token == null
+          ) {
+            return <Loading show={true} opacity={1}></Loading>;
+          } else {
+            return (
+              <>
+                <Header
+                  inbox={this.state.inbox}
+                  onhandleShowCSClick={this.handleShowCSClick}
+                ></Header>
+                <EmptyHeader></EmptyHeader>
+                <Main>
+                  <Switch>
+                    <Route
+                      exact
+                      path={[
+                        baseRouteUrl + "/",
+                        baseRouteUrl + "/a/:promotionid",
+                        baseRouteUrl + "/t/:promotionid",
+                        baseRouteUrl + "/f/:promotionid",
+                      ]}
+                      render={(props) => (
+                        <Home
+                          onhandleShowCSClick={this.handleShowCSClick}
+                          onhandleDepositClick={this.handleDepositClick}
+                        />
+                      )}
+                    />
+                    <Route
+                      exact
+                      path={baseRouteUrl + "/live"}
+                      component={LiveGame}
+                    />
+                    <Route
+                      exact
+                      path={baseRouteUrl + "/chess"}
+                      component={Qipai}
+                    />
+                    <Route
+                      exact
+                      path={baseRouteUrl + "/sports"}
+                      component={Sports}
+                    />
+                    <Route
+                      exact
+                      path={baseRouteUrl + "/sports/play/:params/:type"}
+                      component={SportsPlay}
+                    />
+                    <Route
+                      exact
+                      path={baseRouteUrl + "/lottery"}
+                      component={Lottery}
+                    />
+                    <Route
+                      exact
+                      path={baseRouteUrl + "/lottery/play/:params?"}
+                      component={LotteryPlay}
+                    />
+                    <Route
+                      exact
+                      path={baseRouteUrl + "/slots/:platform?"}
+                      component={Slots}
+                    />
+                    <Route
+                      exact
+                      path={baseRouteUrl + "/electron/:platform?"}
+                      component={Slots}
+                    />
+                    <Route
+                      exact
+                      path={baseRouteUrl + "/fish/:platform?"}
+                      component={Fishing}
+                    />
+                    <Route
+                      exact
+                      path={baseRouteUrl + "/slots/play/:type/:params"}
+                      component={SlotPlay}
+                    />
+                    <Route
+                      exact
+                      path={baseRouteUrl + "/promotion"}
+                      render={(props) => (
+                        <Promotion token={this.props.account.token} />
+                      )}
+                    />
+                    <Route
+                      exact
+                      path={baseRouteUrl + "/promotion/:id"}
+                      render={(props) => <PromotionDetails />}
+                    />
+                    {/* <Route
+                      exact
+                      path={baseRouteUrl + "/vip"}
+                      render={(props) => (
+                        <VIP vip={this.props.account.vip.curr_vip.title} />
+                      )}
+                    />
+                    <Route
+                      exact
+                      path={baseRouteUrl + "/maintenance"}
+                      render={(props) => <Maintenance />}
+                    /> 
+                    <Route
+                      exact
+                      path={baseRouteUrl + "/registersuccess/:username"}
+                      component={RegisterSuccess}
+                    />*/}{" "}
+                    <Route
+                      exact
+                      path={baseRouteUrl + "/maintenance"}
+                      render={(props) => (
+                        <Maintenance onhandleCSClick={this.GetSupportUrl} />
+                      )}
+                    />
+                    <Route
+                      exact
+                      path={baseRouteUrl + "/account/:tab/:popup?"}
+                      render={(props) => (
+                        <Account
+                          token={this.props.account.token}
+                          onhandleCSClick={this.GetSupportUrl}
+                          inbox={this.state.inbox}
+                        />
+                      )}
+                    />
+                    <Route
+                      exact
+                      path={baseRouteUrl + "/download"}
+                      component={Download}
+                    />
+                    <Redirect to={"/" + i18n.language} />
+                  </Switch>
+                </Main>
+                <Footer target={"_blank"}></Footer>
+              </>
+            );
+          }
+        })()}
+      </Router>
     );
   }
 }
 
-export default Maintenance;
+const mapStateToProps = (state) => {
+  return {
+    account: state.account,
+    general: state.general,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    showLogin: (payload) => {
+      dispatch({ type: SHOW_LOGIN, payload });
+    },
+
+    checkTokenIsValid: () => dispatch(accountAction.checkTokenIsValid()),
+    getMarquee: () => dispatch(uiAction.getMarquee()),
+
+    getBankCardList: () => dispatch(walletAction.getBankCardList()),
+
+    getBalanceList: (token) => dispatch(walletAction.getBalanceList()),
+    getAccountInfo: () => dispatch(accountAction.getAccountInfo()),
+    getHomePageGameList: () => dispatch(gameAction.getHomePageGameList()),
+
+    getSiteToken: () => dispatch(generalAction.getSiteToken()),
+
+    getMessageList: (language, pages, limit) =>
+      dispatch(inboxAction.getMessages(language, pages, limit, true, true)),
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(withSnackbar(App)));
