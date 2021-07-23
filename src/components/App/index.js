@@ -29,7 +29,6 @@ import Promotion from "./Promotion/index";
 import PromotionDetails from "./Promotion/Details";
 import Home from "./Home/index";
 
-// import Maintenance from "./Maintenance";
 import Account from "./Account/index";
 
 import Header from "./Header";
@@ -46,6 +45,7 @@ import { SupportService } from "@Inwoker/tgs-api";
 import i18n from "../../utils/i18n";
 import Fishing from "./Fishing";
 import Maintenance from "../Share/Maintenance";
+
 const baseRouteUrl = Common.baseRouteUrl;
 const Main = styled.div`
   min-height: 600px;
