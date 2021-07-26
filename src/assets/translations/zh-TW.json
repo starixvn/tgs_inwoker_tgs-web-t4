@@ -487,6 +487,14 @@
       "validBet": "有效金額",
       "amount": "返水金額"
     },
+    "transfer": {
+      "title": "轉賬記錄",
+      "table": {
+        "from": "從",
+        "to": "至"
+      }
+    },
+
     "dateTime": "時間",
 
     "betDateTime": "投注時間",
