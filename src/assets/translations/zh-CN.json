@@ -486,6 +486,13 @@
       "validBet": "有效金额",
       "amount": "返水金额"
     },
+    "transfer": {
+      "title": "转账记录",
+      "table": {
+        "from": "从",
+        "to": "至"
+      }
+    },
     "dateTime": "时间",
 
     "betDateTime": "投注时间",

@@ -487,6 +487,13 @@
       "validBet": "Valid Bet",
       "amount": "Rebate"
     },
+    "transfer": {
+      "title": "Transfer Record",
+      "table": {
+        "from": "From",
+        "to": "To"
+      }
+    },
     "dateTime": "Time",
     "betid": "ID",
     "betDateTime": "Bet Time",
