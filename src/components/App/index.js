@@ -8,6 +8,7 @@ import { withSnackbar } from "notistack";
 import ErrorSwitcher from "../../utils/ErrorSwitcher";
 import {
   GeneralService,
+  gameAction,
   walletAction,
   uiAction,
   generalAction,
