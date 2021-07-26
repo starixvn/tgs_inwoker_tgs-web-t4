@@ -22,6 +22,14 @@
     "liveChatOptionSlot": "Slot"
   },
 
+  "support": {
+    "contactnow": "Contact Now",
+    "online": "Online Support",
+    "contact": "Contact",
+    "qr": "QR Support",
+    "join": "Join"
+  },
+
   "common": {
     "title": "{brand} | The Biggest & Most Trusted Online Casino",
     "register": "Register",

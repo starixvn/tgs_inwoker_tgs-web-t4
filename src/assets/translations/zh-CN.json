@@ -20,6 +20,15 @@
     "liveChatOptionRegister": "注册问题",
     "liveChatOptionSlot": "电子游戏"
   },
+
+  "support": {
+    "contactnow": "立即联系",
+    "online": "在线客服",
+    "contact": "联系",
+    "qr": "二维码客服",
+    "join": "加入"
+  },
+
   "common": {
     "title": "{brand} - 专业娱乐平台",
     "register": "注册",

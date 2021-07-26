@@ -21,6 +21,15 @@
     "liveChatOptionRegister": "注册问题",
     "liveChatOptionSlot": "电子游戏"
   },
+
+  "support": {
+    "contactnow": "立即聯繫",
+    "online": "在線客服",
+    "contact": "聯繫",
+    "qr": "二維碼客服",
+    "join": "加入"
+  },
+
   "common": {
     "title": "{brand} - 專業娛樂平台",
     "register": "註冊",
