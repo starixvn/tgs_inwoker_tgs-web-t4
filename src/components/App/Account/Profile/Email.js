@@ -139,15 +139,18 @@ class Address extends Component {
           });
           this.setState({ ...this.state, countdown: 60 });
         } else {
-          if (response.code === 402) {
-            this.props.enqueueSnackbar(i18n.t("common.msgInvalidEmail"), {
-              variant: "error",
-            });
-          } else {
-            this.props.enqueueSnackbar(response.info, {
-              variant: "error",
-            });
-          }
+          this.props.enqueueSnackbar(response.info, {
+            variant: "error",
+          });
+          // if (response.code === 402) {
+          //   this.props.enqueueSnackbar(i18n.t("common.msgInvalidEmail"), {
+          //     variant: "error",
+          //   });
+          // } else {
+          //   this.props.enqueueSnackbar(response.info, {
+          //     variant: "error",
+          //   });
+          // }
         }
 
         this.checkCountdown();
@@ -190,19 +193,22 @@ class Address extends Component {
             });
           }
         } else {
-          if (response.code === 405) {
-            this.props.enqueueSnackbar(i18n.t("common.msgInvalidPhoneCode"), {
-              variant: "error",
-            });
-          } else if (response.code === 900) {
-            this.props.enqueueSnackbar(i18n.t("common.msgEmailExist"), {
-              variant: "error",
-            });
-          } else {
-            this.props.enqueueSnackbar(response.info, {
-              variant: "error",
-            });
-          }
+          this.props.enqueueSnackbar(response.info, {
+            variant: "error",
+          });
+          // if (response.code === 405) {
+          //   this.props.enqueueSnackbar(i18n.t("common.msgInvalidPhoneCode"), {
+          //     variant: "error",
+          //   });
+          // } else if (response.code === 900) {
+          //   this.props.enqueueSnackbar(i18n.t("common.msgEmailExist"), {
+          //     variant: "error",
+          //   });
+          // } else {
+          //   this.props.enqueueSnackbar(response.info, {
+          //     variant: "error",
+          //   });
+          // }
         }
       }
     );

@@ -340,9 +340,12 @@ class GuestContainer extends Component {
     if (result.IsSuccess) {
       this.handleLoginSuccess(result.data);
     } else {
-      this.props.enqueueSnackbar(i18n.t("common.msgInvalidUsername"), {
+      this.props.enqueueSnackbar(result.info, {
         variant: "warning",
       });
+      // this.props.enqueueSnackbar(i18n.t("common.msgInvalidUsername"), {
+      //   variant: "warning",
+      // });
 
       // if (result.data.self_control === 1) {
       //   this.props.showLogin(false);

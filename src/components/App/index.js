@@ -5,9 +5,9 @@ import { withRouter } from "react-router-dom";
 import { Router, Route, Switch, Redirect } from "react-router";
 import { AppHistory } from "../../history/History";
 import { withSnackbar } from "notistack";
-
+import ErrorSwitcher from "../../utils/ErrorSwitcher";
 import {
-  gameAction,
+  GeneralService,
   walletAction,
   uiAction,
   generalAction,
@@ -142,6 +142,11 @@ class App extends Component {
           }
         }
         //this.props.getMarquee();
+        GeneralService.GetLocalization().then((response) => {
+          if (response.IsSuccess) {
+            ErrorSwitcher.setTranslation(response.data);
+          }
+        });
         this.props.getHomePageGameList();
       }
     }

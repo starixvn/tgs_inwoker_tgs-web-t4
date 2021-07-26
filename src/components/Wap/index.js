@@ -17,7 +17,6 @@ import {
 } from "@Inwoker/tgs-api";
 import debounce from "lodash.debounce";
 
-import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import { Wapp, setConfigApi, seti18n } from "@Inwoker/tgs-wap-t1";
 
 import Loading from "./Share/Loading";
@@ -65,7 +64,8 @@ import AddCard from "./Card/AddCard";
 // import PassSetting from "./Card/PassSetting";
 
 import Report from "./Report/index";
-import { SupportService } from "@Inwoker/tgs-api";
+import ErrorSwitcher from "../../utils/ErrorSwitcher";
+import { SupportService, GeneralService } from "@Inwoker/tgs-api";
 // import CustomerService from "./CustomerService/index";
 import CustomerServiceChat from "./CustomerService/index";
 
@@ -320,6 +320,11 @@ const RouteMapping = [
     alert: true,
     navigate: true,
   },
+  {
+    path: "/maintenance",
+    component: Wapp.Maintenance,
+    navigate: true,
+  },
   // {
   //   path: "/card/name",
   //   component: NameVerification,
@@ -390,11 +395,6 @@ const RouteMapping = [
     path: "/setting/language",
     component: Wapp.SettingLanguage,
     screenHeight: true,
-  },
-  {
-    path: "/maintenance",
-    component: Wapp.Maintenance,
-    navigate: true,
   },
 ];
 class Wap extends Component {
@@ -571,6 +571,12 @@ class Wap extends Component {
       } else {
         localStorage.setItem("client-token", this.props.general.token);
         //this.props.getMarquee(i18n.language);
+
+        GeneralService.GetLocalization().then((response) => {
+          if (response.IsSuccess) {
+            ErrorSwitcher.setTranslation(response.data);
+          }
+        });
         this.props.getHomePageGameList();
       }
     }

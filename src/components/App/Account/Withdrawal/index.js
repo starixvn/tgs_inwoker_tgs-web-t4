@@ -124,22 +124,25 @@ class Withdrawal extends Component {
         this.props.getBalanceList();
         this.setState({ ...this.state, displayView: 4 });
       } else {
-        if (this.props.wallet.withdrawalResult.code === 207) {
-          this.props.enqueueSnackbar(i18n.t("common.msgRequiredTurnover"), {
-            variant: "error",
-          });
-        } else if (this.props.wallet.withdrawalResult.code === 901) {
-          this.props.enqueueSnackbar(
-            i18n.t("common.msgInvalidWithdrawalPassword"),
-            {
-              variant: "error",
-            }
-          );
-        } else {
-          this.props.enqueueSnackbar(this.props.wallet.withdrawalResult.info, {
-            variant: "error",
-          });
-        }
+        this.props.enqueueSnackbar(this.props.wallet.withdrawalResult.info, {
+          variant: "error",
+        });
+        // if (this.props.wallet.withdrawalResult.code === 207) {
+        //   this.props.enqueueSnackbar(i18n.t("common.msgRequiredTurnover"), {
+        //     variant: "error",
+        //   });
+        // } else if (this.props.wallet.withdrawalResult.code === 901) {
+        //   this.props.enqueueSnackbar(
+        //     i18n.t("common.msgInvalidWithdrawalPassword"),
+        //     {
+        //       variant: "error",
+        //     }
+        //   );
+        // } else {
+        //   this.props.enqueueSnackbar(this.props.wallet.withdrawalResult.info, {
+        //     variant: "error",
+        //   });
+        // }
       }
     }
   }

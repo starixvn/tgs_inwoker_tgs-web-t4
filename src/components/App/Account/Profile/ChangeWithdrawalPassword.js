@@ -144,15 +144,18 @@ class ChangeWithdrawalPassword extends Component {
           });
           this.props.handleCloseDialog();
         } else {
-          if (response.code === 405) {
-            this.props.enqueueSnackbar(i18n.t("common.msgInvalidPhoneCode"), {
-              variant: "error",
-            });
-          } else {
-            this.props.enqueueSnackbar(response.info, {
-              variant: "error",
-            });
-          }
+          this.props.enqueueSnackbar(response.info, {
+            variant: "error",
+          });
+          // if (response.code === 405) {
+          //   this.props.enqueueSnackbar(i18n.t("common.msgInvalidPhoneCode"), {
+          //     variant: "error",
+          //   });
+          // } else {
+          //   this.props.enqueueSnackbar(response.info, {
+          //     variant: "error",
+          //   });
+          // }
         }
       });
     }
