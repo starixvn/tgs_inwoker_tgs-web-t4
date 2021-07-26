@@ -39,7 +39,7 @@ export default {
           code: response.data.err,
           data: response.data.data ? response.data.data : response.data,
         };
-        if (newResponse.code === 0) {
+        if (newResponse.code === 403) {
           AppHistory.replace("/" + i18n.language + "/maintenance");
         }
         if (response.data.url) {
