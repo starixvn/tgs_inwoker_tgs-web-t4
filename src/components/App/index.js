@@ -10,6 +10,7 @@ import {
   GeneralService,
   walletAction,
   uiAction,
+  gameAction,
   generalAction,
   accountAction,
   inboxAction,

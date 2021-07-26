@@ -223,7 +223,7 @@ const FloatPanel = (props) => {
           <CloseButton onClick={performCloseSupportModal}>✖</CloseButton>
         </DialogTitle>
         <QRCodeContainer>
-          {brandsCommunication
+          {brandsCommunication.length
             ? brandsCommunication.map((data, index) => {
                 return (
                   <QRCodeHolder>
