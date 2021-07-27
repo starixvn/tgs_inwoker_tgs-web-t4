@@ -151,6 +151,12 @@ class App extends Component {
         this.props.getHomePageGameList();
       }
     }
+    if (
+      preProps.general.isMaintenance !== this.props.general.isMaintenance &&
+      this.props.general.isMaintenance === true
+    ) {
+      this.props.history.push("/" + i18n.language + "/maintenance");
+    }
   }
   GetSupportUrl = (userid, name, question) => {
     var result = SupportService.GetLiveSupport(
@@ -194,17 +200,12 @@ class App extends Component {
       <Router history={AppHistory}>
         {(() => {
           if (
-            this.state.isIpRestrict ||
-            this.props.general.token == "" ||
-            this.props.general.token == null
+            (this.state.isIpRestrict ||
+              this.props.general.token == "" ||
+              this.props.general.token == null) &&
+            this.props.general.isMaintenance === false
           ) {
-            if (this.props.general.isMaintenance === true) {
-              return (
-                <Redirect to={"/" + i18n.language + "/maintenance"}></Redirect>
-              );
-            } else {
-              return <Loading show={true} opacity={1}></Loading>;
-            }
+            return <Loading show={true} opacity={1}></Loading>;
           } else {
             return (
               <>

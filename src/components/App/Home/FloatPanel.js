@@ -165,7 +165,7 @@ const IconHolder = styled.img`
 const FloatPanel = (props) => {
   const [supportModal, setSupportModal] = useState(false);
   const [csModal, setCsModal] = useState(false);
-  const [brandsCommunication, setBrandCommunication] = useState("");
+  const [brandsCommunication, setBrandCommunication] = useState(null);
 
   const performOpenSupportModal = () => {
     setSupportModal(true);
@@ -183,7 +183,9 @@ const FloatPanel = (props) => {
 
   useEffect(() => {
     props.getBrandCommunicationList().then((result) => {
-      setBrandCommunication(result.data);
+      if (result.IsSuccess) {
+        setBrandCommunication(result.data);
+      }
     });
   }, []);
 

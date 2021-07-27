@@ -580,6 +580,12 @@ class Wap extends Component {
         this.props.getHomePageGameList();
       }
     }
+    if (
+      preProps.general.isMaintenance !== this.props.general.isMaintenance &&
+      this.props.general.isMaintenance === true
+    ) {
+      this.props.history.push("/" + i18n.language + "/maintenance");
+    }
   }
   handleNavigate = (page) => {
     if (
@@ -647,15 +653,12 @@ class Wap extends Component {
       );
 
     if (
-      this.state.loading === true ||
-      this.props.general.token == "" ||
-      this.props.general.token == null
+      (this.state.loading === true ||
+        this.props.general.token == "" ||
+        this.props.general.token == null) &&
+      this.props.general.isMaintenance === false
     ) {
-      if (this.props.general.isMaintenance === true) {
-        return <Redirect to={"/" + i18n.language + "/maintenance"}></Redirect>;
-      } else {
-        return <Loading show={this.state.loading}></Loading>;
-      }
+      return <Loading show={this.state.loading}></Loading>;
     } else {
       return (
         <>
