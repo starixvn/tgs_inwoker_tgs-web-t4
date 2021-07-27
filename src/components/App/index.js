@@ -198,7 +198,13 @@ class App extends Component {
             this.props.general.token == "" ||
             this.props.general.token == null
           ) {
-            return <Loading show={true} opacity={1}></Loading>;
+            if (this.props.general.isMaintenance === true) {
+              return (
+                <Redirect to={"/" + i18n.language + "/maintenance"}></Redirect>
+              );
+            } else {
+              return <Loading show={true} opacity={1}></Loading>;
+            }
           } else {
             return (
               <>
