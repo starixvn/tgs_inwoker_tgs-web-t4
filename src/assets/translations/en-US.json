@@ -456,6 +456,7 @@
     "rebateDetails": "Rebate",
     "platform": "Platform",
     "date": "Date",
+    "gamename": "Game Name",
     "startDate": "Start Date",
     "endDate": "End Date",
     "today": "Today",
