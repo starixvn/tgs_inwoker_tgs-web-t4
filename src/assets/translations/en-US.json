@@ -12,6 +12,7 @@
   "panel": {
     "im": "IM",
     "cs": "Live Chat",
+    "imLong": "Instant Messaging",
     "liveChatWelcome": "[Live Chat] Welcome You!",
     "liveChatDescription": "Please select your question type to speed up the service!",
     "liveChatOptionFund": "Fund",

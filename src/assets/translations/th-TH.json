@@ -11,6 +11,7 @@
   "panel": {
     "im": "IM",
     "cs": "แชทสด",
+    "imLong": "ข้อความโต้ตอบแบบทันที",
     "liveChatWelcome": "[แชทสด] ยินดีต้อนรับคุณ!",
     "liveChatDescription": "โปรดเลือกประเภทคำถามเพื่อเร่งบริการ!",
     "liveChatOptionFund": "กองทุน",

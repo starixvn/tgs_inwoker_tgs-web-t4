@@ -201,7 +201,7 @@ const FloatPanel = (props) => {
       <Container>
         <SidePanel
           onClick={() => {
-            performOpenSupportModal();
+            performOpenCsModal();
           }}
         >
           <Icon src={PanelUserPNG} alt="user-icon" />
@@ -209,7 +209,7 @@ const FloatPanel = (props) => {
         <Divider />
         <SidePanel
           onClick={() => {
-            performOpenCsModal();
+            performOpenSupportModal();
           }}
         >
           <Icon src={PanelCSPNG} alt="user-cs" />
@@ -219,11 +219,11 @@ const FloatPanel = (props) => {
 
       <CustomModal open={supportModal} onClose={performCloseSupportModal}>
         <DialogTitle>
-          <div>{i18n.t("panel.cs")}</div>
+          <div>{i18n.t("panel.imLong")}</div>
           <CloseButton onClick={performCloseSupportModal}>✖</CloseButton>
         </DialogTitle>
         <QRCodeContainer>
-          {brandsCommunication.length
+          {brandsCommunication
             ? brandsCommunication.map((data, index) => {
                 return (
                   <QRCodeHolder>
@@ -249,7 +249,7 @@ const FloatPanel = (props) => {
         <CSActualContent>
           {buttons.map((data, index) => {
             return (
-              <CSButtonContainer>
+              <CSButtonContainer onClick={data.click}>
                 <div>
                   <IconHolder src={data.icon} alt={data.name} />
                 </div>
