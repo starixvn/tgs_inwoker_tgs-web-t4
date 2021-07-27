@@ -9,8 +9,9 @@
     "ERR401": "請檢查您的輸入。"
   },
   "panel": {
-    "im": "即使通訊",
+    "im": "即時通訊",
     "cs": "客服",
+    "imLong": "即時通讯",
     "liveChatWelcome": "【客服中心】歡迎你！",
     "liveChatDescription": "請選擇你的問題類型以重大服務速度！",
     "liveChatOptionFund": "點數問題",
