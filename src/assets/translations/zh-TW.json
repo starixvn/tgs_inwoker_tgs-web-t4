@@ -8,7 +8,6 @@
     "ERR202": "玩家已被禁。",
     "ERR401": "請檢查您的輸入。"
   },
-
   "panel": {
     "im": "即使通訊",
     "cs": "客服",
@@ -827,9 +826,15 @@
   },
   "EVO": {
     "live": "EVO真人",
-    "slots": "EVO電子"
+    "slots": "EVO老虎機"
   },
   "AB": {
     "live": "Allbet真人"
+  },
+  "RT": {
+    "slots": "RedTiger老虎機"
+  },
+  "NT": {
+    "slots": "Netent老虎機"
   }
 }

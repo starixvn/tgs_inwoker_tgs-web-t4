@@ -814,5 +814,11 @@
   },
   "AB": {
     "live": "Allbet ตัวจริง"
+  },
+  "RT": {
+    "slots": "RedTiger"
+  },
+  "NT": {
+    "slots": "Netent"
   }
 }
