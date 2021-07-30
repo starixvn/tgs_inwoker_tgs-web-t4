@@ -364,7 +364,6 @@ const mapDispatchToProps = (dispatch) => {
     },
 
     checkTokenIsValid: () => dispatch(accountAction.checkTokenIsValid()),
-    getMarquee: () => dispatch(uiAction.getMarquee()),
 
     getBankCardList: () => dispatch(walletAction.getBankCardList()),
 

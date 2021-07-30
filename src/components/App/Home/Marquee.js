@@ -28,24 +28,6 @@ const MarqueeContainer = styled.div`
 `;
 
 function Marquee(props) {
-  const [loaded, setLoaded] = useState(false);
-
-  const [announcement, setAnnouncement] = useState("");
-
-  useEffect(() => {
-    setLoaded(true);
-  });
-
-  useEffect(() => {
-    if (loaded) {
-      UiService.GetMarquee(i18n.language).then((result) => {
-        setAnnouncement(result.data);
-      });
-    }
-  }, [loaded]);
-
-  useEffect(() => {});
-
   return (
     <AnnounceContainer>
       <AnnounceText>{i18n.t("web.marquee.latestNews")}</AnnounceText>
