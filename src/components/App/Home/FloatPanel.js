@@ -178,7 +178,6 @@ const IconHolder = styled.img`
 const FloatPanel = (props) => {
   const [supportModal, setSupportModal] = useState(false);
   const [csModal, setCsModal] = useState(false);
-  const [brandsCommunication, setBrandCommunication] = useState(null);
 
   const performOpenSupportModal = () => {
     setSupportModal(true);
@@ -193,14 +192,6 @@ const FloatPanel = (props) => {
   const performCloseCsModal = () => {
     setCsModal(false);
   };
-
-  useEffect(() => {
-    props.getBrandCommunicationList().then((result) => {
-      if (result.IsSuccess) {
-        setBrandCommunication(result.data);
-      }
-    });
-  }, []);
 
   //TODO: Pending CS
   const buttons = [
@@ -263,8 +254,8 @@ const FloatPanel = (props) => {
           <CloseButton onClick={performCloseSupportModal}>✖</CloseButton>
         </DialogTitle>
         <QRCodeContainer>
-          {brandsCommunication
-            ? brandsCommunication.map((data, index) => {
+          {props.general
+            ? props.general.brandsSupport.map((data, index) => {
                 return (
                   <QRCodeHolder>
                     <QRCode value={data.qrcodeurl} bgColor={"#cccccc"} />
@@ -304,12 +295,11 @@ const FloatPanel = (props) => {
   );
 };
 const mapDispatchToProps = (dispatch) => {
-  return {
-    getBrandCommunicationList: (language) =>
-      dispatch(generalAction.getBrandCommunication()),
-  };
+  return {};
 };
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    general: state.general,
+  };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(FloatPanel);

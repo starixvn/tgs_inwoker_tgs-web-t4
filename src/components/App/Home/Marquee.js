@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import i18n from "../../../utils/i18n";
 import { UiService } from "@Inwoker/tgs-api";
+import { connect } from "react-redux";
 const AnnounceContainer = styled.div`
   width: 1280px;
   height: 38px;
@@ -50,28 +51,34 @@ function Marquee(props) {
       <AnnounceText>{i18n.t("web.marquee.latestNews")}</AnnounceText>
       <MarqueeContainer>
         <marquee style={{ marginTop: "10px" }}>
-          {announcement.length
-            ? announcement.map((row, index) => {
-                return (
-                  <div
-                    key={index}
-                    style={{
-                      display: "inline",
-                      whiteSpace: "nowrap",
-                      wordBreak: "keep-all",
-                      overflow: "visible",
-                    }}
-                  >
-                    {row.localization !== null && row.localization.content
-                      ? row.localization.content
-                      : row.content}
-                  </div>
-                );
-              })
-            : ""}
+          {props.ui.marqueeText.map((row, index) => {
+            return (
+              <div
+                key={index}
+                style={{
+                  display: "inline",
+                  whiteSpace: "nowrap",
+                  wordBreak: "keep-all",
+                  overflow: "visible",
+                }}
+              >
+                {row.localization !== null && row.localization.content
+                  ? row.localization.content
+                  : row.content}
+              </div>
+            );
+          })}
         </marquee>
       </MarqueeContainer>
     </AnnounceContainer>
   );
 }
-export default Marquee;
+const mapDispatchToProps = (dispatch) => {
+  return {};
+};
+const mapStateToProps = (state) => {
+  return {
+    ui: state.ui,
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Marquee);
