@@ -473,6 +473,8 @@ class Wap extends Component {
     if (this.props.general.token == "") {
       this.props.getSiteToken();
     }
+    this.props.getMarquee(i18n.language);
+    this.props.getBrandCommunicationList();
     // this.props.getMobilePrefix();
     //this.props.getMarquee();
     // this.props.getBanner();
@@ -829,6 +831,11 @@ const mapDispatchToProps = (dispatch) => {
     getSiteToken: () => dispatch(generalAction.getSiteToken()),
     getMessageList: (language, pages, limit) =>
       dispatch(inboxAction.getMessages(language, pages, limit, true, true)),
+    getBrandCommunicationList: (language) =>
+      dispatch(generalAction.getBrandCommunication()),
+    getMarquee: (language) => {
+      dispatch(uiAction.getMarquee(language));
+    },
   };
 };
 
