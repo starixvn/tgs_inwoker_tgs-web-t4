@@ -5,8 +5,8 @@ import { connect } from "react-redux";
 
 import { generalAction } from "@Inwoker/tgs-api";
 
-import PanelUserPNG from "../../../assets/images/panel-user.png";
-import PanelCSPNG from "../../../assets/images/panel-cs.png";
+import PanelUserPNG from "../../../assets/images/panel/01-3.png";
+import PanelCSPNG from "../../../assets/images/panel/02-3.png";
 
 import Help1PNG from "../../../assets/images/panel/icon-01.png";
 import Help2PNG from "../../../assets/images/panel/icon-02.png";
@@ -32,6 +32,13 @@ const Container = styled.div`
   border-radius: 8px;
   background: rgba(0, 0, 0, 0.75);
 `;
+const Icon = styled.img`
+  height: 45px;
+`;
+
+const Text = styled.div`
+  opacity: 0;
+`;
 
 const SidePanel = styled.div`
   width: 100px;
@@ -44,6 +51,16 @@ const SidePanel = styled.div`
 
   &:hover {
     cursor: pointer;
+
+    ${Icon} {
+      margin-top: -10px;
+      transition: margin-top 0.25s;
+    }
+
+    ${Text} {
+      opacity: 1;
+      transition: opacity 1s;
+    }
   }
 `;
 
@@ -52,10 +69,6 @@ const Divider = styled.div`
   background: white;
   width: 50px;
   opacity: 0.5;
-`;
-
-const Icon = styled.img`
-  height: 50px;
 `;
 
 const CustomModal = styled(Dialog)`
@@ -191,12 +204,36 @@ const FloatPanel = (props) => {
 
   //TODO: Pending CS
   const buttons = [
-    { icon: Help1PNG, name: i18n.t("panel.liveChatOptionFund"), click: "" },
-    { icon: Help2PNG, name: i18n.t("panel.liveChatOptionBall"), click: "" },
-    { icon: Help3PNG, name: i18n.t("panel.liveChatOptionLive"), click: "" },
-    { icon: Help4PNG, name: i18n.t("panel.liveChatOptionLottery"), click: "" },
-    { icon: Help5PNG, name: i18n.t("panel.liveChatOptionRegister"), click: "" },
-    { icon: Help6PNG, name: i18n.t("panel.liveChatOptionSlot"), click: "" },
+    {
+      icon: Help1PNG,
+      name: i18n.t("panel.liveChatOptionFund"),
+      click: props.onhandleShowCSClick,
+    },
+    {
+      icon: Help2PNG,
+      name: i18n.t("panel.liveChatOptionBall"),
+      click: props.onhandleShowCSClick,
+    },
+    {
+      icon: Help3PNG,
+      name: i18n.t("panel.liveChatOptionLive"),
+      click: props.onhandleShowCSClick,
+    },
+    {
+      icon: Help4PNG,
+      name: i18n.t("panel.liveChatOptionLottery"),
+      click: props.onhandleShowCSClick,
+    },
+    {
+      icon: Help5PNG,
+      name: i18n.t("panel.liveChatOptionRegister"),
+      click: props.onhandleShowCSClick,
+    },
+    {
+      icon: Help6PNG,
+      name: i18n.t("panel.liveChatOptionSlot"),
+      click: props.onhandleShowCSClick,
+    },
   ];
   return (
     <div>
@@ -207,6 +244,7 @@ const FloatPanel = (props) => {
           }}
         >
           <Icon src={PanelUserPNG} alt="user-icon" />
+          <Text>{i18n.t("panel.cs")}</Text>
         </SidePanel>
         <Divider />
         <SidePanel
@@ -215,7 +253,7 @@ const FloatPanel = (props) => {
           }}
         >
           <Icon src={PanelCSPNG} alt="user-cs" />
-          <div>{i18n.t("panel.im")}</div>
+          <Text>{i18n.t("panel.im")}</Text>
         </SidePanel>
       </Container>
 
