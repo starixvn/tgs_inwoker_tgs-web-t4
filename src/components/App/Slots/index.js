@@ -39,11 +39,12 @@ const Container = styled.div`
   min-height: 770px;
   padding: 70px 0px;
   position: relative;
-  background: url(${(props) =>
-      process.env.PUBLIC_URL +
-      `/assets/images/pcGamePage/slots/background-` +
-      Common.getCDNLanguagePrefix() +
-      `.jpg`})
+  background: url(${process.env.PUBLIC_URL +
+    `/assets/images/pcGamePage/slots`}${(props) => {
+      return props.type === GameTypeEnum.FISH
+        ? "/fishbg-black.jpg"
+        : `/background-` + Common.getCDNLanguagePrefix() + `.jpg`;
+    }})
     no-repeat center top;
   background-color: #171b36;
 `;
@@ -55,7 +56,10 @@ const InnerWrap = styled.div`
 
   background: rgba(255, 255, 255, 0.8);
 
-  margin: 410px auto 50px auto;
+  margin: ${({ type }) => {
+      return type === GameTypeEnum.FISH ? "600px" : "410px";
+    }}
+    auto 50px auto;
   padding: 16px 46px;
   box-sizing: border-box;
   overflow-y: auto;
@@ -423,6 +427,8 @@ class Slots extends Component {
         ? GameTypeEnum.TABLEGAME
         : this.props.match.url.indexOf("slots") >= 0
         ? GameTypeEnum.SLOT
+        : this.props.match.url.indexOf("fish") >= 0
+        ? GameTypeEnum.FISH
         : GameTypeEnum.TIGERSLOT;
     return type;
   }
@@ -660,8 +666,8 @@ class Slots extends Component {
     }
 
     return (
-      <Container>
-        <InnerWrap>
+      <Container type={this.state.type}>
+        <InnerWrap type={this.state.type}>
           <GameTabContainer>
             <GameTabAll
               active={this.state.platform == ""}

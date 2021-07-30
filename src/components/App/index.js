@@ -275,7 +275,7 @@ class App extends Component {
                     <Route
                       exact
                       path={baseRouteUrl + "/fish/:platform?"}
-                      component={Fishing}
+                      component={Slots}
                     />
                     <Route
                       exact
