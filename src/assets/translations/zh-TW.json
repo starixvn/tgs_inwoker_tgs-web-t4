@@ -8,8 +8,30 @@
     "ERR202": "玩家已被禁。",
     "ERR401": "請檢查您的輸入。"
   },
+  "panel": {
+    "im": "即時通訊",
+    "cs": "客服",
+    "imLong": "即時通讯",
+    "liveChatWelcome": "【客服中心】歡迎你！",
+    "liveChatDescription": "請選擇你的問題類型以重大服務速度！",
+    "liveChatOptionFund": "點數問題",
+    "liveChatOptionBall": "球賽問題",
+    "liveChatOptionLive": "真人游戏",
+    "liveChatOptionLottery": "彩球游戏",
+    "liveChatOptionRegister": "注册问题",
+    "liveChatOptionSlot": "电子游戏"
+  },
+
+  "support": {
+    "contactnow": "立即聯繫",
+    "online": "在線客服",
+    "contact": "聯繫",
+    "qr": "二維碼客服",
+    "join": "加入"
+  },
+
   "common": {
-    "title":"{brand} - 專業娛樂平台",
+    "title": "{brand} - 專業娛樂平台",
     "register": "註冊",
     "login": "登錄",
     "submit": "提交",
@@ -107,15 +129,15 @@
     "cs": "客服",
     "msgSuccessUpdateProfile": "修改成功。",
     "joinGame": "立刻體驗",
-    "withdrawalBankType":"類別",
-    "withdrawalChannel":"渠道",
-    "withdrawalNumber":"銀行卡號碼/加密貨幣地址",
-    "msgEnterWithdrawalNumber":"請輸入銀行卡號碼/加密貨幣地址",
-    "msgEmailExist":"電子郵件地址已存在",
-    "msgRequiredTurnover":"您的投注流水不足，無法提款。 如有問題，請聯繫客服。",
-    "msgInvalidUsername":"帳號或密碼錯誤",
-    "msgInvalidWithdrawalPassword":"提款密碼不正確",
-    "msgRequestFailed" : "請求失敗，請聯繫客服"
+    "withdrawalBankType": "類別",
+    "withdrawalChannel": "渠道",
+    "withdrawalNumber": "銀行卡號碼/加密貨幣地址",
+    "msgEnterWithdrawalNumber": "請輸入銀行卡號碼/加密貨幣地址",
+    "msgEmailExist": "電子郵件地址已存在",
+    "msgRequiredTurnover": "您的投注流水不足，無法提款。 如有問題，請聯繫客服。",
+    "msgInvalidUsername": "帳號或密碼錯誤",
+    "msgInvalidWithdrawalPassword": "提款密碼不正確",
+    "msgRequestFailed": "請求失敗，請聯繫客服"
   },
   "affiliate": {
     "title": "推廣賺錢",
@@ -208,13 +230,13 @@
     "msgPlsSelectPayment": "請選擇支付方式",
     "msgPlsSelectMethod": "請選擇支付渠道",
     "msgPlsEnterAccount": "請輸入銀行賬號名稱",
-    "msgInvalidFileSize":"文件太大，請選擇小於2mb的文件",
-    "msgInvalidFileType":"請僅上傳圖像文件。(.jpg/.jpeg/.png/.tiff)",
+    "msgInvalidFileSize": "文件太大，請選擇小於2mb的文件",
+    "msgInvalidFileType": "請僅上傳圖像文件。(.jpg/.jpeg/.png/.tiff)",
     "msgFailedJoinPromotion": "您無法參加此活動。如有問題，請聯繫客服。",
-    "exchangeRate":"匯率",
-    "buyPrice":"買",
-    "sellPrice":"賣",
-    "expectedPayment":"預計支付",
+    "exchangeRate": "匯率",
+    "buyPrice": "買",
+    "sellPrice": "賣",
+    "expectedPayment": "預計支付",
     "details": {
       "bank": "銀行",
       "account": "賬戶",
@@ -267,7 +289,7 @@
         "mainAccount": "中心錢包餘額：",
         "totalFund": "玩家總資金",
         "accountReport": "帳戶明細",
-        "betReport": "投註記錄",
+        "betReport": "投注記錄",
         "transferReport": "轉換記錄",
         "personalInfo": "個人資料",
         "manageBank": "管理銀行卡",
@@ -333,7 +355,7 @@
     "details": "查看",
     "phoneVerification": "手機驗證",
     "emailVerification": "郵箱驗證",
-    "msgPlsBindEmailAddress":"請綁定郵箱地址",
+    "msgPlsBindEmailAddress": "請綁定郵箱地址",
     "changePassword": {
       "msgConfirmPassFail": "確認密碼錯誤",
       "editPassword": "修改密碼",
@@ -376,24 +398,24 @@
       "phoneDesc": "請放心，我們不會洩露任何用戶信息，以及發送騷擾信息。"
     },
     "email": {
-      "editEmail":"修改郵箱",
-      "verifyEmail":"驗證原郵箱",
-      "addEmail":"設定新郵箱",
-      "plsEnterEmail":"請輸入郵箱地址",
-      
+      "editEmail": "修改郵箱",
+      "verifyEmail": "驗證原郵箱",
+      "addEmail": "設定新郵箱",
+      "plsEnterEmail": "請輸入郵箱地址",
+
       "bindEmail": "綁定郵箱地址",
       "toEdit": "要修改郵箱地址，請點擊",
       "here": "這裡"
     },
-    "qq":{
-      "msgInvalidQQ" :"QQ賬號格式不正確",
-      "plsEnterQQ" :"請輸入QQ賬號",
-      "qqAccount":"QQ賬號"
+    "qq": {
+      "msgInvalidQQ": "QQ賬號格式不正確",
+      "plsEnterQQ": "請輸入QQ賬號",
+      "qqAccount": "QQ賬號"
     },
-    "wechat":{
-      "msgInvalidWeChat" :"微信賬號格式不正確",
-      "plsEnterWechat" :"請輸入微信賬號",
-      "weChatAccount":"微信賬號"
+    "wechat": {
+      "msgInvalidWeChat": "微信賬號格式不正確",
+      "plsEnterWechat": "請輸入微信賬號",
+      "weChatAccount": "微信賬號"
     },
     "resetResetWithdrawalPassword": {
       "title": "修改提款密碼",
@@ -429,10 +451,11 @@
     "transferDetails": "轉換記錄",
     "withdrawalDetails": "提現記錄",
     "depositDetails": "充值記錄",
-    "bettingDetails": "投註記錄",
+    "bettingDetails": "投注記錄",
     "rebateDetails": "返水記錄",
     "platform": "平台",
     "date": "日期",
+    "gamename": "遊戲名稱",
     "startDate": "開始時間",
     "endDate": "結束時間",
     "today": "今天",
@@ -465,6 +488,14 @@
       "validBet": "有效金額",
       "amount": "返水金額"
     },
+    "transfer": {
+      "title": "轉賬記錄",
+      "table": {
+        "from": "從",
+        "to": "至"
+      }
+    },
+
     "dateTime": "時間",
 
     "betDateTime": "投注時間",
@@ -522,7 +553,7 @@
     "maxAmount": "最大金額",
     "transfer": "轉賬",
     "noticeTitle": "溫馨提示",
-    "msgFailedTransfer":"轉賬失敗"
+    "msgFailedTransfer": "轉賬失敗"
   },
 
   "withdrawal": {
@@ -548,8 +579,8 @@
     "receiverAmount": "到賬金額"
   },
   "promotion": {
-    "emptyLine1":"目前尚未有活動",
-    "emptyLine2":"請敬請期待",
+    "emptyLine1": "目前尚未有活動",
+    "emptyLine2": "請敬請期待",
     "moreInfo": "更多資訊",
     "startDate": "開始時間：",
     "endDate": "結束時間：",
@@ -561,7 +592,7 @@
     "joinPromo": "參加優惠",
     "joinSuccess": "參加優惠活動成功",
     "promoJoint": "參加優惠已參加！",
-    "details":"詳情"
+    "details": "詳情"
   },
   "web": {
     "home": {
@@ -722,84 +753,90 @@
       "btn": "聯繫我們"
     }
   },
-  "PrimePay":"一等付",
-  "LeePay":"利付錢包",
-  "ApplePay":"蘋果支付",
-  "Manual":"手動存款",
-  "Crypto":"虛擬幣",
-  "BankTransfer":"銀行轉賬",
-  "CustomBank":"自定銀行",
-  "VR":{
-    "lottery":"VR彩票",
-    "desc":"VR獎源一直以“公正、安全、快速、精準”處於行業領先地位，擁有人工智能的全方位系統主流彩種應有盡有，主要分為「VR視訊彩」、「VR品牌彩票」等。亦在積極開發「VR電子」系列遊戲，立志給予客戶更多樣化的選擇。 VR將持續創造進步，為大眾推出更多的新彩種，創造一個全方位的娛樂環境。 "
+  "PrimePay": "一等付",
+  "LeePay": "利付錢包",
+  "ApplePay": "蘋果支付",
+  "Manual": "手動存款",
+  "Crypto": "虛擬幣",
+  "BankTransfer": "銀行轉賬",
+  "CustomBank": "自定銀行",
+  "VR": {
+    "lottery": "VR彩票",
+    "desc": "VR獎源一直以“公正、安全、快速、精準”處於行業領先地位，擁有人工智能的全方位系統主流彩種應有盡有，主要分為「VR視訊彩」、「VR品牌彩票」等。亦在積極開發「VR電子」系列遊戲，立志給予客戶更多樣化的選擇。 VR將持續創造進步，為大眾推出更多的新彩種，創造一個全方位的娛樂環境。 "
   },
-  "KY":{
-    "chess":"開元棋牌",
-    "desc":"搶莊牛牛龍虎鬥，多款棋牌任君選！棋牌彰顯胸懷，競技娛樂燒腦，好友相約競技，遊戲改變生活",
-    "BankerNiuNiu":"搶莊牛牛",
-    "GoldenFlower":"炸金花",
-    "The21Point":"21點",
-    "SanGong":"三公"
+  "KY": {
+    "chess": "開元棋牌",
+    "desc": "搶莊牛牛龍虎鬥，多款棋牌任君選！棋牌彰顯胸懷，競技娛樂燒腦，好友相約競技，遊戲改變生活",
+    "BankerNiuNiu": "搶莊牛牛",
+    "GoldenFlower": "炸金花",
+    "The21Point": "21點",
+    "SanGong": "三公"
   },
-  "sports":{
-    "desc":"PG 包網提供您創新且多樣化的玩法和高賠率的賽事轉播，與隨時隨地使用各式設備，讓您能輕鬆、快速、且安全下注，再加上豐富的體育賽事投注包括足球、籃球、棒球、網球、美式足球、電競等，以滿足各項的體育競技熱愛者的需求！"
+  "sports": {
+    "desc": "PG 包網提供您創新且多樣化的玩法和高賠率的賽事轉播，與隨時隨地使用各式設備，讓您能輕鬆、快速、且安全下注，再加上豐富的體育賽事投注包括足球、籃球、棒球、網球、美式足球、電競等，以滿足各項的體育競技熱愛者的需求！"
   },
-  "esports":{
-    "desc":"IM電子競技有頂尖的技術支持，還擁有令人驚嘆的視覺界面及高效的用戶體驗。即刻透過【PG】包網平台，體驗輕鬆投注電子競技的樂趣吧!"
+  "esports": {
+    "desc": "IM電子競技有頂尖的技術支持，還擁有令人驚嘆的視覺界面及高效的用戶體驗。即刻透過【PG】包網平台，體驗輕鬆投注電子競技的樂趣吧!"
   },
-  "services":{
-    "depositTitle":"極速存取轉款",
-    "deposit":"最新技術自主研發的財務處理系統真正做到極速存、取、轉獨家網絡優化技術，為您提供一流的遊戲體驗，最大優化網絡延遲。",
-    "securityTitle":"加密安全管理",
-    "security":"獨家開發，採用128位加密技術和嚴格的安全管理體系，客戶資金得到最完善的保障，讓您全情盡享娛樂、賽事投注、無後顧之憂！",
-    "oddsTitle":"海量賽事種類",
-    "odds":"每天為您提供近千場精彩體育賽事，更有真人、彩票、電子遊戲等多種娛樂方式選擇，讓您擁有完美遊戲體驗。",
-    "platformTitle":"三端任您選擇",
-    "platform":"引領市場的卓越技術，自主研發了全套終端應用，讓您暢享Web、H5，更有iOS、Android原生APP，讓您隨時隨地，娛樂投注! 7x24小時在線客服提供最貼心，最優質的服務"
+  "services": {
+    "depositTitle": "極速存取轉款",
+    "deposit": "最新技術自主研發的財務處理系統真正做到極速存、取、轉獨家網絡優化技術，為您提供一流的遊戲體驗，最大優化網絡延遲。",
+    "securityTitle": "加密安全管理",
+    "security": "獨家開發，採用128位加密技術和嚴格的安全管理體系，客戶資金得到最完善的保障，讓您全情盡享娛樂、賽事投注、無後顧之憂！",
+    "oddsTitle": "海量賽事種類",
+    "odds": "每天為您提供近千場精彩體育賽事，更有真人、彩票、電子遊戲等多種娛樂方式選擇，讓您擁有完美遊戲體驗。",
+    "platformTitle": "三端任您選擇",
+    "platform": "引領市場的卓越技術，自主研發了全套終端應用，讓您暢享Web、H5，更有iOS、Android原生APP，讓您隨時隨地，娛樂投注! 7x24小時在線客服提供最貼心，最優質的服務"
   },
-  "AG":{
-    "name":"AG真人",
-    "live":"AG真人"
+  "AG": {
+    "name": "AG真人",
+    "live": "AG真人"
   },
-  "BG":{
-    "name":"BG真人",
-    "live":"BG真人"
+  "BG": {
+    "name": "BG真人",
+    "live": "BG真人"
   },
-  "SG":{
-    "name":"Sexy真人",
-    "live":"Sexy真人"
+  "SG": {
+    "name": "Sexy真人",
+    "live": "Sexy真人"
   },
-  "SW":{
-    "live":"SW真人",
-    "slots":"SW老虎機",
-    "electron":"SW電子"
+  "SW": {
+    "live": "SW真人",
+    "slots": "SW老虎機",
+    "electron": "SW電子"
   },
-  "SBO":{
-    "sports":"SBO體育"
+  "SBO": {
+    "sports": "SBO體育"
   },
-  "IMES":{
-    "sports":"IM電競"
+  "IMES": {
+    "sports": "IM電競"
   },
-  "SABA":{
-    "sports":"沙巴體育"
+  "SABA": {
+    "sports": "沙巴體育"
   },
-  "HABA":{
-    "slots":"HABANERO",
-    "electron":"HABANERO"
+  "HABA": {
+    "slots": "HABANERO",
+    "electron": "HABANERO"
   },
-  "JDB":{
-    "slots":"JDB",
-    "fish":"JDB捕魚"
+  "JDB": {
+    "slots": "JDB",
+    "fish": "JDB捕魚"
   },
-  "PP":{
-    "slots":"PP老虎機",
-    "electron":"PP電子"
+  "PP": {
+    "slots": "PP老虎機",
+    "electron": "PP電子"
   },
-  "EVO":{
-    "live":"EVO真人",
-    "slots":"EVO電子"
+  "EVO": {
+    "live": "EVO真人",
+    "slots": "EVO老虎機"
   },
-  "AB":{
-    "live":"Allbet真人"
+  "AB": {
+    "live": "Allbet真人"
+  },
+  "RT": {
+    "slots": "RedTiger老虎機"
+  },
+  "NT": {
+    "slots": "Netent老虎機"
   }
 }

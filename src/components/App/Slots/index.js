@@ -86,6 +86,7 @@ const GameTabButton = styled.div`
   border-radius: 10px;
   background-color: #eeeeee;
   margin-left: 5px;
+  margin-top: 5px;
   position: relative;
   float: left;
 
@@ -638,13 +639,7 @@ class Slots extends Component {
               this.state.type === GameTypeEnum.FISH
                 ? `/${i18n.language}`
                 : `/${Common.getCDNLanguagePrefix()}`
-            }/${
-              (Common.getCDNLanguagePrefix() === "zh-CN" &&
-                (el.gpcode === "HABA" || el.gpcode === "PP")) ||
-              el.gpcode === "SW"
-                ? el.code
-                : el.code.replace(/_/g, "")
-            }.jpg`}
+            }/${el.code}.jpg`}
           >
             <GameDesc>
               <GameProvider>{el.gpcode}</GameProvider>
