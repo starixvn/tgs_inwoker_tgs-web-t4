@@ -273,10 +273,7 @@ function Footer(props) {
             .t("web.footer.copyrightLine2")
             .replace(/{brand}/g, config.brand)}
         </CopyRightLine2>
-        <Version>
-          Version {process.env.REACT_APP_VERSION} (
-          {process.env.REACT_APP_CUSTOM_NODE_ENV})
-        </Version>
+        <Version>Version {process.env.REACT_APP_VERSION}</Version>
       </BottomContainer>
     </Container>
   );
