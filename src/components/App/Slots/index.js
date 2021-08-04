@@ -56,10 +56,7 @@ const InnerWrap = styled.div`
 
   background: rgba(255, 255, 255, 0.8);
 
-  margin: ${({ type }) => {
-      return type === GameTypeEnum.FISH ? "600px" : "410px";
-    }}
-    auto 50px auto;
+  margin: 410px auto 50px auto;
   padding: 16px 46px;
   box-sizing: border-box;
   overflow-y: auto;
@@ -429,7 +426,7 @@ class Slots extends Component {
         ? GameTypeEnum.SLOT
         : this.props.match.url.indexOf("fish") >= 0
         ? GameTypeEnum.FISH
-        : GameTypeEnum.TIGERSLOT;
+        : GameTypeEnum.SLOT;
     return type;
   }
   getGameList(
@@ -641,11 +638,11 @@ class Slots extends Component {
         .map((el, i) => (
           <ItemContainer
             key={i}
-            img={`${config.sourceUrl}${el.gpcode.toUpperCase()}${
-              this.state.type === GameTypeEnum.FISH
-                ? `/${i18n.language}`
-                : `/${Common.getCDNLanguagePrefix()}`
-            }/${el.code}.jpg`}
+            img={`${
+              config.sourceUrl
+            }${el.gpcode.toUpperCase()}/${Common.getCDNLanguagePrefix()}/${
+              el.code
+            }.jpg`}
           >
             <GameDesc>
               <GameProvider>{el.gpcode}</GameProvider>
