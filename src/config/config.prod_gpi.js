@@ -1,6 +1,6 @@
 module.exports = {
-  baseUrl: "https://operator.tgsstg.gq/api/",
-  client: "6OSiH5is9eibEpedTtaBpHmIrS2gmjZqAEnjcP95CEwgnvCCWOnlro",
+  baseUrl: "https://operator.srvptt.com/api/",
+  client: "I7nKiimrZQOqnJ6ryjUw74c0Hi64KC6Myunhob4cHh8VOUIuZh4p63czefxyyzbZ",
   currency: "CNY",
   brand: "PGG",
   languages: [
