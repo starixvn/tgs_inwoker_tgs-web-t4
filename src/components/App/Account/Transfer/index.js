@@ -394,18 +394,21 @@ class Transfer extends Component {
         });
         // AppHistory.replace("/" + i18n.language + "/withdrawal");
       } else {
-        if (
-          this.props.wallet.transferResult.code === 208 ||
-          this.props.wallet.transferResult.code === 209
-        ) {
-          this.props.enqueueSnackbar(i18n.t("transfer.msgFailedTransfer"), {
-            variant: "error",
-          });
-        } else {
-          this.props.enqueueSnackbar(this.props.wallet.transferResult.info, {
-            variant: "error",
-          });
-        }
+        this.props.enqueueSnackbar(this.props.wallet.transferResult.info, {
+          variant: "error",
+        });
+        // if (
+        //   this.props.wallet.transferResult.code === 208 ||
+        //   this.props.wallet.transferResult.code === 209
+        // ) {
+        //   this.props.enqueueSnackbar(i18n.t("transfer.msgFailedTransfer"), {
+        //     variant: "error",
+        //   });
+        // } else {
+        //   this.props.enqueueSnackbar(this.props.wallet.transferResult.info, {
+        //     variant: "error",
+        //   });
+        // }
       }
     }
 

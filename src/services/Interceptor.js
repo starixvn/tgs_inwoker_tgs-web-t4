@@ -4,6 +4,7 @@ import { AppHistory } from "../history/History";
 import i18n from "../utils/i18n";
 import Promise from "promise-polyfill";
 import { isMobileOnly } from "react-device-detect";
+import ErrorSwitcher from "../utils/ErrorSwitcher";
 export default {
   setupInterceptors: (store) => {
     // Add a response interceptor
@@ -35,10 +36,11 @@ export default {
       function (response) {
         var newResponse = {
           IsSuccess: false,
-          info: response.data.errmsg,
+          info: ErrorSwitcher.getTranslation(response.data.errmsgid),
           code: response.data.err,
           data: response.data.data ? response.data.data : response.data,
         };
+
         if (response.data.url) {
           newResponse.data.url = response.data.url;
         }
@@ -94,7 +96,7 @@ export default {
           }
           return {
             IsSuccess: false,
-            info: error.response.data.errmsg,
+            info: ErrorSwitcher.getTranslation(error.response.data.errmsgid),
             code: error.response.data.err,
             data: {},
           };

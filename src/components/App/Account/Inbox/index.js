@@ -105,7 +105,7 @@ class Inbox extends Component {
     this.GetInboxList(newPage - 1);
   };
   GetInboxList = (page) => {
-    this.props.getMessages(page + 1, this.state.limit);
+    this.props.getMessages(i18n.language, page + 1, this.state.limit);
   };
 
   componentDidMount() {
@@ -194,8 +194,8 @@ const mapDispatchToProps = (dispatch) => {
       dispatch({ type: SHOWING_DIALOG, payload });
     },
     getAccountInfo: () => dispatch(accountAction.getAccountInfo()),
-    getMessages: (page, limit) =>
-      dispatch(inboxAction.getMessages(page, limit, true, false)),
+    getMessages: (language, page, limit) =>
+      dispatch(inboxAction.getMessages(language, page, limit, true, false)),
   };
 };
 export default connect(

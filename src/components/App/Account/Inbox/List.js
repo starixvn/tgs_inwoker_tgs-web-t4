@@ -109,7 +109,12 @@ function List(props) {
           {props.inbox.items.map((row, index) => {
             const isItemSelected = isSelected(row.id);
             const labelId = `enhanced-table-checkbox-${index}`;
-            let doc = new DOMParser().parseFromString(row.content, "text/html");
+            let doc = new DOMParser().parseFromString(
+              row.localization !== null && row.localization.content
+                ? row.localization.content
+                : row.content,
+              "text/html"
+            );
 
             return (
               <StyledTableRow
@@ -138,7 +143,9 @@ function List(props) {
                       : { fontWeight: "normal" }
                   }
                 >
-                  {row.subject}
+                  {row.localization !== null && row.localization.subject
+                    ? row.localization.subject
+                    : row.subject}
                 </StyledTableCell>
                 <StyledTableCell
                   style={
@@ -147,7 +154,9 @@ function List(props) {
                       : { fontWeight: "normal" }
                   }
                 >
-                  {doc.querySelector("p").textContent}
+                  {doc.querySelector("p")
+                    ? doc.querySelector("p").textContent
+                    : ""}
                 </StyledTableCell>
                 <StyledTableCell
                   style={

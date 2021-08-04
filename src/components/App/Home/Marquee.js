@@ -37,7 +37,7 @@ function Marquee(props) {
 
   useEffect(() => {
     if (loaded) {
-      UiService.GetMarquee().then((result) => {
+      UiService.GetMarquee(i18n.language).then((result) => {
         setAnnouncement(result.data);
       });
     }
@@ -62,7 +62,9 @@ function Marquee(props) {
                       overflow: "visible",
                     }}
                   >
-                    {row.content}
+                    {row.localization !== null && row.localization.content
+                      ? row.localization.content
+                      : row.content}
                   </div>
                 );
               })

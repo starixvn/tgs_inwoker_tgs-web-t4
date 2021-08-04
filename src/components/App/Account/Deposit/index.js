@@ -169,19 +169,22 @@ class Deposit extends Component {
           loading: false,
         });
       } else {
-        if (this.props.wallet.depositResult.code === 407) {
-          this.props.enqueueSnackbar(i18n.t("deposit.msgFailedJoinPromotion"), {
-            variant: "error",
-          });
-        } else if (this.props.wallet.depositResult.code === 900) {
-          this.props.enqueueSnackbar(i18n.t("common.msgRequestFailed"), {
-            variant: "error",
-          });
-        } else {
-          this.props.enqueueSnackbar(this.props.wallet.depositResult.info, {
-            variant: "error",
-          });
-        }
+        this.props.enqueueSnackbar(this.props.wallet.depositResult.info, {
+          variant: "error",
+        });
+        // if (this.props.wallet.depositResult.code === 407) {
+        //   this.props.enqueueSnackbar(i18n.t("deposit.msgFailedJoinPromotion"), {
+        //     variant: "error",
+        //   });
+        // } else if (this.props.wallet.depositResult.code === 900) {
+        //   this.props.enqueueSnackbar(i18n.t("common.msgRequestFailed"), {
+        //     variant: "error",
+        //   });
+        // } else {
+        //   this.props.enqueueSnackbar(this.props.wallet.depositResult.info, {
+        //     variant: "error",
+        //   });
+        // }
 
         this.setState({ ...this.state, loading: false });
       }

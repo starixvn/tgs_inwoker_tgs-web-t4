@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import IconReportRedPNG from "../../../../assets/images/icon-report.png";
-
+import TransferReport from "./TransferReport";
 import { ReportService, GameService } from "@Inwoker/tgs-api";
 
 import AccountDetails from "./AccountDetails";
@@ -106,6 +106,10 @@ class Report extends Component {
       count: 0,
     },
     rebateList: {
+      list: [],
+      count: 0,
+    },
+    transferReport: {
       list: [],
       count: 0,
     },
@@ -246,6 +250,29 @@ class Report extends Component {
     });
   };
 
+  handleGetTransferReportTrigger = (dateFrom, dateTo, page, order) => {
+    ReportService.GetTransferReport(
+      moment(dateFrom).format("YYYY-MM-DDT00:00:00.000") + "Z",
+      moment(dateTo).format("YYYY-MM-DDT23:59:59.999") + "Z",
+      page,
+      this.state.limit,
+      order,
+      true,
+      "",
+      false
+    ).then((response) => {
+      if (response.IsSuccess) {
+        this.setState({
+          ...this.state,
+          transferReport: {
+            list: response.data.items,
+            count: response.data.totalCount,
+          },
+        });
+      }
+    });
+  };
+
   handleTabClick = (tab) => {
     this.setState({ ...this.state, tab: tab });
   };
@@ -287,7 +314,13 @@ class Report extends Component {
             onClick={() => this.handleTabClick(5)}
           >
             {i18n.t("report.rebateDetails")}
-          </TabButton> */}
+          </TabButton> */}{" "}
+          <TabButton
+            active={this.state.tab === 6}
+            onClick={() => this.handleTabClick(6)}
+          >
+            {i18n.t("report.transfer.title")}
+          </TabButton>
           <SplitLine></SplitLine>
           {(() => {
             switch (this.state.tab) {
@@ -333,6 +366,16 @@ class Report extends Component {
                   />
                 );
               case 5:
+                return "";
+              case 6:
+                return (
+                  <TransferReport
+                    onhandleGetReportTrigger={
+                      this.handleGetTransferReportTrigger
+                    }
+                    transferReportList={this.state.transferReport}
+                  />
+                );
               default:
                 return (
                   <RebateReport

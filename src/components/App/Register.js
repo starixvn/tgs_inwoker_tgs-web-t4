@@ -282,15 +282,18 @@ function Register(props) {
               "/" + i18n.language + "/registersuccess/" + username
             );
           } else {
-            if (response.code === 206) {
-              props.enqueueSnackbar(i18n.t("common.msgInvalidInvitationCode"), {
-                variant: "warning",
-              });
-            } else {
-              props.enqueueSnackbar(response.info, {
-                variant: "warning",
-              });
-            }
+            props.enqueueSnackbar(response.info, {
+              variant: "warning",
+            });
+            // if (response.code === 206) {
+            //   props.enqueueSnackbar(i18n.t("common.msgInvalidInvitationCode"), {
+            //     variant: "warning",
+            //   });
+            // } else {
+            //   props.enqueueSnackbar(response.info, {
+            //     variant: "warning",
+            //   });
+            // }
           }
         });
     } else {

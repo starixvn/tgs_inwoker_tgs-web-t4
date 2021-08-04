@@ -81,6 +81,7 @@ function TransactionDetailsList(props) {
             >
               {i18n.t("report.platform")}
             </StyledTableCell>
+            <StyledTableCell>{i18n.t("report.gamename")}</StyledTableCell>
             <StyledTableCell
               align="right"
               style={{
@@ -115,6 +116,7 @@ function TransactionDetailsList(props) {
                 <StyledTableCell>{date}</StyledTableCell>
                 <StyledTableCell>{row.id}</StyledTableCell>
                 <StyledTableCell>{row.gameProviderName}</StyledTableCell>
+                <StyledTableCell>{row.gameName}</StyledTableCell>
                 <StyledTableCell align="right">{row.betAmount}</StyledTableCell>
                 <StyledTableCell align="right">
                   {row.validBetAmount}

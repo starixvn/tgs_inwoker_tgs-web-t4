@@ -8,6 +8,29 @@
     "ERR202": "Player is disabled.",
     "ERR401": "Please check your input."
   },
+
+  "panel": {
+    "im": "IM",
+    "cs": "Live Chat",
+    "imLong": "Instant Messaging",
+    "liveChatWelcome": "[Live Chat] Welcome You!",
+    "liveChatDescription": "Please select your question type to speed up the service!",
+    "liveChatOptionFund": "Fund",
+    "liveChatOptionBall": "Sports ",
+    "liveChatOptionLive": "Live",
+    "liveChatOptionLottery": "Lottery",
+    "liveChatOptionRegister": "Register",
+    "liveChatOptionSlot": "Slot"
+  },
+
+  "support": {
+    "contactnow": "Contact Now",
+    "online": "Online Support",
+    "contact": "Contact",
+    "qr": "QR Support",
+    "join": "Join"
+  },
+
   "common": {
     "title": "{brand} | The Biggest & Most Trusted Online Casino",
     "register": "Register",
@@ -433,6 +456,7 @@
     "rebateDetails": "Rebate",
     "platform": "Platform",
     "date": "Date",
+    "gamename": "Game Name",
     "startDate": "Start Date",
     "endDate": "End Date",
     "today": "Today",
@@ -464,6 +488,13 @@
       "cycleDate": "Cycle day",
       "validBet": "Valid Bet",
       "amount": "Rebate"
+    },
+    "transfer": {
+      "title": "Transfer Record",
+      "table": {
+        "from": "From",
+        "to": "To"
+      }
     },
     "dateTime": "Time",
     "betid": "ID",
@@ -794,11 +825,17 @@
     "slots": "Pragmatic Play",
     "electron": "Pragmatic Play"
   },
-  "EVO":{
-    "live":"Evolution",
-    "slots":"Evolution"
+  "EVO": {
+    "live": "Evolution",
+    "slots": "Evolution"
   },
-  "AB":{
-    "live":"Allbet"
+  "AB": {
+    "live": "Allbet"
+  },
+  "RT": {
+    "slots": "RedTiger"
+  },
+  "NT": {
+    "slots": "Netent"
   }
 }

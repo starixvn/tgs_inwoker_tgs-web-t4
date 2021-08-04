@@ -160,15 +160,18 @@ class ForgotPasswordEmail extends Component {
               this.setState({ ...this.state, countdown: 60 });
               this.checkCountdown();
             } else {
-              if (response.code === 201) {
-                this.props.enqueueSnackbar(i18n.t("error.ERR201"), {
-                  variant: "error",
-                });
-              } else {
-                this.props.enqueueSnackbar(response.info, {
-                  variant: "error",
-                });
-              }
+              this.props.enqueueSnackbar(response.info, {
+                variant: "error",
+              });
+              // if (response.code === 201) {
+              //   this.props.enqueueSnackbar(i18n.t("error.ERR201"), {
+              //     variant: "error",
+              //   });
+              // } else {
+              //   this.props.enqueueSnackbar(response.info, {
+              //     variant: "error",
+              //   });
+              // }
             }
           }
         );
