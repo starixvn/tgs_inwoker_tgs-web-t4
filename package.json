@@ -3,7 +3,7 @@
   "version": "1.0.1",
   "private": true,
   "dependencies": {
-    "@Inwoker/tgs-api": "^0.8.112",
+    "@Inwoker/tgs-api": "^0.8.113",
     "@Inwoker/tgs-wap-t1": "^1.0.44",
     "@date-io/date-fns": "^1.3.13",
     "@material-ui/core": "^4.12.2",
@@ -64,6 +64,7 @@
   },
   "scripts": {
     "updateVer": "node updateVer.js",
+    "start:": "env-cmd -f .env react-scripts start",
     "start:development": "env-cmd -f .env.development react-scripts start",
     "start:production": "env-cmd -f .env.production react-scripts start",
     "start:staging": "env-cmd -f .env.staging react-scripts start",
