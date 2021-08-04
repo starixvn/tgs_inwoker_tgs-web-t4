@@ -5,7 +5,7 @@ pipeline {
 	    ENV = "dev"
 	    TAG = sh(script: "echo dev-`date +%Y%m%d%H%M`", returnStdout: true).trim()
 		Registry = "registry.gitlab.com/rayprosoft/turnkey-gaming-system/"
-		Component = "fe-lobby-gpi-t4"
+		Component = "fe-lobby-t4"
 		BuildEnv="staging"
 		gitlab_user_pwd = credentials('gitlab-user-pwd')
 	}
