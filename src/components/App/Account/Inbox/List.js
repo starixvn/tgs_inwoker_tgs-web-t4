@@ -154,7 +154,9 @@ function List(props) {
                       : { fontWeight: "normal" }
                   }
                 >
-                  {doc.querySelector("p").textContent}
+                  {doc.querySelector("p")
+                    ? doc.querySelector("p").textContent
+                    : ""}
                 </StyledTableCell>
                 <StyledTableCell
                   style={
