@@ -586,6 +586,7 @@ class Wap extends Component {
         this.props.getMarquee(i18n.language);
         this.props.getBrandCommunicationList();
         this.props.getLiveChatURL();
+        this.props.getAutoTransferStatus();
       }
     }
     if (
@@ -843,6 +844,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(uiAction.getMarquee(language));
     },
     getLiveChatURL: () => dispatch(generalAction.getLiveChatURL()),
+    getAutoTransferStatus: () => dispatch(walletAction.getAutoTransferStatus()),
   };
 };
 

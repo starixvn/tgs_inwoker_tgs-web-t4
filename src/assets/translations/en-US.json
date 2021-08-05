@@ -530,6 +530,9 @@
   },
 
   "transfer": {
+    "autoTransfer": "Auto Transfer",
+    "on": "ON",
+    "off": "OFF",
     "transferWallet": "Transfer Wallet",
     "quickTransfer": "Quick Transfer",
     "invalidAmount": "Invalid Amount",

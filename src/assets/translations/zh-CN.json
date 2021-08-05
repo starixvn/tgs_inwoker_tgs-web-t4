@@ -530,6 +530,9 @@
   },
 
   "transfer": {
+    "autoTransfer": "自动转帐",
+    "on": "开",
+    "off": "关",
     "transferWallet": "转账钱包",
     "quickTransfer": "快速转账",
     "invalidAmount": "金额有误",

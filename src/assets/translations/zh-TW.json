@@ -531,6 +531,9 @@
   },
 
   "transfer": {
+    "autoTransfer": "自動轉帳",
+    "on": "開",
+    "off": "關",
     "transferWallet": "轉賬錢包",
     "quickTransfer": "快速轉賬",
     "invalidAmount": "金額有誤",

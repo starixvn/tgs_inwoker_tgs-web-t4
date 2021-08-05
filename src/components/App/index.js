@@ -137,6 +137,7 @@ class App extends Component {
             this.props.getBalanceList();
             this.props.getMessageList(i18n.language, 0, 99);
             this.props.getBankCardList();
+            this.props.getAutoTransferStatus();
 
             // if (inbox.IsSuccess) {
             //   this.setState({ inbox: inbox.data });
@@ -376,6 +377,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(uiAction.getMarquee(language));
     },
     getLiveChatURL: () => dispatch(generalAction.getLiveChatURL()),
+    getAutoTransferStatus: () => dispatch(walletAction.getAutoTransferStatus()),
   };
 };
 

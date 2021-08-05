@@ -515,6 +515,9 @@
   },
 
   "transfer": {
+    "autoTransfer": "ออโต้เพย์",
+    "on": "เปิด",
+    "off": "ปิด",
     "transferWallet": "กระเปาเงินเลนเกม ",
     "quickTransfer": "โอนด่วน",
     "invalidAmount": "จำนวนเงินไม่ถูกต้อง",
