@@ -476,6 +476,7 @@ class Wap extends Component {
       this.props.getMarquee(i18n.language);
       this.props.getBrandCommunicationList();
       this.props.getLiveChatURL();
+      this.props.getAutoTransferStatus();
     }
 
     // this.props.getMobilePrefix();
@@ -531,6 +532,11 @@ class Wap extends Component {
         //   responseToken.data.token
         // );
         this.props.getBalanceList();
+        this.props.game.providerList
+          .filter((item) => item.status === 0 && item.transferwallet === true)
+          .map((a) => {
+            this.props.getGameBalance(a.abbreviation);
+          });
         this.props.getMessageList(i18n.language, 1, 99);
         this.props.getBankCardList();
 
@@ -586,8 +592,28 @@ class Wap extends Component {
         this.props.getMarquee(i18n.language);
         this.props.getBrandCommunicationList();
         this.props.getLiveChatURL();
-        this.props.getAutoTransferStatus();
       }
+    }
+    if (
+      preProps.game.providerList.length !==
+        this.props.game.providerList.length &&
+      this.props.account.token !== null
+    ) {
+      this.props.game.providerList
+        .filter((item) => item.status === 0 && item.transferwallet === true)
+        .map((a) => {
+          this.props.getGameBalance(a.abbreviation);
+        });
+    }
+    if (
+      preProps.account.token !== this.props.account.token &&
+      this.props.account.token !== null
+    ) {
+      this.props.game.providerList
+        .filter((item) => item.status === 0 && item.transferwallet === true)
+        .map((a) => {
+          this.props.getGameBalance(a.abbreviation);
+        });
     }
     if (
       preProps.general.isMaintenance !== this.props.general.isMaintenance &&
@@ -807,6 +833,7 @@ const mapStateToProps = (state) => {
   return {
     account: state.account,
     general: state.general,
+    game: state.game,
     screenWidth: state.ui.screenWidth,
     screenHeight: state.ui.screenHeight,
   };
@@ -833,6 +860,7 @@ const mapDispatchToProps = (dispatch) => {
     // getBankList: () => dispatch(walletAction.getBankList()),
     // getDepositChannel: () => dispatch(walletAction.getDepositChannel()),
     getBalanceList: (token) => dispatch(walletAction.getBalanceList()),
+    getGameBalance: (gpcode) => dispatch(walletAction.getGameBalance(gpcode)),
     // getIDCardNo: () => dispatch(accountAction.getIDCardNo()),
     getHomePageGameList: () => dispatch(gameAction.getHomePageGameList()),
     getSiteToken: () => dispatch(generalAction.getSiteToken()),

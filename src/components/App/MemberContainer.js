@@ -147,7 +147,14 @@ class MemberContainer extends Component {
         <BalanceContainer>
           <span>{i18n.t("web.header.mainAccount")}</span>
           <BalanceAmountLabel onClick={this.props.onhandleTransfer}>
-            {Common.formatNumberWithThousand(this.props.mainBalance)}
+            {Common.formatNumberWithThousand(
+              this.props.mainBalance +
+                this.props.game.providerList
+                  .filter(
+                    (item) => item.status === 0 && item.transferwallet === true
+                  )
+                  .reduce((a, v) => (a = a + v.balance), 0)
+            )}
           </BalanceAmountLabel>
           <span>{i18n.t("web.header.dollor")}</span>
           <RefreshBalance onClick={this.props.onhandleRefreshBalanceClick}>
@@ -184,6 +191,7 @@ const mapStateToProps = (state) => {
     // screenHeight: state.ui.screenHeight,
     mainBalance: state.wallet.mainBalance,
     account: state.account,
+    game: state.game,
   };
 };
 export default connect(mapStateToProps, null)(MemberContainer);
