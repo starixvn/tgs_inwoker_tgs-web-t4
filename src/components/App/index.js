@@ -68,6 +68,7 @@ class App extends Component {
     } else {
       this.props.getBrandCommunicationList();
       this.props.getMarquee(i18n.language);
+      this.props.getLiveChatURL();
     }
     // if (response.IsSuccess) {
     //   localStorage.setItem("client-token", response.data.token);
@@ -154,6 +155,7 @@ class App extends Component {
         this.props.getHomePageGameList();
         this.props.getBrandCommunicationList();
         this.props.getMarquee(i18n.language);
+        this.props.getLiveChatURL();
       }
     }
     if (
@@ -164,23 +166,13 @@ class App extends Component {
     }
   }
   GetSupportUrl = (userid, name, question) => {
-    var result = SupportService.GetLiveSupport(
-      userid,
-      name,
-      question,
-      document.URL,
-      document.referrer
-    );
-    if (result.IsSuccess) {
-      if (!csWindowTab || csWindowTab.closed) {
-        csWindowTab = Common.PopupCenter(result.data.online, "", 785, 750);
-      } else {
-        csWindowTab.focus();
-      }
+    var newURL = this.props.general.livechat
+      ? this.props.general.livechat.setting.url.replace("=name", "=" + name)
+      : "";
+
+    if (newURL.length) {
+      Common.PopupCenter(newURL, "", 785, 750);
     } else {
-      this.props.enqueueSnackbar(result.info, {
-        variant: "error",
-      });
     }
   };
 
@@ -383,6 +375,7 @@ const mapDispatchToProps = (dispatch) => {
     getMarquee: (language) => {
       dispatch(uiAction.getMarquee(language));
     },
+    getLiveChatURL: () => dispatch(generalAction.getLiveChatURL()),
   };
 };
 

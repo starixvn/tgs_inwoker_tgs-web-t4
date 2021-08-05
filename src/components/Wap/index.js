@@ -412,14 +412,14 @@ class Wap extends Component {
     loading: true,
   };
   GetSupportUrl = (userid, name, question) => {
-    var response = SupportService.GetLiveSupport(
-      userid,
-      name,
-      question,
-      document.URL,
-      document.referrer
-    );
-    window.open(response.data.online, "_blank");
+    var newURL = this.props.general.livechat
+      ? this.props.general.livechat.setting.url.replace("=name", "=" + name)
+      : "";
+
+    if (newURL.length) {
+      window.open(newURL, "_blank");
+    } else {
+    }
   };
   updateScreenSize = () => {
     var w = window.screen.width;
@@ -472,9 +472,12 @@ class Wap extends Component {
     // } else {
     if (this.props.general.token == "") {
       this.props.getSiteToken();
+    } else {
+      this.props.getMarquee(i18n.language);
+      this.props.getBrandCommunicationList();
+      this.props.getLiveChatURL();
     }
-    this.props.getMarquee(i18n.language);
-    this.props.getBrandCommunicationList();
+
     // this.props.getMobilePrefix();
     //this.props.getMarquee();
     // this.props.getBanner();
@@ -580,6 +583,9 @@ class Wap extends Component {
           }
         });
         this.props.getHomePageGameList();
+        this.props.getMarquee(i18n.language);
+        this.props.getBrandCommunicationList();
+        this.props.getLiveChatURL();
       }
     }
     if (
@@ -836,6 +842,7 @@ const mapDispatchToProps = (dispatch) => {
     getMarquee: (language) => {
       dispatch(uiAction.getMarquee(language));
     },
+    getLiveChatURL: () => dispatch(generalAction.getLiveChatURL()),
   };
 };
 
