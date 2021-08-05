@@ -138,7 +138,7 @@ const CSActualContent = styled.div`
 const QRCodeContainer = styled.div`
   min-height: 300px;
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: auto auto auto auto auto;
   padding: 30px;
 `;
 
@@ -148,8 +148,7 @@ const QRCodeHolder = styled.div`
 `;
 
 const QRCodeText = styled.div`
-  text-transform: uppercase;
-  padding: 10px 0px;
+  padding: 5px 0px;
   font-weight: bold;
   font-size: 20px;
 `;
@@ -177,6 +176,7 @@ const QRCodeTextContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0px 20px;
+  align-items: center;
 `;
 
 const QRCodeWrapper = styled.div`
@@ -193,6 +193,10 @@ const Overlay = styled.div`
   justify-content: center;
   align-items: center;
   font-weight: bold;
+`;
+
+const Icons = styled.img`
+  margin-bottom: 10px;
 `;
 const FloatPanel = (props) => {
   const [supportModal, setSupportModal] = useState(false);
@@ -277,22 +281,22 @@ const FloatPanel = (props) => {
             return (
               <QRCodeHolder>
                 {data.qrcodeurl ? (
-                  <QRCode value={data.qrcodeurl} bgColor={"#f6f8f7"} />
+                  <QRCodeTextContainer>
+                    <QRCode value={data.qrcodeurl} bgColor={"#f6f8f7"} />
+                    <QRCodeText>{data.type}</QRCodeText>
+                  </QRCodeTextContainer>
                 ) : (
-                  <QRCodeWrapper>
-                    <QRCode value="coming soon" bgColor={"#f6f8f7"} />
-                    <Overlay>{i18n.t("common.comingSoon")}</Overlay>
-                  </QRCodeWrapper>
+                  <QRCodeTextContainer>
+                    <Icons
+                      src={
+                        process.env.PUBLIC_URL +
+                        `/assets/images/icon/${data.type}.png`
+                      }
+                    />
+                    <div>ID: {data.appid}</div>
+                    <QRCodeText>{data.type}</QRCodeText>
+                  </QRCodeTextContainer>
                 )}
-                <QRCodeTextContainer>
-                  <QRCodeText>{data.type}</QRCodeText>{" "}
-                  <div>
-                    {i18n.t("common.username")}: {data.appid}
-                  </div>
-                  <div>
-                    {i18n.t("common.phoneNumber")}: {data.phone}
-                  </div>
-                </QRCodeTextContainer>
               </QRCodeHolder>
             );
           })}
