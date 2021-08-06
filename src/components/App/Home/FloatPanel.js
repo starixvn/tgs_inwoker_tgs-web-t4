@@ -252,15 +252,17 @@ const FloatPanel = (props) => {
   return (
     <div>
       <Container>
-        <SidePanel
-          onClick={() => {
-            performOpenCsModal();
-          }}
-        >
-          <Icon src={PanelUserPNG} alt="user-icon" />
-          <Text>{i18n.t("panel.cs")}</Text>
-        </SidePanel>
-        <Divider />
+        {props.general.livechat && (
+          <SidePanel
+            onClick={() => {
+              performOpenCsModal();
+            }}
+          >
+            <Icon src={PanelUserPNG} alt="user-icon" />
+            <Text>{i18n.t("panel.cs")}</Text>
+          </SidePanel>
+        )}
+        {props.general.livechat && <Divider />}
         <SidePanel
           onClick={() => {
             performOpenSupportModal();
