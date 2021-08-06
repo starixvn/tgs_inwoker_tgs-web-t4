@@ -476,7 +476,6 @@ class Wap extends Component {
       this.props.getMarquee(i18n.language);
       this.props.getBrandCommunicationList();
       this.props.getLiveChatURL();
-      this.props.getAutoTransferStatus();
     }
 
     // this.props.getMobilePrefix();
@@ -539,7 +538,7 @@ class Wap extends Component {
           });
         this.props.getMessageList(i18n.language, 1, 99);
         this.props.getBankCardList();
-
+        this.props.getAutoTransferStatus();
         // this.props.getIDCardNo();
         //this.props.getDepositChannel();
 
