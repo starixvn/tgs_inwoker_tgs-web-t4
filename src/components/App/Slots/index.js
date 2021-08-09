@@ -370,6 +370,7 @@ class Slots extends Component {
 
     const type = this.getType();
     this.state = {
+      favGame: [],
       firstLoad: true,
       filterGame: 0,
       keyword: "",
@@ -388,7 +389,21 @@ class Slots extends Component {
   language = null;
   componentDidMount() {
     this.getGameList();
+    this.getFav();
   }
+  getFav(type = this.state.type) {
+    var result = GameService.GetFavoriteGame(type);
+    result.then((response) => {
+      if (response.IsSuccess) {
+        var data = response.data;
+        this.setState({
+          ...this.state,
+          favGame: data,
+        });
+      }
+    });
+  }
+
   componentDidUpdate(prevProps, prevState) {
     if (
       prevState.type !== this.state.type ||
@@ -426,7 +441,7 @@ class Slots extends Component {
         ? GameTypeEnum.SLOT
         : this.props.match.url.indexOf("fish") >= 0
         ? GameTypeEnum.FISH
-        : GameTypeEnum.SLOT;
+        : GameTypeEnum.TABLEGAME;
     return type;
   }
   getGameList(
@@ -540,8 +555,16 @@ class Slots extends Component {
   //   }
   // };
   handleJoinGameClick = (gpcode, gpid) => {
+    const type =
+      this.props.match.url.indexOf("fish") >= 0
+        ? "fish"
+        : this.props.match.url.indexOf("slots") >= 0
+        ? "slots"
+        : "electron";
     if (this.props.token) {
-      this.props.history.push(`/${i18n.language}/slots/play/${gpcode}/${gpid}`);
+      this.props.history.push(
+        `/${i18n.language}/${type}/play/${gpcode}/${gpid}`
+      );
     } else {
       this.props.showLogin(true);
     }
