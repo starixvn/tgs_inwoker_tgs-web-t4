@@ -6,7 +6,7 @@ pipeline {
 	environment {
 		TAG = sh(script: "echo `date +%Y%m%d%H%M`", returnStdout: true).trim()
 		Registry = "registry.gitlab.com/rayprosoft/turnkey-gaming-system/"
-		Image = "lobby-t1"
+		Image = "lobby-t4"
 		gitlab_user_pwd = credentials('gitlab-user-pwd')
 		branch = "develop" 
 		DevComponents = "lobby-t4"
