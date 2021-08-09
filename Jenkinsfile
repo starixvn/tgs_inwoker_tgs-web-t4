@@ -2,7 +2,7 @@ def componentArray = [];
 def message = "";
 pipeline {
 	agent any
-	
+		
 	environment {
 		TAG = sh(script: "echo `date +%Y%m%d%H%M`", returnStdout: true).trim()
 		Registry = "registry.gitlab.com/rayprosoft/turnkey-gaming-system/"
@@ -22,12 +22,12 @@ pipeline {
                 script {
                     switch(env.GIT_BRANCH)
                     {
-                        case 'master':
+                        case ['master', 'origin/master']:
                             env.kube_ns = "prod";
 							env.k8s_config = 'stag-k8s-config';
 							componentArray = "${ProdComponents}".split(",") 	
                             break;
-                        case 'release/current':
+                        case ['release/current', 'origin/release/current']:
                             env.kube_ns = "staging";
 							env.k8s_config = 'stag-k8s-config';
 							componentArray = "${StagingComponents}".split(",") 

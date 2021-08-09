@@ -297,6 +297,16 @@ class App extends Component {
                     />
                     <Route
                       exact
+                      path={baseRouteUrl + "/electron/play/:type/:params"}
+                      component={SlotPlay}
+                    />
+                    <Route
+                      exact
+                      path={baseRouteUrl + "/fish/play/:type/:params"}
+                      component={SlotPlay}
+                    />
+                    <Route
+                      exact
                       path={baseRouteUrl + "/promotion"}
                       render={(props) => (
                         <Promotion token={this.props.account.token} />
