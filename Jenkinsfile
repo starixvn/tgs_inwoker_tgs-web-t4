@@ -3,6 +3,14 @@ def message = "";
 pipeline {
 	agent any
 	
+	triggers {
+        gitlab(
+            triggerOnPush: true,
+            triggerOnMergeRequest: true,
+            branchFilterType: 'All',
+            addVoteOnMergeRequest: true)
+    }
+	
 	environment {
 		TAG = sh(script: "echo `date +%Y%m%d%H%M`", returnStdout: true).trim()
 		Registry = "registry.gitlab.com/rayprosoft/turnkey-gaming-system/"
