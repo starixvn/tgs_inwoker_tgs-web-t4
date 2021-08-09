@@ -9,9 +9,7 @@ RUN apt-get update && \
 
 RUN npm install
 
-ARG BuildEnv
-
-RUN npm run build:${BuildEnv} 
+RUN npm run build
 
 FROM caddy:2.1.1-alpine
 COPY --from=build /src/caddy/Caddyfile /etc/caddy/Caddyfile

@@ -12,13 +12,16 @@ import Maintenance from "../../Share/Maintenance";
 import { withSnackbar } from "notistack";
 import i18n from "../../../utils/i18n";
 import config from "../../../config/config";
+
+import IconLeftArrowPNG from "../../../assets/images/left-arrow-thicc.png";
+import { AppHistory } from "../../../history/History";
 const Container = styled.div`
   width: 100%;
   background: url(${BGJPG});
   min-height: 800px;
 `;
 const InnerContainer = styled.div`
-  margin: 35px auto;
+  margin: 135px auto 35px auto;
   width: 1280px;
   height: 837px;
   overflow: hidden;
@@ -59,6 +62,8 @@ const GameFrameHeader = styled.div`
   height: 50px;
   margin: 0 0 10px 0;
   background-color: ${({ theme }) => theme.primary};
+  display: flex;
+  justify-content: space-between;
 `;
 const RefreshButton = styled.div`
   width: 48px;
@@ -71,6 +76,11 @@ const RefreshButton = styled.div`
     cursor: pointer;
   }
 `;
+const BackButton = styled(RefreshButton)`
+  background-image: url(${IconLeftArrowPNG});
+  background-size: 20px;
+`;
+
 const Spliter = styled.div`
   width: 1px;
   height: 38px;
@@ -137,6 +147,10 @@ class Play extends Component {
     this.myRef.current.src = "";
     this.DoJoinGame();
   };
+  handleGoBack = () => {
+    AppHistory.goBack();
+  };
+
   componentWillUpdate() {}
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.token == null && this.props.token != null) {
@@ -217,12 +231,19 @@ class Play extends Component {
               }
             })()}
             <GameFrameHeader>
-              <RefreshButton onClick={this.handleRefreshClick}></RefreshButton>
-              <Spliter></Spliter>
-              <GameName>{this.props.match.params.name}</GameName>
-              <StyleButton onClick={this.handleFullScreenClick}>
-                <ButtonLabel>{i18n.t("slot.fullscreen")}</ButtonLabel>
-              </StyleButton>
+              <div>
+                <BackButton onClick={this.handleGoBack}></BackButton>
+                <Spliter></Spliter>
+                <RefreshButton
+                  onClick={this.handleRefreshClick}
+                ></RefreshButton>
+                <Spliter></Spliter>
+                <GameName>{this.props.match.params.name}</GameName>
+                <StyleButton onClick={this.handleFullScreenClick}>
+                  <ButtonLabel>{i18n.t("slot.fullscreen")}</ButtonLabel>
+                </StyleButton>
+              </div>
+              <div></div>
             </GameFrameHeader>
             <GameFrame
               ref={this.myRef}

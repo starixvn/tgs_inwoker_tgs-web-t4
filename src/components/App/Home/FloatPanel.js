@@ -5,8 +5,8 @@ import { connect } from "react-redux";
 
 import { generalAction } from "@Inwoker/tgs-api";
 
-import PanelUserPNG from "../../../assets/images/panel-user.png";
-import PanelCSPNG from "../../../assets/images/panel-cs.png";
+import PanelUserPNG from "../../../assets/images/panel/01-3.png";
+import PanelCSPNG from "../../../assets/images/panel/02-3.png";
 
 import Help1PNG from "../../../assets/images/panel/icon-01.png";
 import Help2PNG from "../../../assets/images/panel/icon-02.png";
@@ -32,6 +32,13 @@ const Container = styled.div`
   border-radius: 8px;
   background: rgba(0, 0, 0, 0.75);
 `;
+const Icon = styled.img`
+  height: 45px;
+`;
+
+const Text = styled.div`
+  opacity: 0;
+`;
 
 const SidePanel = styled.div`
   width: 100px;
@@ -44,6 +51,16 @@ const SidePanel = styled.div`
 
   &:hover {
     cursor: pointer;
+
+    ${Icon} {
+      margin-top: -10px;
+      transition: margin-top 0.25s;
+    }
+
+    ${Text} {
+      opacity: 1;
+      transition: opacity 1s;
+    }
   }
 `;
 
@@ -52,10 +69,6 @@ const Divider = styled.div`
   background: white;
   width: 50px;
   opacity: 0.5;
-`;
-
-const Icon = styled.img`
-  height: 50px;
 `;
 
 const CustomModal = styled(Dialog)`
@@ -131,14 +144,11 @@ const QRCodeContainer = styled.div`
 
 const QRCodeHolder = styled.div`
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  padding: 20px;
 `;
 
 const QRCodeText = styled.div`
-  text-transform: uppercase;
-  padding: 10px 0px;
+  padding: 5px 0px;
   font-weight: bold;
   font-size: 20px;
 `;
@@ -162,10 +172,35 @@ const IconHolder = styled.img`
   height: auto;
   width: 75px;
 `;
+const QRCodeTextContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 0px 20px;
+  align-items: center;
+`;
+
+const QRCodeWrapper = styled.div`
+  position: relative;
+`;
+const Overlay = styled.div`
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  background: rgba(255, 255, 255, 0.9);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+`;
+
+const Icons = styled.img`
+  margin-bottom: 10px;
+`;
 const FloatPanel = (props) => {
   const [supportModal, setSupportModal] = useState(false);
   const [csModal, setCsModal] = useState(false);
-  const [brandsCommunication, setBrandCommunication] = useState(null);
 
   const performOpenSupportModal = () => {
     setSupportModal(true);
@@ -181,41 +216,60 @@ const FloatPanel = (props) => {
     setCsModal(false);
   };
 
-  useEffect(() => {
-    props.getBrandCommunicationList().then((result) => {
-      if (result.IsSuccess) {
-        setBrandCommunication(result.data);
-      }
-    });
-  }, []);
-
   //TODO: Pending CS
   const buttons = [
-    { icon: Help1PNG, name: i18n.t("panel.liveChatOptionFund"), click: "" },
-    { icon: Help2PNG, name: i18n.t("panel.liveChatOptionBall"), click: "" },
-    { icon: Help3PNG, name: i18n.t("panel.liveChatOptionLive"), click: "" },
-    { icon: Help4PNG, name: i18n.t("panel.liveChatOptionLottery"), click: "" },
-    { icon: Help5PNG, name: i18n.t("panel.liveChatOptionRegister"), click: "" },
-    { icon: Help6PNG, name: i18n.t("panel.liveChatOptionSlot"), click: "" },
+    {
+      icon: Help1PNG,
+      name: i18n.t("panel.liveChatOptionFund"),
+      click: props.onhandleShowCSClick,
+    },
+    {
+      icon: Help2PNG,
+      name: i18n.t("panel.liveChatOptionBall"),
+      click: props.onhandleShowCSClick,
+    },
+    {
+      icon: Help3PNG,
+      name: i18n.t("panel.liveChatOptionLive"),
+      click: props.onhandleShowCSClick,
+    },
+    {
+      icon: Help4PNG,
+      name: i18n.t("panel.liveChatOptionLottery"),
+      click: props.onhandleShowCSClick,
+    },
+    {
+      icon: Help5PNG,
+      name: i18n.t("panel.liveChatOptionRegister"),
+      click: props.onhandleShowCSClick,
+    },
+    {
+      icon: Help6PNG,
+      name: i18n.t("panel.liveChatOptionSlot"),
+      click: props.onhandleShowCSClick,
+    },
   ];
   return (
     <div>
       <Container>
-        <SidePanel
-          onClick={() => {
-            performOpenCsModal();
-          }}
-        >
-          <Icon src={PanelUserPNG} alt="user-icon" />
-        </SidePanel>
-        <Divider />
+        {props.general.livechat && (
+          <SidePanel
+            onClick={() => {
+              performOpenCsModal();
+            }}
+          >
+            <Icon src={PanelUserPNG} alt="user-icon" />
+            <Text>{i18n.t("panel.cs")}</Text>
+          </SidePanel>
+        )}
+        {props.general.livechat && <Divider />}
         <SidePanel
           onClick={() => {
             performOpenSupportModal();
           }}
         >
           <Icon src={PanelCSPNG} alt="user-cs" />
-          <div>{i18n.t("panel.im")}</div>
+          <Text>{i18n.t("panel.im")}</Text>
         </SidePanel>
       </Container>
 
@@ -225,16 +279,29 @@ const FloatPanel = (props) => {
           <CloseButton onClick={performCloseSupportModal}>✖</CloseButton>
         </DialogTitle>
         <QRCodeContainer>
-          {brandsCommunication
-            ? brandsCommunication.map((data, index) => {
-                return (
-                  <QRCodeHolder>
-                    <QRCode value={data.qrcodeurl} bgColor={"#cccccc"} />
+          {props.general.brandsSupport.map((data, index) => {
+            return (
+              <QRCodeHolder>
+                {data.qrcodeurl ? (
+                  <QRCodeTextContainer>
+                    <QRCode value={data.qrcodeurl} bgColor={"#f6f8f7"} />
                     <QRCodeText>{data.type}</QRCodeText>
-                  </QRCodeHolder>
-                );
-              })
-            : ""}
+                  </QRCodeTextContainer>
+                ) : (
+                  <QRCodeTextContainer>
+                    <Icons
+                      src={
+                        process.env.PUBLIC_URL +
+                        `/assets/images/icon/${data.type}.png`
+                      }
+                    />
+                    <div>ID: {data.appid}</div>
+                    <QRCodeText>{data.type}</QRCodeText>
+                  </QRCodeTextContainer>
+                )}
+              </QRCodeHolder>
+            );
+          })}
         </QRCodeContainer>
       </CustomModal>
 
@@ -266,12 +333,11 @@ const FloatPanel = (props) => {
   );
 };
 const mapDispatchToProps = (dispatch) => {
-  return {
-    getBrandCommunicationList: (language) =>
-      dispatch(generalAction.getBrandCommunication()),
-  };
+  return {};
 };
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    general: state.general,
+  };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(FloatPanel);

@@ -412,14 +412,14 @@ class Wap extends Component {
     loading: true,
   };
   GetSupportUrl = (userid, name, question) => {
-    var response = SupportService.GetLiveSupport(
-      userid,
-      name,
-      question,
-      document.URL,
-      document.referrer
-    );
-    window.open(response.data.online, "_blank");
+    var newURL = this.props.general.livechat
+      ? this.props.general.livechat.setting.url.replace("=name", "=" + name)
+      : "";
+
+    if (newURL.length) {
+      window.open(newURL, "_blank");
+    } else {
+    }
   };
   updateScreenSize = () => {
     var w = window.screen.width;
@@ -472,7 +472,12 @@ class Wap extends Component {
     // } else {
     if (this.props.general.token == "") {
       this.props.getSiteToken();
+    } else {
+      this.props.getMarquee(i18n.language);
+      this.props.getBrandCommunicationList();
+      this.props.getLiveChatURL();
     }
+
     // this.props.getMobilePrefix();
     //this.props.getMarquee();
     // this.props.getBanner();
@@ -526,9 +531,14 @@ class Wap extends Component {
         //   responseToken.data.token
         // );
         this.props.getBalanceList();
+        this.props.game.providerList
+          .filter((item) => item.status === 0 && item.transferwallet === true)
+          .map((a) => {
+            this.props.getGameBalance(a.abbreviation);
+          });
         this.props.getMessageList(i18n.language, 1, 99);
         this.props.getBankCardList();
-
+        this.props.getAutoTransferStatus();
         // this.props.getIDCardNo();
         //this.props.getDepositChannel();
 
@@ -578,7 +588,31 @@ class Wap extends Component {
           }
         });
         this.props.getHomePageGameList();
+        this.props.getMarquee(i18n.language);
+        this.props.getBrandCommunicationList();
+        this.props.getLiveChatURL();
       }
+    }
+    if (
+      preProps.game.providerList.length !==
+        this.props.game.providerList.length &&
+      this.props.account.token !== null
+    ) {
+      this.props.game.providerList
+        .filter((item) => item.status === 0 && item.transferwallet === true)
+        .map((a) => {
+          this.props.getGameBalance(a.abbreviation);
+        });
+    }
+    if (
+      preProps.account.token !== this.props.account.token &&
+      this.props.account.token !== null
+    ) {
+      this.props.game.providerList
+        .filter((item) => item.status === 0 && item.transferwallet === true)
+        .map((a) => {
+          this.props.getGameBalance(a.abbreviation);
+        });
     }
     if (
       preProps.general.isMaintenance !== this.props.general.isMaintenance &&
@@ -798,6 +832,7 @@ const mapStateToProps = (state) => {
   return {
     account: state.account,
     general: state.general,
+    game: state.game,
     screenWidth: state.ui.screenWidth,
     screenHeight: state.ui.screenHeight,
   };
@@ -824,11 +859,19 @@ const mapDispatchToProps = (dispatch) => {
     // getBankList: () => dispatch(walletAction.getBankList()),
     // getDepositChannel: () => dispatch(walletAction.getDepositChannel()),
     getBalanceList: (token) => dispatch(walletAction.getBalanceList()),
+    getGameBalance: (gpcode) => dispatch(walletAction.getGameBalance(gpcode)),
     // getIDCardNo: () => dispatch(accountAction.getIDCardNo()),
     getHomePageGameList: () => dispatch(gameAction.getHomePageGameList()),
     getSiteToken: () => dispatch(generalAction.getSiteToken()),
     getMessageList: (language, pages, limit) =>
       dispatch(inboxAction.getMessages(language, pages, limit, true, true)),
+    getBrandCommunicationList: (language) =>
+      dispatch(generalAction.getBrandCommunication()),
+    getMarquee: (language) => {
+      dispatch(uiAction.getMarquee(language));
+    },
+    getLiveChatURL: () => dispatch(generalAction.getLiveChatURL()),
+    getAutoTransferStatus: () => dispatch(walletAction.getAutoTransferStatus()),
   };
 };
 

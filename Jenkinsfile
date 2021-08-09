@@ -1,33 +1,86 @@
+def componentArray = [];
+def message = "";
 pipeline {
 	agent any
 	
 	environment {
-	    ENV = "dev"
-	    TAG = sh(script: "echo dev-`date +%Y%m%d%H%M`", returnStdout: true).trim()
+		TAG = sh(script: "echo `date +%Y%m%d%H%M`", returnStdout: true).trim()
 		Registry = "registry.gitlab.com/rayprosoft/turnkey-gaming-system/"
-		Component = "fe-lobby-gpi-t4"
-		BuildEnv="staging"
+		Image = "lobby-t1"
 		gitlab_user_pwd = credentials('gitlab-user-pwd')
+		branch = "develop" 
+		DevComponents = "lobby-t4"
+		StagingComponents = "lobby-gpi-t4"
+		ProdComponents = "lobby-gpi-t4"
 	}
 	
-	stages {		
+	stages {		    	
+		stage('Prepare Env') {
+            steps {
+			    sh "sudo docker login registry.gitlab.com -u ${gitlab_user_pwd_USR} -p ${gitlab_user_pwd_PSW}"
+			    sh "echo 'Branch: ${env.GIT_BRANCH}'";
+                script {
+                    switch(env.GIT_BRANCH)
+                    {
+                        case 'master':
+                            env.kube_ns = "prod";
+							env.k8s_config = 'stag-k8s-config';
+							componentArray = "${ProdComponents}".split(",") 	
+                            break;
+                        case 'release/current':
+                            env.kube_ns = "staging";
+							env.k8s_config = 'stag-k8s-config';
+							componentArray = "${StagingComponents}".split(",") 
+                            break;
+                        default:
+                            env.kube_ns = "dev";
+							env.k8s_config = 'k8s-kube-config' 
+							componentArray = "${DevComponents}".split(",")
+                            break;
+                    }
+					TAG = env.kube_ns + '-' + TAG
+					message += "\nBranch:$GIT_BRANCH" 
+					message += "\nImage:${Image}"
+					message += "\nTag:${TAG}"
+					message += "\nEnv:$env.kube_ns"
+                }
+
+				sh "echo 'env: $env.kube_ns'"
+				sh "echo 'tag: ${TAG}'"
+            }
+        }
+		
+		stage('Docker Build') {   
+			steps {	  			    
+				sh "sudo docker build -t ${Registry}${Image}:${TAG} ."
+				sh "sudo docker build -t ${Registry}${Image}:$env.kube_ns ."
+			}
+		}	
+		
+		stage('Docker Push') {   
+			steps {	  
+				sh "sudo docker push ${Registry}${Image}:${TAG}"
+				sh "sudo docker push ${Registry}${Image}:$env.kube_ns"
+			}
+		}	
+		
 		stage('Deployment') {   
 			steps {	  
-			    sh "sudo docker login registry.gitlab.com -u ${gitlab_user_pwd_USR} -p ${gitlab_user_pwd_PSW}"
-				sh "sudo docker build --build-arg BuildEnv=${BuildEnv} -t ${Registry}${Component}:${TAG} ."
-				sh "sudo docker build --build-arg BuildEnv=${BuildEnv} -t ${Registry}${Component}:${ENV} ."
-				sh "sudo docker push ${Registry}${Component}:${TAG}"
-				sh "sudo docker push ${Registry}${Component}:${ENV}"
-							
-				withKubeConfig([credentialsId: 'k8s-kube-config']) {
-					sh "kubectl set image deployment/${Component} ${Component}=${Registry}${Component}:${TAG} --record -n ${ENV}"
+                script {			
+					withKubeConfig([credentialsId: env.k8s_config]) {
+					    message += "\nComponent:"
+						for (i = 0;i < componentArray.length; i++) {
+							message += "\n    ${componentArray[i]}"
+						    sh "kubectl set image deployment/${componentArray[i]} ${componentArray[i]}=${Registry}${Image}:${TAG} --record -n $env.kube_ns"
+						}
+					}
 				}
 			}
 		}	
 	}
 	 post {
         success {
-             sendTelegram("Pipeline: ${currentBuild.fullDisplayName} OK!\n${currentBuild.getBuildCauses()[0].shortDescription}\n")
+             sendTelegram("Pipeline: ${currentBuild.fullDisplayName} OK! ${message} \n${currentBuild.getBuildCauses()[0].shortDescription}\n")
         }
         failure {
             sendTelegram("<b>Failed Pipeline:</b> ${currentBuild.fullDisplayName} Something is wrong with ${env.BUILD_URL}/console\n${currentBuild.getBuildCauses()[0].shortDescription}\n")

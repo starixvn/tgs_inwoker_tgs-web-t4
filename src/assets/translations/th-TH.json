@@ -308,7 +308,7 @@
           "welcomeBack": "ยินดีตอนรับ",
           "pleaseLogin": "สวัสดีผู้ใช้ที่รัก กรุณาเข้าสู่ระบบก่อน...",
           "profile": "ข้อมูลส่วนตัว",
-          "mainAccount": "กระเปาเงินหลัก",
+          "mainAccount": "ยอดเงินคงเหลือ",
           "loginRegister": "เข้าสู่ระบบ/ลงทะเบียน"
         }
       },
@@ -515,6 +515,9 @@
   },
 
   "transfer": {
+    "autoTransfer": "ออโต้เพย์",
+    "on": "เปิด",
+    "off": "ปิด",
     "transferWallet": "กระเปาเงินเลนเกม ",
     "quickTransfer": "โอนด่วน",
     "invalidAmount": "จำนวนเงินไม่ถูกต้อง",
@@ -620,7 +623,7 @@
       "addBookmark": "เพิ่มในรายการโปรด",
       "transfer": "โอน",
       "deposit": "ฝาก",
-      "mainAccount": "กระเปาเงินหลัก:",
+      "mainAccount": "ยอดเงินคงเหลือ:",
       "dollor": "元",
       "logout": "ออกจากระบบ",
       "welcomBack": "ยินดีตอนรับ"
@@ -745,16 +748,17 @@
   "BankTransfer": "การโอนเงินผ่านธนาคาร",
   "CustomBank": "ธนาคารที่กำหนดเอง",
   "VR": {
-    "lottery": "หวย VR",
-    "desc": "แหล่งรางวัล VR อยู่ในตำแหน่งผู้นำของอุตสาหกรรมมาโดยตลอดด้วย 'ความยุติธรรม ความปลอดภัย ความเร็ว และความแม่นยำ' มีระบบปัญญาประดิษฐ์ครบวงจร ความหลากหลายของสีหลักแบ่งออกเป็น 'สีวิดีโอ VR' เป็นหลัก และ 'หวยแบรนด์ VR' รอเลย นอกจากนี้ยังพัฒนาเกมซีรีส์ 'VR อิเล็กทรอนิกส์' อย่างแข็งขัน โดยมุ่งมั่นที่จะให้ลูกค้ามีทางเลือกที่หลากหลายมากขึ้น VR จะสร้างความก้าวหน้าอย่างต่อเนื่อง แนะนำสีใหม่ๆ ให้กับสาธารณชน และสร้างสภาพแวดล้อมความบันเทิงที่ครอบคลุม "
+    "lottery": "VR",
+    "desc": "VR Lottery has always been in the leading position in the industry with \"fairness, safety, fast and accuracy\", and has an all-round system of artificial intelligence. We have all kinds of mainstream lottery here, mainly divided into \"VR Live streaming lottery\" and \"VR lottery\". We are also developing the \"VR Electronic\" series of games, determined to give customers more diversified choices.    VR will continue to create and progress, in order to introduce more new kind lottery for the public, and create an all-round entertainment environment."
   },
   "KY": {
-    "chess": "开元棋牌",
+    "chess": "KaiYuan",
     "desc": "คว้าตัววัว ตัววัว ตัวผู้ ตัวผู้ มังกร และเสือ แล้วคุณสามารถเลือกหมากรุกและไพ่ได้หลากหลาย! หมากรุกและไพ่แสดงความคิดของคุณ ความบันเทิงในการแข่งขัน เผาสมอง พบปะเพื่อนฝูง และแข่งขัน เกมเปลี่ยนชีวิตคุณ",
-    "BankerNiuNiu": "คว้า Zhuang Niu Niu",
-    "GoldenFlower": "金花",
-    "The21Point": "21点",
-    "SanGong": "ซานกง"
+    "BankerNiuNiu": "Niu-Niu",
+    "GoldenFlower": "Gloden Flower",
+    "The21Point": "The 21 Point",
+    "SanGong": "San-Gong",
+    "fish": "KY"
   },
   "sports": {
     "desc": "PG นำเสนอรูปแบบการเล่นที่แปลกใหม่และหลากหลายและการถ่ายทอดเหตุการณ์ที่อัตราต่อรองสูง เช่นเดียวกับการใช้อุปกรณ์ต่างๆ ทุกที่ทุกเวลา ช่วยให้คุณวางเดิมพันได้อย่างง่ายดาย รวดเร็ว และปลอดภัย บวกกับความมั่งคั่งของ การพนันกีฬารวมถึงฟุตบอล บาสเก็ตบอล เบสบอล เทนนิส อเมริกันฟุตบอล อีสปอร์ต ฯลฯ เพื่อตอบสนองความต้องการของผู้รักกีฬาทุกคน!"
@@ -773,49 +777,51 @@
     "platform": "เทคโนโลยีที่ยอดเยี่ยมที่เป็นผู้นำตลาด พัฒนาชุดแอปพลิเคชันเทอร์มินัลอย่างอิสระ ช่วยให้คุณเพลิดเพลินกับเว็บ, H5 และ iOS, แอพ Android ดั้งเดิม ช่วยให้คุณเดิมพันได้ทุกที่ทุกเวลา! บริการลูกค้าออนไลน์ 7x24 ให้บริการที่ใกล้ชิดที่สุด คุณภาพดีที่สุด"
   },
   "AG": {
-    "name": "AG真人",
-    "live": "AG真人"
+    "name": "Asia Gaming",
+    "live": "Asia Gaming"
   },
   "BG": {
-    "name": "บีจี คนจริง",
-    "live": "BG บุคคลจริง"
+    "name": "Big Gaming",
+    "live": "Big Gaming",
+    "fish":"Big Gaming"
   },
   "SG": {
-    "name": "เซ็กซี่ตัวจริง",
-    "live": "เซ็กซี่จริง"
+    "name": "Sexy Gaming",
+    "live": "Sexy Gaming"
   },
   "SW": {
-    "live": "SW คนจริง",
-    "slots": "SW สล็อตแมชชีน",
-    "electron": "SW อิเล็กทรอนิกส์"
+    "live": "Skywind",
+    "slots": "Skywind",
+    "electron": "Skywind"
   },
   "SBO": {
-    "sports": "เอสบีโอ สปอร์ต"
+    "sports": "SBO"
   },
   "IMES": {
-    "sports": "IM e-sports"
+    "sports": "IM"
   },
   "SABA": {
-    "sports": "กีฬาซาบาห์"
+    "sports": "SABA"
   },
   "HABA": {
-    "slots": "HABANERO",
-    "electron": "HABANERO"
+    "slots": "Habanero",
+    "electron": "Habanero",
+    "fish": "HABA"
   },
   "JDB": {
     "slots": "JDB",
-    "fish": "ประมงเจดีบี"
+    "fish": "JDB"
   },
   "PP": {
-    "slots": "สล็อตแมชชีน PP",
-    "electron": "PP อิเล็กตรอน"
+    "slots": "Pragmatic Play",
+    "electron": "Pragmatic Play"
   },
   "EVO": {
-    "live": "EVO REAL",
-    "slots": "EVO Electronics"
+    "live": "Evolution",
+    "slots": "Evolution"
   },
   "AB": {
-    "live": "Allbet ตัวจริง"
+    "live": "Allbet"
   },
   "RT": {
     "slots": "RedTiger"

@@ -39,11 +39,12 @@ const Container = styled.div`
   min-height: 770px;
   padding: 70px 0px;
   position: relative;
-  background: url(${(props) =>
-      process.env.PUBLIC_URL +
-      `/assets/images/pcGamePage/slots/background-` +
-      Common.getCDNLanguagePrefix() +
-      `.jpg`})
+  background: url(${process.env.PUBLIC_URL +
+    `/assets/images/pcGamePage/slots`}${(props) => {
+      return props.type === GameTypeEnum.FISH
+        ? "/fishbg-black.jpg"
+        : `/background-` + Common.getCDNLanguagePrefix() + `.jpg`;
+    }})
     no-repeat center top;
   background-color: #171b36;
 `;
@@ -423,7 +424,9 @@ class Slots extends Component {
         ? GameTypeEnum.TABLEGAME
         : this.props.match.url.indexOf("slots") >= 0
         ? GameTypeEnum.SLOT
-        : GameTypeEnum.TIGERSLOT;
+        : this.props.match.url.indexOf("fish") >= 0
+        ? GameTypeEnum.FISH
+        : GameTypeEnum.SLOT;
     return type;
   }
   getGameList(
@@ -635,11 +638,11 @@ class Slots extends Component {
         .map((el, i) => (
           <ItemContainer
             key={i}
-            img={`${config.sourceUrl}${el.gpcode.toUpperCase()}${
-              this.state.type === GameTypeEnum.FISH
-                ? `/${i18n.language}`
-                : `/${Common.getCDNLanguagePrefix()}`
-            }/${el.code}.jpg`}
+            img={`${
+              config.sourceUrl
+            }${el.gpcode.toUpperCase()}/${Common.getCDNLanguagePrefix()}/${
+              el.code
+            }.jpg`}
           >
             <GameDesc>
               <GameProvider>{el.gpcode}</GameProvider>
@@ -660,8 +663,8 @@ class Slots extends Component {
     }
 
     return (
-      <Container>
-        <InnerWrap>
+      <Container type={this.state.type}>
+        <InnerWrap type={this.state.type}>
           <GameTabContainer>
             <GameTabAll
               active={this.state.platform == ""}

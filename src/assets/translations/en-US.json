@@ -317,7 +317,7 @@
           "welcomeBack": "Welcome back, ",
           "pleaseLogin": "Please login...",
           "profile": "PROFILE",
-          "mainAccount": "Main Account",
+          "mainAccount": "Balance",
           "loginRegister": "Login/Reg"
         }
       },
@@ -453,10 +453,10 @@
     "withdrawalDetails": "Withdrawal",
     "depositDetails": "Deposit",
     "bettingDetails": "Bet History",
+    "gamename": "Game Name",
     "rebateDetails": "Rebate",
     "platform": "Platform",
     "date": "Date",
-    "gamename": "Game Name",
     "startDate": "Start Date",
     "endDate": "End Date",
     "today": "Today",
@@ -530,6 +530,9 @@
   },
 
   "transfer": {
+    "autoTransfer": "Auto Transfer",
+    "on": "ON",
+    "off": "OFF",
     "transferWallet": "Transfer Wallet",
     "quickTransfer": "Quick Transfer",
     "invalidAmount": "Invalid Amount",
@@ -635,7 +638,7 @@
       "addBookmark": "Bookmark",
       "transfer": "Transfer",
       "deposit": "Deposit",
-      "mainAccount": "Main Wallet：",
+      "mainAccount": "Balance：",
       "dollor": "",
       "logout": "Logout",
       "welcomBack": "Welcome back, "
@@ -769,7 +772,8 @@
     "BankerNiuNiu": "Niu-Niu",
     "GoldenFlower": "Gloden Flower",
     "The21Point": "The 21 Point",
-    "SanGong": "San-Gong"
+    "SanGong": "San-Gong",
+    "fish": "KY"
   },
   "sports": {
     "desc": "Pega Gaming provide innovative, variety of bet type and competitive odds for live matches.  Easy betting with quick, and secure way through any kind of devices anywhere, anytime!  In addition, we support all kinds of sport events, including soccer, basketball, baseball, tennis, football, and E-sports to fulfill your needs!"
@@ -793,7 +797,8 @@
   },
   "BG": {
     "name": "Big Gaming",
-    "live": "Big Gaming"
+    "live": "Big Gaming",
+    "fish":"Big Gaming"
   },
   "SG": {
     "name": "Sexy Gaming",
@@ -815,7 +820,8 @@
   },
   "HABA": {
     "slots": "Habanero",
-    "electron": "Habanero"
+    "electron": "Habanero",
+    "fish": "HABA"
   },
   "JDB": {
     "slots": "JDB",

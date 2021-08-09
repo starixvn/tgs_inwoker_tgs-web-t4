@@ -380,7 +380,11 @@ class GuestContainer extends Component {
       this.props.getMessageList(i18n.language, 0, 99);
       this.props.getBankCardList();
       this.props.getBalanceList();
-
+      this.props.game.providerList
+        .filter((item) => item.status === 0 && item.transferwallet === true)
+        .map((a) => {
+          this.props.getGameBalance(a.abbreviation);
+        });
       // this.props.getIDCardNo();
       // this.props.getInviteLink();
       // this.props.getDepositChannel();
@@ -500,6 +504,7 @@ const mapDispatchToProps = (dispatch) => {
 
     getBankCardList: () => dispatch(walletAction.getBankCardList()),
     getBalanceList: () => dispatch(walletAction.getBalanceList()),
+    getGameBalance: (gpcode) => dispatch(walletAction.getGameBalance(gpcode)),
     getHomePageGameList: () => dispatch(gameAction.getHomePageGameList()),
 
     getIDCardNo: () => dispatch(accountAction.getIDCardNo()),
@@ -514,6 +519,7 @@ const mapDispatchToProps = (dispatch) => {
 const mapStateToProps = (state) => {
   return {
     ui: state.ui,
+    game: state.game,
   };
 };
 

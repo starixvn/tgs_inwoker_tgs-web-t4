@@ -65,6 +65,10 @@ class App extends Component {
   async componentDidMount() {
     if (this.props.general.token == "") {
       this.props.getSiteToken();
+    } else {
+      this.props.getBrandCommunicationList();
+      this.props.getMarquee(i18n.language);
+      this.props.getLiveChatURL();
     }
     // if (response.IsSuccess) {
     //   localStorage.setItem("client-token", response.data.token);
@@ -133,6 +137,7 @@ class App extends Component {
             this.props.getBalanceList();
             this.props.getMessageList(i18n.language, 0, 99);
             this.props.getBankCardList();
+            this.props.getAutoTransferStatus();
 
             // if (inbox.IsSuccess) {
             //   this.setState({ inbox: inbox.data });
@@ -149,7 +154,21 @@ class App extends Component {
           }
         });
         this.props.getHomePageGameList();
+        this.props.getBrandCommunicationList();
+        this.props.getMarquee(i18n.language);
+        this.props.getLiveChatURL();
       }
+    }
+    if (
+      preProps.game.providerList.length !==
+        this.props.game.providerList.length &&
+      this.props.account.token !== null
+    ) {
+      this.props.game.providerList
+        .filter((item) => item.status === 0 && item.transferwallet === true)
+        .map((a) => {
+          this.props.getGameBalance(a.abbreviation);
+        });
     }
     if (
       preProps.general.isMaintenance !== this.props.general.isMaintenance &&
@@ -159,23 +178,13 @@ class App extends Component {
     }
   }
   GetSupportUrl = (userid, name, question) => {
-    var result = SupportService.GetLiveSupport(
-      userid,
-      name,
-      question,
-      document.URL,
-      document.referrer
-    );
-    if (result.IsSuccess) {
-      if (!csWindowTab || csWindowTab.closed) {
-        csWindowTab = Common.PopupCenter(result.data.online, "", 785, 750);
-      } else {
-        csWindowTab.focus();
-      }
+    var newURL = this.props.general.livechat
+      ? this.props.general.livechat.setting.url.replace("=name", "=" + name)
+      : "";
+
+    if (newURL.length) {
+      Common.PopupCenter(newURL, "", 785, 750);
     } else {
-      this.props.enqueueSnackbar(result.info, {
-        variant: "error",
-      });
     }
   };
 
@@ -275,7 +284,7 @@ class App extends Component {
                     <Route
                       exact
                       path={baseRouteUrl + "/fish/:platform?"}
-                      component={Fishing}
+                      component={Slots}
                     />
                     <Route
                       exact
@@ -352,6 +361,7 @@ const mapStateToProps = (state) => {
   return {
     account: state.account,
     general: state.general,
+    game: state.game,
   };
 };
 
@@ -362,11 +372,11 @@ const mapDispatchToProps = (dispatch) => {
     },
 
     checkTokenIsValid: () => dispatch(accountAction.checkTokenIsValid()),
-    getMarquee: () => dispatch(uiAction.getMarquee()),
 
     getBankCardList: () => dispatch(walletAction.getBankCardList()),
 
     getBalanceList: (token) => dispatch(walletAction.getBalanceList()),
+    getGameBalance: (gpcode) => dispatch(walletAction.getGameBalance(gpcode)),
     getAccountInfo: () => dispatch(accountAction.getAccountInfo()),
     getHomePageGameList: () => dispatch(gameAction.getHomePageGameList()),
 
@@ -374,6 +384,13 @@ const mapDispatchToProps = (dispatch) => {
 
     getMessageList: (language, pages, limit) =>
       dispatch(inboxAction.getMessages(language, pages, limit, true, true)),
+    getBrandCommunicationList: (language) =>
+      dispatch(generalAction.getBrandCommunication()),
+    getMarquee: (language) => {
+      dispatch(uiAction.getMarquee(language));
+    },
+    getLiveChatURL: () => dispatch(generalAction.getLiveChatURL()),
+    getAutoTransferStatus: () => dispatch(walletAction.getAutoTransferStatus()),
   };
 };
 
