@@ -773,7 +773,8 @@
     "BankerNiuNiu": "搶莊牛牛",
     "GoldenFlower": "炸金花",
     "The21Point": "21點",
-    "SanGong": "三公"
+    "SanGong": "三公",
+    "fish": "KY捕鱼"
   },
   "sports": {
     "desc": "PG 包網提供您創新且多樣化的玩法和高賠率的賽事轉播，與隨時隨地使用各式設備，讓您能輕鬆、快速、且安全下注，再加上豐富的體育賽事投注包括足球、籃球、棒球、網球、美式足球、電競等，以滿足各項的體育競技熱愛者的需求！"
@@ -797,7 +798,8 @@
   },
   "BG": {
     "name": "BG真人",
-    "live": "BG真人"
+    "live": "BG真人",
+    "fish": "BG捕鱼"
   },
   "SG": {
     "name": "Sexy真人",
@@ -819,7 +821,8 @@
   },
   "HABA": {
     "slots": "HABANERO",
-    "electron": "HABANERO"
+    "electron": "HABANERO",
+    "fish": "HABANERO"
   },
   "JDB": {
     "slots": "JDB",

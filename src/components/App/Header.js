@@ -580,11 +580,7 @@ class Header extends Component {
           );
         }
       } else {
-        if (gameType == GameTypeEnum.FISH) {
-          this.props.history.push(`/${i18n.language}/fish`);
-        } else {
-          this.props.history.push(`/${i18n.language}/${path}/${gameCode}`);
-        }
+        this.props.history.push(`/${i18n.language}/${path}/${gameCode}`);
       }
     } else {
       if (!this.props.account.token) {
