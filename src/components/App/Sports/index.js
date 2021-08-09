@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import styled, { css, keyframes } from "styled-components";
 import { withRouter } from "react-router-dom";
 
-import { SHOW_LOGIN, GameTypeEnum } from "@Inwoker/tgs-api";
+import { SHOW_LOGIN, GameTypeEnum, GameEnum } from "@Inwoker/tgs-api";
 import i18n from "../../../utils/i18n";
 import { Grid, Container as MContainer } from "@material-ui/core";
 
@@ -214,7 +214,14 @@ class Sports extends Component {
       this.props.showLogin(true);
     } else {
       this.props.history.push(
-        "/" + i18n.language + "/sports/play/" + params + "/" + type
+        "/" +
+          i18n.language +
+          "/sports/play/" +
+          params +
+          "/" +
+          (params === GameEnum.IMES
+            ? GameTypeEnum.ESPORTS
+            : GameTypeEnum.SPORTS)
       );
     }
   };

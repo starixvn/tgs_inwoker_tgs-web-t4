@@ -174,15 +174,11 @@ const EightButton = styled.div`
 `;
 
 const TheIconMenuButton = styled(Grid)`
-  cursor: pointer;
   width: 175px;
   height: 175px;
   display: inline-flex;
 
   :hover {
-    ${GradientText} {
-      text-shadow: 0px 0px 1px rgba(254, 221, 109, 1);
-    }
   }
 `;
 
