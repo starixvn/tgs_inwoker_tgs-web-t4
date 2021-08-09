@@ -8,7 +8,6 @@ pipeline {
 		Registry = "registry.gitlab.com/rayprosoft/turnkey-gaming-system/"
 		Image = "lobby-t4"
 		gitlab_user_pwd = credentials('gitlab-user-pwd')
-		branch = "develop" 
 		DevComponents = "lobby-t4"
 		StagingComponents = "lobby-gpi-t4"
 		ProdComponents = "lobby-gpi-t4"
