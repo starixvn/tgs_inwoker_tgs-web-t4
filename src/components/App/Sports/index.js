@@ -214,7 +214,14 @@ class Sports extends Component {
       this.props.showLogin(true);
     } else {
       this.props.history.push(
-        "/" + i18n.language + "/sports/play/" + params + "/" + type
+        "/" +
+          i18n.language +
+          "/sports/play/" +
+          params +
+          "/" +
+          (params === GameEnum.IMES
+            ? GameTypeEnum.ESPORTS
+            : GameTypeEnum.SPORTS)
       );
     }
   };
