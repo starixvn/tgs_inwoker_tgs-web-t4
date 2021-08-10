@@ -389,7 +389,9 @@ class Slots extends Component {
   language = null;
   componentDidMount() {
     this.getGameList();
-    this.getFav();
+    if (this.props.token !== null && this.props.token !== "") {
+      this.getFav();
+    }
   }
   getFav(type = this.state.type) {
     var result = GameService.GetFavoriteGame(type);
@@ -431,6 +433,9 @@ class Slots extends Component {
       } else {
         this.getGameList();
       }
+    }
+    if (prevProps.token !== this.props.token && this.props.token !== null) {
+      this.getFav();
     }
   }
   getType() {
@@ -624,7 +629,7 @@ class Slots extends Component {
                   active={this.state.filterGame === category}
                 ></HistoryFilterItem>
               );
-            case "fav":
+            case SlotFilterType.Bookmark:
               return (
                 <BookmarkFilterItem
                   active={this.state.filterGame === category}
@@ -639,26 +644,28 @@ class Slots extends Component {
       </CategoryContainer>
     );
   }
+
   handleToggleFavorite = (match, id, match2) => {
-    if (match) {
-      this.props.removeFavoriteGame(id).then(() => {
-        var array = [...this.state.favGame];
-        var index = array.indexOf(id);
-        if (index !== -1) {
-          array.splice(index, 1);
-          this.setState({ favGame: array });
-        }
-      });
-    } else {
-      this.props.setFavoriteGame(id).then(() => {
-        this.setState({
-          ...this.state,
-          favGame: [...this.state.favGame, id],
+    if (this.props.token !== null && this.props.token !== "") {
+      if (match) {
+        this.props.removeFavoriteGame(id).then(() => {
+          var array = [...this.state.favGame];
+          var index = array.indexOf(id);
+          if (index !== -1) {
+            array.splice(index, 1);
+            this.setState({ favGame: array });
+          }
         });
-      });
+      } else {
+        this.props.setFavoriteGame(id).then(() => {
+          this.setState({
+            ...this.state,
+            favGame: [...this.state.favGame, id],
+          });
+        });
+      }
     }
   };
-
   render() {
     let list = null;
     if (this.state.gameList.length > 0) {
@@ -672,7 +679,7 @@ class Slots extends Component {
               return a.tag.new === true;
             } else if (this.state.filterGame === SlotFilterType.Recommend) {
               return a.tag.recommend === true;
-            } else if (this.state.filterGame === "fav") {
+            } else if (this.state.filterGame === SlotFilterType.Bookmark) {
               return this.state.favGame.indexOf(a.id) > -1;
             }
           }
@@ -756,8 +763,11 @@ class Slots extends Component {
             {this.genCategoryItem(
               SlotFilterType.Recommend,
               i18n.t("slot.recommendGame")
-            )}{" "}
-            {this.genCategoryItem("fav", i18n.t("slot.bookmarkGame"))}
+            )}
+            {this.genCategoryItem(
+              SlotFilterType.Bookmark,
+              i18n.t("slot.bookmarkGame")
+            )}
             {/* {this.genCategoryItem(
               SlotFilterType.Bookmark,
               i18n.t("slot.bookmarkGame")
