@@ -97,7 +97,7 @@ pipeline {
 		
 		stage('Delete Image Tags') {					
             steps {	
-				sh "curl --request DELETE --data 'name_regex_delete=.*' --data 'keep_n=10' --header 'PRIVATE-TOKEN: ${GitLabToken}' ${ImageTagUrl}"
+				sh "curl --request DELETE --data \'name_regex_delete=.*\' --data 'keep_n=10' --header \'PRIVATE-TOKEN: ${GitLabToken}\' ${ImageTagUrl}"
             }
         }
 	}
