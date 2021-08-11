@@ -82,7 +82,7 @@ pipeline {
 		stage('Add Tag on Prod') {
             when {
                 expression {
-                    return env.kube_ns == 'dev';
+                    return env.kube_ns == 'prod';
                 }
             }					
             steps {	
