@@ -104,7 +104,7 @@ pipeline {
         }
 		always {
             script {
-			    sh "curl --request DELETE --data \'name_regex_delete=.*\' --data 'keep_n=5' --header \'PRIVATE-TOKEN: ${GitLabToken}\' ${ImageTagUrl}"
+			    sh "curl --request DELETE --data \'name_regex_delete=.*\' --data \'keep_n=5\' --header \'PRIVATE-TOKEN: ${GitLabToken}\' ${ImageTagUrl}"
                 sh '''#!/bin/bash
                 sudo docker rmi $(sudo docker images | awk '{ print \$3 }' | tail -n +2) --force
                 sudo docker system prune -f
