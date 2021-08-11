@@ -6,6 +6,7 @@ pipeline {
 	environment {
 		TAG = sh(script: "echo `date +%Y%m%d%H%M`", returnStdout: true).trim()
 		Registry = "registry.gitlab.com/rayprosoft/turnkey-gaming-system/"
+		GitUrl = "gitlab.com/inwoker/tgs/tgs-web-t4.git"
 		Image = "lobby-t4"
 		gitlab_user_pwd = credentials('gitlab-user-pwd')
 		branch = "develop" 
@@ -76,7 +77,21 @@ pipeline {
 					}
 				}
 			}
-		}	
+		}
+		
+		stage('Add Tag on Prod') {
+            when {
+                expression {
+                    return env.kube_ns == 'dev';
+                }
+            }					
+            steps {	
+				withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId:'gitssh-user-pwd', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+				    sh "git tag -a ${TAG} -m ${TAG}"
+				    sh "git push https://$USERNAME:$PASSWORD@${GitUrl} --tags"
+				}
+            }
+        }
 	}
 	 post {
         success {
