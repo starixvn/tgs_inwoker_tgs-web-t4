@@ -94,12 +94,6 @@ pipeline {
 				}
             }
         }
-		
-		stage('Delete Image Tags') {					
-            steps {	
-				sh "curl --request DELETE --data \'name_regex_delete=.*\' --data 'keep_n=10' --header \'PRIVATE-TOKEN: ${GitLabToken}\' ${ImageTagUrl}"
-            }
-        }
 	}
 	 post {
         success {
@@ -107,6 +101,15 @@ pipeline {
         }
         failure {
             sendTelegram("<b>Failed Pipeline:</b> ${currentBuild.fullDisplayName} Something is wrong with ${env.BUILD_URL}/console\n${currentBuild.getBuildCauses()[0].shortDescription}\n")
+        }
+		always {
+            script {
+			    sh "curl --request DELETE --data \'name_regex_delete=.*\' --data 'keep_n=5' --header \'PRIVATE-TOKEN: ${GitLabToken}\' ${ImageTagUrl}"
+                sh '''#!/bin/bash
+                sudo docker rmi $(sudo docker images | awk '{ print \$3 }' | tail -n +2) --force
+                sudo docker system prune -f
+                '''
+            }
         }
     }
 }
