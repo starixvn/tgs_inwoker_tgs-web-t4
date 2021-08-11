@@ -38,7 +38,11 @@ export default {
           IsSuccess: false,
           info: ErrorSwitcher.getTranslation(response.data.errmsgid),
           code: response.data.err,
-          data: response.data.data ? response.data.data : response.data,
+          data:
+            response.data.data !== null &&
+            typeof response.data.data !== "undefined"
+              ? response.data.data
+              : response.data,
         };
 
         if (response.data.url) {
