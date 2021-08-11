@@ -7,6 +7,8 @@ pipeline {
 		TAG = sh(script: "echo `date +%Y%m%d%H%M`", returnStdout: true).trim()
 		Registry = "registry.gitlab.com/rayprosoft/turnkey-gaming-system/"
 		GitUrl = "gitlab.com/inwoker/tgs/tgs-web-t4.git"
+		ImageTagUrl = "https://gitlab.com/api/v4/projects/20478010/registry/repositories/2172985/tags"
+		Token = "oD2cksJhGN1tgUuaE6C9"
 		Image = "lobby-t4"
 		gitlab_user_pwd = credentials('gitlab-user-pwd')
 		branch = "develop" 
@@ -90,6 +92,12 @@ pipeline {
 				    sh "git tag -a ${TAG} -m ${TAG}"
 				    sh "git push https://$USERNAME:$PASSWORD@${GitUrl} --tags"
 				}
+            }
+        }
+		
+		stage('Delete Image Tags') {					
+            steps {	
+				sh "curl --request DELETE --data 'name_regex_delete=.*' --data 'keep_n=10' --header "PRIVATE-TOKEN: ${Token}" ${ImageTagUrl}"
             }
         }
 	}
