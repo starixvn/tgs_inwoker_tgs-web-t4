@@ -9,7 +9,6 @@ pipeline {
         ImageTagUrl = "https://gitlab.com/api/v4/projects/20478010/registry/repositories/2172985/tags"
         Image = "lobby-t4"
         gitlab_user_pwd = credentials('gitlab-user-pwd')
-        branch = "develop" 
         DevComponents = "lobby-t4"
         StagingComponents = "lobby-gpi-t4"
         ProdComponents = "lobby-gpi-t4"
