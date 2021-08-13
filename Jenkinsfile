@@ -3,7 +3,7 @@ def message = "";
 pipeline {
     agent any	
     environment {
-        TAG = sh(script: "echo `date +%Y%m%d%H%M`", returnStdout: true).trim()
+        TAG = sh(script: "echo `date +%Y-%m%d-%H%M`", returnStdout: true).trim()
         Registry = "registry.gitlab.com/rayprosoft/turnkey-gaming-system/"
         GitUrl = "gitlab.com/inwoker/tgs/tgs-web-t4.git"
         ImageTagUrl = "https://gitlab.com/api/v4/projects/20478010/registry/repositories/2172985/tags"
