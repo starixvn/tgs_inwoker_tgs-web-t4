@@ -141,6 +141,12 @@ class Deposit extends Component {
       name: "",
       step: 1,
       exchangeRate: { buyprice: 0, sellprice: 0 },
+      //to handle access via URL
+      paymentId: this.props.match.params.paymentId,
+      depositDetail: "",
+      channelname: "",
+      methodcode: "",
+      bankaccount: "",
     };
     this.state = this.initialState;
   }
@@ -148,6 +154,22 @@ class Deposit extends Component {
   componentDidMount() {
     this.props.getDepositMethod();
     this.props.getPlayerPromotionList();
+    if (this.state.paymentId) {
+      WalletService.PerformGetManualDepositDetail(this.state.paymentId).then(
+        (e) => {
+          if (e.IsSuccess) {
+            this.setState({
+              step: 5,
+              depositDetail: e.data,
+              amount: e.data.amount,
+              channelname: e.data.bankname,
+              methodcode: e.data.methodname,
+              bankaccount: e.data.bankaccount,
+            });
+          }
+        }
+      );
+    }
   }
 
   componentDidUpdate(preProps, preState) {
@@ -374,7 +396,12 @@ class Deposit extends Component {
   };
 
   performUploadImage = (file) => {
-    this.props.doUploadDepositProof(this.props.wallet.depositResult.data, file);
+    this.props.doUploadDepositProof(
+      this.props.wallet.depositResult
+        ? this.props.wallet.depositResult.data
+        : this.state.paymentId,
+      file
+    );
   };
   handleAmountChange = (e) => {
     var max =
@@ -482,6 +509,20 @@ class Deposit extends Component {
         );
       case 4:
         return <Success handleRestartClick={this.handleRestartClick}></Success>;
+      case 5:
+        return (
+          <NewStepTwo
+            methodcode={this.state.methodcode}
+            channelname={this.state.channelname}
+            depositDetail={this.state.depositDetail}
+            bankaccount={this.state.bankaccount}
+            paymentId={this.state.paymentId}
+            depositResult={this.props.wallet.depositResult}
+            amount={this.state.amount}
+            performUploadImage={this.performUploadImage}
+            handleRestartClick={this.handleRestartClick}
+          />
+        );
     }
   };
 
