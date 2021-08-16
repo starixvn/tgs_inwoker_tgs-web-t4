@@ -293,6 +293,12 @@ const RouteMapping = [
     navigate: true,
   },
   {
+    path: "/manual/:paymentId?",
+    component: Wapp.Deposit,
+    alert: true,
+    navigate: true,
+  },
+  {
     path: "/deposit/payment/:id/:bank/:amount/:bonus?",
     component: Wapp.DepositPayment,
     alert: true,
