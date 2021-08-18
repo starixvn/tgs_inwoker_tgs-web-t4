@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 import { AppHistory } from "../../../history/History";
 
-import { GameService } from "@Inwoker/tgs-api";
+import { gameAction, GameService } from "@Inwoker/tgs-api";
 
 import SlotAllPNG from "../../../assets/images/slot-all.png";
 import SlotAllInactivePNG from "../../../assets/images/slot-all-inactive.png";
@@ -304,7 +304,7 @@ const ItemContainer = styled.div`
 `;
 const GameDesc = styled.div`
   padding-left: 10px;
-  padding-right: 10px;
+
   height: 28px;
   float: right;
   background-color: rgba(0, 0, 0, 0.8);
@@ -338,7 +338,7 @@ const GameProvider = styled.div`
   float: left;
   font-size: 14px;
   color: #ffffff;
-
+  padding-right: 5px;
   margin-top: 4px;
   text-align: center;
 `;
@@ -370,6 +370,7 @@ class Slots extends Component {
 
     const type = this.getType();
     this.state = {
+      favGame: [],
       firstLoad: true,
       filterGame: 0,
       keyword: "",
@@ -388,7 +389,23 @@ class Slots extends Component {
   language = null;
   componentDidMount() {
     this.getGameList();
+    if (this.props.token !== null && this.props.token !== "") {
+      this.getFav();
+    }
   }
+  getFav(type = this.state.type) {
+    var result = GameService.GetFavoriteGame(type);
+    result.then((response) => {
+      if (response.IsSuccess) {
+        var data = response.data;
+        this.setState({
+          ...this.state,
+          favGame: data,
+        });
+      }
+    });
+  }
+
   componentDidUpdate(prevProps, prevState) {
     if (
       prevState.type !== this.state.type ||
@@ -403,6 +420,8 @@ class Slots extends Component {
           : "";
 
         this.getGameList(1, platform, this.getType());
+      } else if (prevState.type !== this.state.type) {
+        this.getFav();
       } else if (
         prevProps.match.params.platform !== this.props.match.params.platform
       ) {
@@ -417,6 +436,9 @@ class Slots extends Component {
         this.getGameList();
       }
     }
+    if (prevProps.token !== this.props.token && this.props.token !== null) {
+      this.getFav();
+    }
   }
   getType() {
     const type =
@@ -426,7 +448,7 @@ class Slots extends Component {
         ? GameTypeEnum.SLOT
         : this.props.match.url.indexOf("fish") >= 0
         ? GameTypeEnum.FISH
-        : GameTypeEnum.SLOT;
+        : GameTypeEnum.TABLEGAME;
     return type;
   }
   getGameList(
@@ -540,8 +562,16 @@ class Slots extends Component {
   //   }
   // };
   handleJoinGameClick = (gpcode, gpid) => {
+    const type =
+      this.props.match.url.indexOf("fish") >= 0
+        ? "fish"
+        : this.props.match.url.indexOf("slots") >= 0
+        ? "slots"
+        : "electron";
     if (this.props.token) {
-      this.props.history.push(`/${i18n.language}/slots/play/${gpcode}/${gpid}`);
+      this.props.history.push(
+        `/${i18n.language}/${type}/play/${gpcode}/${gpid}`
+      );
     } else {
       this.props.showLogin(true);
     }
@@ -601,6 +631,12 @@ class Slots extends Component {
                   active={this.state.filterGame === category}
                 ></HistoryFilterItem>
               );
+            case SlotFilterType.Bookmark:
+              return (
+                <BookmarkFilterItem
+                  active={this.state.filterGame === category}
+                ></BookmarkFilterItem>
+              );
             default:
               return null;
           }
@@ -610,6 +646,28 @@ class Slots extends Component {
       </CategoryContainer>
     );
   }
+
+  handleToggleFavorite = (match, id, match2) => {
+    if (this.props.token !== null && this.props.token !== "") {
+      if (match) {
+        this.props.removeFavoriteGame(id).then(() => {
+          var array = [...this.state.favGame];
+          var index = array.indexOf(id);
+          if (index !== -1) {
+            array.splice(index, 1);
+            this.setState({ favGame: array });
+          }
+        });
+      } else {
+        this.props.setFavoriteGame(id).then(() => {
+          this.setState({
+            ...this.state,
+            favGame: [...this.state.favGame, id],
+          });
+        });
+      }
+    }
+  };
   render() {
     let list = null;
     if (this.state.gameList.length > 0) {
@@ -623,6 +681,8 @@ class Slots extends Component {
               return a.tag.new === true;
             } else if (this.state.filterGame === SlotFilterType.Recommend) {
               return a.tag.recommend === true;
+            } else if (this.state.filterGame === SlotFilterType.Bookmark) {
+              return this.state.favGame.indexOf(a.id) > -1;
             }
           }
 
@@ -647,10 +707,15 @@ class Slots extends Component {
             <GameDesc>
               <GameProvider>{el.gpcode}</GameProvider>
               <Spliter></Spliter>
-              {/* <Bookmark
-                bookmark={el.collect_id > 0}
-                // onClick={() => this.handleBookmarkClick(el.id, el.collect_id)}
-              ></Bookmark> */}
+              <Bookmark
+                bookmark={this.state.favGame.indexOf(el.id) > -1}
+                onClick={() =>
+                  this.handleToggleFavorite(
+                    this.state.favGame.indexOf(el.id) > -1,
+                    el.id
+                  )
+                }
+              ></Bookmark>
             </GameDesc>
             <GameHoverSelection
               onClick={() => this.handleJoinGameClick(el.gpcode, el.id)}
@@ -701,6 +766,10 @@ class Slots extends Component {
               SlotFilterType.Recommend,
               i18n.t("slot.recommendGame")
             )}
+            {this.genCategoryItem(
+              SlotFilterType.Bookmark,
+              i18n.t("slot.bookmarkGame")
+            )}
             {/* {this.genCategoryItem(
               SlotFilterType.Bookmark,
               i18n.t("slot.bookmarkGame")
@@ -742,6 +811,9 @@ const mapDispatchToProps = (dispatch) => {
     showLogin: (payload) => {
       dispatch({ type: SHOW_LOGIN, payload });
     },
+    setFavoriteGame: (gameId) => dispatch(gameAction.setFavoriteGame(gameId)),
+    removeFavoriteGame: (gameId) =>
+      dispatch(gameAction.removeFavoriteGame(gameId)),
   };
 };
 const mapStateToProps = (state) => {

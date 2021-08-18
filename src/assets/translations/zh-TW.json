@@ -531,7 +531,7 @@
   },
 
   "transfer": {
-    "autoTransfer": "自動轉帳",
+    "autoTransfer": "自動轉帳：開啟遊戲時，將所有餘額自動轉入遊戲",
     "on": "開",
     "off": "關",
     "transferWallet": "轉賬錢包",
