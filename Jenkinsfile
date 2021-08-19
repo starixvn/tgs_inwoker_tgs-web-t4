@@ -43,12 +43,11 @@ pipeline {
                     message += "\n Image: ${Image}"
                     message += "\n Tag: ${TAG}"
                     message += "\n Env: $env.kube_ns"
-					env.GIT_URL = "${env.GIT_URL}".replace(".git","/-/commit/")
+					env.GIT_URL = ${env.GIT_URL}.replace(".git","/-/commit/")
 					message += "\n Commit: ${env.GIT_URL}${env.GIT_COMMIT}"
                 }
                 sh "echo 'env: $env.kube_ns'"
                 sh "echo 'tag: ${TAG}'"
-				sh "echo '$env.GIT_URL.replace(\".git\",\"/-/commit/\")'"
 				sh "printenv"
             }
         }	
