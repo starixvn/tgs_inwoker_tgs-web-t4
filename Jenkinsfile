@@ -46,6 +46,8 @@ pipeline {
                 }
                 sh "echo 'env: $env.kube_ns'"
                 sh "echo 'tag: ${TAG}'"
+				sh "echo 'printenv:'"
+				sh "printenv"
             }
         }	
         stage('Docker Build') {   
