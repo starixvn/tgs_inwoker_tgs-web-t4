@@ -166,6 +166,7 @@ class Deposit extends Component {
               methodcode: e.data.methodname,
               bankaccount: e.data.bankaccount,
             });
+            this.props.setActivePage("deposit");
           }
         }
       );

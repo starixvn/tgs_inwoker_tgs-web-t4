@@ -300,6 +300,12 @@ class Account extends Component {
       </MenuButtonDiv>
     );
   };
+  setActivePage = (page) => {
+    this.setState({
+      ...this.state,
+      activePage: page,
+    });
+  };
   render() {
     return (
       <Container>
@@ -357,6 +363,7 @@ class Account extends Component {
                     path={baseRouteUrl + "/account/manual/:paymentId"}
                     render={(props) => (
                       <Deposit
+                        setActivePage={this.setActivePage}
                         token={this.props.account.token}
                         account={this.props.account}
                       />
