@@ -62,14 +62,14 @@ function TransactionDetailsList(props) {
           <TableRow>
             <StyledTableCell
               style={{
-                width: "7rem",
+                width: "8rem",
               }}
             >
               {i18n.t("report.betDateTime")}
             </StyledTableCell>
             <StyledTableCell
               style={{
-                width: "15rem",
+                width: "16rem",
               }}
             >
               {i18n.t("report.betid")}

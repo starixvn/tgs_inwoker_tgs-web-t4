@@ -88,6 +88,7 @@ function DepositReportList(props) {
       pathname: "/" + i18n.language + "/account/manual/" + id,
     });
   };
+
   return (
     <InnerWrap>
       <Table aria-label="customized table">
@@ -95,7 +96,6 @@ function DepositReportList(props) {
           <TableRow>
             <StyledTableCell>{i18n.t("report.submitDate")}</StyledTableCell>
             <StyledTableCell>{i18n.t("report.OrderNumber")}</StyledTableCell>
-
             <StyledTableCell>{i18n.t("report.status")}</StyledTableCell>
             <StyledTableCell align="right">
               {i18n.t("common.amount")}
@@ -108,13 +108,13 @@ function DepositReportList(props) {
             return (
               <StyledTableRow hover role="checkbox" tabIndex={-1} key={index}>
                 <StyledTableCell>
-                  {moment(row.createdOn).format("YYYY-MM-DD hh:mm a")}
+                  {moment(row.createdon).format("YYYY-MM-DD hh:mm a")}
                 </StyledTableCell>
                 <StyledTableCell>{row.id}</StyledTableCell>
                 <StyledTableCell>
                   {i18n.t(`report.deposit.status${row.status}`)}
                 </StyledTableCell>
-                <StyledTableCell align="right">{row.amount}</StyledTableCell>{" "}
+                <StyledTableCell align="right">{row.amount}</StyledTableCell>
                 <StyledTableCell>
                   {row.status === 1 && (
                     <TheDepositButton

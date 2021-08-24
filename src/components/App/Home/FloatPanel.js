@@ -75,13 +75,10 @@ const CustomModal = styled(Dialog)`
   .MuiBackdrop-root {
     background: transparent;
   }
-  .MuiDialog-scrollPaper {
-    align-items: flex-start;
-  }
 
   .MuiDialog-paper {
     min-width: 900px;
-    margin-top: 150px;
+
     border-radius: 16px;
     background: #cccccc;
     min-height: 200px;
@@ -154,9 +151,9 @@ const QRCodeText = styled.div`
 `;
 
 const CSButtonContainer = styled.div`
-  padding: 20px;
+  padding: 5px;
   text-align: center;
-  margin: 20px;
+  margin: 5px;
   display: flex;
   flex-direction: column;
   justify-content: center;

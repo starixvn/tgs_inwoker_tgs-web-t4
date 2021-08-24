@@ -422,7 +422,7 @@ class Wap extends Component {
       ? this.props.general.livechat.setting.url
           .replace("{name}", name)
           .replace("{lang}", i18n.language)
-          .replace("{email}", email)
+          .replace("{email}", email || "")
       : "";
 
     if (newURL.length) {
@@ -482,7 +482,9 @@ class Wap extends Component {
     if (this.props.general.token == "") {
       this.props.getSiteToken();
     } else {
+      this.props.getBrandLanguage();
       this.props.getMarquee(i18n.language);
+      this.props.getBanner();
       this.props.getBrandCommunicationList();
       this.props.getLiveChatURL();
     }
@@ -597,7 +599,9 @@ class Wap extends Component {
           }
         });
         this.props.getHomePageGameList();
+        this.props.getBrandLanguage();
         this.props.getMarquee(i18n.language);
+        this.props.getBanner();
         this.props.getBrandCommunicationList();
         this.props.getLiveChatURL();
       }
@@ -876,8 +880,10 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(inboxAction.getMessages(language, pages, limit, true, true)),
     getBrandCommunicationList: (language) =>
       dispatch(generalAction.getBrandCommunication()),
-    getMarquee: (language) => {
-      dispatch(uiAction.getMarquee(language));
+    getBrandLanguage: () => dispatch(generalAction.getBrandLanguage()),
+
+    getBanner: () => {
+      dispatch(generalAction.getBanner());
     },
     getLiveChatURL: () => dispatch(generalAction.getLiveChatURL()),
     getAutoTransferStatus: () => dispatch(walletAction.getAutoTransferStatus()),

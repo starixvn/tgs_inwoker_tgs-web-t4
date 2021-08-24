@@ -30,6 +30,7 @@ import Promotion from "./Promotion/index";
 import PromotionDetails from "./Promotion/Details";
 import Home from "./Home/index";
 
+// import Maintenance from "./Maintenance";
 import Account from "./Account/index";
 
 import Header from "./Header";
@@ -46,7 +47,6 @@ import { SupportService } from "@Inwoker/tgs-api";
 import i18n from "../../utils/i18n";
 import Fishing from "./Fishing";
 import Maintenance from "../Share/Maintenance";
-
 const baseRouteUrl = Common.baseRouteUrl;
 const Main = styled.div`
   min-height: 600px;
@@ -69,7 +69,10 @@ class App extends Component {
       this.props.getBrandCommunicationList();
       this.props.getMarquee(i18n.language);
       this.props.getLiveChatURL();
+      this.props.getBrandLanguage();
+      this.props.getBanner();
     }
+
     // if (response.IsSuccess) {
     //   localStorage.setItem("client-token", response.data.token);
     // }
@@ -157,6 +160,8 @@ class App extends Component {
         this.props.getBrandCommunicationList();
         this.props.getMarquee(i18n.language);
         this.props.getLiveChatURL();
+        this.props.getBrandLanguage();
+        this.props.getBanner();
       }
     }
     if (
@@ -274,7 +279,6 @@ class App extends Component {
                       path={baseRouteUrl + "/lottery/play/:params?"}
                       component={LotteryPlay}
                     />
-
                     <Route
                       exact
                       path={baseRouteUrl + "/slots/:platform?"}
@@ -317,7 +321,6 @@ class App extends Component {
                       path={baseRouteUrl + "/promotion/:id"}
                       render={(props) => <PromotionDetails />}
                     />
-
                     {/* <Route
                       exact
                       path={baseRouteUrl + "/vip"}
@@ -334,7 +337,7 @@ class App extends Component {
                       exact
                       path={baseRouteUrl + "/registersuccess/:username"}
                       component={RegisterSuccess}
-                    />*/}
+                    />*/}{" "}
                     <Route
                       exact
                       path={baseRouteUrl + "/maintenance"}
@@ -400,6 +403,11 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(inboxAction.getMessages(language, pages, limit, true, true)),
     getBrandCommunicationList: (language) =>
       dispatch(generalAction.getBrandCommunication()),
+    getBrandLanguage: () => dispatch(generalAction.getBrandLanguage()),
+
+    getBanner: () => {
+      dispatch(generalAction.getBanner());
+    },
     getMarquee: (language) => {
       dispatch(uiAction.getMarquee(language));
     },

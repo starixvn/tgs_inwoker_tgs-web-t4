@@ -72,7 +72,7 @@ function TransferReportList(props) {
         </TableHead>
         <TableBody>
           {props.rows.map((row, index) => {
-            const date = moment(row.createdOn).format("YYYY-MM-DD hh:mm a");
+            const date = moment(row.balancetime).format("YYYY-MM-DD hh:mm a");
             return (
               <StyledTableRow hover role="checkbox" tabIndex={-1} key={index}>
                 <StyledTableCell>{date}</StyledTableCell>

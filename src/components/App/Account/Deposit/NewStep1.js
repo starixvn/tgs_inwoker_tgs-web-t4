@@ -321,24 +321,57 @@ class NewStepOne extends Component {
                       )}
                     </LimitAmount>
                   </LimitPopupContainer>
-                  {paymentType.paymentcode.toUpperCase() === "LEEPAY" ? (
-                    <ExchangeRateContainer style={{ marginTop: "4px" }}>
-                      <LimitLabel>
-                        {i18n.t("deposit.exchangeRate")}:{" "}
-                      </LimitLabel>
-                      <LimitAmount>{` ${exchangeRate.buyprice}`}</LimitAmount>
-                      <LimitLabel style={{ marginLeft: "26px" }}>
-                        {i18n.t("deposit.expectedPayment")}
-                      </LimitLabel>{" "}
-                      <LimitAmount>{` ${
-                        isNaN(amount) === false
-                          ? (amount / exchangeRate.buyprice).toFixed(2)
-                          : 0
-                      }`}</LimitAmount>
-                    </ExchangeRateContainer>
-                  ) : (
-                    <></>
-                  )}
+                  {(() => {
+                    if (
+                      methodList[selectedMethodIndex].methodcode === "Crypto"
+                    ) {
+                      if (paymentType.paymentcode.toUpperCase() === "LEEPAY") {
+                        return (
+                          <ExchangeRateContainer style={{ marginTop: "10px" }}>
+                            <LimitLabel>
+                              {i18n.t("deposit.exchangeRate")}:{" "}
+                            </LimitLabel>
+                            <LimitAmount>{` ${exchangeRate.buyprice}`}</LimitAmount>
+                            <LimitLabel style={{ marginLeft: "26px" }}>
+                              {i18n.t("deposit.expectedPayment")}
+                            </LimitLabel>{" "}
+                            <LimitAmount>{` ${
+                              isNaN(amount) === false
+                                ? (amount / exchangeRate.buyprice).toFixed(2)
+                                : 0
+                            }`}</LimitAmount>
+                          </ExchangeRateContainer>
+                        );
+                      } else {
+                        return Object.keys(exchangeRate).map((key) => {
+                          return Object.keys(exchangeRate[key]).map((key2) => {
+                            if (key2 === "HKD") {
+                              return (
+                                <ExchangeRateContainer
+                                  style={{ marginTop: "10px" }}
+                                >
+                                  <LimitLabel>
+                                    {i18n.t("deposit.exchangeRate")}:{" "}
+                                  </LimitLabel>
+                                  <LimitAmount>{` ${exchangeRate[key][key2].rate}`}</LimitAmount>
+                                  <LimitLabel style={{ marginLeft: "26px" }}>
+                                    {i18n.t("deposit.expectedPayment")}
+                                  </LimitLabel>{" "}
+                                  <LimitAmount>{` ${
+                                    isNaN(amount) === false
+                                      ? (
+                                          amount / exchangeRate[key][key2].rate
+                                        ).toFixed(2)
+                                      : 0
+                                  }`}</LimitAmount>
+                                </ExchangeRateContainer>
+                              );
+                            }
+                          });
+                        });
+                      }
+                    }
+                  })()}
                 </SelectionContainer>
                 <SplitLine></SplitLine>
                 <SubHeaderContainer>

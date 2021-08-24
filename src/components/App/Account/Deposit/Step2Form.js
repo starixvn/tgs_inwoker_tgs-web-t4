@@ -39,10 +39,34 @@ class Step2Form extends Component {
   };
   componentDidMount() {
     if (this.props.isCrypto === true) {
+      this.GetExchangeRate();
+    }
+  }
+  componentDidUpdate(preProps) {
+    if (this.props.isCrypto === true) {
+      if (preProps.depositType !== this.props.depositType) {
+        this.GetExchangeRate();
+      }
+    }
+  }
+  GetExchangeRate() {
+    if (this.props.depositType === "LeePay") {
       WalletService.GetLeePayExchangeRate(this.props.channel.id).then(
         (response) => {
           if (response.IsSuccess) {
             this.setState({ ...this.state, exchangeRate: response.data });
+          } else {
+            this.setState({
+              ...this.state,
+            });
+          }
+        }
+      );
+    } else {
+      WalletService.GetUmPayExchangeRate(this.props.channel.id).then(
+        (response) => {
+          if (response.IsSuccess) {
+            this.setState({ ...this.state, exchangeRate: response.data.rate });
           } else {
             this.setState({
               ...this.state,
@@ -71,20 +95,52 @@ class Step2Form extends Component {
               <TitleTD>{i18n.t("deposit.depositAmount")}</TitleTD>
               <ValueTD>{this.props.amount}</ValueTD>
             </tr>
-            {this.props.isCrypto === true ? (
-              <tr>
-                <TitleTD>{i18n.t("deposit.exchangeRate")}</TitleTD>
-                <ValueTD>{this.state.exchangeRate.buyprice}</ValueTD>
-                <TitleTD>{i18n.t("deposit.expectedPayment")}</TitleTD>
-                <ValueTD>
-                  {(
-                    this.props.amount / this.state.exchangeRate.buyprice
-                  ).toFixed(2)}
-                </ValueTD>
-              </tr>
-            ) : (
-              <></>
-            )}
+            {(() => {
+              if (this.props.isCrypto === true) {
+                if (this.props.depositType.toUpperCase() === "LEEPAY") {
+                  return (
+                    <tr>
+                      <TitleTD>{i18n.t("deposit.exchangeRate")}</TitleTD>
+                      <ValueTD>{this.state.exchangeRate.buyprice}</ValueTD>
+                      <TitleTD>{i18n.t("deposit.expectedPayment")}</TitleTD>
+                      <ValueTD>
+                        {(
+                          this.props.amount / this.state.exchangeRate.buyprice
+                        ).toFixed(2)}
+                      </ValueTD>
+                    </tr>
+                  );
+                } else {
+                  return Object.keys(this.state.exchangeRate).map((key) => {
+                    return Object.keys(this.state.exchangeRate[key]).map(
+                      (key2) => {
+                        if (key2 === "HKD") {
+                          return (
+                            <tr>
+                              <TitleTD>
+                                {i18n.t("deposit.exchangeRate")}
+                              </TitleTD>
+                              <ValueTD>
+                                {this.state.exchangeRate[key][key2].rate}
+                              </ValueTD>
+                              <TitleTD>
+                                {i18n.t("deposit.expectedPayment")}
+                              </TitleTD>
+                              <ValueTD>
+                                {(
+                                  this.props.amount /
+                                  this.state.exchangeRate[key][key2].rate
+                                ).toFixed(2)}
+                              </ValueTD>
+                            </tr>
+                          );
+                        }
+                      }
+                    );
+                  });
+                }
+              }
+            })()}
           </tbody>
         </CustomTable>
         <ButtonContainer>

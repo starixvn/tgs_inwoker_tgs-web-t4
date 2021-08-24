@@ -1,6 +1,12 @@
 {
   "lang": {
-    "language": "语言"
+    "language": "语言",
+    "zh-TW":"繁体",
+    "zh-CN":"简体",
+    "en-US":"English",
+    "th-TH":"ไทย",
+    "id-ID":"Indonesia",
+    "vi-VN":"Tiếng Việt"
   },
   "error": {
     "ERR101": "无效的凭证。",
@@ -599,9 +605,11 @@
   "web": {
     "home": {
       "Section1Chess": "棋牌游戏",
-      "Section1Slot": "电子游戏",
+      "Section1Slot": "老虎机",
       "Section1Lottery": "彩票游戏",
-      "Section1FISHing": "捕鱼游戏"
+      "Section1Fishing": "捕鱼游戏",
+      "Section1Sport": "体育电竞",
+      "Section1Electron": "电子游戏"
     },
     "liveGame": {
       "wmDesc": "以高规格打造的WM真人配备最先进的设备以及富丽堂皇的装潢，为玩家打造绝佳真人视讯游戏体验。",
@@ -843,5 +851,11 @@
   },
   "NT": {
     "slots": "Netent老虎机"
+  },
+  "WGFM": {
+    "sports": "WG体育"
+  },
+  "WGVIA": {
+    "sports": "WG赛马"
   }
 }

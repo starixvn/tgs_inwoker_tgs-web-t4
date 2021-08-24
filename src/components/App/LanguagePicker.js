@@ -39,15 +39,15 @@ const LanguangeChanger = ({ language }) => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        {config.languages.map((data, index) => {
+        {language.map((data, index) => {
           return (
             <MenuItem
               key={index}
               onClick={() => {
-                window.location.href = `/${data.name}`;
+                window.location.href = `/${data.culturecode}`;
               }}
             >
-              {data.label}
+              {i18n.t("lang." + data.culturecode)}
             </MenuItem>
           );
         })}
