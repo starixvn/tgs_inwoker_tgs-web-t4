@@ -41,8 +41,8 @@ const Text = styled.div`
 `;
 
 const SidePanel = styled.div`
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 90px;
   display: flex;
   font-size: 12px;
   align-items: center;

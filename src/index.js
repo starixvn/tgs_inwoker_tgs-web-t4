@@ -140,8 +140,6 @@ const muiTheme = createMuiTheme({
     type: "light",
   },
   typography: {
-    fontFamily: "PingFangTC-Medium",
-
     fontWeightLight: 300,
     fontWeightRegular: 400,
     fontWeightMedium: 500,
