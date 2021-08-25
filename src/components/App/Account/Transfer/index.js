@@ -773,9 +773,8 @@ class Transfer extends Component {
                   <GameTranferLeftWrap>
                     <GameIcon
                       src={
-                        Common.gameImageMapping.filter(
-                          (a) => a.gcode === item.abbreviation.toUpperCase()
-                        )[0].img
+                        process.env.PUBLIC_URL +
+                        `/assets/images/provider/${item.abbreviation.toLowerCase()}.png`
                       }
                     ></GameIcon>
                     <GameName> {item.name}</GameName>
