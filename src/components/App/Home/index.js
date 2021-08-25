@@ -138,7 +138,7 @@ const TheButtonSubtitle = styled.div`
 const StashOfCoins = styled.div`
   height: 500px;
   background: url(${CoinPNG}) no-repeat;
-  background-position: center;
+  background-position: 0px 43px;
 `;
 
 const IconsMenu = styled.img`
