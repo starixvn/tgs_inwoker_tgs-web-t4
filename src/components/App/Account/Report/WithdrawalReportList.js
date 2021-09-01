@@ -67,7 +67,7 @@ function DailyReportList(props) {
             return (
               <StyledTableRow hover role="checkbox" tabIndex={-1} key={index}>
                 <StyledTableCell>
-                  {moment(row.createdOn).format("YYYY-MM-DD hh:mm a")}
+                  {moment(row.createdon).format("YYYY-MM-DD hh:mm a")}
                 </StyledTableCell>
                 <StyledTableCell>{row.id}</StyledTableCell>
 

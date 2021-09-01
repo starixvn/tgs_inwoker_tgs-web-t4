@@ -8,6 +8,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import TablePagination from "@material-ui/core/TablePagination";
 import i18n from "../../../../utils/i18n";
+import { AppHistory } from "../../../../history/History";
 const moment = require("moment");
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -68,9 +69,24 @@ const InnerWrap = styled.div`
   box-sizing: border-box;
   background-color: #f7f7f7;
 `;
+const TheDepositButton = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: ${({ theme }) => theme.primary};
+  padding: 0px 10px;
+  color: white;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+`;
 function DepositReportList(props) {
   const handleChangePage = (event, newPage) => {
     props.onhandleChangePage(newPage + 1);
+  };
+  const handleManualDeposit = (id) => {
+    AppHistory.push({
+      pathname: "/" + i18n.language + "/account/manual/" + id,
+    });
   };
 
   return (
@@ -80,11 +96,11 @@ function DepositReportList(props) {
           <TableRow>
             <StyledTableCell>{i18n.t("report.submitDate")}</StyledTableCell>
             <StyledTableCell>{i18n.t("report.OrderNumber")}</StyledTableCell>
-
             <StyledTableCell>{i18n.t("report.status")}</StyledTableCell>
             <StyledTableCell align="right">
               {i18n.t("common.amount")}
             </StyledTableCell>
+            <StyledTableCell align="right"></StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -92,14 +108,24 @@ function DepositReportList(props) {
             return (
               <StyledTableRow hover role="checkbox" tabIndex={-1} key={index}>
                 <StyledTableCell>
-                  {moment(row.createdOn).format("YYYY-MM-DD hh:mm a")}
+                  {moment(row.createdon).format("YYYY-MM-DD hh:mm a")}
                 </StyledTableCell>
                 <StyledTableCell>{row.id}</StyledTableCell>
-
                 <StyledTableCell>
                   {i18n.t(`report.deposit.status${row.status}`)}
                 </StyledTableCell>
                 <StyledTableCell align="right">{row.amount}</StyledTableCell>
+                <StyledTableCell>
+                  {row.status === 1 && (
+                    <TheDepositButton
+                      onClick={() => {
+                        handleManualDeposit(row.id);
+                      }}
+                    >
+                      {i18n.t("deposit.uploadReceipt")}
+                    </TheDepositButton>
+                  )}
+                </StyledTableCell>
               </StyledTableRow>
             );
           })}

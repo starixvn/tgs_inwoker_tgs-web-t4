@@ -1,10 +1,6 @@
 import i18n from "i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import config from "../config/config";
-import en from "../assets/translations/en-US.json";
-import cn from "../assets/translations/zh-CN.json";
-import tw from "../assets/translations/zh-TW.json";
-import th from "../assets/translations/th-TH.json";
 i18n.on("languageChanged", function (lng) {
   // if the language we switched to is the default language we need to remove the /en from URL
   //   if (lng === i18n.options.fallbackLng[0]) {
@@ -21,21 +17,25 @@ i18n.on("languageChanged", function (lng) {
 i18n.use(LanguageDetector).init({
   resources: {
     "en-US": {
-      translation: en,
+      translation: require("../assets/translations/en-US.json"),
     },
     "zh-CN": {
-      translation: cn,
+      translation: require("../assets/translations/zh-CN.json"),
     },
     "zh-TW": {
-      translation: tw,
+      translation: require("../assets/translations/zh-TW.json"),
     },
     "th-TH": {
-      translation: th,
+      translation: require("../assets/translations/th-TH.json"),
+    },
+    "id-ID": {
+      translation: require("../assets/translations/en-US.json"),
+    },
+    "vt-VN": {
+      translation: require("../assets/translations/en-US.json"),
     },
   },
-  whitelist: config.languages.map((item) => {
-    return item.name;
-  }),
+  whitelist: ["en-US", "zh-CN", "zh-TW", "th-TH", "id-ID", "vt-VN"],
   fallbackLng: [config.defaultLanguage],
   detection: {
     order: ["path"],

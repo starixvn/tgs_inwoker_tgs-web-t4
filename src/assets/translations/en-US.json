@@ -1,6 +1,12 @@
 {
   "lang": {
-    "language": "Language"
+    "language": "Language",
+    "zh-TW":"繁体",
+    "zh-CN":"简体",
+    "en-US":"English",
+    "th-TH":"ไทย",
+    "id-ID":"Indonesia",
+    "vi-VN":"Tiếng Việt"
   },
   "error": {
     "ERR101": "Invalid credential.",
@@ -598,10 +604,12 @@
   },
   "web": {
     "home": {
-      "Section1Chess": "CARD GAME",
+      "Section1Chess": "CHESS GAME",
       "Section1Slot": "SLOT GAME",
       "Section1Lottery": "LOTTERY GAME",
-      "Section1FISHing": "FISHING GAME"
+      "Section1Fishing": "FISHING GAME",
+      "Section1Sport": "SPORT GAME",
+      "Section1Electron": "E-GAME"
     },
     "liveGame": {
       "wmDesc": "Exclusive custom interface for asian players, according to the user experience and habits. Extreme interface, extreme game control, unqiue live casino.",
@@ -843,5 +851,11 @@
   },
   "NT": {
     "slots": "Netent"
+  },
+  "WGFM": {
+    "sports": "WG Sports"
+  },
+  "WGVIA": {
+    "sports": "WG Horserace"
   }
 }

@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -62,6 +63,21 @@ const Img = styled.img`
 
 class Slider extends React.Component {
   render() {
+    function PrevButton({ onClick }) {
+      return (
+        <PreContainer onClick={onClick} className="">
+          <PreImg src={LeftArrowPNG}></PreImg>
+        </PreContainer>
+      );
+    }
+
+    function NextButton({ onClick }) {
+      return (
+        <NextContainer onClick={onClick} className="">
+          <NextImg src={LeftArrowPNG}></NextImg>
+        </NextContainer>
+      );
+    }
     const settings = {
       dots: false,
 
@@ -73,23 +89,26 @@ class Slider extends React.Component {
       speed: 500,
       arrows: true,
       autoplay: true,
+      lazyLoad: "progressive",
     };
 
     return (
       <Container>
         <Slick {...settings}>
           {(() => {
-            var banner = [];
-            for (var i = 1; i <= config.bannerCount; i++) {
-              banner.push(
-                process.env.PUBLIC_URL +
-                  `/assets/images/banner/${i18n.language}/${config.brand}/${i}.jpg`
-              );
-            }
-            return banner.map((item, index) => {
+            return this.props.general.banner.map((item, index) => {
               return (
-                <ATag href={"#"} key={index}>
-                  <Img src={item}></Img>
+                <ATag
+                  href={item.navurl}
+                  key={index}
+                  target="_blank"
+                  alt={item.alt}
+                >
+                  <Img
+                    src={item.desktopurl}
+                    alt={item.alt}
+                    title={item.title}
+                  ></Img>
                 </ATag>
               );
             });
@@ -107,4 +126,10 @@ class Slider extends React.Component {
     );
   }
 }
-export default Slider;
+
+const mapStateToProps = (state) => {
+  return {
+    general: state.general,
+  };
+};
+export default connect(mapStateToProps, null)(Slider);

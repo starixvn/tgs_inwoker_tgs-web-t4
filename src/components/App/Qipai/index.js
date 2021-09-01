@@ -16,12 +16,12 @@ const Container = styled.div`
 
   width: 100%;
   height: auto;
-  min-height: 770px;
-  padding: 70px 0px;
+  min-height: 720px;
+
   position: relative;
   background: url(${(props) =>
       process.env.PUBLIC_URL}/assets/images/pcGamePage/qipai/background.jpg)
-    no-repeat center;
+    no-repeat center 0px;
 `;
 
 const leftRightLeft = keyframes`

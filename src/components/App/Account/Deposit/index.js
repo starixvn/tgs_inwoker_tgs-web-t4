@@ -141,6 +141,12 @@ class Deposit extends Component {
       name: "",
       step: 1,
       exchangeRate: { buyprice: 0, sellprice: 0 },
+      //to handle access via URL
+      paymentId: this.props.match.params.paymentId,
+      depositDetail: "",
+      channelname: "",
+      methodcode: "",
+      bankaccount: "",
     };
     this.state = this.initialState;
   }
@@ -148,6 +154,23 @@ class Deposit extends Component {
   componentDidMount() {
     this.props.getDepositMethod();
     this.props.getPlayerPromotionList();
+    if (this.state.paymentId) {
+      WalletService.PerformGetManualDepositDetail(this.state.paymentId).then(
+        (e) => {
+          if (e.IsSuccess) {
+            this.setState({
+              step: 5,
+              depositDetail: e.data,
+              amount: e.data.amount,
+              channelname: e.data.bankname,
+              methodcode: e.data.methodname,
+              bankaccount: e.data.bankaccount,
+            });
+            this.props.setActivePage("deposit");
+          }
+        }
+      );
+    }
   }
 
   componentDidUpdate(preProps, preState) {
@@ -214,23 +237,47 @@ class Deposit extends Component {
     ) {
       if (
         this.props.wallet.depositTypeList[this.state.selectedPaymentIndex]
-          .paymentcode === "LeePay"
+          .method[this.state.selectedMethodIndex].methodcode === "Crypto"
       ) {
-        WalletService.GetLeePayExchangeRate(
+        if (
           this.props.wallet.depositTypeList[this.state.selectedPaymentIndex]
-            .method[this.state.selectedMethodIndex].channel[
-            this.state.selectedChannelIndex
-          ].id
-        ).then((response) => {
-          if (response.IsSuccess) {
-            this.setState({ ...this.state, exchangeRate: response.data });
-          } else {
-            this.setState({
-              ...this.state,
-              exchangeRate: this.initialState.exchangeRate,
-            });
-          }
-        });
+            .paymentcode === "LeePay"
+        ) {
+          WalletService.GetLeePayExchangeRate(
+            this.props.wallet.depositTypeList[this.state.selectedPaymentIndex]
+              .method[this.state.selectedMethodIndex].channel[
+              this.state.selectedChannelIndex
+            ].id
+          ).then((response) => {
+            if (response.IsSuccess) {
+              this.setState({ ...this.state, exchangeRate: response.data });
+            } else {
+              this.setState({
+                ...this.state,
+                exchangeRate: this.initialState.exchangeRate,
+              });
+            }
+          });
+        } else {
+          WalletService.GetUmPayExchangeRate(
+            this.props.wallet.depositTypeList[this.state.selectedPaymentIndex]
+              .method[this.state.selectedMethodIndex].channel[
+              this.state.selectedChannelIndex
+            ].id
+          ).then((response) => {
+            if (response.IsSuccess) {
+              this.setState({
+                ...this.state,
+                exchangeRate: response.data.rate,
+              });
+            } else {
+              this.setState({
+                ...this.state,
+                exchangeRate: this.initialState.exchangeRate,
+              });
+            }
+          });
+        }
       } else {
         this.setState({
           ...this.state,
@@ -305,6 +352,20 @@ class Deposit extends Component {
           this.state.depositPromotion,
           this.state.name
         );
+      } else if (payment.paymentcode.toUpperCase() === "UMPAY") {
+        if (method.methodcode === "Crypto") {
+          this.props.doUmPayCryptoDeposit(
+            this.state.amount.replace(/,/g, ""),
+            channel.id,
+            this.state.depositPromotion
+          );
+        } else {
+          this.props.doUmPayBankDeposit(
+            this.state.amount.replace(/,/g, ""),
+            channel.id,
+            this.state.depositPromotion
+          );
+        }
       }
     }
   };
@@ -374,8 +435,14 @@ class Deposit extends Component {
   };
 
   performUploadImage = (file) => {
-    this.props.doUploadDepositProof(this.props.wallet.depositResult.data, file);
+    this.props.doUploadDepositProof(
+      this.props.wallet.depositResult
+        ? this.props.wallet.depositResult.data
+        : this.state.paymentId,
+      file
+    );
   };
+
   handleAmountChange = (e) => {
     var max =
       this.props.wallet.depositTypeList[this.state.selectedPaymentIndex].method[
@@ -463,7 +530,11 @@ class Deposit extends Component {
           <Step2Form
             isCrypto={
               this.props.wallet.depositTypeList[this.state.selectedPaymentIndex]
-                .paymentcode === "LeePay"
+                .method[this.state.selectedMethodIndex].methodcode === "Crypto"
+            }
+            depositType={
+              this.props.wallet.depositTypeList[this.state.selectedPaymentIndex]
+                .paymentcode
             }
             methodcode={
               this.props.wallet.depositTypeList[this.state.selectedPaymentIndex]
@@ -482,6 +553,20 @@ class Deposit extends Component {
         );
       case 4:
         return <Success handleRestartClick={this.handleRestartClick}></Success>;
+      case 5:
+        return (
+          <NewStepTwo
+            methodcode={this.state.methodcode}
+            channelname={this.state.channelname}
+            depositDetail={this.state.depositDetail}
+            bankaccount={this.state.bankaccount}
+            paymentId={this.state.paymentId}
+            depositResult={this.props.wallet.depositResult}
+            amount={this.state.amount}
+            performUploadImage={this.performUploadImage}
+            handleRestartClick={this.handleRestartClick}
+          />
+        );
     }
   };
 
@@ -642,6 +727,14 @@ const mapDispatchToProps = (dispatch) => {
           promotionid,
           transname
         )
+      ),
+    doUmPayCryptoDeposit: (amount, payment_id, promotionid) =>
+      dispatch(
+        walletAction.doUmPayCryptoDeposit(amount, payment_id, promotionid)
+      ),
+    doUmPayBankDeposit: (amount, payment_id, promotionid) =>
+      dispatch(
+        walletAction.doUmPayBankDeposit(amount, payment_id, promotionid)
       ),
     cancelDeposit: (id, notice_id) =>
       dispatch(walletAction.cancelDeposit(id, notice_id)),

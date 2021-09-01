@@ -1,6 +1,12 @@
 {
   "lang": {
-    "language": "ภาษา"
+    "language": "ภาษา",
+    "zh-TW":"繁体",
+    "zh-CN":"简体",
+    "en-US":"English",
+    "th-TH":"ไทย",
+    "id-ID":"Indonesia",
+    "vi-VN":"Tiếng Việt"
   },
   "error": {
     "ERR101": "ข้อมูลประจำตัวไม่ถูกต้อง",
@@ -584,9 +590,11 @@
   "web": {
     "home": {
       "Section1Chess": "โปกเกอร",
-      "Section1Slot": "วิดีโอเกม",
-      "Section1Lottery": "ล็อตเตอร",
-      "Section1FISHing": "เกมตกปลา"
+      "Section1Slot": "เกมสล็อต",
+      "Section1Lottery": "เกมลอตเตอรี",
+      "Section1Fishing": "เกมตกปลา",
+      "Section1Sport": "เกมกีฬา",
+      "Section1Electron": "เกมอิเล็กตรอน"
     },
     "liveGame": {
       "wmDesc": "คนจริงของ WM ที่สร้างขึ้นด้วยสเปคที่สูงนั้นติดตั้งอุปกรณ์ที่ทันสมัยที่สุดและการตกแต่งที่สวยงาม สร้างประสบการณ์การเล่นเกมวิดีโอแบบเรียลไทม์ที่ยอดเยี่ยมสำหรับผู้เล่น",
@@ -828,5 +836,11 @@
   },
   "NT": {
     "slots": "Netent"
+  },  
+  "WGFM": {
+    "sports": "WG Sports"
+  },
+  "WGVIA": {
+    "sports": "WG Horserace"
   }
 }

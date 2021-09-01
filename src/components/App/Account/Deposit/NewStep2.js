@@ -125,15 +125,23 @@ class NewStepTwo extends Component {
             </tr>
             <tr>
               <TitleTD>{i18n.t("deposit.receiverBank")}</TitleTD>
-              <ValueTD>{extended.name}</ValueTD>
+              <ValueTD>
+                {extended
+                  ? extended.name
+                  : this.props.depositDetail.bankaccountname}
+              </ValueTD>
             </tr>
             <tr>
               <TitleTD>{i18n.t("deposit.receiverAccount")}</TitleTD>
-              <ValueTD>{extended.bankAccount}</ValueTD>
+              <ValueTD>
+                {extended ? extended.bankAccount : this.props.bankaccount}
+              </ValueTD>
             </tr>
             <tr>
               <TitleTD>{i18n.t("deposit.orderNumber")}</TitleTD>
-              <ValueTD>{depositResult.data}</ValueTD>
+              <ValueTD>
+                {depositResult ? depositResult.data : this.props.paymentId}
+              </ValueTD>
             </tr>
             <tr>
               <TitleTD>{i18n.t("deposit.depositAmount")}</TitleTD>

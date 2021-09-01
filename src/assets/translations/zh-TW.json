@@ -1,6 +1,12 @@
 {
   "lang": {
-    "language": "語言"
+    "language": "語言",
+    "zh-TW":"繁体",
+    "zh-CN":"简体",
+    "en-US":"English",
+    "th-TH":"ไทย",
+    "id-ID":"Indonesia",
+    "vi-VN":"Tiếng Việt"
   },
   "error": {
     "ERR101": "無效的憑證。",
@@ -316,7 +322,7 @@
           "welcomeBack": "歡迎您回來，",
           "pleaseLogin": "親愛的用戶您好，請先登錄...",
           "profile": "個人資料",
-          "mainAccount": "总资金",
+          "mainAccount": "總資金",
           "loginRegister": "登入/註冊"
         }
       },
@@ -600,9 +606,11 @@
   "web": {
     "home": {
       "Section1Chess": "棋牌遊戲",
-      "Section1Slot": "電子遊戲",
+      "Section1Slot": "老虎機",
       "Section1Lottery": "彩票遊戲",
-      "Section1FISHing": "捕魚游戲"
+      "Section1Fishing": "捕魚游戲",
+      "Section1Sport": "體育電競",
+      "Section1Electron": "電子遊戲"
     },
     "liveGame": {
       "wmDesc": "以高規格打造的WM真人配備最先進的設備以及富麗堂皇的裝潢，為玩家打造絕佳真人視訊遊戲體驗。",
@@ -844,5 +852,11 @@
   },
   "NT": {
     "slots": "Netent老虎機"
+  },
+  "WGFM": {
+    "sports": "WG體育"
+  },
+  "WGVIA": {
+    "sports": "WG賽馬"
   }
 }
