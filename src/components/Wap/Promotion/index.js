@@ -118,20 +118,22 @@ class Promotion extends Component {
         <ListView>
           {this.props.general.promotionList.items.length <= 0 ? (
             <EmptyPromo>
-              <PromoEmptyText>
-                <PromoEmptyTextLine
-                  style={
-                    i18n.language === "en-US"
-                      ? { fontSize: "26px", padding: "0px 32px" }
-                      : {}
-                  }
-                >
-                  {i18n.t("promotion.emptyLine1")}
-                </PromoEmptyTextLine>
-                <PromoEmptyTextLine>
-                  {i18n.t("promotion.emptyLine2")}
-                </PromoEmptyTextLine>
-              </PromoEmptyText>
+              {
+                //      <PromoEmptyText>
+                //      <PromoEmptyTextLine
+                //        style={
+                //          i18n.language === "en-US"
+                //            ? { fontSize: "26px", padding: "0px 32px" }
+                //            : {}
+                //        }
+                //      >
+                //        {i18n.t("promotion.emptyLine1")}
+                //      </PromoEmptyTextLine>
+                //      <PromoEmptyTextLine>
+                //        {i18n.t("promotion.emptyLine2")}
+                //      </PromoEmptyTextLine>
+                //    </PromoEmptyText>
+              }
             </EmptyPromo>
           ) : (
             this.props.general.promotionList.items.map((row, index) => {
