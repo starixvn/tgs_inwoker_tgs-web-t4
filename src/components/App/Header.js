@@ -338,6 +338,12 @@ const StyledAppBar = withStyles((theme) => ({
     },
   },
 }))(AppBar);
+
+const CustomAppBar = styled(StyledAppBar)`
+  display: ${({ hide }) => {
+    return hide ? "none" : "block";
+  }};
+`;
 const styles = {
   root: {
     flexGrow: 1,
@@ -635,7 +641,7 @@ class Header extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <StyledAppBar>
+      <CustomAppBar hide={this.props.hide}>
         <InnerWrap>
           <TopContainer>
             {
@@ -810,7 +816,7 @@ class Header extends Component {
             </RightMenuContainer>
           </BottomContainer>
         </InnerWrap>
-      </StyledAppBar>
+      </CustomAppBar>
     );
   }
 }

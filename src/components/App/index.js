@@ -54,6 +54,7 @@ const Main = styled.div`
 const EmptyHeader = styled.div`
   height: 45px;
   background-color: ${(props) => props.theme.primary};
+  background: black;
 `;
 let csWindowTab = null;
 class App extends Component {
@@ -212,6 +213,8 @@ class App extends Component {
       this.props.history.push("/" + i18n.language + "/account/deposit");
     }
   };
+  path = window.location.pathname.split("/");
+  maintenance = this.path[2] == "maintenance";
 
   render() {
     return (
@@ -230,6 +233,7 @@ class App extends Component {
                 <Header
                   inbox={this.state.inbox}
                   onhandleShowCSClick={this.handleShowCSClick}
+                  hide={this.maintenance}
                 ></Header>
                 <EmptyHeader></EmptyHeader>
                 <Main>
@@ -364,7 +368,7 @@ class App extends Component {
                     <Redirect to={"/" + i18n.language} />
                   </Switch>
                 </Main>
-                <Footer target={"_blank"}></Footer>
+                <Footer hide={this.maintenance} target={"_blank"}></Footer>
               </>
             );
           }
