@@ -13,13 +13,19 @@ const languageSwitcher = (language) => {
       return ``;
   }
 };
+
 export const GlobalStyles = createGlobalStyle`
-    @media (max-width: 800px) {
-      * {
-         font-family: ${languageSwitcher(i18n.language)};
-        }
-     }
+  @media (max-width: 800px) {
+    * {
+      font-family: ${languageSwitcher(i18n.language)};
+    }
+  }
  
+
+  body {
+    background: ${({ theme }) => theme.bodyBackground};
+    background-size: 100%;
+  }
 
 
 `;

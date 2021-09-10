@@ -1,4 +1,7 @@
 //const config = require("./config." + process.env.REACT_APP_CUSTOM_NODE_ENV);
+import { isMobileOnly } from "react-device-detect";
+
+var template = 4; //2 for T2, 3 for T3 (based on .xd file)
 
 const config = {
   baseUrl: window?.env ? "/api/" : "https://dev.operator.tgsdev.gq/api/",
@@ -17,7 +20,8 @@ const config = {
       ],
   defaultLanguage: window?.env?.defaultLanguage || "zh-CN",
   bannerCount: window?.env?.bannerCount || 2,
-  theme: window?.env?.theme || "black",
+  wapVersion: template,
+  theme: window?.env?.theme || (isMobileOnly ? `wapT${template}` : "black"),
   sourceUrl: window?.env?.sourceUrl || "https://images.srvptt.com/",
 };
 
