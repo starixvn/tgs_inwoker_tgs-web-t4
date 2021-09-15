@@ -60,6 +60,7 @@ export const wapT2 = {
   buttonText2: "#C69C6A",
   bottomnav: "#f5f5f5",
   bottomNavAction: "#676767",
+  tabbar: "#fff",
 };
 
 export const wapT3 = {
@@ -83,6 +84,7 @@ export const wapT3 = {
   buttonText2: "#ffffff",
   bottomnav: "#f5f5f5",
   bottomNavAction: "#585858",
+  tabbar: "#161519",
 };
 
 export const wapT4 = {
@@ -109,6 +111,7 @@ export const wapT4 = {
   buttonText2: "#ffffff",
   bottomnav: "#f5f5f5",
   bottomNavAction: "#585858",
+  tabbar: "#161519",
 };
 
 export const wapT5 = {
@@ -131,6 +134,7 @@ export const wapT5 = {
   buttonText2: "#C69C6A",
   bottomnav: "#f5f5f5",
   bottomNavAction: "#585858",
+  tabbar: "#fff",
 };
 
 export const wapT6 = {
@@ -153,6 +157,7 @@ export const wapT6 = {
   buttonText2: "#fff",
   bottomnav: "#464E69",
   bottomNavAction: "#fff",
+  tabbar: "#121315",
 };
 
 export const wapT7 = {
@@ -175,6 +180,7 @@ export const wapT7 = {
   buttonText2: "#fff",
   bottomnav: "#2B2A2A",
   bottomNavAction: "#fff",
+  tabbar: "#121315",
 };
 
 export const themeList = {
