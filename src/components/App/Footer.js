@@ -28,6 +28,9 @@ const Container = styled.div`
     ${({ theme }) => theme.primaryGradient},
     ${({ theme }) => theme.primary}
   );
+  display: ${({ hide }) => {
+    return hide ? "none" : "block";
+  }};
 `;
 
 const AffAndCSContainer = styled.div`
@@ -213,7 +216,7 @@ const settings = {
 function Footer(props) {
   console.log(props.game.providerList);
   return (
-    <Container>
+    <Container hide={props.hide}>
       <MiddleContainer>
         <MiddleInnerWrap>
           <Slider {...settings}>

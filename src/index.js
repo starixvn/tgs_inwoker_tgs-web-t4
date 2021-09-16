@@ -42,6 +42,7 @@ import { ConfigService, rootReducer } from "@Inwoker/tgs-api";
 import Common from "./utils/Common";
 import { ThemeProvider } from "styled-components";
 import { themeList } from "./theme";
+import { GlobalStyles } from "./global";
 require("es6-promise").polyfill();
 const store = createStore(rootReducer, applyMiddleware(thunk));
 Interceptor.setupInterceptors(store);
@@ -200,6 +201,7 @@ const AppWrapper = () => {
       <StylesProvider injectFirst>
         <MuiThemeProvider theme={muiTheme}>
           <ThemeProvider theme={muiThemeMode}>
+            <GlobalStyles />
             <SnackbarProvider
               classes={{
                 variantSuccess: classes.success,

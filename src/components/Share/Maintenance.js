@@ -11,6 +11,7 @@ const Container = styled.div`
   background: url(${MaintenancePNG}) no-repeat center;
   background-size: cover;
   position: relative;
+  height: calc(100vh - 45px);
 `;
 const MaintenanceImage = styled.img`
   margin: 150px auto 30px auto;

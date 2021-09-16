@@ -24,8 +24,10 @@ const moment = require("moment");
 
 const Container = styled.div`
   width: 100%;
-  background: url(${BGPromotionJPG}) no-repeat center top
-    ${(props) => props.primary};
+  background: url(${process.env.PUBLIC_URL +
+    `/assets/images/empty/promo/${i18n.language}.jpg`})
+    no-repeat center top ${(props) => props.primary};
+
   min-height: 800px;
   position: relative;
   padding-top: 100px;
@@ -313,17 +315,19 @@ class Promotion extends Component {
         {this.props.general.promotionList.items &&
         this.props.general.promotionList.items.length <= 0 ? (
           <PromoEmptyContainer>
-            <PromoEmptyText>
-              <PromoEmptyTextLine
-                style={i18n.language === "en-US" ? { fontSize: "58px" } : {}}
-              >
-                {i18n.t("promotion.emptyLine1")}
-              </PromoEmptyTextLine>
-              <PromoEmptyTextLine>
-                {i18n.t("promotion.emptyLine2")}
-              </PromoEmptyTextLine>
-            </PromoEmptyText>
-            <PromoEmptyBg></PromoEmptyBg>
+            {
+              //     <PromoEmptyText>
+              //     <PromoEmptyTextLine
+              //       style={i18n.language === "en-US" ? { fontSize: "58px" } : {}}
+              //     >
+              //       {i18n.t("promotion.emptyLine1")}
+              //     </PromoEmptyTextLine>
+              //     <PromoEmptyTextLine>
+              //       {i18n.t("promotion.emptyLine2")}
+              //     </PromoEmptyTextLine>
+              //   </PromoEmptyText>
+              //   <PromoEmptyBg></PromoEmptyBg>
+            }
           </PromoEmptyContainer>
         ) : (
           <></>

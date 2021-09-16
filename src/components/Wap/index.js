@@ -17,7 +17,7 @@ import {
 } from "@Inwoker/tgs-api";
 import debounce from "lodash.debounce";
 
-import { Wapp, setConfigApi, seti18n } from "@Inwoker/tgs-wap-t1";
+import { Wapp, setConfigApi, seti18n } from "@Inwoker/tgs-wap-t2";
 
 import Loading from "./Share/Loading";
 
