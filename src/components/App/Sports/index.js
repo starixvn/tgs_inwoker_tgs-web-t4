@@ -175,6 +175,39 @@ const TextInsideContainer = styled.div`
   top: 10px;
 `;
 
+const Maintenance = styled.div`
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  display: none;
+  padding-top: 75px;
+`;
+
+const GameWrapper = styled.div`
+  position: relative;
+
+  ${({ maintenance }) => {
+    return maintenance
+      ? `
+
+  ${Maintenance}{
+   
+    display: flex;
+  }
+  ${GirlImage}{
+    filter: brightness(40%) grayscale(200%);
+  }
+  
+  
+  `
+      : ``;
+  }}
+`;
+
 class Sports extends Component {
   constructor(props) {
     super(props);
@@ -238,25 +271,31 @@ class Sports extends Component {
             {this.state.list.map((item) => {
               return (
                 <Grid item lg={12 / this.state.list.length}>
-                  <GirlsContainer
-                    container
-                    direction="column"
-                    alignItems="center"
+                  <GameWrapper
+                    //TODO: To remove
+                    maintenance={true}
                   >
-                    <TheGirlImageContainer1 item>
-                      <GirlImage
-                        onClick={() => {
-                          this.handleJoinGameClick(item.abbreviation);
-                        }}
-                        src={
-                          process.env.PUBLIC_URL +
-                          "/assets/images/pcGamePage/sports/" +
-                          item.abbreviation.toLowerCase() +
-                          ".png"
-                        }
-                      />
-                    </TheGirlImageContainer1>
-                  </GirlsContainer>
+                    <Maintenance>Maintenance</Maintenance>
+                    <GirlsContainer
+                      container
+                      direction="column"
+                      alignItems="center"
+                    >
+                      <TheGirlImageContainer1 item>
+                        <GirlImage
+                          onClick={() => {
+                            this.handleJoinGameClick(item.abbreviation);
+                          }}
+                          src={
+                            process.env.PUBLIC_URL +
+                            "/assets/images/pcGamePage/sports/" +
+                            item.abbreviation.toLowerCase() +
+                            ".png"
+                          }
+                        />
+                      </TheGirlImageContainer1>
+                    </GirlsContainer>
+                  </GameWrapper>
                 </Grid>
               );
             })}

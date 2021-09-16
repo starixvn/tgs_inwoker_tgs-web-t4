@@ -27,7 +27,6 @@ import Common from "../../utils/Common";
 import Config from "../../config/config";
 import i18n from "../../utils/i18n";
 import LanguangeChanger from "./LanguagePicker";
-
 const moment = require("moment");
 
 const InnerWrap = styled.div`
@@ -101,7 +100,6 @@ const LinkList = styled.ul`
 const LinkListItem = styled.li`
   display: inline;
 `;
-
 const LanguageContent = styled.div`
   display: none;
   position: absolute;
@@ -148,8 +146,7 @@ const BottomContainer = styled.div`
   height: 100px;
 `;
 const LogoContainer = styled.div`
-  background-image: url(${process.env
-    .PUBLIC_URL}/assets/images/logo/${Config.brand}.png);
+  background-image: url("${(props) => props.img}");
   background-repeat: no-repeat;
   background-size: auto 60px;
   background-position: left center;
@@ -201,7 +198,7 @@ const MouseOverContainer = styled.div`
 const MouseOverBackground = styled.div`
   width: 100%;
 
-  background-color: rgba(${(props) => props.theme.primaryRgb}, 0.5);
+  background-color: rgba(${(props) => props.theme.primaryRgb}, 0.8);
   height: 160px;
   position: absolute;
   bottom: 30px;
@@ -229,17 +226,6 @@ const MouseOverInner = styled.div`
   margin: 0 auto;
 `;
 
-const GameFrame = styled.div`
-  max-width: 290px;
-  float: left;
-  min-height: 160px;
-  position: relative;
-  transition: transform 0.6s;
-  &:hover {
-    cursor: pointer;
-    transform: scale(1.1);
-  }
-`;
 const GameImg = styled.div`
   background: url(${(props) => props.img}) no-repeat;
   background-position: center bottom;
@@ -329,7 +315,7 @@ const StyledAppBar = withStyles((theme) => ({
       theme.palette.primary.mainRgb +
       ",1) 45px, rgba(" +
       theme.palette.primary.mainRgb +
-      ",0.5) 45px)",
+      ",0.8) 45px)",
     "& .MuiToolbar-regular": {
       margin: "0 auto",
     },
@@ -344,6 +330,59 @@ const CustomAppBar = styled(StyledAppBar)`
     return hide ? "none" : "block";
   }};
 `;
+
+const GameFrameWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  height: 161px;
+`;
+
+const Maintenance = styled.div`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: none;
+
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  cursor: not-allowed;
+  pointer-event: none;
+  color: white;
+  font-size: 24px;
+`;
+
+const GameFrame = styled.div`
+  max-width: 290px;
+  float: left;
+  min-height: 160px;
+  position: relative;
+  transition: transform 0.6s;
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+
+  ${({ maintenance }) => {
+    return maintenance
+      ? `
+      ${GameImg}{
+        filter: brightness(40%) grayscale(200%);
+      }
+
+      ${Maintenance}{
+
+        display: flex;
+      }
+
+  
+    
+    
+    `
+      : ``;
+  }}
+`;
+
 const styles = {
   root: {
     flexGrow: 1,
@@ -644,33 +683,31 @@ class Header extends Component {
       <CustomAppBar hide={this.props.hide}>
         <InnerWrap>
           <TopContainer>
-            {
-              //     <TimerContainer>
-              //     <TimerLogo></TimerLogo>
-              //     <TimerSpan>GMT+8 {this.state.systemDateTime}</TimerSpan>
-              //   </TimerContainer>
-              //   <LinkContainer>
-              //     <LinkList>
-              //       <LinkListItem>
-              //         {config.languages.map((lang, index) => {
-              //           return (
-              //             <>
-              //               <CustomExternalLink
-              //                 selected={i18n.language === lang.name}
-              //                 onClick={() => {
-              //                   window.location.href = `/${lang.name}`;
-              //                 }}
-              //               >
-              //                 {lang.label}
-              //               </CustomExternalLink>
-              //               {index < config.languages.length - 1 ? " | " : ""}
-              //             </>
-              //           );
-              //         })}
-              //       </LinkListItem>
-              //     </LinkList>
-              //   </LinkContainer>
-            }
+            {/* <TimerContainer>
+              <TimerLogo></TimerLogo>
+              <TimerSpan>GMT+8 {this.state.systemDateTime}</TimerSpan>
+            </TimerContainer>
+            <LinkContainer>
+              <LinkList>
+                <LinkListItem>
+                  {config.languages.map((lang, index) => {
+                    return (
+                      <>
+                        <CustomExternalLink
+                          selected={i18n.language === lang.name}
+                          onClick={() => {
+                            window.location.href = `/${lang.name}`;
+                          }}
+                        >
+                          {lang.label}
+                        </CustomExternalLink>
+                        {index < config.languages.length - 1 ? " | " : ""}
+                      </>
+                    );
+                  })}
+                </LinkListItem>
+              </LinkList>
+            </LinkContainer> */}
             <RightContainer>
               <LanguageContainer>
                 <LanguangeChanger language={this.props.general.brandLanguage} />
@@ -703,6 +740,10 @@ class Header extends Component {
           </TopContainer>
           <BottomContainer>
             <LogoContainer
+              img={
+                this.props.general.brand &&
+                this.props.general.brand.desktopLogoUrl
+              }
               onClick={this.onhandleLogoClick}
               className={`${
                 this.state.shouldShow === null
@@ -770,32 +811,37 @@ class Header extends Component {
                                     style={{
                                       width: `calc(1264px/${list.length})`,
                                     }}
+                                    //TODO: To remove
+                                    maintenance={true}
                                   >
-                                    <GameImg
-                                      index={index}
-                                      img={`${
-                                        process.env.PUBLIC_URL
-                                      }/assets/images/pcHeaderMenu/${
-                                        item.path
-                                      }/${game.abbreviation.toLowerCase()}.png`}
-                                      text={i18n.t(
-                                        `${game.abbreviation}.${item.path}`
-                                      )}
-                                      alt=""
-                                      onClick={() => {
-                                        this.handleJoinGameClick(
-                                          game.type,
-                                          item.path,
-                                          game.abbreviation,
-                                          "/" +
-                                            i18n.language +
-                                            "/joingame/" +
-                                            game.type +
+                                    <GameFrameWrapper>
+                                      <Maintenance>maintenance</Maintenance>
+                                      <GameImg
+                                        index={index}
+                                        img={`${
+                                          process.env.PUBLIC_URL
+                                        }/assets/images/pcHeaderMenu/${
+                                          item.path
+                                        }/${game.abbreviation.toLowerCase()}.png`}
+                                        text={i18n.t(
+                                          `${game.abbreviation}.${item.path}`
+                                        )}
+                                        alt=""
+                                        onClick={() => {
+                                          this.handleJoinGameClick(
+                                            game.type,
+                                            item.path,
+                                            game.abbreviation,
                                             "/" +
-                                            game.abbreviation
-                                        );
-                                      }}
-                                    ></GameImg>
+                                              i18n.language +
+                                              "/joingame/" +
+                                              game.type +
+                                              "/" +
+                                              game.abbreviation
+                                          );
+                                        }}
+                                      ></GameImg>
+                                    </GameFrameWrapper>
                                   </GameFrame>
                                 );
                               });

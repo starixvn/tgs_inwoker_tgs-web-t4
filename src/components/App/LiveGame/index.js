@@ -42,6 +42,44 @@ const RightSlide = styled(ScrollAnimation)`
   margin-left: -594px;
   width: 1053px;
 `;
+
+const Maintenance = styled.div`
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  display: none;
+  padding-top: 75px;
+  padding-right: 55px;
+`;
+
+const GameWrapper = styled.div`
+  width: 308px;
+  height: 244px;
+  float: right;
+  position: relative;
+
+  ${({ maintenance }) => {
+    return maintenance
+      ? `
+
+  ${Maintenance}{
+   
+    display: flex;
+  }
+  ${GirlImage}{
+    filter: brightness(40%) grayscale(200%);
+  }
+  
+  
+  `
+      : ``;
+  }}
+`;
+
 class LiveGame extends Component {
   constructor(props) {
     super(props);
@@ -124,17 +162,25 @@ class LiveGame extends Component {
           {this.state.list.map((item, index) => {
             if (index < 3) {
               return (
-                <GirlImage
-                  img={
-                    process.env.PUBLIC_URL +
-                    "/assets/images/pcGamePage/live/" +
-                    item.abbreviation.toLowerCase() +
-                    ".png"
-                  }
-                  onClick={() => {
-                    this.handleJoinGameClick(item.abbreviation);
-                  }}
-                />
+                <GameWrapper
+
+                //TODO: To remove
+                //  maintenance={true}
+                >
+                  <Maintenance>Maintenance</Maintenance>
+                  <GirlImage
+                    style={{ float: "right" }}
+                    img={
+                      process.env.PUBLIC_URL +
+                      "/assets/images/pcGamePage/live/" +
+                      item.abbreviation.toLowerCase() +
+                      ".png"
+                    }
+                    onClick={() => {
+                      this.handleJoinGameClick(item.abbreviation);
+                    }}
+                  />
+                </GameWrapper>
               );
             }
           })}
@@ -148,18 +194,24 @@ class LiveGame extends Component {
           {this.state.list.map((item, index) => {
             if (index >= 3) {
               return (
-                <GirlImage
-                  style={{ float: "right" }}
-                  img={
-                    process.env.PUBLIC_URL +
-                    "/assets/images/pcGamePage/live/" +
-                    item.abbreviation.toLowerCase() +
-                    ".png"
-                  }
-                  onClick={() => {
-                    this.handleJoinGameClick(item.abbreviation);
-                  }}
-                />
+                <GameWrapper
+                //TODO: To remove
+                //  maintenance={true}
+                >
+                  <Maintenance>Maintenance</Maintenance>
+                  <GirlImage
+                    style={{ float: "right" }}
+                    img={
+                      process.env.PUBLIC_URL +
+                      "/assets/images/pcGamePage/live/" +
+                      item.abbreviation.toLowerCase() +
+                      ".png"
+                    }
+                    onClick={() => {
+                      this.handleJoinGameClick(item.abbreviation);
+                    }}
+                  />
+                </GameWrapper>
               );
             }
           })}
