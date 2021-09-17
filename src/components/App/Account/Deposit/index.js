@@ -23,7 +23,7 @@ import Step2Form from "./Step2Form";
 
 import Success from "./Success";
 import i18n from "../../../../utils/i18n";
-
+import ErrorSwitcher from "../../../../utils/ErrorSwitcher";
 import NewStepOne from "./NewStep1";
 import NewStepTwo from "./NewStep2";
 const Container = styled.div`
@@ -147,13 +147,49 @@ class Deposit extends Component {
       channelname: "",
       methodcode: "",
       bankaccount: "",
+      paymenturl: "",
     };
     this.state = this.initialState;
   }
 
   componentDidMount() {
+    localStorage.removeItem("depositResult");
     this.props.getDepositMethod();
-    this.props.getPlayerPromotionList();
+    this.props.getPlayerPromotionList(i18n.language);
+    window.addEventListener("storage", (ev) => {
+      if (ev.key === "depositResult" && ev.newValue) {
+        var depositResult = JSON.parse(ev.newValue);
+
+        if (depositResult !== null && depositResult.IsSuccess) {
+          var payment =
+            this.props.wallet.depositTypeList[this.state.selectedPaymentIndex];
+          // var paymenturl = "";
+          // if (payment.paymentcode.toUpperCase() !== "MANUAL") {
+          //   paymenturl = response.data.paymenturl;
+          //   window.open(paymenturl, "_blank");
+          // }
+
+          this.setState({
+            ...this.state,
+            step: payment.paymentcode.toUpperCase() === "MANUAL" ? 2 : 3,
+            depositResult: depositResult,
+            loading: false,
+          });
+        } else {
+          this.props.enqueueSnackbar(
+            ErrorSwitcher.getTranslation(depositResult.info),
+            {
+              variant: "error",
+            }
+          );
+
+          this.setState({
+            ...this.state,
+            loading: false,
+          });
+        }
+      }
+    });
     if (this.state.paymentId) {
       WalletService.PerformGetManualDepositDetail(this.state.paymentId).then(
         (e) => {
@@ -182,19 +218,25 @@ class Deposit extends Component {
         const response = this.props.wallet.depositResult;
         var payment =
           this.props.wallet.depositTypeList[this.state.selectedPaymentIndex];
-
-        if (payment.paymentcode.toUpperCase() !== "MANUAL")
-          window.open(response.data.paymenturl, "_blank");
+        var paymenturl = "";
+        if (payment.paymentcode.toUpperCase() !== "MANUAL") {
+          paymenturl = response.data.paymenturl;
+          window.open(paymenturl, "_blank");
+        }
 
         this.setState({
           ...this.state,
           step: payment.paymentcode.toUpperCase() === "MANUAL" ? 2 : 3,
+          paymenturl: paymenturl,
           loading: false,
         });
       } else {
-        this.props.enqueueSnackbar(this.props.wallet.depositResult.info, {
-          variant: "error",
-        });
+        this.props.enqueueSnackbar(
+          ErrorSwitcher.getTranslation(this.props.wallet.depositResult.info),
+          {
+            variant: "error",
+          }
+        );
         // if (this.props.wallet.depositResult.code === 407) {
         //   this.props.enqueueSnackbar(i18n.t("deposit.msgFailedJoinPromotion"), {
         //     variant: "error",
@@ -224,9 +266,15 @@ class Deposit extends Component {
           loading: false,
         });
       } else {
-        this.props.enqueueSnackbar(this.props.wallet.depositUploadResult.info, {
-          variant: "error",
-        });
+        this.props.enqueueSnackbar(
+          ErrorSwitcher.getTranslation(
+            this.props.wallet.depositUploadResult.info
+          ),
+          {
+            variant: "error",
+          }
+        );
+
         this.setState({ ...this.state, loading: false });
       }
     }
@@ -287,6 +335,11 @@ class Deposit extends Component {
     }
   }
 
+  componentWillUnmount() {
+    window.onstorage = null;
+    localStorage.removeItem("depositResult");
+  }
+
   handleTabClick = (item, index) => {
     if (this.state.step === 1) {
       this.setState({
@@ -312,6 +365,7 @@ class Deposit extends Component {
       ...this.state,
       amount: "",
       selectedMethodIndex: index,
+      selectedChannelIndex: 0,
     });
   };
   handleNextClick = (e) => {
@@ -322,6 +376,17 @@ class Deposit extends Component {
     var method = payment.method[this.state.selectedMethodIndex];
 
     var channel = method.channel[this.state.selectedChannelIndex];
+
+    window.open(
+      `/${i18n.language}/deposit/${payment.paymentcode}/${method.methodcode}/${
+        channel.id
+      }/${this.state.amount.replace(/,/g, "")}/${
+        this.state.depositPromotion ? this.state.depositPromotion : " "
+      }/${this.state.name}`,
+      "_blank"
+    );
+
+    return;
 
     if (payment.paymentcode.toUpperCase() === "MANUAL") {
       // handle manual deposit
@@ -341,6 +406,12 @@ class Deposit extends Component {
         );
       } else if (payment.paymentcode.toUpperCase() === "PRIMEPAY") {
         this.props.doPrimePayDeposit(
+          this.state.amount.replace(/,/g, ""),
+          channel.id,
+          this.state.depositPromotion
+        );
+      } else if (payment.paymentcode.toUpperCase() === "MATICPAY") {
+        this.props.doMaticPayDeposit(
           this.state.amount.replace(/,/g, ""),
           channel.id,
           this.state.depositPromotion
@@ -436,8 +507,8 @@ class Deposit extends Component {
 
   performUploadImage = (file) => {
     this.props.doUploadDepositProof(
-      this.props.wallet.depositResult
-        ? this.props.wallet.depositResult.data
+      this.state.depositResult
+        ? this.state.depositResult.data
         : this.state.paymentId,
       file
     );
@@ -519,7 +590,7 @@ class Deposit extends Component {
                 this.state.selectedChannelIndex
               ].channelname
             }
-            depositResult={this.props.wallet.depositResult}
+            depositResult={this.state.depositResult}
             amount={this.state.amount}
             performUploadImage={this.performUploadImage}
             handleRestartClick={this.handleRestartClick}
@@ -546,7 +617,8 @@ class Deposit extends Component {
                 this.state.selectedChannelIndex
               ]
             }
-            depositResult={this.props.wallet.depositResult}
+            depositResult={this.state.depositResult}
+            paymenturl={this.state.paymenturl}
             amount={this.state.amount}
             handleRestartClick={this.handleRestartClick}
           ></Step2Form>
@@ -561,7 +633,7 @@ class Deposit extends Component {
             depositDetail={this.state.depositDetail}
             bankaccount={this.state.bankaccount}
             paymentId={this.state.paymentId}
-            depositResult={this.props.wallet.depositResult}
+            depositResult={this.state.depositResult}
             amount={this.state.amount}
             performUploadImage={this.performUploadImage}
             handleRestartClick={this.handleRestartClick}
@@ -719,6 +791,8 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(walletAction.doLeePayDeposit(amount, payment_id, promotionid)),
     doPrimePayDeposit: (amount, payment_id, promotionid) =>
       dispatch(walletAction.doPrimePayDeposit(amount, payment_id, promotionid)),
+    doMaticPayDeposit: (amount, payment_id, promotionid) =>
+      dispatch(walletAction.doMaticPayDeposit(amount, payment_id, promotionid)),
     doApplePayDeposit: (amount, payment_id, promotionid, transname) =>
       dispatch(
         walletAction.doApplePayDeposit(

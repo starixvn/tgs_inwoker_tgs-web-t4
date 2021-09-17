@@ -43,6 +43,7 @@ import Common from "./utils/Common";
 import { ThemeProvider } from "styled-components";
 import { themeList } from "./theme";
 import { GlobalStyles } from "./global";
+import Deposit from "./components/Share/Deposit";
 require("es6-promise").polyfill();
 const store = createStore(rootReducer, applyMiddleware(thunk));
 Interceptor.setupInterceptors(store);
@@ -228,6 +229,14 @@ const AppWrapper = () => {
             >
               <Router history={AppHistory}>
                 <Switch>
+                  <Route
+                    exact
+                    path={
+                      Common.baseRouteUrl +
+                      "/deposit/:paymentcode/:methodcode/:channelid/:amount/:promotion/:name?"
+                    }
+                    component={Deposit}
+                  />
                   <Route
                     exact
                     path={
