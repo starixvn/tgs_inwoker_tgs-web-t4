@@ -377,6 +377,12 @@ class Withdrawal extends Component {
                                 this.handleWithdrawalClick
                               }
                               account={this.props.account}
+                              withdrawalMinLimit={
+                                this.props.wallet.withdrawalMinLimit
+                              }
+                              withdrawalMaxLimit={
+                                this.props.wallet.withdrawalMaxLimit
+                              }
                             ></Main>
                           );
                         case 2:

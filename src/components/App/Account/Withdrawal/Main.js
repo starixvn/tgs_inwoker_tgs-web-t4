@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import CurrencyTextField from "@unicef/material-ui-currency-textfield";
 import LimitPopupBigPNG from "../../../../assets/images/limit-popup-big.png";
-
+import LimitPopupPNG from "../../../../assets/images/limit-popup.png";
 import IconEditPNG from "../../../../assets/images/icon-edit.png";
 import IconBankDisablePNG from "../../../../assets/images/icon-bank-disable.png";
 
@@ -11,6 +11,7 @@ import CustomButton from "../../../Share/Button";
 import Messagebox from "../../Messagebox";
 import CustomTextField from "../../../Share/TextField";
 import i18n from "../../../../utils/i18n";
+import Common from "../../../../utils/Common";
 const TabButton = styled.div`
   height: 41px;
   font-size: 14px;
@@ -86,14 +87,15 @@ const SplitLine = styled.div`
 `;
 
 const LimitPopupContainer = styled.div`
-  background: url(${LimitPopupBigPNG}) no-repeat,
-    linear-gradient(90deg, rgba(2, 0, 36, 0) 9px, rgba(122, 145, 153, 1) 10px);
+  background: url(${LimitPopupPNG}) no-repeat,
+    linear-gradient(90deg, rgba(2, 0, 36, 0) 10px, rgb(242, 230, 125) 11px);
   font-size: 14px;
-  color: #ffffff;
-  padding: 10px 10px 10px 25px;
+  color: #000;
+  padding: 10px 10px 10px 22px;
   border-radius: 4px;
   display: inline-block;
-  line-height: 25px;
+  min-width: 150px;
+  margin-top: 10px;
 `;
 
 const WithdrawalLimitListItem = styled.div`
@@ -206,9 +208,10 @@ class Main extends Component {
             type={"number"}
             maxLength={12}
           ></CustomTextField>
-          {/* <LimitPopupContainer>
-            {i18n.t("withdrawal.msgWithdrawalAmount")}
-          </LimitPopupContainer> */}
+          <LimitPopupContainer>
+            {Common.formatNumberWithThousand(this.props.withdrawalMinLimit)} -{" "}
+            {Common.formatNumberWithThousand(this.props.withdrawalMaxLimit)}
+          </LimitPopupContainer>
         </SelectionContainer>
         <SplitLine></SplitLine>
         <SubHeaderContainer>
@@ -236,6 +239,11 @@ class Main extends Component {
           float={"none"}
           marginLeft={290}
           handleClick={this.handleWithdrawalClick}
+          disabled={
+            parseFloat(this.state.amount) < this.props.withdrawalMinLimit ||
+            parseFloat(this.state.amount) > this.props.withdrawalMaxLimit ||
+            this.state.password === ""
+          }
         ></CustomButton>
       </>
     );
