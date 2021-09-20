@@ -54,6 +54,7 @@ const Maintenance = styled.div`
   display: none;
   padding-top: 75px;
   padding-right: 55px;
+  text-transform: capitalize;
 `;
 
 const GameWrapper = styled.div`
@@ -162,12 +163,8 @@ class LiveGame extends Component {
           {this.state.list.map((item, index) => {
             if (index < 3) {
               return (
-                <GameWrapper
-
-                //TODO: To remove
-                //  maintenance={true}
-                >
-                  <Maintenance>Maintenance</Maintenance>
+                <GameWrapper maintenance={item.status != 0}>
+                  <Maintenance>{i18n.t("transfer.maintenance")}</Maintenance>
                   <GirlImage
                     style={{ float: "right" }}
                     img={
@@ -194,11 +191,8 @@ class LiveGame extends Component {
           {this.state.list.map((item, index) => {
             if (index >= 3) {
               return (
-                <GameWrapper
-                //TODO: To remove
-                //  maintenance={true}
-                >
-                  <Maintenance>Maintenance</Maintenance>
+                <GameWrapper maintenance={item.status != 0}>
+                  <Maintenance>{i18n.t("transfer.maintenance")}</Maintenance>
                   <GirlImage
                     style={{ float: "right" }}
                     img={

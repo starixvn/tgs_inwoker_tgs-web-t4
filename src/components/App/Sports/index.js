@@ -271,11 +271,8 @@ class Sports extends Component {
             {this.state.list.map((item) => {
               return (
                 <Grid item lg={12 / this.state.list.length}>
-                  <GameWrapper
-                    //TODO: To remove
-                    maintenance={true}
-                  >
-                    <Maintenance>Maintenance</Maintenance>
+                  <GameWrapper maintenance={item.status != 0}>
+                    <Maintenance>{i18n.t("transfer.maintenance")}</Maintenance>
                     <GirlsContainer
                       container
                       direction="column"

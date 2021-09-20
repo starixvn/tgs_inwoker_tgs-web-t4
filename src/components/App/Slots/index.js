@@ -81,6 +81,23 @@ const GameTab = styled.div`
   left: 50%;
   transform: translateY(-50%) translateX(-50%);
 `;
+
+const DisabledOverlay = styled.div`
+  height: 100%;
+  width: 100&;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  cursor: not-allowed;
+  background: rgba(0, 0, 0, 0.75);
+  position: relative;
+  color: white;
+  font-weight: bold;
+  pointer-event: none;
+  text-transform: capitalize;
+  z-index: 3;
+`;
+
 const GameTabButton = styled.div`
   width: 141px;
   height: 76px;
@@ -115,6 +132,23 @@ const GameTabButton = styled.div`
         props.theme.primary +
         `);`
       : `  background-color: #EEEEEE;`};
+
+  ${({ maintenance }) => {
+    return maintenance
+      ? `
+              pointer-events: none !important;
+            ${DisabledOverlay}{
+              display: flex; 
+              pointer-events: none !important;
+            }
+        
+            ${GameTab}{
+              pointer-events: none;
+              z-index: -1;
+            }
+            `
+      : ``;
+  }}
 `;
 
 const GameTabAll = styled(GameTabButton)`
@@ -749,7 +783,11 @@ class Slots extends Component {
                     img={row.abbreviation.toLowerCase()}
                     active={this.state.platform == row.abbreviation}
                     onClick={() => this.handleParentClick(row.abbreviation)}
+                    maintenance={row.status != 0}
                   >
+                    <DisabledOverlay>
+                      {i18n.t("transfer.maintenance")}
+                    </DisabledOverlay>
                     <GameTab
                       img={row.abbreviation.toLowerCase()}
                       active={this.state.platform == row.abbreviation}
