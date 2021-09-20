@@ -14,6 +14,7 @@ import { Grid, Container as MContainer } from "@material-ui/core";
 
 import i18n from "../../../utils/i18n";
 import ScrollAnimation from "react-animate-on-scroll";
+import config from "../../../config/config";
 const Container = styled.div`
   margin-top: 100px;
 
@@ -45,8 +46,21 @@ const CenterText = styled.div`
   color: #fff;
 `;
 
-const LogoHolder = styled.img`
-  margin-bottom: 30px;
+const LogoHolder = styled.div`
+  height: 150px;
+  width: 150px;
+
+  ${({ selected, src }) => {
+    return selected === true
+      ? `background: url(${src})
+      no-repeat center / contain;`
+      : `background: #474747; -webkit-mask: url(${src})
+    no-repeat center / contain;`;
+  }}
+  cursor: pointer;
+
+  background-size: 100%;
+  margin: 10px 20px;
 `;
 const MiddleDesc = styled(ScrollAnimation)`
   position: absolute;
@@ -72,6 +86,12 @@ const JoinGameButton = styled.div`
     cursor: pointer;
     color: #000;
   }
+`;
+
+const LogoHolderContainer = styled.div`
+  display: flex;
+  flex-flow: wrap;
+  justify-content: center;
 `;
 class Lottery extends Component {
   constructor(props) {
@@ -107,7 +127,7 @@ class Lottery extends Component {
 
       this.setState({
         ...this.state,
-        selected: lotteryList[0],
+        selected: lotteryList[0].abbreviation,
 
         list: lotteryList,
       });
@@ -148,14 +168,47 @@ class Lottery extends Component {
               alignItems="center"
               style={{ height: "100%" }}
             >
-              <LogoHolder
-                src={`${process.env.PUBLIC_URL}/assets/images/pcGamePage/lottery/logo.png`}
-              />
+              <LogoHolderContainer>
+                {this.state.list
+                  .filter((a) => {
+                    if (a.abbreviation.includes("TCG")) {
+                      switch (config.currency) {
+                        case "CNY":
+                          return (
+                            a.abbreviation === "TCG_LOTTO" ||
+                            a.abbreviation === "TCG_SEA"
+                          );
+                        case "VND":
+                          return (
+                            a.abbreviation === "TCG_LOTTO_VN" ||
+                            a.abbreviation === "TCG_SEA"
+                          );
+                        default:
+                          return "";
+                      }
+                    } else {
+                      return a;
+                    }
+                  })
+                  .map((data, index) => {
+                    return (
+                      <LogoHolder
+                        id={data.abbreviation}
+                        selected={this.state.selected === data.abbreviation}
+                        src={`${process.env.PUBLIC_URL}/assets/images/pcGamePage/lottery/${data.abbreviation}.png`}
+                        onClick={() => {
+                          this.handleGameChange(data.abbreviation);
+                        }}
+                      />
+                    );
+                  })}
+              </LogoHolderContainer>
+
               <CenterText>{i18n.t("VR.desc")}</CenterText>
 
               <JoinGameButton
                 onClick={() => {
-                  this.handleJoinGameClick("vr");
+                  this.handleJoinGameClick(this.state.selected);
                 }}
               >
                 {i18n.t("common.joinGame")}
