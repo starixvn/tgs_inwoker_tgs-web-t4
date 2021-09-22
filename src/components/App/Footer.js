@@ -214,7 +214,6 @@ const settings = {
   infinite: true,
 };
 function Footer(props) {
-  console.log(props.game.providerList);
   return (
     <Container hide={props.hide}>
       <MiddleContainer>

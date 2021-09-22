@@ -71,11 +71,19 @@ export default {
 
         if (newResponse.code === 0) {
           newResponse.IsSuccess = true;
-        } else if (newResponse.code === 102 || newResponse.code === 101) {
+        } else if (
+          newResponse.code === 102 ||
+          newResponse.code === 101 ||
+          newResponse.code === 210
+        ) {
           localStorage.removeItem("token" + (isMobileOnly ? "1" : "0"));
           store.dispatch({ type: UNAUTHORIZE });
 
-          AppHistory.replace("/" + i18n.language + "/");
+          if (newResponse.code === 210) {
+            AppHistory.replace("/" + i18n.language + "/banned");
+          } else {
+            AppHistory.replace("/" + i18n.language + "/");
+          }
         }
 
         return newResponse;
@@ -85,6 +93,7 @@ export default {
           if (
             error.response.data.err == 102 ||
             error.response.data.err == 101 ||
+            error.response.data.err == 210 ||
             error.response.data.errmsg ===
               "request platform is not matched with player login platform."
           ) {
@@ -94,8 +103,11 @@ export default {
             ) {
               localStorage.removeItem("token" + (isMobileOnly ? "1" : "0"));
               store.dispatch({ type: UNAUTHORIZE });
-
-              AppHistory.replace("/" + i18n.language + "/");
+              if (error.response.data.err == 210) {
+                AppHistory.replace("/" + i18n.language + "/banned");
+              } else {
+                AppHistory.replace("/" + i18n.language + "/");
+              }
             }
           }
           return {

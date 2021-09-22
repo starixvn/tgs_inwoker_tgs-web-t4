@@ -47,6 +47,7 @@ import { SupportService } from "@Inwoker/tgs-api";
 import i18n from "../../utils/i18n";
 import Fishing from "./Fishing";
 import Maintenance from "../Share/Maintenance";
+import Banned from "./Banned";
 const baseRouteUrl = Common.baseRouteUrl;
 const Main = styled.div`
   min-height: 600px;
@@ -347,6 +348,13 @@ class App extends Component {
                       path={baseRouteUrl + "/maintenance"}
                       render={(props) => (
                         <Maintenance onhandleCSClick={this.GetSupportUrl} />
+                      )}
+                    />
+                    <Route
+                      exact
+                      path={baseRouteUrl + "/banned"}
+                      render={(props) => (
+                        <Banned onhandleCSClick={this.GetSupportUrl} />
                       )}
                     />
                     <Route

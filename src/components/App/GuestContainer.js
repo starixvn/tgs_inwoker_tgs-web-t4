@@ -5,7 +5,7 @@ import { withRouter } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import Dialog from "@material-ui/core/Dialog";
 import Login from "./Login";
-
+import { AppHistory } from "../../history/History";
 import ForgotPasswordEmail from "./ForgotPasswordEmail";
 
 import ResetPassword from "./ResetPassword";
@@ -335,6 +335,9 @@ class GuestContainer extends Component {
 
     if (result.code === 101 && result.IsSuccess === false) {
       this.props.showLogin(true);
+    } else if (result.code === 210) {
+      this.onhandleCloseDialog();
+      AppHistory.replace("/" + i18n.language + "/banned");
     } else {
     }
     if (result.IsSuccess) {

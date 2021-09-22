@@ -331,6 +331,11 @@ const RouteMapping = [
     component: Wapp.Maintenance,
     navigate: true,
   },
+  {
+    path: "/banned",
+    component: Wapp.Banned,
+    navigate: true,
+  },
   // {
   //   path: "/card/name",
   //   component: NameVerification,

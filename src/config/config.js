@@ -4,7 +4,7 @@ import { isMobileOnly } from "react-device-detect";
 var template = 4; //2 for T2, 3 for T3 (based on .xd file)
 
 const config = {
-  baseUrl: window?.env ? "/api/" : "https://dev.operator.tgsdev.gq/api/",
+  baseUrl: window?.env ? "/api/" : "https://dev-op.rpgp.cc/api/",
   client:
     window?.env?.client ||
     "I7nKiimrZQOqnJ6ryjUw74c0Hi64KC6Myunhob4cHh8VOUIuZh4p63czefxyyzbZ",
