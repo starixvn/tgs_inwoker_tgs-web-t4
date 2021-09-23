@@ -144,7 +144,7 @@ const GameTabButton = styled.div`
         
             ${GameTab}{
               pointer-events: none;
-              z-index: -1;
+             
             }
             `
       : ``;
@@ -728,6 +728,9 @@ class Slots extends Component {
             return a.name
               .toUpperCase()
               .includes(this.state.keyword.toUpperCase());
+        })
+        .filter((s) => {
+          return s.isactive === true; // show only active game.
         })
         .map((el, i) => (
           <ItemContainer

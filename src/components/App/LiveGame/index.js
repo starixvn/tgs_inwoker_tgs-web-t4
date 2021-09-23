@@ -53,8 +53,9 @@ const Maintenance = styled.div`
   color: white;
   display: none;
   padding-top: 75px;
-  padding-right: 55px;
   text-transform: capitalize;
+  font-weight: bold;
+  font-size: 35px;
 `;
 
 const GameWrapper = styled.div`
@@ -72,7 +73,7 @@ const GameWrapper = styled.div`
     display: flex;
   }
   ${GirlImage}{
-    filter: brightness(40%) grayscale(200%);
+    filter: brightness(20%) grayscale(200%);
   }
   
   
