@@ -5,7 +5,7 @@ import styled, { css, keyframes } from "styled-components";
 import BtnRedPNG from "../../../assets/images/btn-red.png";
 import BtnRedHoverPNG from "../../../assets/images/btn-red-hover.png";
 
-import { SHOW_LOGIN, GameEnum, GameTypeEnum } from "@Inwoker/tgs-api";
+import { SHOW_LOGIN, GameService, GameTypeEnum } from "@Inwoker/tgs-api";
 
 import _633Lottery from "../../../assets/images/lottery/633-lotteryball.png";
 import _633Description from "../../../assets/images/lottery/633-lotterydescription.png";
@@ -133,18 +133,24 @@ class Lottery extends Component {
       });
     }
   }
-  handleJoinGameClick = (params) => {
+  handleJoinGameClick = (name) => {
     if (this.props.account.token != null) {
-      window.open(
-        "/" +
-          i18n.language +
-          "/joingame/" +
-          GameTypeEnum.LOTTERYLOBBY +
-          "/" +
-          params.toUpperCase(),
-        "_blank",
-        "directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=1280,height=720"
-      );
+      GameService.GetGameList(name, GameTypeEnum.LOTTERYLOBBY).then((e) => {
+        if (e.IsSuccess) {
+          GameService.JoinGame(e.data[0].id, name).then((response) => {
+            if (response.IsSuccess) {
+              this.setState({ ...this.state, maintenance: false });
+              window.open(
+                response.data.url,
+                "_blank",
+                "directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=1280,height=720"
+              );
+            } else {
+              this.setState({ ...this.state, maintenance: true });
+            }
+          });
+        }
+      });
     } else {
       this.props.showLogin(true);
     }
@@ -169,39 +175,18 @@ class Lottery extends Component {
               style={{ height: "100%" }}
             >
               <LogoHolderContainer>
-                {this.state.list
-                  .filter((a) => {
-                    if (a.abbreviation.includes("TCG")) {
-                      switch (config.currency) {
-                        case "CNY":
-                          return (
-                            a.abbreviation === "TCG_LOTTO" ||
-                            a.abbreviation === "TCG_SEA"
-                          );
-                        case "VND":
-                          return (
-                            a.abbreviation === "TCG_LOTTO_VN" ||
-                            a.abbreviation === "TCG_SEA"
-                          );
-                        default:
-                          return a.abbreviation === "TCG_SEA";
-                      }
-                    } else {
-                      return a;
-                    }
-                  })
-                  .map((data, index) => {
-                    return (
-                      <LogoHolder
-                        id={data.abbreviation}
-                        selected={this.state.selected === data.abbreviation}
-                        src={`${process.env.PUBLIC_URL}/assets/images/pcGamePage/lottery/${data.abbreviation}.png`}
-                        onClick={() => {
-                          this.handleGameChange(data.abbreviation);
-                        }}
-                      />
-                    );
-                  })}
+                {this.state.list.map((data, index) => {
+                  return (
+                    <LogoHolder
+                      id={data.abbreviation}
+                      selected={this.state.selected === data.abbreviation}
+                      src={`${process.env.PUBLIC_URL}/assets/images/pcGamePage/lottery/${data.abbreviation}.png`}
+                      onClick={() => {
+                        this.handleGameChange(data.abbreviation);
+                      }}
+                    />
+                  );
+                })}
               </LogoHolderContainer>
 
               <CenterText>{i18n.t("VR.desc")}</CenterText>
