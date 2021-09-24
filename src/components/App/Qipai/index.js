@@ -16,94 +16,76 @@ const Container = styled.div`
 
   width: 100%;
   height: auto;
-  min-height: 720px;
-
+  min-height: 770px;
+  padding: 70px 0px;
   position: relative;
   background: url(${(props) =>
       process.env.PUBLIC_URL}/assets/images/pcGamePage/qipai/background.jpg)
-    no-repeat center 0px;
+    no-repeat center;
 `;
-
-const leftRightLeft = keyframes`
-from  {
-  -webkit-transform:translate3d(-30px,0,0);
-  opacity:0;
-  transform:translate3d(-30px,0,0);
- 
-}
-to{
-  -webkit-transform:translateZ(0);
-  opacity:1;
-  transform:translateZ(0);
-}
-  `;
-
-const rightLeftRight = keyframes`
-from{
-  -webkit-transform:translate3d(30px,0,0);
-  opacity:0;
-  transform:translate3d(30px,0,0);
-
-}
-to{
-  -webkit-transform:translateZ(0);
-  opacity:1;
-  transform:translateZ(0);
-
-}
-  `;
-
-const LeftGirl = styled.img`
-  animation: ${leftRightLeft} 800ms forwards;
-`;
-
-const RightGirl = styled.img`
-  animation: ${rightLeftRight} 800ms forwards;
-`;
-
-const CenterText = styled.div`
-  text-align: center;
-  color: #fff;
-  line-height: 1.25rem;
-  margin-bottom: 50px;
-`;
-
-const LogoHolder = styled.img`
-  margin-bottom: 30px;
-`;
-const Model = styled(ScrollAnimation)`
-  background: url(${(props) => props.img}) no-repeat center;
-  height: 785px;
-  width: 740px;
-  position: absolute;
-  left: 50%;
-  margin-left: -225px;
-  bottom: -100px;
-`;
-const MiddleDesc = styled(ScrollAnimation)`
-  position: absolute;
-
-  right: 50%;
-  margin-right: 100px !important;
-  width: 470px;
-  top: 150px;
-`;
-const JoinGameButton = styled.div`
-  width: 261px;
-  height: 76px;
-  background: url(${process.env
-      .PUBLIC_URL}/assets/images/pcGamePage/qipai/button.png)
-    no-repeat;
-  color: #fff;
-  font-size: 25px;
-  font-weight: bold;
-  text-align: center;
-  padding-top: 25px;
-
+const GirlImage = styled.div`
+  background: url(${(props) => props.img}) no-repeat;
+  width: 308px;
+  height: 244px;
+  float: left;
   &:hover {
     cursor: pointer;
-    color: #000;
   }
+`;
+const LeftSlide = styled(ScrollAnimation)`
+  position: absolute;
+  right: 50%;
+  margin-right: -586px;
+  top: 400px;
+  width: 1053px;
+  display: flex;
+  justify-content: center;
+`;
+const RightSlide = styled(ScrollAnimation)`
+  position: absolute;
+  left: 50%;
+  top: 500px;
+  margin-left: -594px;
+  width: 1053px;
+`;
+
+const Maintenance = styled.div`
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  display: none;
+
+  text-transform: capitalize;
+  font-weight: bold;
+  font-size: 35px;
+`;
+
+const GameWrapper = styled.div`
+  width: 308px;
+  height: 244px;
+  float: right;
+  position: relative;
+
+  ${({ maintenance }) => {
+    return maintenance
+      ? `
+
+  ${Maintenance}{
+   
+    display: flex;
+  }
+  ${GirlImage}{
+    filter: brightness(20%) grayscale(200%);
+  }
+  
+  
+  `
+      : ``;
+  }}
 `;
 class Qipai extends Component {
   constructor(props) {
@@ -178,41 +160,64 @@ class Qipai extends Component {
   render() {
     return (
       <Container>
-        <Grid container justify="center" style={{ height: "100%" }}>
-          <MiddleDesc item animateIn="fadeIn" duration={1} animateOnce={true}>
-            <Grid
-              container
-              direction="column"
-              justify="center"
-              alignItems="center"
-              style={{ height: "100%" }}
-            >
-              <LogoHolder
-                src={`${
-                  process.env.PUBLIC_URL
-                }/assets/images/pcGamePage/qipai/ky-${Common.getCDNLanguagePrefix()}.png`}
-              />
-              <CenterText>{i18n.t("KY.desc")}</CenterText>
-              <JoinGameButton
-                onClick={() => {
-                  this.handleJoinGameClick("ky");
-                }}
-              >
-                {i18n.t("common.joinGame")}
-              </JoinGameButton>
-            </Grid>
-          </MiddleDesc>
-          <Model
-            animateIn="fadeInRight"
-            duration={1}
-            animateOnce={true}
-            style={{ overflow: "visible" }}
-            img={
-              process.env.PUBLIC_URL +
-              "/assets/images/pcGamePage/qipai/model.png"
+        <LeftSlide
+          animateIn="fadeInLeft"
+          duration={1}
+          animateOnce={true}
+          style={{ overflow: "visible" }}
+        >
+          {this.state.list.map((item, index) => {
+            if (index < 3) {
+              return (
+                <GameWrapper maintenance={item.status != 0}>
+                  <Maintenance>{i18n.t("transfer.maintenance")}</Maintenance>
+                  <GirlImage
+                    style={{ float: "right" }}
+                    img={
+                      process.env.PUBLIC_URL +
+                      "/assets/images/pcGamePage/qipai/" +
+                      item.abbreviation.toLowerCase() +
+                      ".png"
+                    }
+                    onClick={() => {
+                      this.handleJoinGameClick(item.abbreviation);
+                    }}
+                  />
+                </GameWrapper>
+              );
             }
-          ></Model>
-        </Grid>
+          })}
+        </LeftSlide>
+        {
+          //      <RightSlide
+          //      animateIn="fadeInRight"
+          //      duration={1}
+          //      animateOnce={true}
+          //      style={{ overflow: "visible" }}
+          //    >
+          //      {this.state.list.map((item, index) => {
+          //        if (index >= 3) {
+          //          return (
+          //            <GameWrapper maintenance={item.status != 0}>
+          //              <Maintenance>{i18n.t("transfer.maintenance")}</Maintenance>
+          //              <GirlImage
+          //                style={{ float: "right" }}
+          //                img={
+          //                  process.env.PUBLIC_URL +
+          //                  "/assets/images/pcGamePage/live/" +
+          //                  item.abbreviation.toLowerCase() +
+          //                  ".png"
+          //                }
+          //                onClick={() => {
+          //                  this.handleJoinGameClick(item.abbreviation);
+          //                }}
+          //              />
+          //            </GameWrapper>
+          //          );
+          //        }
+          //      })}
+          //    </RightSlide>
+        }
       </Container>
     );
   }
