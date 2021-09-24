@@ -27,71 +27,70 @@ const Container = styled.div`
       process.env.PUBLIC_URL}/assets/images/pcGamePage/lottery/background.jpg)
     no-repeat center;
 `;
-
-const Model = styled(ScrollAnimation)`
+const GirlImage = styled.div`
   background: url(${(props) => props.img}) no-repeat center;
-  height: 785px;
-  width: 740px;
-  position: absolute;
-  left: 50%;
-
-  bottom: -20px;
-  margin-left: -120px;
-`;
-const CenterText = styled.div`
-  text-align: center;
-  font-family: AdobeHeitiR;
-  line-height: 1.25rem;
-  margin-bottom: 50px;
-  color: #fff;
-`;
-
-const LogoHolder = styled.div`
-  height: 150px;
-  width: 150px;
-
-  ${({ selected, src }) => {
-    return selected === true
-      ? `background: url(${src})
-      no-repeat center / contain;`
-      : `background: #474747; -webkit-mask: url(${src})
-    no-repeat center / contain;`;
-  }}
-  cursor: pointer;
-
+  width: 275px;
+  height: 244px;
   background-size: 100%;
-  margin: 10px 20px;
-`;
-const MiddleDesc = styled(ScrollAnimation)`
-  position: absolute;
-
-  right: 50%;
-  margin-right: 100px !important;
-  width: 470px;
-  top: 150px;
-`;
-const JoinGameButton = styled.div`
-  width: 261px;
-  height: 76px;
-  background: url(${process.env
-      .PUBLIC_URL}/assets/images/pcGamePage/lottery/button.png)
-    no-repeat;
-  color: #fff;
-  font-size: 25px;
-  font-weight: bold;
-  text-align: center;
-  padding-top: 25px;
-
+  float: left;
   &:hover {
     cursor: pointer;
-    color: #000;
   }
 `;
-
-const LogoHolderContainer = styled.div`
+const LeftSlide = styled(ScrollAnimation)`
+  position: absolute;
+  right: 50%;
+  margin-right: -586px;
+  top: 450px;
+  width: 1100px;
   display: flex;
-  flex-flow: wrap;
   justify-content: center;
+`;
+const RightSlide = styled(ScrollAnimation)`
+  position: absolute;
+  left: 50%;
+  top: 500px;
+  margin-left: -594px;
+  width: 1053px;
+`;
+
+const Maintenance = styled.div`
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  display: none;
+
+  text-transform: capitalize;
+  font-weight: bold;
+  font-size: 35px;
+`;
+
+const GameWrapper = styled.div`
+  width: 308px;
+  height: 244px;
+  float: right;
+  position: relative;
+
+  ${({ maintenance }) => {
+    return maintenance
+      ? `
+
+  ${Maintenance}{
+   
+    display: flex;
+  }
+  ${GirlImage}{
+    filter: brightness(20%) grayscale(200%);
+  }
+  
+  
+  `
+      : ``;
+  }}
 `;
 class Lottery extends Component {
   constructor(props) {
@@ -165,53 +164,64 @@ class Lottery extends Component {
   render() {
     return (
       <Container>
-        <Grid container justify="center" style={{ height: "100%" }}>
-          <MiddleDesc item animateIn="fadeIn" duration={1} animateOnce={true}>
-            <Grid
-              container
-              direction="column"
-              justify="center"
-              alignItems="center"
-              style={{ height: "100%" }}
-            >
-              <LogoHolderContainer>
-                {this.state.list.map((data, index) => {
-                  return (
-                    <LogoHolder
-                      id={data.abbreviation}
-                      selected={this.state.selected === data.abbreviation}
-                      src={`${process.env.PUBLIC_URL}/assets/images/pcGamePage/lottery/${data.abbreviation}.png`}
-                      onClick={() => {
-                        this.handleGameChange(data.abbreviation);
-                      }}
-                    />
-                  );
-                })}
-              </LogoHolderContainer>
-
-              <CenterText>{i18n.t("VR.desc")}</CenterText>
-
-              <JoinGameButton
-                onClick={() => {
-                  this.handleJoinGameClick(this.state.selected);
-                }}
-              >
-                {i18n.t("common.joinGame")}
-              </JoinGameButton>
-            </Grid>
-          </MiddleDesc>
-
-          <Model
-            animateIn="fadeInRight"
-            duration={1}
-            animateOnce={true}
-            style={{ overflow: "visible" }}
-            img={
-              process.env.PUBLIC_URL +
-              "/assets/images/pcGamePage/lottery/ball.png"
+        <LeftSlide
+          animateIn="fadeInLeft"
+          duration={1}
+          animateOnce={true}
+          style={{ overflow: "visible" }}
+        >
+          {this.state.list.map((item, index) => {
+            if (index < 4) {
+              return (
+                <GameWrapper maintenance={item.status != 0}>
+                  <Maintenance>{i18n.t("transfer.maintenance")}</Maintenance>
+                  <GirlImage
+                    style={{ float: "right" }}
+                    img={
+                      process.env.PUBLIC_URL +
+                      "/assets/images/pcGamePage/lottery/" +
+                      item.abbreviation.toLowerCase() +
+                      ".png"
+                    }
+                    onClick={() => {
+                      this.handleJoinGameClick(item.abbreviation);
+                    }}
+                  />
+                </GameWrapper>
+              );
             }
-          ></Model>
-        </Grid>
+          })}
+        </LeftSlide>
+        {
+          //      <RightSlide
+          //      animateIn="fadeInRight"
+          //      duration={1}
+          //      animateOnce={true}
+          //      style={{ overflow: "visible" }}
+          //    >
+          //      {this.state.list.map((item, index) => {
+          //        if (index >= 3) {
+          //          return (
+          //            <GameWrapper maintenance={item.status != 0}>
+          //              <Maintenance>{i18n.t("transfer.maintenance")}</Maintenance>
+          //              <GirlImage
+          //                style={{ float: "right" }}
+          //                img={
+          //                  process.env.PUBLIC_URL +
+          //                  "/assets/images/pcGamePage/live/" +
+          //                  item.abbreviation.toLowerCase() +
+          //                  ".png"
+          //                }
+          //                onClick={() => {
+          //                  this.handleJoinGameClick(item.abbreviation);
+          //                }}
+          //              />
+          //            </GameWrapper>
+          //          );
+          //        }
+          //      })}
+          //    </RightSlide>
+        }
       </Container>
     );
   }
