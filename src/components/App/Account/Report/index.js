@@ -205,8 +205,9 @@ class Report extends Component {
       page,
       this.state.limit,
       true,
-      "",
-      false
+      "CreatedOn",
+      false,
+      "1"
     ).then((response) => {
       if (response.IsSuccess) {
         this.setState({
@@ -227,8 +228,9 @@ class Report extends Component {
       page,
       this.state.limit,
       true,
-      "",
-      false
+      "CreatedOn",
+      false,
+      "1"
     ).then((response) => {
       if (response.IsSuccess) {
         this.setState({
@@ -258,7 +260,7 @@ class Report extends Component {
       this.state.limit,
       order,
       true,
-      "",
+      "BalanceTime",
       false
     ).then((response) => {
       if (response.IsSuccess) {

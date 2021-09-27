@@ -192,7 +192,7 @@ const Maintenance = styled.div`
 
 const GameWrapper = styled.div`
   position: relative;
-
+  width: 225px;
   ${({ maintenance }) => {
     return maintenance
       ? `
@@ -236,7 +236,7 @@ class Sports extends Component {
           item.type === GameTypeEnum.ESPORTS
         );
       });
-
+      console.log(this.props.game.homePageGameList);
       this.setState({
         ...this.state,
         selected: sportsList[0],
@@ -268,35 +268,33 @@ class Sports extends Component {
           <Grid
             container
             justify="space-between"
-            alignItems="center"
+            alignItems="flex-end"
             style={{ height: "100%", marginTop: "350px" }}
           >
             {this.state.list.map((item) => {
               return (
-                <Grid item lg={12 / this.state.list.length}>
-                  <GameWrapper maintenance={item.status != 0}>
-                    <Maintenance>{i18n.t("transfer.maintenance")}</Maintenance>
-                    <GirlsContainer
-                      container
-                      direction="column"
-                      alignItems="center"
-                    >
-                      <TheGirlImageContainer1 item>
-                        <GirlImage
-                          onClick={() => {
-                            this.handleJoinGameClick(item.abbreviation);
-                          }}
-                          src={
-                            process.env.PUBLIC_URL +
-                            "/assets/images/pcGamePage/sports/" +
-                            item.abbreviation.toLowerCase() +
-                            ".png"
-                          }
-                        />
-                      </TheGirlImageContainer1>
-                    </GirlsContainer>
-                  </GameWrapper>
-                </Grid>
+                <GameWrapper maintenance={item.status != 0}>
+                  <Maintenance>{i18n.t("transfer.maintenance")}</Maintenance>
+                  <GirlsContainer
+                    container
+                    direction="column"
+                    alignItems="center"
+                  >
+                    <TheGirlImageContainer1 item>
+                      <GirlImage
+                        onClick={() => {
+                          this.handleJoinGameClick(item.abbreviation);
+                        }}
+                        src={
+                          process.env.PUBLIC_URL +
+                          "/assets/images/pcGamePage/sports/" +
+                          item.abbreviation.toLowerCase() +
+                          ".png"
+                        }
+                      />
+                    </TheGirlImageContainer1>
+                  </GirlsContainer>
+                </GameWrapper>
               );
             })}
           </Grid>
