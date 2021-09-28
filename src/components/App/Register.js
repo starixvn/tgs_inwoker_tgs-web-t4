@@ -340,7 +340,7 @@ function Register(props) {
           variant="outlined"
           autoComplete="off"
           inputProps={{
-            maxLength: 32,
+            maxLength: 16,
           }}
           InputProps={{
             startAdornment: (
