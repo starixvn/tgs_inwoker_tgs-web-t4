@@ -145,6 +145,25 @@ class PromotionDetails extends Component {
     }
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (
+      this.props.general.joinPromoResult !== null &&
+      prevProps.general.joinPromoResult !== this.props.general.joinPromoResult
+    ) {
+      if (this.props.general.joinPromoResult.success === true) {
+        this.props.enqueueSnackbar(i18n.t("promotion.joinSuccess"), {
+          variant: "success",
+        });
+      } else {
+        if (this.props.general.joinPromoResult.err === 0) {
+          this.props.enqueueSnackbar(i18n.t("promotion.promoJoint"), {
+            variant: "success",
+          });
+        }
+      }
+    }
+  }
+
   handleBospIdChange = (bospId) => {
     this.setState({ ...this.state, selectedBospId: bospId });
   };
@@ -195,9 +214,6 @@ class PromotionDetails extends Component {
       ) {
         AppHistory.push({
           pathname: "/" + i18n.language + "/account/deposit/" + id,
-        });
-        this.props.enqueueSnackbar(i18n.t("promotion.joinSuccess"), {
-          variant: "success",
         });
       }
     }
