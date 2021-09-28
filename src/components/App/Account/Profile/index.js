@@ -119,6 +119,29 @@ function GetContentWrap(accountInfo, label, attr, func, label2) {
     }
   }
 
+  if (attr === "member_wechat") {
+    if (attrValue !== "") {
+      attrValue = accountInfo["member_wechat"]
+        ? accountInfo["member_wechat"].substring(0, 1) + "**"
+        : "";
+    }
+  }
+
+  if (attr === "member_qq") {
+    if (attrValue !== "") {
+      attrValue = accountInfo["member_qq"]
+        ? accountInfo["member_qq"].substring(0, 1) + "**"
+        : "";
+    }
+  }
+  if (attr === "member_phone") {
+    if (attrValue !== "") {
+      attrValue = accountInfo["member_phone"]
+        ? accountInfo["member_phone"].substring(0, 1) + "**"
+        : "";
+    }
+  }
+
   let isDisable = false;
   let buttonValue = i18n.t("profile.edit");
   let requiredVerify =

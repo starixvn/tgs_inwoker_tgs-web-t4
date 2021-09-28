@@ -4,8 +4,8 @@
   "private": true,
   "dependencies": {
     "@Inwoker/tgs-api": "^0.8.158",
-    "@Inwoker/tgs-wap-t1": "^1.0.120",
-    "@Inwoker/tgs-wap-t2": "^1.0.137",
+    "@Inwoker/tgs-wap-t1": "^1.0.121",
+    "@Inwoker/tgs-wap-t2": "^1.0.139",
     "@date-io/date-fns": "^1.3.13",
     "@material-ui/core": "^4.12.2",
     "@material-ui/icons": "^4.11.2",
