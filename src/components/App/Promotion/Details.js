@@ -196,6 +196,9 @@ class PromotionDetails extends Component {
         AppHistory.push({
           pathname: "/" + i18n.language + "/account/deposit/" + id,
         });
+        this.props.enqueueSnackbar(i18n.t("promotion.joinSuccess"), {
+          variant: "success",
+        });
       }
     }
   };
