@@ -33,14 +33,14 @@ const LeftSlide = styled(ScrollAnimation)`
   right: 50%;
   margin-right: -586px;
   top: 290px;
-  width: 1053px;
+  width: 1280px;
 `;
 const RightSlide = styled(ScrollAnimation)`
   position: absolute;
   left: 50%;
   top: 500px;
   margin-left: -594px;
-  width: 1053px;
+  width: 1280px;
 `;
 
 const Maintenance = styled.div`
@@ -52,7 +52,6 @@ const Maintenance = styled.div`
   justify-content: center;
   color: white;
   display: none;
-  padding-top: 75px;
   text-transform: capitalize;
   font-weight: bold;
   font-size: 35px;
@@ -67,7 +66,7 @@ const GameWrapper = styled.div`
   ${({ maintenance }) => {
     return maintenance
       ? `
-
+      margin-top: 50px;
   ${Maintenance}{
    
     display: flex;
