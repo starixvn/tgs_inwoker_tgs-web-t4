@@ -119,6 +119,15 @@ const WithdrawalLimitItemRight = styled.div`
   padding: 13px 0 0 20px;
   float: left;
 `;
+
+const Turnover = styled.div`
+  a {
+    color: ${({ theme }) => {
+      return theme.primary;
+    }};
+    font-weight: bold;
+  }
+`;
 class Main extends Component {
   state = {
     selectedCardIndex: 0,
@@ -212,7 +221,14 @@ class Main extends Component {
             {Common.formatNumberWithThousand(this.props.withdrawalMinLimit)} -{" "}
             {Common.formatNumberWithThousand(this.props.withdrawalMaxLimit)}
           </LimitPopupContainer>
+          <Turnover>
+            {i18n.t("withdrawal.turnover")}
+            <a>
+              {Common.formatNumberWithThousand(this.props.minWithdrawLimit)}
+            </a>
+          </Turnover>
         </SelectionContainer>
+
         <SplitLine></SplitLine>
         <SubHeaderContainer>
           <NumberContainer>3</NumberContainer>
