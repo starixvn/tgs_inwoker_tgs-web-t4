@@ -732,6 +732,7 @@ class Wap extends Component {
                 }
                 propsObj["GetSupportUrl"] = this.GetSupportUrl;
                 propsObj["appHistory"] = AppHistory;
+                propsObj["brandComm"] = this.props.getBrandCommunicationList;
                 return (
                   <Route
                     exact

@@ -347,7 +347,11 @@ class App extends Component {
                       exact
                       path={baseRouteUrl + "/maintenance"}
                       render={(props) => (
-                        <Maintenance onhandleCSClick={this.GetSupportUrl} />
+                        <Maintenance
+                          onhandleCSClick={this.GetSupportUrl}
+                          brandComm={this.props.getBrandCommunicationList}
+                          alert={this.props.enqueueSnackbar}
+                        />
                       )}
                     />
                     <Route
