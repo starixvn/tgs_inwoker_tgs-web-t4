@@ -114,7 +114,7 @@ export default {
             IsSuccess: false,
             info: ErrorSwitcher.getTranslation(error.response.data.errmsgid),
             code: error.response.data.err,
-            data: {},
+            data: error.response.data,
           };
         } else {
           return {
