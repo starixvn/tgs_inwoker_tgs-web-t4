@@ -13,7 +13,7 @@ import ChangePassword from "./ChangePassword";
 import Email from "./Email";
 import WithdrawalPassword from "./WithdrawalPassword";
 import ChangeWithdrawalPassword from "./ChangeWithdrawalPassword";
-
+import config from "../../../../config/config";
 import IDVerification from "./IDVerification";
 import PhoneVerification from "./PhoneVerification";
 // import SecurityQuestion from "./SecurityQuestion";
@@ -154,7 +154,10 @@ function GetContentWrap(accountInfo, label, attr, func, label2) {
 
   if (requiredVerify) {
     if (attr === "member_name" || attr === "member_birthday") {
-      isVerify = accountInfo.check_pass_account;
+      isVerify =
+        config.brand !== "HKJP"
+          ? accountInfo.check_pass_account
+          : accountInfo.member_name !== "";
     }
     if (attr === "member_email") {
       isVerify = accountInfo.check_pass_email;
@@ -538,24 +541,42 @@ class Profile extends Component {
           {i18n.t("profile.title")}
         </Title>
         <InnerWrap>
-          {GetContentWrap(
-            this.props.account.info,
-            i18n.t("profile.nameVerify.icNum"),
-            "member_name",
-            this.handleButtonClick
-          )}
+          {(() => {
+            if (config.brand !== "HKJP") {
+              return GetContentWrap(
+                this.props.account.info,
+                i18n.t("profile.nameVerify.icNum"),
+                "member_name",
+                this.handleButtonClick
+              );
+            }
+          })()}
           {/* {GetContentWrap(
             this.props.account.info,
             i18n.t("profile.phone.title"),
             "member_phone",
             this.handleButtonClick
           )} */}
-          {GetContentWrap(
-            this.props.account.info,
-            i18n.t("common.emailAddress"),
-            "member_email",
-            this.handleButtonClick
-          )}
+          {(() => {
+            if (config.brand === "GPI" || config.brand === "HKJP") {
+              return GetContentWrap(
+                this.props.account.info,
+                i18n.t("common.phoneNumber"),
+                "member_phone",
+                this.handleButtonClick
+              );
+            }
+          })()}
+          {(() => {
+            if (config.brand !== "HKJP") {
+              return GetContentWrap(
+                this.props.account.info,
+                i18n.t("common.emailAddress"),
+                "member_email",
+                this.handleButtonClick
+              );
+            }
+          })()}
           {GetContentWrap(
             this.props.account.info,
             "QQ",
@@ -592,13 +613,13 @@ class Profile extends Component {
             "member_birthday",
             this.handleButtonClick
           )} */}
-          {GetContentWrap(
+          {/* {GetContentWrap(
             this.props.account.info,
             i18n.t("profile.withdrawalPassword.title"),
             "member_safe_password",
             this.handleButtonClick,
             i18n.t("profile.edit")
-          )}
+          )} */}
           {GetContentWrap(
             this.props.account.info,
             i18n.t("profile.password.title"),

@@ -7,11 +7,48 @@ import TextField from "@material-ui/core/TextField";
 import IconInputVerifyCodePNG from "../../../../assets/images/icon-input-verifycode.png";
 import { withStyles } from "@material-ui/core/styles";
 import { AccountService, UPDATE_INFO, accountAction } from "@Inwoker/tgs-api";
-
+import Select from "@material-ui/core/Select";
 import i18n from "../../../../utils/i18n";
-
+import ErrorSwitcher from "../../../../utils/ErrorSwitcher";
 import { withSnackbar } from "notistack";
 const Container = styled.div``;
+const StyleButton = styled.div`
+  width: 140px;
+  height: 44px;
+  border: solid 1px #b6b6b6;
+  margin: 0;
+  margin-top: 10px;
+  margin-left: 5px;
+  float: left;
+
+  ${(props) =>
+    props.disable === true
+      ? `  background-image: linear-gradient(90deg, rgba(89,89,89,1) 0%, rgba(126,126,126,1) 100%);`
+      : `  background-image:linear-gradient(to top, ${props.theme.primaryGradient},
+        ${props.theme.primary});;
+`}
+
+  border-radius: 5px;
+  font-size: 16px;
+  color: #fff;
+
+  &:hover {
+    cursor: pointer;
+
+    ${(props) =>
+      props.disable === true
+        ? `  background-image: linear-gradient(90deg, rgba(89,89,89,1) 0%, rgba(126,126,126,1) 100%);`
+        : `      background-blend-mode: screen, normal;
+        box-shadow: inset 1px 1px 9px 0  rgba(255, 255, 255, 0.75);
+        }
+  `}
+  }
+`;
+const ButtonLabel = styled.span`
+  text-align: center;
+  display: block;
+  margin-top: 10px;
+`;
 const CustomText = withStyles({
   root: {
     marginTop: "10px",
@@ -51,7 +88,20 @@ const Message = styled.div`
   width: 100%;
   text-align: left;
 `;
-
+const FormControl = styled.div`
+  margin-top: 10px;
+  float: left;
+`;
+const CustomSelect = withStyles((theme) => ({
+  root: {
+    fontSize: "14px",
+    color: "#818181",
+    "&.MuiSelect-root": {
+      paddingTop: "14px",
+      paddingBottom: "15px",
+    },
+  },
+}))(Select);
 class PhoneVerification extends Component {
   constructor(props) {
     super(props);
@@ -66,6 +116,7 @@ class PhoneVerification extends Component {
       prefix: "86",
       countdown: 0,
       securityKey: "",
+      areacode: "+852",
     };
   }
 
@@ -90,58 +141,28 @@ class PhoneVerification extends Component {
   };
   onhandleGetCodeClick = () => {
     if (this.state.countdown <= 0) {
-      AccountService.VerifyPhone(this.state.phone).then((response) => {
-        if (response.IsSuccess) {
-          this.setState({
-            securityKey: response.data,
-          });
-          this.props.enqueueSnackbar(i18n.t("common.msgTokenSent"), {
-            variant: "info",
-          });
-        } else {
-          this.props.enqueueSnackbar(response.info, {
-            variant: "error",
-          });
+      AccountService.VerifyPhone(this.state.phone, this.state.areacode).then(
+        (response) => {
+          if (response.IsSuccess) {
+            this.setState({
+              securityKey: response.data,
+            });
+            this.props.enqueueSnackbar(i18n.t("common.msgTokenSent"), {
+              variant: "info",
+            });
+            this.setState({ ...this.state, countdown: 60 });
+          } else {
+            this.props.enqueueSnackbar(
+              ErrorSwitcher.getTranslation(response.info),
+              {
+                variant: "error",
+              }
+            );
+          }
+
+          this.checkCountdown();
         }
-        this.setState({ ...this.state, countdown: 60 });
-        this.checkCountdown();
-      });
-      //   var result = null;
-      //   if (this.state.isNew) {
-      //     result = AccountService.GetPhoneVerificationCode(
-      //       this.props.token,
-      //       this.state.phone,
-      //       ""
-      //     );
-      //   } else {
-      //     if (this.props.isForWithdrawalPassword) {
-      //       result = AccountService.GetChangeWithdrawalPasswordVerificationCode();
-
-      //     } else {
-      //       if (this.state.step === 1) {
-      //         result = AccountService.GetChangePhoneVerificationCode();
-
-      //       } else {
-      //         result = AccountService.GetChangeNewPhoneVerificationCode(this.state.phone);
-      //       }
-
-      //     }
-
-      //   }
-      //   result.then((response) => {
-      //     // this.setState({ ...this.state, message: response.msg });
-      //     if (response.IsSuccess) {
-      //       this.props.enqueueSnackbar(i18n.t("common.msgTokenSent"), {
-      //         variant: "info",
-      //       });
-      //     } else {
-      //       this.props.enqueueSnackbar(response.info, {
-      //         variant: "error",
-      //       });
-      //     }
-      //     // this.setState({ ...this.state, countdown: response.data });
-      //     // this.checkCountdown();
-      //   });
+      );
     }
   };
   checkCountdown = () => {
@@ -153,6 +174,12 @@ class PhoneVerification extends Component {
     }
   };
   onhandleClick = () => {
+    if (this.state.code.length < 6) {
+      this.props.enqueueSnackbar(i18n.t("common.msgEnterCode"), {
+        variant: "error",
+      });
+      return;
+    }
     AccountService.UpdatePhone(this.state.securityKey, this.state.code).then(
       (response) => {
         if (response.IsSuccess) {
@@ -161,20 +188,7 @@ class PhoneVerification extends Component {
           });
           if (this.state.isNew || this.state.step === 2) {
             this.props.getAccountInfo();
-            if (this.props.isForWithdrawalPassword) {
-              this.props.dispatch({
-                type: UPDATE_INFO,
-                payload: {
-                  member_phone: this.state.phone,
-                },
-              });
-              this.props.onhandleVerifySuccess(
-                this.props.isForSecurityQuestion,
-                this.props.isForWithdrawalPassword
-              );
-            } else {
-              this.props.handleCloseDialog();
-            }
+            this.props.handleCloseDialog();
           } else {
             this.setState({
               ...this.state,
@@ -182,22 +196,17 @@ class PhoneVerification extends Component {
               phone: "",
               securityKey: "",
               step: 2,
+              message: i18n.t("common.msgTokenVerified"),
               countdown: 0,
             });
           }
         } else {
-          this.props.enqueueSnackbar(response.info, {
-            variant: "error",
-          });
-          // if (response.code === 405) {
-          //   this.props.enqueueSnackbar(i18n.t("common.msgInvalidPhoneCode"), {
-          //     variant: "error",
-          //   });
-          // } else {
-          //   this.props.enqueueSnackbar(response.info, {
-          //     variant: "error",
-          //   });
-          // }
+          this.props.enqueueSnackbar(
+            ErrorSwitcher.getTranslation(response.info),
+            {
+              variant: "error",
+            }
+          );
         }
       }
     );
@@ -308,6 +317,20 @@ class PhoneVerification extends Component {
   render() {
     return (
       <Container>
+        <FormControl>
+          <CustomSelect
+            native
+            variant="outlined"
+            value={this.state.areacode}
+            displayEmpty
+            onChange={(e) => {
+              this.setState({ ...this.state, areacode: e.target.value });
+            }}
+          >
+            <option value={"+852"}>+852</option>
+          </CustomSelect>
+        </FormControl>
+
         <CustomText
           placeholder={i18n.t("common.msgEnterPhone")}
           onChange={this.onhandlePhoneChange}
@@ -316,8 +339,9 @@ class PhoneVerification extends Component {
             maxLength: 20,
           }}
           style={{
-            width: "100%",
+            width: "268px",
             height: "46px",
+            float: "right",
           }}
           variant="outlined"
           autoComplete="off"
@@ -336,13 +360,19 @@ class PhoneVerification extends Component {
             height: "46px",
           }}
         ></CustomText>
-        <CustomButton
-          handleClick={this.onhandleGetCodeClick}
-          name={i18n.t("common.msgSendToken")}
-          width={140}
-          marginTop={10}
-          float={"right"}
-        ></CustomButton>
+        <StyleButton
+          onClick={this.onhandleGetCodeClick}
+          disable={this.state.countdown > 0}
+        >
+          <ButtonLabel>
+            {this.state.countdown <= 0
+              ? i18n.t("common.msgSendToken")
+              : i18n.t("common.btnTokenResendLabel") +
+                "(" +
+                this.state.countdown +
+                "s)"}
+          </ButtonLabel>
+        </StyleButton>
 
         <Message>{this.state.message}</Message>
         <CustomButton
