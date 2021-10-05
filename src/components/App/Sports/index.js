@@ -236,7 +236,7 @@ class Sports extends Component {
           item.type === GameTypeEnum.ESPORTS
         );
       });
-      console.log(this.props.game.homePageGameList);
+
       this.setState({
         ...this.state,
         selected: sportsList[0],
