@@ -23,7 +23,7 @@ import {
 } from "@Inwoker/tgs-api";
 
 import Register from "./Register";
-
+import ForgotPasswordPhone from "./ForgotPasswordPhone";
 import { withSnackbar } from "notistack";
 
 import BlowFishEncryption from "../../utils/BlowFishEncryption";
@@ -87,6 +87,7 @@ class GuestContainer extends Component {
     securityKey: "",
     username: "",
     pass: "",
+    areaCode: "+852",
   };
   componentDidMount() {
     let urlParams = new URLSearchParams(this.props.location.search);
@@ -500,7 +501,7 @@ class GuestContainer extends Component {
                   ></Activation>
                 );
               } else if (this.state.openDialogName === "forgotpassword") {
-                return (
+                return config.brand !== "HKJP" ? (
                   <ForgotPasswordEmail
                     onhandleClose={this.onhandleCloseDialog}
                     onhandleNextClick={this.onhandleForgotPasswordEmailClick}
@@ -509,6 +510,16 @@ class GuestContainer extends Component {
                     code={this.state.code}
                     email={this.state.email}
                   ></ForgotPasswordEmail>
+                ) : (
+                  <ForgotPasswordPhone
+                    onhandleClose={this.onhandleCloseDialog}
+                    onhandleNextClick={this.onhandleForgotPasswordPhoneClick}
+                    onhandleBackClick={this.onhandleForgotPasswordBackClick}
+                    onhandleOnlineSupport={this.onhandleOnlineSupport}
+                    code={this.state.code}
+                    phone={this.state.phone}
+                    areaCode={this.state.areaCode}
+                  ></ForgotPasswordPhone>
                 );
               } else if (this.state.openDialogName === "resetpassword") {
                 return (

@@ -1,18 +1,25 @@
 import React, { Component } from "react";
-
+import { AccountService } from "@Inwoker/tgs-api";
 import styled from "styled-components";
 import { withStyles } from "@material-ui/core/styles";
 import LoginBGPNG from "../../assets/images/login-bg.png";
-
 import TextField from "@material-ui/core/TextField";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import IconMobilePNG from "../../assets/images/icon-mobile.png";
+import IconInboxSelectedPNG from "../../assets/images/icon-inbox-selected.png";
+import IconInputVerifyCodePNG from "../../assets/images/icon-input-verifycode.png";
+import { makeStyles } from "@material-ui/core/styles";
 import { withSnackbar } from "notistack";
-import { AccountService } from "@Inwoker/tgs-api";
+import Select from "@material-ui/core/Select";
+import FormControl from "@material-ui/core/FormControl";
 import IconLoginClosePNG from "../../assets/images/icon-login-close.png";
 import i18n from "../../utils/i18n";
+import ErrorSwitcher from "../../utils/ErrorSwitcher";
 const Container = styled.div`
   width: 506px;
-  height: 360px;
   background: url(${LoginBGPNG});
+  background-attachment: fixed;
+  background-position: center;
   display: table;
 `;
 const CloseIconContainer = styled.div`
@@ -28,24 +35,135 @@ const CloseIconContainer = styled.div`
 const TitleContainer = styled.div`
   text-align: center;
 
-  font-size: 28px;
+  font-size: 42px;
 
-  color: #000;
+  color: ${({ theme }) => theme.secondary};
 `;
+const SubTitleContainer = styled.div`
+  text-align: center;
 
+  font-size: 18px;
+
+  color: ${({ theme }) => theme.secondary};
+`;
 const FormContainer = styled.div`
   margin: 10px 78px 0 78px;
+  padding: 0 3px;
 `;
 const CustomText = withStyles({
   root: {
     width: "350px",
-    height: "46px",
+    height: "51px",
+    borderRadius: "6px",
+    border: "none",
+    boxShadow: "0px 3px 8px -2px rgba(0,0,0,0.75)",
     margin: 0,
     marginTop: "13px",
-    float: "left",
     background: "white",
+
     "& .MuiOutlinedInput-input": {
       fontSize: "14px",
+    },
+    "& label.Mui-focused": {
+      color: "#b6b6b6",
+    },
+    "& .MuiInput-underline:after": {
+      borderBottomColor: "none",
+    },
+    "& .MuiOutlinedInput-root": {
+      "& fieldset": {
+        border: "none",
+      },
+      "&:hover fieldset": {
+        border: "none",
+      },
+      "&.Mui-focused fieldset": {
+        border: "none",
+      },
+    },
+  },
+})(TextField);
+const CustomText2 = withStyles({
+  root: {
+    marginLeft: "8px",
+    width: "240px",
+    height: "51px",
+    borderRadius: "6px",
+    border: "none",
+    boxShadow: "0px 3px 8px -2px rgba(0,0,0,0.75)",
+    margin: 0,
+    marginTop: "13px",
+    background: "white",
+
+    "& .MuiOutlinedInput-input": {
+      fontSize: "14px",
+    },
+    "& label.Mui-focused": {
+      color: "#b6b6b6",
+    },
+    "& .MuiInput-underline:after": {
+      borderBottomColor: "none",
+    },
+    "& .MuiOutlinedInput-root": {
+      "& fieldset": {
+        border: "none",
+      },
+      "&:hover fieldset": {
+        border: "none",
+      },
+      "&.Mui-focused fieldset": {
+        border: "none",
+      },
+    },
+  },
+})(CustomText);
+const ButtonLogin = styled.div`
+  margin-top: 24px;
+  margin-bottom: 35px;
+  color: #fff;
+  font-size: 20px;
+  width: 350px;
+  height: 51px;
+  border-radius: 6px;
+
+  border: solid 1px #ffffff;
+  background-image: linear-gradient(
+    to top,
+    ${({ theme }) => theme.primaryGradient},
+    ${({ theme }) => theme.primary}
+  );
+  &:hover {
+    cursor: pointer;
+
+    box-shadow: inset 1px 1px 9px 0 rgba(255, 255, 255, 0.75);
+  }
+`;
+const ButtonLoginLabel = styled.span`
+  text-align: center;
+  display: block;
+  margin-top: 10px;
+`;
+
+const CustomFormControl = withStyles((theme) => ({
+  root: {
+    width: "100px",
+    height: "51px",
+    border: "none",
+    boxShadow: "0px 3px 8px -2px rgba(0,0,0,0.75)",
+    marginTop: "13px",
+    marginBottom: "13px",
+    float: "left",
+    backgroundColor: "#fff",
+    padding: 0,
+    "&:before": {
+      borderRight: "1px solid #b6b6b6",
+      content: '"\\00a0"',
+      position: "absolute",
+      top: "1px",
+      right: "36px",
+      zIndex: " 1",
+      display: "block",
+      height: "100%",
     },
     "& label.Mui-focused": {
       color: "#b6b6b6",
@@ -56,80 +174,73 @@ const CustomText = withStyles({
     "& .MuiOutlinedInput-root": {
       "& fieldset": {
         borderColor: "#b6b6b6",
+        marginTop: "1px",
       },
       "&:hover fieldset": {
         borderColor: "#b6b6b6",
+        marginTop: "1px",
       },
       "&.Mui-focused fieldset": {
         borderColor: "#b6b6b6",
+        marginTop: "1px",
       },
     },
   },
-})(TextField);
-
-const LinkStyle = styled.a`
-  font-size: 14px;
-
-  margin-top: 5px;
-  text-decoration: underline;
-  &:hover {
-    cursor: pointer;
-  }
-`;
-
-const Description = styled.p`
-  text-align: center;
-  display: inline-block;
-  width: 100%;
-
-  font-size: 14px;
-
-  color: #ffffff;
-`;
-
-const ContactUsLink = styled(LinkStyle)`
-  font-size: 13px;
-`;
+}))(FormControl);
 const StyleButton = styled.div`
-  width: 135px;
-  height: 46px;
+  width: 140px;
+  height: 51px;
+  border: solid 1px #b6b6b6;
+  margin: 0;
 
-  color: #fff;
-  font-size: 20px;
-
-  border-radius: 6px;
-
-  border: solid 1px #ffffff;
-  background-image: linear-gradient(
-    to top,
-    ${({ theme }) => theme.primaryGradient},
-    ${({ theme }) => theme.primary}
-  );
-  text-align: center;
-  padding-top: 8px;
+  margin-left: 5px;
   float: right;
-  margin: 13px 0 0 0;
+
+  ${(props) =>
+    props.disable === true
+      ? `  background-image: linear-gradient(90deg, rgba(89,89,89,1) 0%, rgba(126,126,126,1) 100%);`
+      : `  background-image: linear-gradient(to top, ` +
+        props.theme.primaryGradient +
+        `, ` +
+        props.theme.primary +
+        `);
+`}
+
+  border-radius: 5px;
+  font-size: 16px;
+  color: #fff;
+
   &:hover {
     cursor: pointer;
 
-    box-shadow: inset 1px 1px 9px 0 rgba(255, 255, 255, 0.75);
+    ${(props) =>
+      props.disable === true
+        ? `  background-image: linear-gradient(90deg, rgba(89,89,89,1) 0%, rgba(126,126,126,1) 100%);`
+        : `      background-blend-mode: screen, normal;
+        box-shadow: inset 1px 1px 9px 0  rgba(255, 255, 255, 0.75);
+        }
+  `}
   }
 `;
-const Button = styled(StyleButton)`
-  width: 100%;
-  height: 46px;
-  float: left;
-
-  margin-top: 15px;
-
-  float: left;
+const ButtonLabel = styled.span`
+  text-align: center;
+  display: block;
+  margin-top: 12px;
 `;
+const CustomSelect = withStyles((theme) => ({
+  root: {
+    fontSize: "14px",
+
+    color: "#818181",
+  },
+}))(Select);
 class ForgotPasswordPhone extends Component {
   constructor(props) {
     super(props);
     this.state = {
       phone: this.props.phone,
       code: this.props.code,
+      areaCode: this.props.areaCode,
       countdown: 0,
       securityKey: this.props.securityKey,
     };
@@ -151,22 +262,27 @@ class ForgotPasswordPhone extends Component {
   onhandleGetCodeClick = () => {
     if (this.state.countdown <= 0) {
       if (this.state.phone.length > 0) {
-        AccountService.VerifyForgotPassword(this.state.phone).then(
-          (response) => {
-            if (response.IsSuccess) {
-              this.setState({ securityKey: response.data });
-              this.props.enqueueSnackbar(i18n.t("common.msgTokenSent"), {
-                variant: "info",
-              });
-            } else {
-              this.props.enqueueSnackbar(response.info, {
+        AccountService.VerifyForgotPassword(
+          "",
+          this.state.areaCode,
+          this.state.phone
+        ).then((response) => {
+          if (response.IsSuccess) {
+            this.setState({ securityKey: response.data });
+            this.props.enqueueSnackbar(i18n.t("common.msgTokenSent"), {
+              variant: "info",
+            });
+            this.setState({ ...this.state, countdown: 60 });
+            this.checkCountdown();
+          } else {
+            this.props.enqueueSnackbar(
+              ErrorSwitcher.getTranslation(response.info),
+              {
                 variant: "error",
-              });
-            }
+              }
+            );
           }
-        );
-        this.setState({ ...this.state, countdown: 60 });
-        this.checkCountdown();
+        });
       } else {
         this.props.enqueueSnackbar(i18n.t("common.msgEnterPhone"), {
           variant: "error",
@@ -224,50 +340,75 @@ class ForgotPasswordPhone extends Component {
         <TitleContainer>{i18n.t("forgotPassword.title")}</TitleContainer>
 
         <FormContainer>
-          <CustomText
-            placeholder={i18n.t("common.msgEnterPhone")}
-            variant="outlined"
+          <CustomFormControl>
+            <CustomSelect
+              native
+              variant="outlined"
+              value={this.state.areaCode}
+              displayEmpty
+              onChange={(e) => {
+                this.setState({
+                  ...this.state,
+                  areaCode: e.target.value,
+                });
+              }}
+            >
+              <option value={"+852"}>+852</option>
+            </CustomSelect>
+          </CustomFormControl>
+          <CustomText2
+            id="phone"
             value={this.state.phone}
+            placeholder={i18n.t("forgotPassword.plsEnterPhoneNumber")}
             onChange={this.handlePhoneChange}
+            variant="outlined"
+            type="text"
             autoComplete="off"
-            style={{
-              width: "345px",
-              height: "46px",
+            inputProps={{
+              maxLength: 20,
+            }}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment
+                  position="start"
+                  style={{ height: "26px", width: "30px" }}
+                >
+                  <img src={IconMobilePNG} alt=""></img>
+                </InputAdornment>
+              ),
             }}
           />
+          <div class="clear"></div>
           <CustomText
             placeholder={i18n.t("common.msgEnterCode")}
-            variant="outlined"
+            adornment={IconInputVerifyCodePNG}
             onChange={this.handleCodeChange}
+            variant="outlined"
+            autoComplete="off"
             value={this.state.code}
             type={"text"}
-            autoComplete="off"
             style={{
-              width: "208px",
-              height: "46px",
+              width: "200px",
+              height: "51px",
+              marginTop: "0",
             }}
-          />
+          ></CustomText>
           <StyleButton
             onClick={this.onhandleGetCodeClick}
             disable={this.state.countdown > 0}
           >
-            {this.state.countdown <= 0
-              ? i18n.t("common.msgSendToken")
-              : i18n.t("common.btnTokenResendLabel") +
-                "(" +
-                this.state.countdown +
-                "s)"}
+            <ButtonLabel>
+              {this.state.countdown <= 0
+                ? i18n.t("common.msgSendToken")
+                : i18n.t("common.btnTokenResendLabel") +
+                  "(" +
+                  this.state.countdown +
+                  "s)"}
+            </ButtonLabel>
           </StyleButton>
-
-          <Button onClick={this.onhandleNextClick}>
-            {i18n.t("common.nextStep")}
-          </Button>
-          <Description>
-            {i18n.t("common.support")}
-            <ContactUsLink onClick={this.props.onhandleOnlineSupport}>
-              {i18n.t("common.contactus")}
-            </ContactUsLink>
-          </Description>
+          <ButtonLogin onClick={this.onhandleNextClick}>
+            <ButtonLoginLabel>{i18n.t("common.nextStep")}</ButtonLoginLabel>
+          </ButtonLogin>
         </FormContainer>
       </Container>
     );
