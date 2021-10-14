@@ -216,17 +216,31 @@ class PromotionDetails extends Component {
       );
     }
   };
+  performRedirect = (id, promotionType) => {
+    this.props.joinPromotion(id);
+    if (
+      ["FirstDeposit", "DailySecondDeposit", "DailyFirstDeposit"].indexOf(
+        promotionType
+      ) >= 0
+    ) {
+      AppHistory.push({
+        pathname: "/" + i18n.language + "/account/deposit/" + id,
+      });
+    }
+  };
+
   handlejoinPromotionClick = (id, promotionType) => {
     if (this.props.account.token === null) this.props.showLogin(true);
     else {
-      this.props.joinPromotion(id);
-      if (
-        ["FirstDeposit", "DailySecondDeposit", "DailyFirstDeposit"].indexOf(
-          promotionType
-        ) >= 0
-      ) {
-        AppHistory.push({
-          pathname: "/" + i18n.language + "/account/deposit/" + id,
+      if (this.state.details.vipLevels.length === 0) {
+        //if nothing inside viplevels
+        this.performRedirect(id, promotionType);
+      } else {
+        this.state.details.vipLevels.filter((levels) => {
+          if (levels === this.props.account.info.member_level_id) {
+            //check every single level whether it match member level
+            this.performRedirect(id, promotionType);
+          }
         });
       }
     }
