@@ -100,7 +100,11 @@ const RefreshButtonIcon = styled.div`
     animation: ${rotateKeyFrame} 1s linear 0s infinite;
   }
 `;
-
+const VIPLabel = styled.div`
+  color: ${({ theme }) => theme.primary};
+  font-weight: bold;
+  font-size: 12px;
+`;
 function Header(props) {
   var ingame = 0;
 
@@ -113,6 +117,10 @@ function Header(props) {
       <AvatarContainer src={AvatarPNG}></AvatarContainer>
       <PlayerInfoContainer>
         <PlayerName>{props.info.member_username}</PlayerName>
+        <VIPLabel>
+          VIP
+          {props.info.member_level_id}
+        </VIPLabel>
         {/* <MissionContainer>
           {i18n.t("web.account.header.lastLogin")}:
           {props.info.member_last_login}
