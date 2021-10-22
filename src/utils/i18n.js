@@ -32,11 +32,11 @@ i18n.use(LanguageDetector).init({
     "id-ID": {
       translation: require("../assets/translations/en-US.json"),
     },
-    "vt-VN": {
+    "vi-VN": {
       translation: language.viVN,
     },
   },
-  whitelist: ["en-US", "zh-CN", "zh-TW", "th-TH", "id-ID", "vt-VN"],
+  whitelist: ["en-US", "zh-CN", "zh-TW", "th-TH", "id-ID", "vi-VN"],
   fallbackLng: [config.defaultLanguage],
   detection: {
     order: ["path"],
