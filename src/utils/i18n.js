@@ -33,7 +33,7 @@ i18n.use(LanguageDetector).init({
       translation: require("../assets/translations/en-US.json"),
     },
     "vt-VN": {
-      translation: require("../assets/translations/en-US.json"),
+      translation: language.viVN,
     },
   },
   whitelist: ["en-US", "zh-CN", "zh-TW", "th-TH", "id-ID", "vt-VN"],
