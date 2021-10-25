@@ -38,6 +38,7 @@ const Icon = styled.img`
 
 const Text = styled.div`
   opacity: 0;
+  text-align: center;
 `;
 
 const SidePanel = styled.div`
