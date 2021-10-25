@@ -271,7 +271,7 @@ class Withdrawal extends Component {
   handleWithdrawalClick = (bankid, amount, password) => {
     const formatedamount = amount.toString().replace(/,/g, "");
     if (config.brand === "HKJP") {
-      if (!/^[1-9][0-9]{0,17}00$/.test(amount)) {
+      if (!/^[1-9][0-9]{0,17}00$/.test(formatedamount)) {
         this.props.enqueueSnackbar(i18n.t("withdrawal.msgMustHundred"), {
           variant: "warning",
         });
