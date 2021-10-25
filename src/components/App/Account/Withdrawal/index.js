@@ -7,6 +7,7 @@ import { withRouter } from "react-router-dom";
 import Loading from "../../Loading";
 import NameVerification from "../../Share/NameVerification";
 // import PassSetting from "./PassSetting";
+import config from "../../../../config/config";
 
 import AddCard from "./AddCard";
 import AddCardSuccess from "./AddCardSuccess";
@@ -269,6 +270,14 @@ class Withdrawal extends Component {
   };
   handleWithdrawalClick = (bankid, amount, password) => {
     const formatedamount = amount.toString().replace(/,/g, "");
+    if (config.brand === "HKJP") {
+      if (!/^[1-9][0-9]{0,17}00$/.test(amount)) {
+        this.props.enqueueSnackbar(i18n.t("withdrawal.msgMustHundred"), {
+          variant: "warning",
+        });
+        return;
+      }
+    }
     if (bankid == 0) {
       this.props.enqueueSnackbar(i18n.t("withdrawal.msgEnterBank"), {
         variant: "warning",
