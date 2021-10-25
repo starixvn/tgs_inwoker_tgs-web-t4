@@ -186,9 +186,11 @@ class Main extends Component {
                         item.detail.bankAccount.length
                       )}
                 </BankCardButtonCardNoHL>
-                <BankCardButtonCardNo>
-                  {i18n.t("withdrawal.tail")}
-                </BankCardButtonCardNo>
+                {i18n.language !== "vi-VN" && (
+                  <BankCardButtonCardNo>
+                    {i18n.t("withdrawal.tail")}
+                  </BankCardButtonCardNo>
+                )}
               </BankCardButton>
             );
           })}

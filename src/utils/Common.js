@@ -406,9 +406,7 @@ function GetPromoImg(index) {
   return promoImgMap[index % 3];
 }
 
-const baseRouteUrl = `/:locale(${config.languages
-  .map((item) => item.name)
-  .join("|")})`;
+const baseRouteUrl = `/:locale(zh-CN|zh-TW|en-US|th-TH|vi-VN)`;
 
 const Common = {
   baseRouteUrl,

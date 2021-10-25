@@ -11,6 +11,8 @@ const languageSwitcher = (language) => {
       return `"Microsoft JhengHei", "微軟正黑體"`;
     case "th-TH":
       return ``;
+    case "vi-VN":
+      return ``;
   }
 };
 

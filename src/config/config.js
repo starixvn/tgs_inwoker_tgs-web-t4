@@ -17,6 +17,7 @@ const config = {
         { name: "zh-TW", label: "繁體" },
         { name: "en-US", label: "English" },
         { name: "th-TH", label: "Thai" },
+        { name: "vi-VN", label: "Vietnam" },
       ],
   bannerCount: window?.env?.bannerCount || 2,
   wapVersion: template,

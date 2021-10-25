@@ -263,6 +263,7 @@ const RightMenuLI = styled.li`
   display: inline-block;
   min-width: 100px;
   height: 95px;
+  padding: 0px 7.5px;
   line-height: 95px;
   text-align: center;
   color: ${(props) => props.theme.primaryText};
