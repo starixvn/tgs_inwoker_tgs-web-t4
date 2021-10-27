@@ -176,7 +176,12 @@ class Main extends Component {
                 </BankCardButtonLabel>
 
                 <BankCardButtonCardNoHL>
-                  {item.detail.address
+                  {item.banktype === "ThirdParty" || item.banktype === "FPS"
+                    ? item.detail.phone.substring(
+                        item.detail.phone.length - 4,
+                        item.detail.phone.length
+                      )
+                    : item.detail.address
                     ? item.detail.address.substring(
                         item.detail.address.length - 4,
                         item.detail.address.length
