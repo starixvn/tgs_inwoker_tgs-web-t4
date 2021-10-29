@@ -5,6 +5,8 @@ import { Select, FormControl, withStyles } from "@material-ui/core";
 import CustomTextField from "../../../Share/TextField";
 import Button from "../../../Share/Button";
 import i18n from "../../../../utils/i18n";
+import config from "../../../../config/config";
+import { withSnackbar } from "notistack";
 const Container = styled.div`
   width: 100%;
 `;
@@ -125,6 +127,9 @@ class AddCard extends Component {
     selectedChannelIndex: 0,
 
     selectedBankTypeIndex: 0,
+
+    name: "",
+    phone: "",
   };
   componentDidMount() {}
   handleBankTypeChange = (e) => {
@@ -146,19 +151,89 @@ class AddCard extends Component {
     this.setState({ ...this.state, bankBranch: e.target.value });
   };
 
+  handleNameChange = (e) => {
+    this.setState({ ...this.state, name: e.target.value });
+  };
+  handlePhoneChange = (e) => {
+    this.setState({ ...this.state, phone: e.target.value });
+  };
+
   handleNextClick = (e) => {
     var selected = this.props.withdrawalList[this.state.selectedBankTypeIndex];
     var detail = {};
+
     if (selected.banktype === "Bank") {
+      var bankName =
+        selected.channel[this.state.selectedChannelIndex].channelcode ===
+        "CustomBank"
+          ? this.state.bankName.trim()
+          : selected.channel[this.state.selectedChannelIndex].channelcode;
+      var bankAccountName = this.state.bankAccountName.trim();
+      var bankBranch = this.state.bankBranch.trim();
+      var number = this.state.number.trim();
+
+      if (bankName === "") {
+        this.props.enqueueSnackbar(i18n.t("card.addCard.msgEnterBankName"), {
+          variant: "error",
+        });
+        return;
+      }
+
+      if (bankAccountName === "") {
+        this.props.enqueueSnackbar(
+          i18n.t("card.addCard.msgEnterBankAccountName"),
+          {
+            variant: "error",
+          }
+        );
+        return;
+      }
+
+      if (number === "") {
+        this.props.enqueueSnackbar(i18n.t("common.msgEnterWithdrawalNumber"), {
+          variant: "error",
+        });
+        return;
+      }
       detail = {
-        bankAccount: this.state.number,
-        bankName: this.state.bankName,
-        name: this.state.bankAccountName,
-        bankBranch: this.state.bankBranch,
+        bankAccount: number,
+        bankName: bankName,
+        name: bankAccountName,
+        bankBranch: bankBranch,
+      };
+    } else if (
+      selected.banktype === "ThirdParty" ||
+      selected.banktype === "FPS"
+    ) {
+      if (this.state.name === "") {
+        this.props.enqueueSnackbar(
+          i18n.t("profile.nameVerify.msgPlsEnterName"),
+          {
+            variant: "error",
+          }
+        );
+        return;
+      }
+      if (this.state.phone === "") {
+        this.props.enqueueSnackbar(i18n.t("common.msgEnterPhone"), {
+          variant: "error",
+        });
+        return;
+      }
+      detail = {
+        username: this.state.name,
+        phone: this.state.phone,
       };
     } else {
+      var number = this.state.number.trim();
+      if (number === "") {
+        this.props.enqueueSnackbar(i18n.t("common.msgEnterWithdrawalNumber"), {
+          variant: "error",
+        });
+        return;
+      }
       detail = {
-        address: this.state.number,
+        address: number,
       };
     }
 
@@ -226,31 +301,59 @@ class AddCard extends Component {
           ) {
             return (
               <>
-                <TextFieldLabel>
-                  {i18n.t("card.addCard.BankName")}
-                </TextFieldLabel>
-                <TextFieldContainer>
-                  <CustomTextField
-                    marginTop={10}
-                    placeholder={i18n.t("card.addCard.msgEnterBankName")}
-                    width={395}
-                    height={38}
-                    float={"none"}
-                    handleTextFieldChange={this.handleBankNameChange}
-                  ></CustomTextField>
-                </TextFieldContainer>
+                {(() => {
+                  if (
+                    this.props.withdrawalList[this.state.selectedBankTypeIndex]
+                      .channel[this.state.selectedChannelIndex].channelcode !==
+                    "CustomBank"
+                  ) {
+                    return null;
+                  } else {
+                    return (
+                      <>
+                        <TextFieldLabel>
+                          {i18n.t("card.addCard.BankName")}
+                        </TextFieldLabel>
+                        <TextFieldContainer>
+                          <CustomTextField
+                            marginTop={10}
+                            placeholder={i18n.t(
+                              "card.addCard.msgEnterBankName"
+                            )}
+                            width={395}
+                            height={38}
+                            float={"none"}
+                            handleTextFieldChange={this.handleBankNameChange}
+                          ></CustomTextField>
+                        </TextFieldContainer>
+                      </>
+                    );
+                  }
+                })()}
+                {(() => {
+                  if (config.brand !== "HKJP") {
+                    return (
+                      <React.Fragment>
+                        <TextFieldLabel>
+                          {i18n.t("card.addCard.branch")}
+                        </TextFieldLabel>
+                        <TextFieldContainer>
+                          <CustomTextField
+                            marginTop={10}
+                            placeholder={i18n.t(
+                              "card.addCard.branchPlaceHolder"
+                            )}
+                            width={395}
+                            height={38}
+                            float={"none"}
+                            handleTextFieldChange={this.handleBankBranchChange}
+                          ></CustomTextField>
+                        </TextFieldContainer>
+                      </React.Fragment>
+                    );
+                  }
+                })()}
 
-                <TextFieldLabel>{i18n.t("card.addCard.branch")}</TextFieldLabel>
-                <TextFieldContainer>
-                  <CustomTextField
-                    marginTop={10}
-                    placeholder={i18n.t("card.addCard.branchPlaceHolder")}
-                    width={395}
-                    height={38}
-                    float={"none"}
-                    handleTextFieldChange={this.handleBankBranchChange}
-                  ></CustomTextField>
-                </TextFieldContainer>
                 <TextFieldLabel>
                   {i18n.t("card.addCard.BankAccountName")}
                 </TextFieldLabel>
@@ -270,19 +373,55 @@ class AddCard extends Component {
             return null;
           }
         })()}
-
-        <TextFieldLabel>{i18n.t("common.withdrawalNumber")}</TextFieldLabel>
-        <TextFieldContainer>
-          <CustomTextField
-            marginTop={10}
-            placeholder={i18n.t("common.msgEnterWithdrawalNumber")}
-            width={395}
-            height={38}
-            maxLength={50}
-            float={"none"}
-            handleTextFieldChange={this.handleNumberChange}
-          ></CustomTextField>
-        </TextFieldContainer>
+        {withdrawalList.length > 0 &&
+        (withdrawalList[this.state.selectedBankTypeIndex].banktype ===
+          "ThirdParty" ||
+          withdrawalList[this.state.selectedBankTypeIndex].banktype ===
+            "FPS") ? (
+          <div>
+            <TextFieldLabel>
+              {i18n.t("profile.nameVerify.title")}
+            </TextFieldLabel>
+            <TextFieldContainer>
+              <CustomTextField
+                marginTop={10}
+                placeholder={i18n.t("profile.nameVerify.msgPlsEnterName")}
+                width={395}
+                height={38}
+                maxLength={50}
+                float={"none"}
+                handleTextFieldChange={this.handleNameChange}
+              ></CustomTextField>
+            </TextFieldContainer>
+            <TextFieldLabel>{i18n.t("common.phoneNumber")}</TextFieldLabel>
+            <TextFieldContainer>
+              <CustomTextField
+                marginTop={10}
+                placeholder={i18n.t("common.msgEnterPhone")}
+                width={395}
+                height={38}
+                maxLength={50}
+                float={"none"}
+                handleTextFieldChange={this.handlePhoneChange}
+              ></CustomTextField>
+            </TextFieldContainer>
+          </div>
+        ) : (
+          <div>
+            <TextFieldLabel>{i18n.t("common.withdrawalNumber")}</TextFieldLabel>
+            <TextFieldContainer>
+              <CustomTextField
+                marginTop={10}
+                placeholder={i18n.t("common.msgEnterWithdrawalNumber")}
+                width={395}
+                height={38}
+                maxLength={50}
+                float={"none"}
+                handleTextFieldChange={this.handleNumberChange}
+              ></CustomTextField>
+            </TextFieldContainer>
+          </div>
+        )}
 
         <TextFieldContainer>
           {(() => {
@@ -312,4 +451,4 @@ class AddCard extends Component {
   }
 }
 
-export default connect(null, null)(AddCard);
+export default connect(null, null)(withSnackbar(AddCard));
