@@ -14,11 +14,13 @@ const StyledTableCell = withStyles((theme) => ({
     backgroundColor: "#f7f7f7",
     color: "#747474",
     padding: "5px 20px 5px 20px",
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
   },
   body: {
     fontSize: 14,
     padding: "5px 20px 5px 20px",
-
     color: "#7b7b7b",
     whiteSpace: "nowrap",
     overflow: "hidden",
@@ -69,8 +71,8 @@ function DailyReportList(props) {
                 <StyledTableCell>
                   {moment(row.createdon).format("YYYY-MM-DD hh:mm a")}
                 </StyledTableCell>
+                x<StyledTableCell>{row.id}</StyledTableCell>
                 <StyledTableCell>{row.orderno}</StyledTableCell>
-                <StyledTableCell>{row.id}</StyledTableCell>
                 <StyledTableCell>
                   {i18n.t(`report.withdrawal.status${row.status}`)}
                 </StyledTableCell>
