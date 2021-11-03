@@ -380,7 +380,7 @@ class Deposit extends Component {
     window.open(
       `/${i18n.language}/deposit/${payment.paymentcode}/${method.methodcode}/${
         channel.id
-      }/${this.state.amount.replace(/,/g, "")}/${
+      }/${this.state.amount}/${
         this.state.depositPromotion ? this.state.depositPromotion : " "
       }/${this.state.name}`,
       "_blank"
