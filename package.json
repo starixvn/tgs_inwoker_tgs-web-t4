@@ -3,7 +3,7 @@
   "version": "1.0.1",
   "private": true,
   "dependencies": {
-    "@Inwoker/tgs-api": "^0.8.204",
+    "@Inwoker/tgs-api": "^0.8.207",
     "@Inwoker/tgs-wap-t1": "^1.0.160",
     "@Inwoker/tgs-wap-t2": "^1.0.214",
     "@date-io/date-fns": "^1.3.13",

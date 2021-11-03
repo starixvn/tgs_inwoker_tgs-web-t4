@@ -20,8 +20,12 @@ class Deposit extends Component {
     var name = this.props.match.params.name;
     if (paymentcode === "MANUAL") {
       // handle manual deposit
-
-      this.props.doManualDeposit(name, amount, channelid, depositPromotion);
+      if (methodcode === "BankTransfer") {
+        this.props.doBankDeposit(name, amount, channelid, depositPromotion);
+      }
+      if (methodcode === "ThirdParty") {
+        this.props.doThirdPartyDeposit(amount, channelid, depositPromotion);
+      }
     } else {
       if (paymentcode === "LEEPAY") {
         this.props.doLeePayDeposit(amount, channelid, depositPromotion);
