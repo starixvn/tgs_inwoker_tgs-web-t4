@@ -8,13 +8,12 @@ import Loading from "../../Loading";
 import NameVerification from "../../Share/NameVerification";
 // import PassSetting from "./PassSetting";
 import config from "../../../../config/config";
-
 import AddCard from "./AddCard";
 import AddCardSuccess from "./AddCardSuccess";
 import CardManage from "./CardManage";
 import Main from "./Main";
 import Success from "./Success";
-
+import EmailVerification from "../../Share/EmailVerification";
 import {
   walletAction,
   UPDATE_INFO,
@@ -82,6 +81,7 @@ class Withdrawal extends Component {
         });
       }
     });
+
     if (this.props.wallet.bankCardList.length === 0)
       this.props.getBankCardList();
     if (this.props.wallet.withdrawalList.length === 0)
@@ -299,12 +299,12 @@ class Withdrawal extends Component {
       });
       return;
     }
-    if (password.length <= 0) {
-      this.props.enqueueSnackbar(i18n.t("withdrawal.msgEnterWithdrawalPass"), {
-        variant: "warning",
-      });
-      return;
-    }
+    // if (password.length <= 0) {
+    //   this.props.enqueueSnackbar(i18n.t("withdrawal.msgEnterWithdrawalPass"), {
+    //     variant: "warning",
+    //   });
+    //   return;
+    // }
     this.props.doWithdraw(formatedamount, password, bankid);
     // this.setState({ ...this.state, loading: true });
     // const result = WalletService.Withdrawal(
@@ -352,92 +352,93 @@ class Withdrawal extends Component {
                 return (
                   <NameVerification token={this.props.token}></NameVerification>
                 );
+              } else if (this.props.account.info.member_email === "") {
+                return (
+                  <EmailVerification
+                    token={this.props.token}
+                  ></EmailVerification>
+                );
               } else {
-                if (this.props.account.info.member_safe_password !== "set") {
+                {
+                  /* if (this.props.account.info.member_safe_password !== "set") {
                   return (
                     <Redirect
                       to={`/${i18n.language}/account/profile/member_safe_password`}
                     ></Redirect>
                   );
                 } else {
-                  if (
-                    this.props.wallet.bankCardList != null &&
-                    this.props.wallet.bankCardList.length === 0
-                  ) {
+                  
+                } */
+                }
+                if (
+                  this.props.wallet.bankCardList != null &&
+                  this.props.wallet.bankCardList.length === 0
+                ) {
+                  return (
+                    <AddCard
+                      name={this.props.account.info.member_name}
+                      onhandleNextClick={this.handleAddCardNextClick}
+                      withdrawalList={this.props.wallet.withdrawalList}
+                      showBack={false}
+                    ></AddCard>
+                  );
+                } else {
+                  if (this.state.isAddCardSuccess === true) {
                     return (
-                      <AddCard
-                        name={this.props.account.info.member_name}
-                        onhandleNextClick={this.handleAddCardNextClick}
-                        withdrawalList={this.props.wallet.withdrawalList}
-                        showBack={false}
-                      ></AddCard>
+                      <AddCardSuccess
+                        onhandleBindCardClick={this.handleBindCardClick}
+                        onhandleGoWithdrawClick={this.handleGoWithdrawClick}
+                        onhandleCSClick={this.handleCSClick}
+                      ></AddCardSuccess>
                     );
                   } else {
-                    if (this.state.isAddCardSuccess === true) {
-                      return (
-                        <AddCardSuccess
-                          onhandleBindCardClick={this.handleBindCardClick}
-                          onhandleGoWithdrawClick={this.handleGoWithdrawClick}
-                          onhandleCSClick={this.handleCSClick}
-                        ></AddCardSuccess>
-                      );
-                    } else {
-                      switch (this.state.displayView) {
-                        case 1:
-                          return (
-                            <Main
-                              defaultCard={this.state.defaultCard}
-                              cardList={this.props.wallet.bankCardList}
-                              withdrawalInfo={this.state.withdrawalInfo}
-                              onhandleManageCardClick={
-                                this.handleManageCardClick
-                              }
-                              onhandleWithdrawalClick={
-                                this.handleWithdrawalClick
-                              }
-                              account={this.props.account}
-                              withdrawalMinLimit={
-                                this.props.wallet.withdrawalMinLimit
-                              }
-                              withdrawalMaxLimit={
-                                this.props.wallet.withdrawalMaxLimit
-                              }
-                              minWithdrawLimit={this.state.minWithdrawLimit}
-                            ></Main>
-                          );
-                        case 2:
-                          return (
-                            <AddCard
-                              name={this.props.account.info.member_name}
-                              onhandleNextClick={this.handleAddCardNextClick}
-                              onhandleBackClick={this.handleAddCardBack}
-                              withdrawalList={this.props.wallet.withdrawalList}
-                              showBack={true}
-                            ></AddCard>
-                          );
-                        case 3:
-                          return (
-                            <CardManage
-                              bankCardList={this.props.wallet.bankCardList}
-                              onhandleAddCardClick={this.handleAddCardClick}
-                              onhandleBackClick={this.handleCardManageBack}
-                              onhandleDeleteCardClick={
-                                this.handleDeleteCardClick
-                              }
-                              onhandleReportClick={this.handleReportClick}
-                            ></CardManage>
-                          );
-                        case 4:
-                          return (
-                            <Success
-                              handleConfirmClick={
-                                this.handleSuccessConfirmClick
-                              }
-                            ></Success>
-                          );
-                        default:
-                          return null;
-                      }
+                    switch (this.state.displayView) {
+                      case 1:
+                        return (
+                          <Main
+                            defaultCard={this.state.defaultCard}
+                            cardList={this.props.wallet.bankCardList}
+                            withdrawalInfo={this.state.withdrawalInfo}
+                            onhandleManageCardClick={this.handleManageCardClick}
+                            onhandleWithdrawalClick={this.handleWithdrawalClick}
+                            account={this.props.account}
+                            withdrawalMinLimit={
+                              this.props.wallet.withdrawalMinLimit
+                            }
+                            withdrawalMaxLimit={
+                              this.props.wallet.withdrawalMaxLimit
+                            }
+                            minWithdrawLimit={this.state.minWithdrawLimit}
+                          ></Main>
+                        );
+                      case 2:
+                        return (
+                          <AddCard
+                            name={this.props.account.info.member_name}
+                            onhandleNextClick={this.handleAddCardNextClick}
+                            onhandleBackClick={this.handleAddCardBack}
+                            withdrawalList={this.props.wallet.withdrawalList}
+                            showBack={true}
+                          ></AddCard>
+                        );
+                      case 3:
+                        return (
+                          <CardManage
+                            bankCardList={this.props.wallet.bankCardList}
+                            onhandleAddCardClick={this.handleAddCardClick}
+                            onhandleBackClick={this.handleCardManageBack}
+                            onhandleDeleteCardClick={this.handleDeleteCardClick}
+                            onhandleReportClick={this.handleReportClick}
+                          ></CardManage>
+                        );
+                      case 4:
+                        return (
+                          <Success
+                            handleConfirmClick={this.handleSuccessConfirmClick}
+                          ></Success>
+                        );
+                      default:
+                        return null;
                     }
                   }
                 }
