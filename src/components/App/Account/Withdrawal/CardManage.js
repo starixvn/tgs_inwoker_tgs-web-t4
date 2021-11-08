@@ -109,20 +109,36 @@ function CardManage(props) {
               <RowContainer>
                 <CardTitle>{i18n.t("card.tail")}</CardTitle>
                 <CardNumber>
-                  {item.banktype === "ThirdParty" || item.banktype === "FPS"
-                    ? item.detail.phone.substring(
-                        item.detail.phone.length - 4,
-                        item.detail.phone.length
-                      )
-                    : item.detail.address
-                    ? item.detail.address.substring(
-                        item.detail.address.length - 4,
-                        item.detail.address.length
-                      )
-                    : item.detail.bankAccount.substring(
-                        item.detail.bankAccount.length - 4,
-                        item.detail.bankAccount.length
-                      )}
+                  {(() => {
+                    if (
+                      item.banktype === "ThirdParty" ||
+                      item.banktype === "FPS"
+                    ) {
+                      if (item.detail.phone) {
+                        return item.detail.phone.substring(
+                          item.detail.phone.length - 4,
+                          item.detail.phone.length
+                        );
+                      } else if (item.detail.address) {
+                        return item.detail.address.substring(
+                          item.detail.address.length - 4,
+                          item.detail.address.length
+                        );
+                      }
+                    } else {
+                      if (item.detail.bankAccount) {
+                        return item.detail.bankAccount.substring(
+                          item.detail.bankAccount.length - 4,
+                          item.detail.bankAccount.length
+                        );
+                      } else if (item.detail.address) {
+                        return item.detail.address.substring(
+                          item.detail.address.length - 4,
+                          item.detail.address.length
+                        );
+                      }
+                    }
+                  })()}
                 </CardNumber>
               </RowContainer>
               <RowContainer>
