@@ -36,7 +36,7 @@ export const themeBlack = {
   primaryHightlight: "#fde73f",
   secondary: "#363A45",
   secondaryText: "#fff",
-  tertiary: "#950400",
+  tertiary: "#FF9900",
   tertiaryText: "#fff",
 };
 
@@ -61,6 +61,7 @@ export const wapT2 = {
   bottomnav: "#f5f5f5",
   bottomNavAction: "#676767",
   tabbar: "#fff",
+  cardText: "#676767",
 };
 
 export const wapT3 = {
@@ -75,16 +76,17 @@ export const wapT3 = {
   primaryGradient: "#ff9900",
   primaryGradientRgb: "4, 75, 163",
   primaryHightlight: "#fde73f",
-  secondary: "#ffffff",
+  secondary: "#000000",
   secondaryText: "rgba(0,0,0,0.5)",
   tertiary: "rgba(255, 255, 255, 0.5)",
   tertiaryText: "rgba(255, 255, 255, 0.5)",
   buttonText: "#ffffff",
   buttonBackground: "#ff9900",
-  buttonText2: "#ffffff",
+  buttonText2: "#000000",
   bottomnav: "#f5f5f5",
   bottomNavAction: "#585858",
   tabbar: "#161519",
+  cardText: "#000",
 };
 
 export const wapT4 = {
@@ -112,6 +114,7 @@ export const wapT4 = {
   bottomnav: "#f5f5f5",
   bottomNavAction: "#585858",
   tabbar: "#161519",
+  cardText: "#000",
 };
 
 export const wapT5 = {
@@ -135,6 +138,7 @@ export const wapT5 = {
   bottomnav: "#f5f5f5",
   bottomNavAction: "#585858",
   tabbar: "#fff",
+  cardText: "#676767",
 };
 
 export const wapT6 = {
@@ -158,6 +162,7 @@ export const wapT6 = {
   bottomnav: "#464E69",
   bottomNavAction: "#fff",
   tabbar: "#121315",
+  cardText: "#000",
 };
 
 export const wapT7 = {
@@ -181,13 +186,13 @@ export const wapT7 = {
   bottomnav: "#2B2A2A",
   bottomNavAction: "#fff",
   tabbar: "#121315",
+  cardText: "#000",
 };
 
 export const themeList = {
   red: themeRed,
   blue: themeBlue,
   black: themeBlack,
-
   wapT2: wapT2,
   wapT3: wapT3,
   wapT4: wapT4,
