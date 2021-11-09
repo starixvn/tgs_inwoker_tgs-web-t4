@@ -352,7 +352,10 @@ class Withdrawal extends Component {
                 return (
                   <NameVerification token={this.props.token}></NameVerification>
                 );
-              } else if (this.props.account.info.member_email === "") {
+              } else if (
+                this.props.account.info.member_email === "" ||
+                this.props.account.info.member_email === null
+              ) {
                 return (
                   <EmailVerification
                     token={this.props.token}
