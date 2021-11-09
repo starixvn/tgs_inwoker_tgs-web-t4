@@ -357,9 +357,9 @@ class Withdrawal extends Component {
                 this.props.account.info.member_email === null
               ) {
                 return (
-                  <EmailVerification
-                    token={this.props.token}
-                  ></EmailVerification>
+                  <Redirect
+                    to={`/${i18n.language}/account/profile/member_email`}
+                  ></Redirect>
                 );
               } else {
                 {
