@@ -229,7 +229,7 @@ class Main extends Component {
 
         <SelectionContainer>
           <CustomTextField
-            width={220}
+            width={250}
             height={38}
             placeholder={i18n.t("withdrawal.enterAmount")}
             handleTextFieldChange={this.handleAmountChange}

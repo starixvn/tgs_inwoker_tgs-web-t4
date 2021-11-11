@@ -260,7 +260,7 @@ class NewStepOne extends Component {
                           <TextField
                             style={{
                               height: "38px",
-                              width: "220px",
+                              width: "258px",
                               float: "left",
                               marginRight: "5px",
                               padding: 0,

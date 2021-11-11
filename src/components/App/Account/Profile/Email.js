@@ -45,7 +45,7 @@ const CustomText = withStyles({
 const Container = styled.div``;
 
 const StyleButton = styled.div`
-  width: 140px;
+  width: 130px;
   height: 44px;
   border: solid 1px #b6b6b6;
   margin: 0;
@@ -238,7 +238,7 @@ class Address extends Component {
           onChange={this.onhandleCodeChange}
           value={this.state.code}
           style={{
-            width: "200px",
+            width: "210px",
             height: "46px",
           }}
           variant="outlined"

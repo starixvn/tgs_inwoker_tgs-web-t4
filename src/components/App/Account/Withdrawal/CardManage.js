@@ -22,7 +22,7 @@ const CardContainer = styled.div`
   margin-top: 10px;
 `;
 const CardFrame = styled.div`
-  width: 204px;
+  width: 279px;
   height: 133px;
   border: solid 1px #e1dfdf;
   background-color: #fefefe;
