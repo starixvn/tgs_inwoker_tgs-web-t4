@@ -142,6 +142,20 @@ const ButtonCancel = styled(ButtonConfirm)``;
 const RouteMapping = [
   {
     path: "/",
+    component: Wapp.Main,
+    alert: true,
+    popup: true,
+    navigate: true,
+  },
+  {
+    path: "/main/:page",
+    component: Wapp.Main,
+    alert: true,
+    popup: true,
+    navigate: true,
+  },
+  {
+    path: "/login",
     component: Wapp.Login,
     alert: true,
   },
@@ -159,13 +173,6 @@ const RouteMapping = [
     path: "/f/:promotionid",
     component: Wapp.Login,
     alert: true,
-  },
-  {
-    path: "/main/:page",
-    component: Wapp.Main,
-    alert: true,
-    popup: true,
-    navigate: true,
   },
   {
     path: "/profile",
