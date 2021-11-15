@@ -542,7 +542,7 @@ class Profile extends Component {
         </Title>
         <InnerWrap>
           {(() => {
-            if (config.brand !== "HKJP") {
+            if (config.brand !== "HKJP" && config.brand !== "HK28") {
               return GetContentWrap(
                 this.props.account.info,
                 i18n.t("profile.nameVerify.icNum"),
@@ -551,6 +551,7 @@ class Profile extends Component {
               );
             }
           })()}
+
           {/* {GetContentWrap(
             this.props.account.info,
             i18n.t("profile.phone.title"),
@@ -567,8 +568,13 @@ class Profile extends Component {
               );
             }
           })()}
+
           {(() => {
-            if (config.brand !== "HKJP") {
+            if (
+              config.brand !== "HKJP" &&
+              config.brand !== "GPI" &&
+              config.brand !== "HK28"
+            ) {
               return GetContentWrap(
                 this.props.account.info,
                 i18n.t("common.emailAddress"),
@@ -577,18 +583,26 @@ class Profile extends Component {
               );
             }
           })()}
-          {GetContentWrap(
-            this.props.account.info,
-            "QQ",
-            "member_qq",
-            this.handleButtonClick
-          )}
-          {GetContentWrap(
-            this.props.account.info,
-            i18n.t("common.wechatNumber"),
-            "member_wechat",
-            this.handleButtonClick
-          )}
+          {(() => {
+            if (config.brand !== "HK28") {
+              return GetContentWrap(
+                this.props.account.info,
+                "QQ",
+                "member_qq",
+                this.handleButtonClick
+              );
+            }
+          })()}
+          {(() => {
+            if (config.brand !== "HK28") {
+              return GetContentWrap(
+                this.props.account.info,
+                i18n.t("common.wechatNumber"),
+                "member_wechat",
+                this.handleButtonClick
+              );
+            }
+          })()}
           {/* {GetContentWrap(
             this.props.account.info,
             "电子邮件",
@@ -613,13 +627,18 @@ class Profile extends Component {
             "member_birthday",
             this.handleButtonClick
           )} */}
-          {/* {GetContentWrap(
-            this.props.account.info,
-            i18n.t("profile.withdrawalPassword.title"),
-            "member_safe_password",
-            this.handleButtonClick,
-            i18n.t("profile.edit")
-          )} */}
+          {/* {(() => {
+            if (config.brand !== "HKJP" && config.brand !== "GPI") {
+              return GetContentWrap(
+                this.props.account.info,
+                i18n.t("profile.withdrawalPassword.title"),
+                "member_safe_password",
+                this.handleButtonClick,
+                i18n.t("profile.edit")
+              );
+            }
+          })()} */}
+
           {GetContentWrap(
             this.props.account.info,
             i18n.t("profile.password.title"),
