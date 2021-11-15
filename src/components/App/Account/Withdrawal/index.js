@@ -353,8 +353,9 @@ class Withdrawal extends Component {
                   <NameVerification token={this.props.token}></NameVerification>
                 );
               } else if (
-                this.props.account.info.member_email === "" ||
-                this.props.account.info.member_email === null
+                (this.props.account.info.member_email === null ||
+                  this.props.account.info.member_email === "") &&
+                config.brand !== "HK28"
               ) {
                 return (
                   <Redirect
