@@ -57,7 +57,7 @@ import Deposit from "./Deposit/index";
 import DepositPayment from "./Deposit/Payment";
 import DepositDetails from "./Deposit/Details";
 import DepositManual from "./Deposit/Manual";
-
+import PopupAnnouncement from "../Share/PopupAnnouncement";
 import Card from "./Card/index";
 import AddCard from "./Card/AddCard";
 // import NameVerification from "./Card/NameVerification";
@@ -428,6 +428,7 @@ class Wap extends Component {
     title: "",
     message: "",
     loading: true,
+    openAnnouncement: true,
   };
   GetSupportUrl = (userid, name, question, email) => {
     var newURL = this.props.general.livechat
@@ -807,6 +808,33 @@ class Wap extends Component {
               })}
             </Switch>
           </Router>
+          {(() => {
+            if (
+              config.brand === "HK28" &&
+              this.props.ui.marqueeText.length > 0
+            ) {
+              var row = this.props.ui.marqueeText[0];
+
+              return (
+                <PopupAnnouncement
+                  open={this.state.openAnnouncement}
+                  onClose={() => {
+                    this.setState({ ...this.state, openAnnouncement: false });
+                  }}
+                  text={
+                    row.localization !== null && row.localization.content
+                      ? row.localization.content
+                      : row.content
+                  }
+                  header={
+                    row.localization !== null && row.localization.subject
+                      ? row.localization.subject
+                      : row.subject
+                  }
+                ></PopupAnnouncement>
+              );
+            }
+          })()}
           <StyledModal onClose={this.handleClose} open={this.state.open}>
             <DialoTitle>{this.state.title}</DialoTitle>
             <DialoMessage>{this.state.message}</DialoMessage>
@@ -859,6 +887,7 @@ const mapStateToProps = (state) => {
     account: state.account,
     general: state.general,
     game: state.game,
+    ui: state.ui,
     screenWidth: state.ui.screenWidth,
     screenHeight: state.ui.screenHeight,
   };
