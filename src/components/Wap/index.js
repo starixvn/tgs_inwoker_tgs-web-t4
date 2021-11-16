@@ -809,7 +809,8 @@ class Wap extends Component {
             </Switch>
           </Router>
           {(() => {
-            this.props.location.pathname === "/" + i18n.language ||
+            const matchingpath =
+              this.props.location.pathname === "/" + i18n.language ||
               this.props.location.pathname === "/" + i18n.language + "/" ||
               this.props.location.pathname ===
                 "/" + i18n.language + "/main/home";
