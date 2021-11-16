@@ -213,6 +213,10 @@ const CustomInput = styled.input`
     opacity: 1;
   }
 `;
+const CustomImage = styled.img`
+  height: 130px;
+  width: auto;
+`;
 
 class NewStepOne extends Component {
   render() {
@@ -322,6 +326,9 @@ class NewStepOne extends Component {
                             </SubTitle>
                           </SubHeaderContainer>
                           <SelectionContainer>
+                            {channelExtend.logo && (
+                              <CustomImage src={channelExtend.logo} />
+                            )}
                             <TransferContainer>
                               <TransferLabel>
                                 {i18n.t("deposit.accName")}:
