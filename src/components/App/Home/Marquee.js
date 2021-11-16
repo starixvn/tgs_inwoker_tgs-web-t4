@@ -44,7 +44,7 @@ function Marquee(props) {
                   overflow: "visible",
                 }}
               >
-                {" * "}
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{"* "}
                 {row.localization !== null && row.localization.content
                   ? row.localization.content
                   : row.content}
