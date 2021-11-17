@@ -10,6 +10,15 @@ export const themeRed = {
   secondaryText: "rgba(0,0,0,0.5)",
   tertiary: "rgba(255, 255, 255, 0.5)",
   tertiaryText: "rgba(255, 255, 255, 0.5)",
+  //new addition to compensate wap-t2
+  appbar: "linear-gradient(to top, #91030c, #c40511)",
+  buttonBackground: "#fff",
+  buttonText: "#fff",
+  buttonText2: "#000",
+  bottomnav: "#f5f5f5",
+  bottomNavAction: "#404040",
+  body: "#F0EFF5",
+  bodyBackground: "#F0EFF5",
 };
 
 export const themeBlue = {
@@ -24,6 +33,15 @@ export const themeBlue = {
   secondaryText: "rgba(0,0,0,0.5)",
   tertiary: "rgba(255, 255, 255, 0.5)",
   tertiaryText: "rgba(255, 255, 255, 0.5)",
+  //new addition to compensate wap-t2
+  appbar: "linear-gradient(to top,#044BA3, #1b86c7)",
+  buttonBackground: "#fff",
+  buttonText: "#fff",
+  buttonText2: "#000",
+  bottomnav: "#f5f5f5",
+  bottomNavAction: "#404040",
+  body: "#F0EFF5",
+  bodyBackground: "#F0EFF5",
 };
 
 export const themeBlack = {
@@ -38,6 +56,15 @@ export const themeBlack = {
   secondaryText: "#fff",
   tertiary: "#FF9900",
   tertiaryText: "#fff",
+  //new addition to compensate wap-t2
+  appbar: "linear-gradient(to top,#044BA3, #1b86c7)",
+  buttonBackground: "#fff",
+  buttonText: "#fff",
+  buttonText2: "#000",
+  bottomnav: "#f5f5f5",
+  bottomNavAction: "#404040",
+  body: "#F0EFF5",
+  bodyBackground: "#F0EFF5",
 };
 
 export const wapT2 = {
