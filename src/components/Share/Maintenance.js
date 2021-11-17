@@ -1,10 +1,15 @@
-import { Grid } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import i18n from "../../utils/i18n";
 import QRCode from "qrcode.react";
 import MaintenancePNG from "../../assets/images/maintenance-blank.png";
 import { Dialog } from "@material-ui/core";
+import { connect } from "react-redux";
+import Common from "../../utils/Common";
+import { generalAction } from "@Inwoker/tgs-api";
+import config from "../../config/config";
+import { withSnackbar } from "notistack";
+import { AppHistory } from "../../history/History";
 const Container = styled.div`
   width: 100%;
   background: url(${MaintenancePNG}) no-repeat center;
@@ -135,6 +140,12 @@ const Maintenance = (props) => {
     });
   }, []);
 
+  useEffect(() => {
+    if (!props.general.isMaintenance) {
+      AppHistory.push("/" + i18n.language);
+    }
+  });
+
   function copyText(text) {
     navigator.clipboard.writeText(text);
   }
@@ -213,4 +224,22 @@ const Maintenance = (props) => {
   );
 };
 
-export default Maintenance;
+const mapStateToProps = (state) => {
+  return {
+    general: state.general,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getBrandCommunicationList: () =>
+      dispatch(generalAction.getBrandCommunication()),
+
+    getLiveChatURL: () => dispatch(generalAction.getLiveChatURL()),
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withSnackbar(Maintenance));
