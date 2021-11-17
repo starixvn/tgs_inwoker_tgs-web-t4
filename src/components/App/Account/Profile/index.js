@@ -577,7 +577,8 @@ class Profile extends Component {
             if (
               config.brand !== "HKJP" &&
               config.brand !== "GPI" &&
-              config.brand !== "HK28"
+              config.brand !== "HK28" &&
+              config.brand !== "WLGHK"
             ) {
               return GetContentWrap(
                 this.props.account.info,

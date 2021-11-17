@@ -355,7 +355,8 @@ class Withdrawal extends Component {
               } else if (
                 (this.props.account.info.member_email === null ||
                   this.props.account.info.member_email === "") &&
-                config.brand !== "HK28"
+                config.brand !== "HK28" &&
+                config.brand !== "WLGHK"
               ) {
                 return (
                   <Redirect
