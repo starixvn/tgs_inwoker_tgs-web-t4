@@ -437,7 +437,11 @@ class GuestContainer extends Component {
     return (
       <Container>
         {(() => {
-          if (config.brand === "HKJP" || config.brand === "GPI") {
+          if (
+            config.brand === "HKJP" ||
+            config.brand === "GPI" ||
+            config.brand === "WLGHK"
+          ) {
             return (
               <React.Fragment>
                 <BtnRegister onClick={() => this.onhandleActivation()}>
@@ -501,7 +505,7 @@ class GuestContainer extends Component {
                   ></Activation>
                 );
               } else if (this.state.openDialogName === "forgotpassword") {
-                return config.brand !== "HKJP" ? (
+                return config.brand !== "HKJP" && config.brand === "WLGHK" ? (
                   <ForgotPasswordEmail
                     onhandleClose={this.onhandleCloseDialog}
                     onhandleNextClick={this.onhandleForgotPasswordEmailClick}

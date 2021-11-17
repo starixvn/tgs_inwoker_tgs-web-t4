@@ -559,7 +559,11 @@ class Profile extends Component {
             this.handleButtonClick
           )} */}
           {(() => {
-            if (config.brand === "GPI" || config.brand === "HKJP") {
+            if (
+              config.brand === "GPI" ||
+              config.brand === "HKJP" ||
+              config.brand === "WLGHK"
+            ) {
               return GetContentWrap(
                 this.props.account.info,
                 i18n.t("common.phoneNumber"),
