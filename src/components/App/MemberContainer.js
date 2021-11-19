@@ -17,14 +17,15 @@ export const rotateKeyFrame = keyframes`
 `;
 const Container = styled.div`
   font-size: 14px;
-  float: right;
+
+  display: flex;
+  align-items: center;
 `;
 const BtnStyle1 = styled.div`
   width: 68px;
   height: 35px;
   border-radius: 4px;
 
-  float: right;
   margin-right: 10px;
   text-align: center;
   line-height: 220%;
@@ -44,7 +45,7 @@ const BtnStyle1 = styled.div`
 const BtnLogout = styled.div`
   color: #ffffff;
   text-align: right;
-  padding: 10px 0px 0 0;
+
   float: right;
   &:hover {
     cursor: pointer;
@@ -58,8 +59,7 @@ const BtnDeposit = styled(BtnStyle1)``;
 const BalanceContainer = styled.div`
   color: #ffffff;
   text-align: right;
-  padding: 10px 10px 0 0;
-  float: right;
+  margin-right: 8px;
   &:hover {
     cursor: pointer;
   }
@@ -97,14 +97,13 @@ const MemberUserName = styled.span`
 const Spliter = styled.div`
   width: 2px;
   height: 16px;
-  margin: 12px 10px 0px 10px;
+  margin: 0px 10px 0px 10px;
   float: right;
   background-color: rgba(255, 255, 255, 0.2);
 `;
 const InboxContainer = styled(BalanceContainer)`
   color: #ffffff;
   text-align: right;
-  padding: 10px 0px 0 0;
   &:hover {
     cursor: pointer;
   }
@@ -124,7 +123,6 @@ const WelcomeContainer = styled(BalanceContainer)`
   color: #f6f6f6;
   float: right;
   margin-right: 0px;
-  padding: 10px 0 0 0;
   max-width: 300px;
 `;
 const CustomLink = styled(Link)`
@@ -138,12 +136,27 @@ class MemberContainer extends Component {
   render() {
     return (
       <Container>
-        <BtnTransfer onClick={this.props.onhandleTransfer}>
-          {i18n.t("web.header.transfer")}
-        </BtnTransfer>
-        <BtnDeposit onClick={this.props.onhandleDeposit}>
-          {i18n.t("web.header.deposit")}
-        </BtnDeposit>
+        <WelcomeContainer>
+          <CustomLink to={"/" + i18n.language + "/account/profile"}>
+            {i18n.t("web.header.welcomBack")}{" "}
+            <MemberUserName>
+              {this.props.account.info.member_username} (VIP
+              {this.props.account.info.member_level_id})
+            </MemberUserName>
+          </CustomLink>
+        </WelcomeContainer>
+        <Spliter></Spliter>
+        <BtnLogout onClick={this.props.onhandleLogout}>
+          {i18n.t("web.header.logout")}
+        </BtnLogout>
+        <Spliter></Spliter>
+        <InboxContainer onClick={this.props.onhandleInboxClick}>
+          <InboxCountLabel>
+            {this.props.account.info.message_num}
+          </InboxCountLabel>
+          <InboxIconImg src={InboxIconPNG}></InboxIconImg>
+        </InboxContainer>
+        <Spliter></Spliter>
         <BalanceContainer>
           <span>{i18n.t("web.header.mainAccount")}</span>
           <BalanceAmountLabel onClick={this.props.onhandleTransfer}>
@@ -161,27 +174,12 @@ class MemberContainer extends Component {
             <RefreshBalanceIcon></RefreshBalanceIcon>
           </RefreshBalance>
         </BalanceContainer>
-        <Spliter></Spliter>
-        <InboxContainer onClick={this.props.onhandleInboxClick}>
-          <InboxCountLabel>
-            {this.props.account.info.message_num}
-          </InboxCountLabel>
-          <InboxIconImg src={InboxIconPNG}></InboxIconImg>
-        </InboxContainer>
-        <Spliter></Spliter>
-        <BtnLogout onClick={this.props.onhandleLogout}>
-          {i18n.t("web.header.logout")}
-        </BtnLogout>
-        <Spliter></Spliter>
-        <WelcomeContainer>
-          <CustomLink to={"/" + i18n.language + "/account/profile"}>
-            {i18n.t("web.header.welcomBack")}{" "}
-            <MemberUserName>
-              {this.props.account.info.member_username} (VIP
-              {this.props.account.info.member_level_id})
-            </MemberUserName>
-          </CustomLink>
-        </WelcomeContainer>
+        <BtnDeposit onClick={this.props.onhandleDeposit}>
+          {i18n.t("web.header.deposit")}
+        </BtnDeposit>
+        <BtnTransfer onClick={this.props.onhandleTransfer}>
+          {i18n.t("web.header.transfer")}
+        </BtnTransfer>
       </Container>
     );
   }
