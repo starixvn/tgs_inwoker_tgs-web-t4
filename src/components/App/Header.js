@@ -38,9 +38,11 @@ const InnerWrap = styled.div`
 `;
 const TopContainer = styled.div`
   height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `;
 const TimerContainer = styled.div`
-  padding-top: 18px;
   font-family: arial;
   float: left;
   @media (max-width: 950px) {
@@ -113,7 +115,7 @@ const LanguageContent = styled.div`
 
 const LanguageContainer = styled.div`
   float: left;
-  padding-top: 7.5px;
+
   padding-right: 5px;
   position: relative;
   display: inline-block;
@@ -127,7 +129,6 @@ const LanguageContainer = styled.div`
 
 const RightContainer = styled.div`
   float: right;
-  padding-top: 5px;
   display: flex;
   align-items: center;
 `;
@@ -712,6 +713,10 @@ class Header extends Component {
       <CustomAppBar hide={this.props.hide}>
         <InnerWrap>
           <TopContainer>
+            <TimerContainer>
+              <TimerLogo></TimerLogo>
+              <TimerSpan>GMT+8 {this.state.systemDateTime}</TimerSpan>
+            </TimerContainer>
             {/* <TimerContainer>
               <TimerLogo></TimerLogo>
               <TimerSpan>GMT+8 {this.state.systemDateTime}</TimerSpan>

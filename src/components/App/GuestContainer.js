@@ -28,9 +28,7 @@ import { withSnackbar } from "notistack";
 
 import BlowFishEncryption from "../../utils/BlowFishEncryption";
 import i18n from "../../utils/i18n";
-const Container = styled.div`
-  margin-top: 5px;
-`;
+const Container = styled.div``;
 const BtnLoginRegister = styled.div`
   float: right;
   font-size: 12px;
