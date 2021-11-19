@@ -128,12 +128,13 @@ const LanguageContainer = styled.div`
 const RightContainer = styled.div`
   float: right;
   padding-top: 5px;
+  display: flex;
+  align-items: center;
 `;
 
 const BtnAppsAndCS = styled.div`
   width: 77px;
-  height: 30px;
-  margin-top: 3px;
+
   float: right;
   &:hover {
     cursor: pointer;
@@ -262,8 +263,8 @@ const breatheAnimation = keyframes`
 const RightMenuLI = styled.li`
   display: inline-block;
   min-width: 100px;
-  height: 95px;
   padding: 0px 7.5px;
+  height: 95px;
   line-height: 95px;
   text-align: center;
   color: ${(props) => props.theme.primaryText};
@@ -633,6 +634,7 @@ class Header extends Component {
       this.props.showLogin(true);
     }
   };
+
   handleJoinGameClick = (gameType, path, gameCode, url) => {
     var slotPageGameType = [
       GameTypeEnum.SLOT,
@@ -763,6 +765,9 @@ class Header extends Component {
                   );
                 }
               })()}
+              <BtnAppsAndCS onClick={this.props.onhandleShowCSClick}>
+                {i18n.t("common.cs")}
+              </BtnAppsAndCS>
             </RightContainer>
           </TopContainer>
           <BottomContainer>
