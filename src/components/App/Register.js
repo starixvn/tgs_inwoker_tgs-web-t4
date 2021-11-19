@@ -409,14 +409,16 @@ function Register(props) {
           }}
         />
 
-        <CustomText
-          onChange={handlePromoChange}
-          value={promotionId}
-          id="code"
-          placeholder={i18n.t("web.register.promoteCode")}
-          variant="outlined"
-          inputProps={{ disabled: withPromo ? true : false }}
-        />
+        {!props.general.brand.hasInvitationCode && (
+          <CustomText
+            onChange={handlePromoChange}
+            value={promotionId}
+            id="code"
+            placeholder={i18n.t("web.register.promoteCode")}
+            variant="outlined"
+            inputProps={{ disabled: withPromo ? true : false }}
+          />
+        )}
         <DescriptionContainer>
           <Checkbox
             checked={tnc}
