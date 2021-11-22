@@ -103,7 +103,7 @@ export const wapT3 = {
   primaryGradient: "#ff9900",
   primaryGradientRgb: "4, 75, 163",
   primaryHightlight: "#fde73f",
-  secondary: "#000000",
+  secondary: "#fff",
   secondaryText: "rgba(0,0,0,0.5)",
   tertiary: "rgba(255, 255, 255, 0.5)",
   tertiaryText: "rgba(255, 255, 255, 0.5)",
