@@ -439,6 +439,13 @@ function Register(props) {
     </Container>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    general: state.general,
+  };
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
     dispatchFunction: (json) => dispatch(json),
@@ -452,5 +459,5 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 export default withRouter(
-  connect(null, mapDispatchToProps)(withSnackbar(Register))
+  connect(mapStateToProps, mapDispatchToProps)(withSnackbar(Register))
 );
