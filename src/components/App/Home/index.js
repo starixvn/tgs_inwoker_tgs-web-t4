@@ -468,16 +468,6 @@ class Home extends Component {
           //  </SectionContainer>
           //  <ThirdSection handleJoinGameClick={this.handleJoinGameClick} />
         }
-
-        {config.brand !== "HK28" && (
-          <FloatPanel
-            onhandleDepositClick={this.props.onhandleDepositClick}
-            onhandleShowCSClick={this.props.onhandleShowCSClick}
-            onDownloadClick={() =>
-              this.handleNavigateClick("/" + i18n.language + "/download")
-            }
-          ></FloatPanel>
-        )}
       </HomeContainer>
     );
   }

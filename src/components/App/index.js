@@ -385,11 +385,10 @@ class App extends Component {
                     <Redirect to={"/" + i18n.language} />
                   </Switch>
                 </Main>
-                {config.brand === "HK28" && (
-                  <FloatPanel
-                    onhandleShowCSClick={this.handleShowCSClick}
-                  ></FloatPanel>
-                )}
+
+                <FloatPanel
+                  onhandleShowCSClick={this.handleShowCSClick}
+                ></FloatPanel>
 
                 <Footer target={"_blank"}></Footer>
               </>
