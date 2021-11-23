@@ -13,7 +13,7 @@ import CustomButton from "../../../Share/Button";
 import CurrencyTextField from "@unicef/material-ui-currency-textfield";
 import LimitPopupPNG from "../../../../assets/images/limit-popup.png";
 import Common from "../../../../utils/Common";
-import QRCode from "qrcode.react";
+import config from "../../../../config/config";
 const CustomText = withStyles({
   root: {
     marginTop: "10px",
@@ -134,6 +134,7 @@ const SubTitle = styled.div`
 const SelectionContainer = styled.div`
   margin: 15px 0 0 30px;
 `;
+const QRCodeImg = styled.img``;
 const TunnelButton = styled(TabButton)`
   min-width: 133px;
   height: 41px;
@@ -284,7 +285,7 @@ class NewStepOne extends Component {
                       );
                     }
                   )}
-                </SelectionContainer>{" "}
+                </SelectionContainer>
                 <SplitLine></SplitLine>
                 {(() => {
                   if (paymentType.paymentcode.toUpperCase() === "MANUAL") {
@@ -307,10 +308,7 @@ class NewStepOne extends Component {
                             </SubTitle>
                           </SubHeaderContainer>
                           <SelectionContainer>
-                            <QRCode
-                              value={channelExtend.qrCode}
-                              bgColor={"#f6f8f7"}
-                            />
+                            <QRCodeImg src={channelExtend.qrCodeFileUrl} />
                           </SelectionContainer>
                           <SplitLine></SplitLine>
                         </>
@@ -352,11 +350,12 @@ class NewStepOne extends Component {
                     }
                   }
                 })()}
-                <SplitLine></SplitLine>
+
                 {(() => {
                   if (
-                    paymentType.paymentcode.toUpperCase() === "MANUAL" ||
-                    paymentType.paymentcode.toUpperCase() === "APPLEPAY"
+                    (paymentType.paymentcode.toUpperCase() === "MANUAL" ||
+                      paymentType.paymentcode.toUpperCase() === "APPLEPAY") &&
+                    config.brand !== "HK28"
                   ) {
                     return (
                       <>
@@ -391,7 +390,9 @@ class NewStepOne extends Component {
                 })()}
                 <SubHeaderContainer>
                   <NumberContainer>
-                    {paymentType.paymentcode.toUpperCase() === "MANUAL"
+                    {config.brand === "HK28"
+                      ? "4"
+                      : paymentType.paymentcode.toUpperCase() === "MANUAL"
                       ? "5"
                       : paymentType.paymentcode.toUpperCase() === "APPLEPAY"
                       ? "4"
@@ -493,7 +494,9 @@ class NewStepOne extends Component {
                 <SplitLine></SplitLine>
                 <SubHeaderContainer>
                   <NumberContainer>
-                    {paymentType.paymentcode.toUpperCase() === "MANUAL"
+                    {config.brand === "HK28"
+                      ? "5"
+                      : paymentType.paymentcode.toUpperCase() === "MANUAL"
                       ? "6"
                       : paymentType.paymentcode.toUpperCase() === "APPLEPAY"
                       ? "5"
@@ -530,7 +533,9 @@ class NewStepOne extends Component {
                       <React.Fragment>
                         <SplitLine></SplitLine>
                         <SubHeaderContainer>
-                          <NumberContainer>7</NumberContainer>
+                          <NumberContainer>
+                            {config.brand === "HK28" ? "6" : "7"}
+                          </NumberContainer>
 
                           <SubTitle>{i18n.t("deposit.uploadReceipt")}</SubTitle>
                         </SubHeaderContainer>
