@@ -292,6 +292,11 @@ const FloatPanel = (props) => {
                         process.env.PUBLIC_URL +
                         `/assets/images/icon/${data.type}.png`
                       }
+                      onClick={() => {
+                        if (data.type === "WhatsApp") {
+                          window.open(`https://wa.me/${data.appid}`, "_blank");
+                        }
+                      }}
                     />
                     <div>ID: {data.appid}</div>
                     <QRCodeText>{data.type}</QRCodeText>
