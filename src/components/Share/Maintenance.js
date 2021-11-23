@@ -212,7 +212,7 @@ const Maintenance = (props) => {
                         onClick={() => {
                           if (data.type === "WhatsApp") {
                             window.open(
-                              `https://wa.me/${data.appid}`,
+                              `https://wa.me/${data.phone}`,
                               "_blank"
                             );
                           }
