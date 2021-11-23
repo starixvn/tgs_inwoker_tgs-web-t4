@@ -39,6 +39,7 @@ import Section3T from "../../../assets/images/home/section/section3title.png";
 
 import ScrollAnimation from "react-animate-on-scroll";
 import { Grid, Container } from "@material-ui/core";
+import config from "../../../config/config";
 const breatheAnimation = keyframes`
  0% { transform:translateY(0); }
  50% { transform:translateY(-10px); }
@@ -468,13 +469,15 @@ class Home extends Component {
           //  <ThirdSection handleJoinGameClick={this.handleJoinGameClick} />
         }
 
-        <FloatPanel
-          onhandleDepositClick={this.props.onhandleDepositClick}
-          onhandleShowCSClick={this.props.onhandleShowCSClick}
-          onDownloadClick={() =>
-            this.handleNavigateClick("/" + i18n.language + "/download")
-          }
-        ></FloatPanel>
+        {config.brand !== "HK28" && (
+          <FloatPanel
+            onhandleDepositClick={this.props.onhandleDepositClick}
+            onhandleShowCSClick={this.props.onhandleShowCSClick}
+            onDownloadClick={() =>
+              this.handleNavigateClick("/" + i18n.language + "/download")
+            }
+          ></FloatPanel>
+        )}
       </HomeContainer>
     );
   }

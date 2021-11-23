@@ -48,6 +48,8 @@ import i18n from "../../utils/i18n";
 import Fishing from "./Fishing";
 import Maintenance from "../Share/Maintenance";
 import Banned from "./Banned";
+import config from "../../config/config";
+import FloatPanel from "./Home/FloatPanel";
 const baseRouteUrl = Common.baseRouteUrl;
 const Main = styled.div`
   min-height: 600px;
@@ -58,6 +60,7 @@ const EmptyHeader = styled.div`
   background: black;
 `;
 let csWindowTab = null;
+
 class App extends Component {
   state = {
     showCS: false,
@@ -73,6 +76,7 @@ class App extends Component {
       this.props.getLiveChatURL();
       this.props.getBrandLanguage();
       this.props.getBanner();
+      this.props.getBrand();
     }
 
     // if (response.IsSuccess) {
@@ -164,6 +168,7 @@ class App extends Component {
         this.props.getLiveChatURL();
         this.props.getBrandLanguage();
         this.props.getBanner();
+        this.props.getBrand();
       }
     }
     if (
@@ -214,6 +219,7 @@ class App extends Component {
       this.props.history.push("/" + i18n.language + "/account/deposit");
     }
   };
+
   path = window.location.pathname.split("/");
   maintenance = this.path[2] == "maintenance";
 
@@ -379,6 +385,12 @@ class App extends Component {
                     <Redirect to={"/" + i18n.language} />
                   </Switch>
                 </Main>
+                {config.brand === "HK28" && (
+                  <FloatPanel
+                    onhandleShowCSClick={this.handleShowCSClick}
+                  ></FloatPanel>
+                )}
+
                 <Footer target={"_blank"}></Footer>
               </>
             );
@@ -419,7 +431,7 @@ const mapDispatchToProps = (dispatch) => {
     getBrandCommunicationList: (language) =>
       dispatch(generalAction.getBrandCommunication()),
     getBrandLanguage: () => dispatch(generalAction.getBrandLanguage()),
-
+    getBrand: () => dispatch(generalAction.getBrand()),
     getBanner: () => {
       dispatch(generalAction.getBanner());
     },
