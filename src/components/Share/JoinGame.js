@@ -113,7 +113,7 @@ class JoinGame extends Component {
   };
   render() {
     if (this.state.maintenance) {
-      return <Maintenance></Maintenance>;
+      return <Maintenance isGameMaintenance={true}></Maintenance>;
     } else {
       return <Loading show={this.state.loading} opacity={1}></Loading>;
     }
