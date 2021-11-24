@@ -573,7 +573,7 @@ class NewStepOne extends Component {
                       ].transferlimit.to ||
                     ((paymentType.paymentcode.toUpperCase() === "MANUAL" ||
                       paymentType.paymentcode.toUpperCase() === "APPLEPAY") &&
-                      name.length <= 0) ||
+                      amount.length <= 0) ||
                     (paymentType.paymentcode.toUpperCase() === "MANUAL" &&
                       files.length <= 0)
                   }
