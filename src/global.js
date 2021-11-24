@@ -1,14 +1,16 @@
 import { createGlobalStyle } from "styled-components";
 import i18n from "./utils/i18n";
+import "./assets/fonts/notosans/notosans-sc/css.css";
+import "./assets/fonts/notosans/notosans-tc/css.css";
 
 const languageSwitcher = (language) => {
   switch (language) {
     case "en-US":
       return `Arial`;
     case "zh-CN":
-      return `"Microsoft JhengHei", "微軟正黑體", "Arial"`;
+      return `'Noto Sans SC', Microsoft Yahei, '微软雅黑', STXihei, '华文细黑'`;
     case "zh-TW":
-      return `"Microsoft JhengHei", "微軟正黑體"`;
+      return `'Noto Sans TC', Tahoma, Helvetica, Arial, sans-serif, '微軟正黑粗'`;
     case "th-TH":
       return ``;
     case "vi-VN":
@@ -17,11 +19,9 @@ const languageSwitcher = (language) => {
 };
 
 export const GlobalStyles = createGlobalStyle`
-  @media (max-width: 800px) {
-    * {
-      font-family: ${languageSwitcher(i18n.language)};
-    }
-  }
+* {
+  font-family: ${languageSwitcher(i18n.language)};
+}
  
 
   body {
