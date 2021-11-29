@@ -455,7 +455,9 @@ class Slots extends Component {
 
         this.getGameList(1, platform, this.getType());
       } else if (prevState.type !== this.state.type) {
-        this.getFav();
+        if (this.props.token !== null && this.props.token !== "") {
+          this.getFav();
+        }
       } else if (
         prevProps.match.params.platform !== this.props.match.params.platform
       ) {
