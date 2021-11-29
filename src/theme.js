@@ -19,6 +19,10 @@ export const themeRed = {
   bottomNavAction: "#404040",
   body: "#F0EFF5",
   bodyBackground: "#F0EFF5",
+  supportBg: `url(${
+    process.env.PUBLIC_URL + `/assets/images/wapp/resource/T2/supportbg.png`
+  })
+  no-repeat center,  linear-gradient(180deg, rgb(5 30 74) 40%, rgba(12,21,37,1) 100%)`,
 };
 
 export const themeBlue = {
@@ -42,6 +46,10 @@ export const themeBlue = {
   bottomNavAction: "#404040",
   body: "#F0EFF5",
   bodyBackground: "#F0EFF5",
+  supportBg: `url(${
+    process.env.PUBLIC_URL + `/assets/images/wapp/resource/T2/supportbg.png`
+  })
+  no-repeat center,  linear-gradient(180deg, rgb(5 30 74) 40%, rgba(12,21,37,1) 100%)`,
 };
 
 export const themeBlack = {
@@ -65,6 +73,10 @@ export const themeBlack = {
   bottomNavAction: "#404040",
   body: "#F0EFF5",
   bodyBackground: "#F0EFF5",
+  supportBg: `url(${
+    process.env.PUBLIC_URL + `/assets/images/wapp/resource/T2/supportbg.png`
+  })
+  no-repeat center,  linear-gradient(180deg, rgb(5 30 74) 40%, rgba(12,21,37,1) 100%)`,
 };
 
 export const wapT2 = {
@@ -89,6 +101,11 @@ export const wapT2 = {
   bottomNavAction: "#676767",
   tabbar: "#fff",
   cardText: "#676767",
+
+  supportBg: `url(${
+    process.env.PUBLIC_URL + `/assets/images/wapp/resource/T2/supportbg.png`
+  })
+  no-repeat center,  linear-gradient(180deg, rgb(5 30 74) 40%, rgba(12,21,37,1) 100%)`,
 };
 
 export const wapT3 = {
@@ -114,12 +131,17 @@ export const wapT3 = {
   bottomNavAction: "#585858",
   tabbar: "#161519",
   cardText: "#000",
+
+  supportBg: "#3a3a3a",
 };
 
 export const wapT4 = {
   variant: "wapT4",
   appbar: "#161519",
-  body: "#051b42",
+  body: `url(${
+    process.env.PUBLIC_URL + `/assets/images/wapp/resource/T4/background.png`
+  })
+  no-repeat center,  linear-gradient(180deg, rgb(5 30 74) 40%, rgba(12,21,37,1) 100%)`,
   bodyBackground: `url(${
     process.env.PUBLIC_URL + `/assets/images/wapp/resource/T4/background.png`
   })
@@ -142,6 +164,11 @@ export const wapT4 = {
   bottomNavAction: "#585858",
   tabbar: "#161519",
   cardText: "#000",
+
+  supportBg: `url(${
+    process.env.PUBLIC_URL + `/assets/images/wapp/resource/T4/supportbg.png`
+  })
+  no-repeat center,  linear-gradient(180deg, rgb(5 30 74) 40%, rgba(12,21,37,1) 100%)`,
 };
 
 export const wapT5 = {
@@ -166,6 +193,10 @@ export const wapT5 = {
   bottomNavAction: "#585858",
   tabbar: "#fff",
   cardText: "#676767",
+  supportBg: `url(${
+    process.env.PUBLIC_URL + `/assets/images/wapp/resource/T5/supportbg.png`
+  })
+  no-repeat center,  linear-gradient(180deg, rgb(5 30 74) 40%, rgba(12,21,37,1) 100%)`,
 };
 
 export const wapT6 = {
@@ -190,6 +221,8 @@ export const wapT6 = {
   bottomNavAction: "#fff",
   tabbar: "#121315",
   cardText: "#000",
+
+  supportBg: "#121315",
 };
 
 export const wapT7 = {
@@ -214,6 +247,8 @@ export const wapT7 = {
   bottomNavAction: "#fff",
   tabbar: "#121315",
   cardText: "#000",
+
+  supportBg: "#121315",
 };
 
 export const themeList = {
