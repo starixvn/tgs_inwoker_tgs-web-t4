@@ -114,9 +114,13 @@ document
 // }
 var fontFamily = "Tahoma, Helvetica, Arial, sans-serif";
 if (i18n.language === "zh-CN") {
-  fontFamily = "Microsoft Yahei, '微软雅黑', STXihei, '华文细黑'";
+  fontFamily =
+    "'Noto Sans SC', Microsoft Yahei, '微软雅黑', STXihei, '华文细黑'";
 } else if (i18n.language === "zh-TW") {
-  fontFamily = "Tahoma, Helvetica, Arial, sans-serif, '微軟正黑粗'";
+  fontFamily =
+    "'Noto Sans TC', Tahoma, Helvetica, Arial, sans-serif, '微軟正黑粗'";
+} else if (i18n.language === "th-TH") {
+  fontFamily = "'Sarabun', sans-serif";
 }
 document.getElementById("root").style.fontFamily = fontFamily;
 const muiThemeMode = themeList[Config.theme];
