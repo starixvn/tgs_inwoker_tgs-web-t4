@@ -2,13 +2,14 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import IconReportRedPNG from "../../../../assets/images/icon-report.png";
 import TransferReport from "./TransferReport";
-import { ReportService, GameService } from "@Inwoker/tgs-api";
+import { ReportService, GameService, GeneralService } from "@Inwoker/tgs-api";
 
 import AccountDetails from "./AccountDetails";
 import WithdrawalReport from "./WithdrawalReport";
 import DepositReport from "./DepositReport";
 import RebateReport from "./RebateReport";
 import TransactionDetails from "./TransactionDetails";
+import JoinedPromoReport from "./JoinedPromoReport";
 import i18n from "../../../../utils/i18n";
 const moment = require("moment");
 const Container = styled.div`
@@ -113,7 +114,10 @@ class Report extends Component {
       list: [],
       count: 0,
     },
-
+    joinedReport: {
+      list: [],
+      count: 0,
+    },
     isLoaded: false,
     gameList: [],
     depositStatusList: {},
@@ -274,6 +278,19 @@ class Report extends Component {
       }
     });
   };
+  handleGetJoinedPromo = () => {
+    GeneralService.GetJoinedPromoReport().then((response) => {
+      if (response.IsSuccess) {
+        this.setState({
+          ...this.state,
+          joinedReport: {
+            list: response.data.items,
+            count: response.data.totalCount,
+          },
+        });
+      }
+    });
+  };
 
   handleTabClick = (tab) => {
     this.setState({ ...this.state, tab: tab });
@@ -322,6 +339,12 @@ class Report extends Component {
             onClick={() => this.handleTabClick(6)}
           >
             {i18n.t("report.transfer.title")}
+          </TabButton>
+          <TabButton
+            active={this.state.tab === 7}
+            onClick={() => this.handleTabClick(7)}
+          >
+            {i18n.t("report.joinedPromo.title")}
           </TabButton>
           <SplitLine></SplitLine>
           {(() => {
@@ -376,6 +399,13 @@ class Report extends Component {
                       this.handleGetTransferReportTrigger
                     }
                     transferReportList={this.state.transferReport}
+                  />
+                );
+              case 7:
+                return (
+                  <JoinedPromoReport
+                    onhandleGetReportTrigger={this.handleGetJoinedPromo}
+                    joinedReport={this.state.joinedReport}
                   />
                 );
               default:
