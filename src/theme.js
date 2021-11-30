@@ -132,7 +132,10 @@ export const wapT3 = {
   tabbar: "#161519",
   cardText: "#000",
 
-  supportBg: "#3a3a3a",
+  supportBg: `url(${
+    process.env.PUBLIC_URL + `/assets/images/wapp/resource/T3/supportbg.png`
+  })
+  no-repeat center,  linear-gradient(180deg, rgb(5 30 74) 40%, rgba(12,21,37,1) 100%)`,
 };
 
 export const wapT4 = {
