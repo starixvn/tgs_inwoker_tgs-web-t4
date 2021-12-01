@@ -278,14 +278,22 @@ class Report extends Component {
       }
     });
   };
-  handleGetJoinedPromo = () => {
-    GeneralService.GetJoinedPromoReport().then((response) => {
+  handleGetJoinedPromo = (dateFrom, dateTo, page) => {
+    GeneralService.GetJoinedPromoReport(
+      moment(dateFrom).utc().format(),
+      moment(dateTo).utc().add(1, "days").format(),
+      page,
+      this.state.limit,
+      false,
+      "",
+      false
+    ).then((response) => {
       if (response.IsSuccess) {
         this.setState({
           ...this.state,
           joinedReport: {
             list: response.data.items,
-            count: response.data.totalCount,
+            count: response.data.totalcount,
           },
         });
       }

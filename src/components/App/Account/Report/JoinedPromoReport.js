@@ -96,9 +96,7 @@ class JoinedPromoReport extends Component {
       this.props.onhandleGetReportTrigger(
         this.state.dateRange.dateFrom,
         this.state.dateRange.dateTo,
-        this.state.page,
-        1, //force OrderBy
-        this.state.type2
+        this.state.page
       );
     }
   }
@@ -108,27 +106,41 @@ class JoinedPromoReport extends Component {
       this.props.onhandleGetReportTrigger(
         this.state.dateRange.dateFrom,
         this.state.dateRange.dateTo,
-        this.state.page,
-        1, //force OrderBy
-        this.state.type2
+        this.state.page
       );
     }
   }
+
+  onhandleDateChange = (dateRange) => {
+    this.setState({ ...this.state, dateRange: dateRange, page: 1 });
+    this.props.onhandleGetReportTrigger(
+      dateRange.dateFrom,
+      dateRange.dateTo,
+      1
+    );
+  };
   handleChangePage = (page) => {
     this.setState({ ...this.state, page: page });
     this.props.onhandleGetReportTrigger(
       this.state.dateRange.dateFrom,
       this.state.dateRange.dateTo,
-      page,
-      1, //force OrderBy
-      this.state.type2
+      page
     );
   };
   render() {
     return (
       <Container>
+        <FilterContainer>
+          <DateSelection
+            onhandleDateChange={this.onhandleDateChange}
+            defaultDateFrom={this.state.dateRange.dateFrom}
+            defaultDateTo={this.state.dateRange.dateTo}
+          ></DateSelection>
+          <div className="clear"></div>
+        </FilterContainer>
         <InnerWrap>
           <JoinedReportList
+            page={this.state.page}
             rows={this.props.joinedReport.list}
             total={this.props.joinedReport.count}
             onhandleChangePage={this.handleChangePage}

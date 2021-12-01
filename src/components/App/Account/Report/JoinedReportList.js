@@ -79,23 +79,22 @@ function JoinedReportList(props) {
           })}
         </TableBody>
       </Table>
-      {
-        //    <TablePagination
-        //    rowsPerPageOptions={[20]}
-        //    component="div"
-        //    count={props.total}
-        //    rowsPerPage={20}
-        //    page={props.page - 1}
-        //    labelRowsPerPage={("asd", "213123", "asdasdasda", "每頁行数")}
-        //    backIconButtonProps={{
-        //      "aria-label": "previous page",
-        //    }}
-        //    nextIconButtonProps={{
-        //      "aria-label": "next page",
-        //    }}
-        //    onChangePage={handleChangePage}
-        //  />
-      }
+
+      <TablePagination
+        rowsPerPageOptions={[20]}
+        component="div"
+        count={props.total}
+        rowsPerPage={20}
+        page={props.page - 1}
+        labelRowsPerPage={("asd", "213123", "asdasdasda", "每頁行数")}
+        backIconButtonProps={{
+          "aria-label": "previous page",
+        }}
+        nextIconButtonProps={{
+          "aria-label": "next page",
+        }}
+        onChangePage={handleChangePage}
+      />
     </InnerWrap>
   );
 }
