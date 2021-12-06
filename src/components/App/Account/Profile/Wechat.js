@@ -38,7 +38,7 @@ class Wechat extends Component {
         this.props.dispatch({
           type: UPDATE_INFO,
           payload: {
-            member_wechat: this.state.member_wechat.substring(0, 1) + "**",
+            member_wechat: this.state.member_wechat,
           },
         });
         this.props.handleCloseDialog();

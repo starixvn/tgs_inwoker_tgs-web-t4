@@ -39,7 +39,7 @@ class QQ extends Component {
         this.props.dispatch({
           type: UPDATE_INFO,
           payload: {
-            member_qq: this.state.member_qq.substring(0, 1) + "**",
+            member_qq: this.state.member_qq,
           },
         });
         this.props.handleCloseDialog();
