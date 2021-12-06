@@ -615,22 +615,11 @@ class Header extends Component {
 
   handleJoinLotteryGame = (name) => {
     if (this.props.account.token != null) {
-      GameService.GetGameList(name, GameTypeEnum.LOTTERYLOBBY).then((e) => {
-        if (e.IsSuccess) {
-          GameService.JoinGame(e.data[0].id, name).then((response) => {
-            if (response.IsSuccess) {
-              this.setState({ ...this.state, maintenance: false });
-              window.open(
-                response.data.url,
-                "_blank",
-                "directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=1280,height=720"
-              );
-            } else {
-              this.setState({ ...this.state, maintenance: true });
-            }
-          });
-        }
-      });
+      window.open(
+        "/" + i18n.language + "/joinlottery/" + name,
+        "_blank",
+        "directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=1280,height=720"
+      );
     } else {
       this.props.showLogin(true);
     }

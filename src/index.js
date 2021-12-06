@@ -43,6 +43,7 @@ import Common from "./utils/Common";
 import { ThemeProvider } from "styled-components";
 import { themeList } from "./theme";
 import { GlobalStyles } from "./global";
+import JoinLotteryGame from "./components/App/Lottery/JoinLotteryGame";
 import Deposit from "./components/Share/Deposit";
 require("es6-promise").polyfill();
 const store = createStore(rootReducer, applyMiddleware(thunk));
@@ -257,6 +258,11 @@ const AppWrapper = () => {
                     exact
                     path={Common.baseRouteUrl + "/joinlobbygame/:type/:params"}
                     component={JoinLobbyGame}
+                  />
+                  <Route
+                    exact
+                    path={Common.baseRouteUrl + "/joinlottery/:brand"}
+                    component={JoinLotteryGame}
                   />
                   <Route
                     path={Common.baseRouteUrl + "/"}
